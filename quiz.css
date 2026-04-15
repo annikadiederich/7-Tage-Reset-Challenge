@@ -264,6 +264,67 @@
     fill: none;
 }
 
+/* ── Loading screen ── */
+
+.qz-loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 28px;
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.qz-loading-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #1e1c1a;
+    text-align: center;
+}
+
+.qz-loading-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(30,28,26,0.06);
+    border-radius: 100px;
+    overflow: hidden;
+    position: relative;
+}
+
+.qz-loading-bar-fill {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, #1F3D2B, #2a5a38);
+    border-radius: 100px;
+    transition: width 0.3s ease;
+    position: relative;
+}
+
+/* Shimmer on the fill */
+.qz-loading-bar-fill::after {
+    content: '';
+    position: absolute;
+    top: 0; left: -40%;
+    width: 30%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    animation: loadShimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes loadShimmer {
+    0% { left: -40%; }
+    100% { left: 140%; }
+}
+
+.qz-loading-status {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.82rem;
+    color: #9b938a;
+    text-align: center;
+    min-height: 1.2em;
+    transition: opacity 0.3s ease;
+}
+
 /* ── Responsive ── */
 @media (max-width: 480px) {
     .qz-body { padding: 48px 18px 60px; }

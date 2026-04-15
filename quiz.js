@@ -221,7 +221,7 @@
         }
     }
 
-    // ── Quiz complete ──
+    // ── Quiz complete — loading screen ──
     function quizComplete() {
         const container = document.getElementById('qzQuestion');
         container.classList.remove('visible');
@@ -229,20 +229,45 @@
 
         document.getElementById('qzProgressFill').style.width = '100%';
 
+        try { sessionStorage.setItem('quizAnswers', JSON.stringify(answers)); } catch(e) {}
+
         setTimeout(() => {
             container.innerHTML = `
-                <p class="qz-q">Deine Analyse wird erstellt&hellip;</p>
-                <p style="color:#9b938a; font-size:0.88rem; margin-top:8px;">Bitte warte einen Moment.</p>
+                <div class="qz-loading">
+                    <p class="qz-loading-title">Deine Analyse wird erstellt&hellip;</p>
+                    <div class="qz-loading-bar"><div class="qz-loading-bar-fill" id="qzLoadFill"></div></div>
+                    <p class="qz-loading-status" id="qzLoadStatus">Antworten werden analysiert&hellip;</p>
+                </div>
             `;
             container.classList.remove('exit');
             void container.offsetHeight;
             container.classList.add('visible');
 
-            // Store answers for later use
-            try { sessionStorage.setItem('quizAnswers', JSON.stringify(answers)); } catch(e) {}
+            var fill = document.getElementById('qzLoadFill');
+            var status = document.getElementById('qzLoadStatus');
+            var steps = [
+                { pct: 35, text: 'Antworten werden analysiert\u2026', time: 0 },
+                { pct: 68, text: 'Muster werden erkannt\u2026', time: 1600 },
+                { pct: 95, text: 'Dein Abnehmprofil wird erstellt\u2026', time: 3200 },
+                { pct: 100, text: '', time: 4500 }
+            ];
 
-            // In production: redirect to results page
-            // setTimeout(() => { window.location.href = 'result.html'; }, 3000);
+            steps.forEach(function(s) {
+                setTimeout(function() {
+                    if (fill) fill.style.width = s.pct + '%';
+                    if (status && s.text) {
+                        status.style.opacity = '0';
+                        setTimeout(function() {
+                            status.textContent = s.text;
+                            status.style.opacity = '1';
+                        }, 200);
+                    }
+                }, s.time);
+            });
+
+            setTimeout(function() {
+                window.location.href = 'result.html';
+            }, 5000);
         }, 350);
     }
 
