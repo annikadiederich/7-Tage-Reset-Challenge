@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dein Plan wird erstellt…</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sansita+Swashed:wght@400;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background: #141f1a;
+            color: #f0ede8;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Subtle ambient glow */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 35%; left: 50%;
+            transform: translateX(-50%);
+            width: 500px; height: 400px;
+            background: radial-gradient(ellipse,
+                rgba(42,90,56,0.06) 0%,
+                transparent 65%);
+            border-radius: 50%;
+            pointer-events: none;
+            filter: blur(40px);
+            animation: ambientPulse 6s ease-in-out infinite;
+        }
+
+        @keyframes ambientPulse {
+            0%, 100% { opacity: 0.5; transform: translateX(-50%) scale(1); }
+            50% { opacity: 0.8; transform: translateX(-50%) scale(1.05); }
+        }
+
+        .loader-wrap {
+            text-align: center;
+            max-width: 520px;
+            padding: 0 28px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Logo */
+        .loader-logo {
+            font-family: 'Sansita Swashed', cursive;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: rgba(240,237,232,0.3);
+            margin-bottom: 48px;
+            animation: fadeIn 0.6s ease both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Headline */
+        .loader-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.15rem, 3.5vw, 1.45rem);
+            font-weight: 700;
+            line-height: 1.45;
+            color: #f0ede8;
+            margin-bottom: 48px;
+            letter-spacing: -0.02em;
+            animation: fadeUp 0.7s ease 0.2s both;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Progress bar container */
+        .loader-bar-wrap {
+            width: 100%;
+            margin-bottom: 16px;
+            animation: fadeUp 0.7s ease 0.4s both;
+        }
+
+        .loader-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 100px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .loader-bar-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 100px;
+            background: linear-gradient(90deg, #2a5a38, #4a8a50, #f07848);
+            transition: width 0.3s ease;
+            position: relative;
+        }
+
+        /* Shimmer on fill */
+        .loader-bar-fill::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -40%;
+            width: 30%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+            border-radius: 100px;
+            animation: shimmer 1.8s ease-in-out infinite;
+        }
+
+        @keyframes shimmer {
+            0% { left: -40%; }
+            100% { left: 140%; }
+        }
+
+        /* Percentage */
+        .loader-pct {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: rgba(240,237,232,0.4);
+            text-align: right;
+            animation: fadeUp 0.7s ease 0.5s both;
+            transition: color 0.3s ease;
+        }
+
+        /* Status text */
+        .loader-status {
+            font-size: 0.82rem;
+            color: rgba(240,237,232,0.35);
+            margin-top: 32px;
+            min-height: 1.4em;
+            animation: fadeUp 0.7s ease 0.6s both;
+        }
+
+        .loader-status span {
+            display: inline-block;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Breathing dot */
+        .loader-dot {
+            display: inline-block;
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: rgba(240,120,72,0.4);
+            margin-left: 6px;
+            vertical-align: middle;
+            animation: dotPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.7; transform: scale(1.3); }
+        }
+
+        /* Complete state */
+        .loader-pct.done { color: rgba(240,237,232,0.7); }
+
+        @media (max-width: 480px) {
+            .loader-title { font-size: 1.1rem; }
+            .loader-wrap { padding: 0 20px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="loader-wrap">
+    <p class="loader-logo">Elliott Aziz</p>
+
+    <h1 class="loader-title">
+        Dein persönlicher Plan für ein reguliertes Nervensystem &amp; nachhaltige Abnahme wird erstellt&hellip;
+    </h1>
+
+    <div class="loader-bar-wrap">
+        <div class="loader-bar">
+            <div class="loader-bar-fill" id="loaderFill"></div>
+        </div>
+    </div>
+    <p class="loader-pct" id="loaderPct">0%</p>
+
+    <p class="loader-status" id="loaderStatus">
+        <span>Daten werden verarbeitet</span><span class="loader-dot"></span>
+    </p>
+</div>
+
+<script>
+    var fill = document.getElementById('loaderFill');
+    var pct = document.getElementById('loaderPct');
+    var status = document.getElementById('loaderStatus');
+
+    var steps = [
+        { p: 15, t: 'Daten werden verarbeitet', ms: 0 },
+        { p: 35, t: 'Muster werden analysiert', ms: 900 },
+        { p: 55, t: 'Nervensystem-Profil wird erstellt', ms: 1800 },
+        { p: 78, t: 'Individuelle Empfehlungen werden berechnet', ms: 2700 },
+        { p: 95, t: 'Dein Plan wird finalisiert', ms: 3600 },
+        { p: 100, t: 'Fertig!', ms: 4300 }
+    ];
+
+    steps.forEach(function(s) {
+        setTimeout(function() {
+            if (fill) fill.style.width = s.p + '%';
+            if (pct) {
+                pct.textContent = s.p + '%';
+                if (s.p >= 100) pct.classList.add('done');
+            }
+            if (status) {
+                status.style.opacity = '0';
+                setTimeout(function() {
+                    status.innerHTML = '<span>' + s.t + '</span>' + (s.p < 100 ? '<span class="loader-dot"></span>' : '');
+                    status.style.opacity = '1';
+                }, 200);
+            }
+        }, s.ms);
+    });
+
+    // Redirect after complete
+    setTimeout(function() {
+        // window.location.href = 'plan.html';
+    }, 5000);
+</script>
+
+</body>
+</html>
