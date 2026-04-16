@@ -266,7 +266,7 @@
             });
 
             setTimeout(function() {
-                window.location.href = 'result.html';
+                window.location.href = 'loading-quiz.html';
             }, 5000);
         }, 350);
     }

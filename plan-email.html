@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dein Plan ist bereit | Abnehm-Analyse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sansita+Swashed:wght@400;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background: #141f1a;
+            color: #f0ede8;
+            min-height: 100dvh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-font-smoothing: antialiased;
+            padding: 40px 24px;
+        }
+
+        h1, h2 { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        .email-wrap {
+            width: 100%;
+            max-width: 440px;
+            text-align: center;
+        }
+
+        /* Logo */
+        .email-logo {
+            font-family: 'Sansita Swashed', cursive;
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: rgba(240,237,232,0.25);
+            margin-bottom: 48px;
+            animation: fadeUp 0.6s ease both;
+        }
+
+        /* Headline */
+        .email-title {
+            font-size: clamp(1.4rem, 4.5vw, 1.85rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+            line-height: 1.25;
+            margin-bottom: 14px;
+            animation: fadeUp 0.7s ease 0.1s both;
+        }
+
+        /* Subline */
+        .email-sub {
+            font-size: 0.9rem;
+            color: rgba(240,237,232,0.5);
+            line-height: 1.6;
+            margin-bottom: 40px;
+            animation: fadeUp 0.7s ease 0.2s both;
+        }
+
+        /* Form */
+        .email-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 20px;
+            animation: fadeUp 0.7s ease 0.3s both;
+        }
+
+        .email-input {
+            width: 100%;
+            align-self: stretch;
+            padding: 17px 22px;
+            background: rgba(255,255,255,0.05);
+            border: 1.5px solid rgba(255,255,255,0.07);
+            border-radius: 14px;
+            font-family: 'Instrument Sans', sans-serif;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: #f0ede8;
+            outline: none;
+            transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .email-input::placeholder {
+            color: rgba(240,237,232,0.3);
+        }
+
+        .email-input:focus {
+            border-color: rgba(240,100,50,0.35);
+            background: rgba(255,255,255,0.07);
+            box-shadow: 0 0 0 3px rgba(240,100,50,0.06);
+        }
+
+        .email-input.error {
+            border-color: rgba(240,60,30,0.5);
+            box-shadow: 0 0 0 3px rgba(240,60,30,0.08);
+        }
+
+        .email-error {
+            font-size: 0.72rem;
+            color: rgba(240,100,50,0.7);
+            text-align: left;
+            margin-top: -6px;
+            min-height: 1em;
+            align-self: stretch;
+        }
+
+        /* CTA Button */
+        .email-btn {
+            width: auto;
+            padding: 15px 52px;
+            background: linear-gradient(90deg, #FF4D1A, #FF3B1F, #FF1F1F);
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.96rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(255,60,31,0.2), 0 0 40px rgba(255,77,26,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
+            animation: fadeUp 0.7s ease 0.4s both;
+        }
+
+        .email-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            filter: brightness(1.08);
+            box-shadow: 0 6px 24px rgba(255,60,31,0.28), 0 0 52px rgba(255,77,26,0.1);
+        }
+
+        .email-btn:active {
+            transform: translateY(0) scale(0.98);
+            filter: brightness(0.96);
+        }
+
+        .email-btn .btn-lock {
+            display: inline-flex;
+            align-items: center;
+            margin-left: 11px;
+            vertical-align: middle;
+        }
+
+        .email-btn .btn-lock svg {
+            width: 16px; height: 16px;
+            stroke: rgba(255,255,255,0.9);
+            stroke-width: 2;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .btn-lock-shackle {
+            transform-origin: 17px 11px;
+            animation: lockToggle 3.5s ease-in-out infinite;
+        }
+
+        @keyframes lockToggle {
+            0%, 15% { transform: translateY(0) rotate(0deg); }
+            25% { transform: translateY(-3px) rotate(-15deg); }
+            45% { transform: translateY(-3px) rotate(-15deg); }
+            60%, 100% { transform: translateY(0) rotate(0deg); }
+        }
+
+        .email-btn:disabled {
+            opacity: 0.45;
+            cursor: not-allowed;
+            transform: none;
+            filter: none;
+        }
+
+        /* Trust text */
+        .email-trust {
+            font-size: 0.66rem;
+            color: rgba(240,237,232,0.22);
+            line-height: 1.6;
+            margin-top: 20px;
+            max-width: 360px;
+            margin-left: auto;
+            margin-right: auto;
+            animation: fadeUp 0.7s ease 0.5s both;
+        }
+
+        /* Animations */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(14px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Plan ready visual */
+        .plan-icon {
+            width: 64px; height: 64px;
+            margin: 0 auto 32px;
+            position: relative;
+            animation: fadeUp 0.7s ease 0.25s both;
+        }
+
+        .plan-icon-card {
+            width: 100%; height: 100%;
+            border-radius: 16px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            box-shadow: 0 0 20px rgba(240,100,50,0.04);
+            animation: planGlow 4s ease-in-out infinite;
+        }
+
+        @keyframes planGlow {
+            0%, 100% { box-shadow: 0 0 20px rgba(240,100,50,0.04); }
+            50% { box-shadow: 0 0 28px rgba(240,100,50,0.08); }
+        }
+
+        .plan-icon-card svg {
+            width: 28px; height: 28px;
+            stroke: rgba(240,100,50,0.5);
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        /* Small check badge */
+        .plan-icon-check {
+            position: absolute;
+            bottom: -4px; right: -4px;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF4D1A, #FF3B1F);
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 10px rgba(255,60,31,0.2);
+        }
+
+        .plan-icon-check svg {
+            width: 10px; height: 10px;
+            stroke: #fff;
+            stroke-width: 2.5;
+            fill: none;
+        }
+
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .email-title { font-size: 1.3rem; }
+            .email-input { padding: 15px 18px; font-size: 0.88rem; }
+            .email-btn { padding: 14px 24px; font-size: 0.92rem; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="email-wrap">
+    <p class="email-logo">Elliott Aziz</p>
+
+    <h1 class="email-title">Dein persönlicher Abnehm-Plan ist bereit</h1>
+    <p class="email-sub">Gib deine E-Mail an, um sofort Zugriff zu erhalten:</p>
+
+    <form class="email-form" id="emailForm" novalidate>
+        <input type="text" class="email-input" id="inputName" placeholder="Dein Vorname" autocomplete="given-name" required>
+        <input type="email" class="email-input" id="inputEmail" placeholder="Deine E-Mail-Adresse" autocomplete="email" required>
+        <p class="email-error" id="emailError"></p>
+        <button type="submit" class="email-btn" id="emailBtn" disabled>Weiter<span class="btn-lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path class="btn-lock-shackle" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span></button>
+    </form>
+
+    <p class="email-trust">
+        Deine Daten sind bei uns sicher und werden nur für die Auswertung deiner Analyse verwendet. Kein Spam.
+    </p>
+
+</div>
+
+<script>
+    var nameInput = document.getElementById('inputName');
+    var emailInput = document.getElementById('inputEmail');
+    var btn = document.getElementById('emailBtn');
+    var errorEl = document.getElementById('emailError');
+    var form = document.getElementById('emailForm');
+
+    function isValidEmail(e) {
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+    }
+
+    function checkValid() {
+        var nameOk = nameInput.value.trim().length >= 2;
+        var emailOk = emailInput.value.trim().length > 0;
+        btn.disabled = !(nameOk && emailOk);
+
+        // Clear errors on typing
+        nameInput.classList.remove('error');
+        emailInput.classList.remove('error');
+        errorEl.textContent = '';
+    }
+
+    nameInput.addEventListener('input', checkValid);
+    emailInput.addEventListener('input', checkValid);
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        var name = nameInput.value.trim();
+        var email = emailInput.value.trim();
+
+        // Validate name
+        if (name.length < 2) {
+            nameInput.classList.add('error');
+            errorEl.textContent = 'Bitte gib deinen Vornamen ein.';
+            nameInput.focus();
+            return;
+        }
+
+        // Validate email
+        if (!isValidEmail(email)) {
+            emailInput.classList.add('error');
+            errorEl.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.';
+            emailInput.focus();
+            return;
+        }
+
+        // Store data
+        try {
+            localStorage.setItem('funnelName', name);
+            localStorage.setItem('funnelEmail', email);
+        } catch(err) {}
+
+        // Disable button, show loading
+        btn.disabled = true;
+        btn.textContent = 'Wird geladen…';
+
+        // Redirect
+        setTimeout(function() {
+            window.location.href = 'offer.html';
+        }, 1200);
+    });
+</script>
+
+</body>
+</html>

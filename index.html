@@ -78,7 +78,7 @@
             padding: 32px 24px 100px;
             position: relative;
             overflow: hidden;
-            background: #141f1a;
+            background: #0e1a14;
             color: #f0ede8;
             margin: 12px 12px 0;
             border-radius: 24px;
@@ -89,12 +89,67 @@
         .hero-bg-mesh {
             position: absolute; inset: 0;
             background:
-                radial-gradient(ellipse at 25% 20%, rgba(30,55,38,0.9) 0%, transparent 50%),
-                radial-gradient(ellipse at 75% 75%, rgba(25,45,32,0.8) 0%, transparent 45%),
-                radial-gradient(ellipse at 60% 10%, rgba(35,58,42,0.6) 0%, transparent 40%),
-                radial-gradient(ellipse at 10% 80%, rgba(20,38,28,0.7) 0%, transparent 40%),
-                linear-gradient(170deg, #151f1a 0%, #1a2d22 50%, #14231c 100%);
+                radial-gradient(ellipse at 25% 20%, rgba(20,40,28,0.6) 0%, transparent 50%),
+                radial-gradient(ellipse at 75% 75%, rgba(18,35,25,0.5) 0%, transparent 45%),
+                radial-gradient(ellipse at 60% 10%, rgba(22,40,30,0.35) 0%, transparent 40%),
+                radial-gradient(ellipse at 10% 80%, rgba(16,30,22,0.4) 0%, transparent 40%),
+                linear-gradient(170deg, #0e1a14 0%, #141f1a 50%, #0e1a14 100%);
             pointer-events: none; z-index: 0;
+        }
+
+        /* ── Portrait image layer ── */
+        .hero-portrait {
+            position: absolute;
+            right: -20%; bottom: 0;
+            width: 56%; height: 90%;
+            background-image: url('elliott.jpg');
+            background-size: cover;
+            background-position: center top;
+            opacity: 0.82;
+            pointer-events: none;
+            z-index: 0;
+            filter: brightness(1.1);
+            mask-image:
+                linear-gradient(to right, transparent 0%, rgba(0,0,0,0.04) 8%, rgba(0,0,0,0.15) 18%, rgba(0,0,0,0.4) 32%, rgba(0,0,0,0.75) 48%, rgba(0,0,0,1) 58%, rgba(0,0,0,1) 84%, rgba(0,0,0,0.3) 95%, transparent 100%),
+                linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 4%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 84%, rgba(0,0,0,0.25) 95%, transparent 100%);
+            -webkit-mask-image:
+                linear-gradient(to right, transparent 0%, rgba(0,0,0,0.04) 8%, rgba(0,0,0,0.15) 18%, rgba(0,0,0,0.4) 32%, rgba(0,0,0,0.75) 48%, rgba(0,0,0,1) 58%, rgba(0,0,0,1) 84%, rgba(0,0,0,0.3) 95%, transparent 100%),
+                linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.6) 4%, rgba(0,0,0,1) 10%, rgba(0,0,0,1) 84%, rgba(0,0,0,0.25) 95%, transparent 100%);
+            mask-composite: intersect;
+            -webkit-mask-composite: source-in;
+        }
+
+        .hero-portrait::after {
+            content: '';
+            position: absolute;
+            top: -40%; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 55% 35%, rgba(255,220,180,0.05), transparent 45%);
+            pointer-events: none;
+        }
+
+        @media (max-width: 860px) {
+            .hero-portrait { opacity: 0.25; width: 55%; right: -10%; }
+        }
+
+        @media (max-width: 520px) {
+            .hero-portrait { display: none; }
+        }
+
+        /* Right-side atmospheric light — full height */
+        .hero-right-glow {
+            position: absolute;
+            top: 0; right: 0; bottom: 0;
+            width: 50%;
+            background:
+                radial-gradient(ellipse at 70% 30%, rgba(220,215,195,0.04), transparent 55%),
+                radial-gradient(ellipse at 60% 65%, rgba(200,195,175,0.03), transparent 50%),
+                linear-gradient(to left,
+                    rgba(200,200,185,0.035) 0%,
+                    rgba(200,200,185,0.02) 30%,
+                    transparent 70%);
+            pointer-events: none;
+            z-index: 0;
         }
 
         /* ── LAYER 2: Organic glow shapes ── */
@@ -257,12 +312,11 @@
         .topbar-avatar {
             width: 34px; height: 34px;
             border-radius: 50%;
-            background: var(--bg);
             border: 2px solid var(--white);
             box-shadow: 0 1px 4px rgba(30,28,26,0.06);
             object-fit: cover;
-            /* placeholder gradient if no image loaded */
-            background: linear-gradient(135deg, #e8e2d8, #d8d2c8);
+            object-position: center 18%;
+            background: #1a2a20;
         }
 
         .hero-logo {
@@ -2198,8 +2252,20 @@
         .cyc-vis {
             width: 100%; height: 80px;
             margin-bottom: 10px;
-            display: flex; align-items: center; justify-content: center;
+            border-radius: 12px;
+            overflow: hidden;
             position: relative;
+        }
+
+        .cyc-img {
+            width: 100%; height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
+            border-radius: 12px;
+            filter: saturate(0.9) brightness(0.95);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0.3) 90%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 60%, rgba(0,0,0,0.3) 90%, transparent 100%);
         }
 
         /* Scene text */
@@ -3129,13 +3195,13 @@
         .step-num {
             width: 44px; height: 44px;
             border-radius: 50%;
-            background: linear-gradient(145deg, #1F3D2B, #2a4f38);
-            color: rgba(200,233,157,0.85);
+            background: linear-gradient(145deg, #163A2A, #1B4531);
+            color: rgba(240,237,232,0.85);
             font-family: 'Plus Jakarta Sans', sans-serif;
             font-size: 0.9rem; font-weight: 800;
             display: flex; align-items: center; justify-content: center;
             margin: 0 auto 20px;
-            box-shadow: 0 2px 10px rgba(31,61,43,0.15), 0 0 20px rgba(31,61,43,0.06);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1), 0 8px 20px rgba(0,0,0,0.06);
         }
 
         .step h3 {
@@ -3214,9 +3280,10 @@
             background: rgba(255,255,255,0.04);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 16px;
-            padding: 14px 20px;
+            padding: 14px 22px;
             text-align: center;
             transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
+            min-width: 145px;
         }
 
         .cn:hover {
@@ -3237,16 +3304,34 @@
             color: rgba(248,244,237,0.35);
         }
 
+        .cn-img {
+            width: calc(100% + 44px);
+            margin: -14px -22px 10px;
+            height: 88px;
+            object-fit: cover;
+            object-position: center 30%;
+            display: block;
+            border-radius: 14px 14px 0 0;
+            filter: saturate(0.9) brightness(0.94);
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 55%, rgba(0,0,0,0.35) 88%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 55%, rgba(0,0,0,0.35) 88%, transparent 100%);
+        }
+
+        /* Card-specific image adjustments */
+        .cn--2 .cn-img { object-position: center 40%; height: 96px; }
+        .cn--4 .cn-img { object-position: center 25%; height: 100px; object-fit: cover; }
+
         .cn--hot { border-color: rgba(232,83,14,0.35); background: rgba(232,83,14,0.07); }
         .cn--hot b { color: #f8a070; }
 
         /* Node positions — 6 nodes around a hexagonal path */
-        .cn--1 { top: 0; left: 50%; transform: translateX(-50%); }
-        .cn--2 { top: 16%; right: 0; }
-        .cn--3 { bottom: 16%; right: 0; }
-        .cn--4 { bottom: 0; left: 50%; transform: translateX(-50%); }
-        .cn--5 { bottom: 16%; left: 0; }
-        .cn--6 { top: 16%; left: 0; }
+        /* 6 positions — circular ring, cards stay horizontal */
+        .cn--1 { top: 0; left: 50%; transform: translateX(-50%); }              /* 12 Uhr */
+        .cn--2 { top: 20%; right: -10%; }                                        /* 2 Uhr */
+        .cn--3 { bottom: 20%; right: -6%; }                                      /* 4 Uhr */
+        .cn--4 { bottom: 0; left: 50%; transform: translateX(-50%); }           /* 6 Uhr */
+        .cn--5 { bottom: 20%; left: -6%; }                                       /* 8 Uhr */
+        .cn--6 { top: 20%; left: -6%; }                                          /* 10 Uhr */
 
         .cn--1:hover { transform: translateX(-50%) scale(1.05); }
         .cn--4:hover { transform: translateX(-50%) scale(1.05); }
@@ -3508,7 +3593,7 @@
 <div class="hero-topbar">
         <!-- Left: avatar + logo -->
         <div class="topbar-left">
-            <div class="topbar-avatar"></div>
+            <img class="topbar-avatar" src="elliott logo.jpg" alt="Elliott Aziz">
             <span class="hero-logo">Elliott Aziz</span>
         </div>
 
@@ -3554,6 +3639,8 @@
 <!-- ════════ HERO ════════ -->
 <section class="hero">
     <div class="hero-bg-mesh"></div>
+    <div class="hero-right-glow"></div>
+    <div class="hero-portrait"></div>
     <div class="hero-glow-a"></div>
     <div class="hero-glow-b"></div>
     <div class="hero-glow-c"></div>
@@ -3765,11 +3852,7 @@
             <!-- Card 1: Functioning -->
             <div class="cyc cyc-1">
                 <div class="cyc-vis">
-                    <div class="cv1">
-                        <div class="cv1-items"><div class="cv1-item"></div><div class="cv1-item"></div><div class="cv1-item"></div></div>
-                        <div class="cv1-head"></div>
-                        <div class="cv1-body"></div>
-                    </div>
+                    <img class="cyc-img" src="kreislauf 1.png" alt="">
                 </div>
                 <p>Du funktionierst.</p>
             </div>
@@ -3777,11 +3860,7 @@
             <!-- Card 2: Evening -->
             <div class="cyc cyc-2">
                 <div class="cyc-vis">
-                    <div class="cv2">
-                        <div class="cv2-glow"></div>
-                        <div class="cv2-fig"></div>
-                        <div class="cv2-couch"></div>
-                    </div>
+                    <img class="cyc-img" src="kreislauf 2.png" alt="">
                 </div>
                 <p>Endlich Ruhe&hellip;</p>
             </div>
@@ -3789,10 +3868,7 @@
             <!-- Card 3: Autopilot -->
             <div class="cyc cyc-3">
                 <div class="cyc-vis">
-                    <div class="cv3">
-                        <div class="cv3-fig"><div class="cv3-fig-h"></div><div class="cv3-fig-b"></div></div>
-                        <div class="cv3-arrow"></div>
-                    </div>
+                    <img class="cyc-img" src="kreislauf 3.png" alt="">
                 </div>
                 <p>Es passiert einfach.</p>
             </div>
@@ -3800,10 +3876,7 @@
             <!-- Card 4: Fridge -->
             <div class="cyc cyc-4">
                 <div class="cyc-vis">
-                    <div class="cv4">
-                        <div class="cv4-glow"></div>
-                        <div class="cv4-fridge"><div class="cv4-door"></div></div>
-                    </div>
+                    <img class="cyc-img" src="kreislauf 4.png" alt="">
                 </div>
                 <p>Du wolltest nicht.</p>
             </div>
@@ -3811,23 +3884,17 @@
             <!-- Card 5: After -->
             <div class="cyc cyc-5">
                 <div class="cyc-vis">
-                    <div class="cv5">
-                        <div class="cv5-scale"><span class="cv5-num">79</span></div>
-                    </div>
+                    <img class="cyc-img" src="kreislauf 5.png" alt="">
                 </div>
-                <p>Wieder dasselbe.</p>
+                <p>Scham &amp; Zweifel.</p>
             </div>
 
             <!-- Card 6: Shame -->
             <div class="cyc cyc-6">
                 <div class="cyc-vis">
-                    <div class="cv6">
-                        <div class="cv6-mirror">
-                            <div class="cv6-fig"><div class="cv6-fig-h"></div><div class="cv6-fig-b"></div></div>
-                        </div>
-                    </div>
+                    <img class="cyc-img" src="kreislauf 6.png" alt="">
                 </div>
-                <p>Scham. Zweifel.</p>
+                <p>Neustart. Nächste Diät.</p>
             </div>
 
         </div>
@@ -3864,7 +3931,7 @@
 <!-- ════════ CYCLE ════════ -->
 <section class="cycle">
     <div class="container">
-        <h2>Der Kreislauf, den du <span class="sw">durchbrechen</span> musst</h2>
+        <h2>Wenn du diesen Kreislauf nicht <span class="sw">durchbrichst</span></h2>
 
         <div class="cycle-wrap">
             <svg class="cycle-svg" viewBox="0 0 540 540" fill="none">
@@ -3894,34 +3961,34 @@
 
             <!-- Center -->
             <div class="cycle-center">
-                <span class="sw">Endlosschleife</span>
-                <small>Immer. Wieder. Dasselbe.</small>
+                <span class="sw">Stillstand</span>
+                <small>Jahr für Jahr dasselbe.</small>
             </div>
 
             <!-- 6 Nodes -->
-            <div class="cn cn--1 cn--hot">
-                <b>Stress</b>
-                <span>Der Auslöser</span>
+            <div class="cn cn--1">
+                <img class="cn-img" src="kreislauf v2 1.png" alt="">
+                <b>Selbstzweifel</b>
             </div>
             <div class="cn cn--2">
-                <b>Heißhunger</b>
-                <span>Unkontrollierbar</span>
+                <img class="cn-img" src="kreislauf v2 2.png" alt="">
+                <b>Du versteckst dich</b>
             </div>
             <div class="cn cn--3">
-                <b>Essen</b>
-                <span>Trost &amp; Flucht</span>
+                <img class="cn-img" src="kreislauf v2 3.png" alt="">
+                <b>Essen bleibt Thema</b>
             </div>
             <div class="cn cn--4">
-                <b>Schuld</b>
-                <span>Warum schon wieder?</span>
+                <img class="cn-img" src="kreislauf v2 4.png" alt="">
+                <b>Lebensfreude sinkt</b>
             </div>
             <div class="cn cn--5">
-                <b>Neue Diät</b>
-                <span>Diesmal klappt's...</span>
+                <img class="cn-img" src="kreislauf v2 5.png" alt="">
+                <b>Rückzug</b>
             </div>
             <div class="cn cn--6">
-                <b>Rückfall</b>
-                <span>Ich schaff's nicht</span>
+                <img class="cn-img" src="kreislauf v2 6.png" alt="">
+                <b>Jahre vergehen</b>
             </div>
         </div>
 
@@ -3935,8 +4002,8 @@
                 box-shadow: 0 6px 24px rgba(255,80,40,0.3), 0 20px 60px rgba(255,80,40,0.2), 0 0 40px rgba(255,80,40,0.1);
                 transition: transform 0.35s cubic-bezier(.23,1,.32,1), box-shadow 0.35s ease;
             " onmouseover="this.style.transform='translateY(-2px) scale(1.04)';this.style.boxShadow='0 8px 28px rgba(255,80,40,0.4), 0 24px 72px rgba(255,80,40,0.25), 0 0 56px rgba(255,80,40,0.15)';" onmouseout="this.style.transform='';this.style.boxShadow='0 6px 24px rgba(255,80,40,0.3), 0 20px 60px rgba(255,80,40,0.2), 0 0 40px rgba(255,80,40,0.1)';">
-                Finde heraus wie
-                <span class="sub">Kostenfreie Analyse &ndash; Nur 3 Min.</span>
+                Endlich leicht abnehmen
+                <span class="sub">Finde deinen Weg in 3 Min.</span>
             </a>
         </div>
 
