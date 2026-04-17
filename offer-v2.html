@@ -68,6 +68,18 @@
         .hero-offer h1 .sw::after{content:'';position:absolute;bottom:-4px;left:-12px;right:-12px;height:28px;background:radial-gradient(ellipse,rgba(240,74,35,.06) 0%,transparent 70%);border-radius:50%;pointer-events:none;filter:blur(8px)}
         .hero-offer .hero-sub{font-size:clamp(1.02rem,2.3vw,1.18rem);color:var(--soft);max-width:560px;margin:0 auto 0;line-height:1.75;position:relative;z-index:1}
 
+        /* ═══ TRANSFORMATION MARQUEE ═══ */
+        .trafo-marquee{max-width:900px;margin:0 auto;padding:24px 0 0;overflow:hidden;position:relative;border-radius:20px}
+        .trafo-marquee::before,.trafo-marquee::after{content:'';position:absolute;top:0;bottom:0;width:60px;z-index:2;pointer-events:none}
+        .trafo-marquee::before{left:0;background:linear-gradient(90deg,var(--bg),transparent)}
+        .trafo-marquee::after{right:0;background:linear-gradient(270deg,var(--bg),transparent)}
+        .trafo-track{display:flex;gap:14px;width:max-content;animation:marqueeSlide 45s linear infinite}
+        .trafo-track:hover{animation-play-state:paused}
+        @keyframes marqueeSlide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+        .trafo-card-img{flex-shrink:0;width:150px;height:200px;border-radius:16px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.04),0 8px 24px rgba(0,0,0,.05);border:1px solid rgba(0,0,0,.03);background:var(--card)}
+        .trafo-card-img img{width:100%;height:100%;object-fit:cover;display:block}
+        @media(max-width:480px){.trafo-marquee{padding:20px 0 0;border-radius:0}.trafo-card-img{width:120px;height:160px;border-radius:13px}.trafo-track{gap:10px}.trafo-marquee::before,.trafo-marquee::after{width:32px}}
+
         /* ═══ S2: PROBLEM (compact) ═══ */
         .prob-sec{padding:52px 0 44px}
         .prob-pills{display:flex;justify-content:center;gap:10px;margin-bottom:28px;flex-wrap:wrap}
@@ -199,8 +211,37 @@
     </div>
 </section>
 
+<!-- ═══ TRANSFORMATION MARQUEE ═══ -->
+<div class="trafo-marquee">
+    <div class="trafo-track" id="trafoTrack">
+        <div class="trafo-card-img"><img src="trafo 1.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 2.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 3.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 4.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 5.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 6.jpg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 7.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 8.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 9.jpg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 10.jpg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 11.jpg" alt="Transformation" draggable="false"></div>
+        <!-- Duplicate set for seamless loop -->
+        <div class="trafo-card-img"><img src="trafo 1.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 2.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 3.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 4.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 5.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 6.jpg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 7.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 8.jpeg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 9.jpg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 10.jpg" alt="Transformation" draggable="false"></div>
+        <div class="trafo-card-img"><img src="trafo 11.jpg" alt="Transformation" draggable="false"></div>
+    </div>
+</div>
+
 <!-- ═══ S3: FEATURES ═══ -->
-<section class="sec" style="padding-top:40px;padding-bottom:28px">
+<section class="sec" style="padding-top:56px;padding-bottom:28px">
     <div class="ctn-sm">
         <h2 class="sec-title rv" data-d="0">Was du bekommst:</h2>
 
