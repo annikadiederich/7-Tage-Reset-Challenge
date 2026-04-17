@@ -816,8 +816,8 @@
             border-radius: 50%;
             border: 1.5px solid var(--white);
             margin-left: -8px;
-            background-size: cover;
-            background-position: center;
+            object-fit: cover;
+            object-position: center 20%;
             box-shadow: 0 1px 4px rgba(30,28,26,0.06);
             opacity: 0;
             transform: scale(0.8);
@@ -3277,13 +3277,14 @@
 
         .cn {
             position: absolute;
-            background: rgba(255,255,255,0.04);
+            background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.08);
             border-radius: 16px;
-            padding: 14px 22px;
+            padding: 0;
             text-align: center;
             transition: transform 0.3s ease, border-color 0.3s ease, background 0.3s ease;
-            min-width: 145px;
+            width: 140px;
+            overflow: hidden;
         }
 
         .cn:hover {
@@ -3295,8 +3296,9 @@
         .cn b {
             display: block;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.88rem; font-weight: 700;
+            font-size: 0.78rem; font-weight: 700;
             color: rgba(248,244,237,0.9);
+            padding: 10px 14px 14px;
         }
 
         .cn span {
@@ -3305,21 +3307,14 @@
         }
 
         .cn-img {
-            width: calc(100% + 44px);
-            margin: -14px -22px 10px;
-            height: 88px;
+            width: 100%;
+            height: 90px;
             object-fit: cover;
             object-position: center 30%;
             display: block;
-            border-radius: 14px 14px 0 0;
-            filter: saturate(0.9) brightness(0.94);
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 55%, rgba(0,0,0,0.35) 88%, transparent 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 55%, rgba(0,0,0,0.35) 88%, transparent 100%);
+            border-radius: 15px 15px 0 0;
+            filter: saturate(0.92) brightness(0.96);
         }
-
-        /* Card-specific image adjustments */
-        .cn--2 .cn-img { object-position: center 40%; height: 96px; }
-        .cn--4 .cn-img { object-position: center 25%; height: 100px; object-fit: cover; }
 
         .cn--hot { border-color: rgba(232,83,14,0.35); background: rgba(232,83,14,0.07); }
         .cn--hot b { color: #f8a070; }
@@ -3327,19 +3322,20 @@
         /* Node positions — 6 nodes around a hexagonal path */
         /* 6 positions — circular ring, cards stay horizontal */
         .cn--1 { top: 0; left: 50%; transform: translateX(-50%); }              /* 12 Uhr */
-        .cn--2 { top: 20%; right: -10%; }                                        /* 2 Uhr */
-        .cn--3 { bottom: 20%; right: -6%; }                                      /* 4 Uhr */
+        .cn--2 { top: 18%; right: -8%; }                                         /* 2 Uhr */
+        .cn--3 { bottom: 18%; right: -8%; }                                      /* 4 Uhr */
         .cn--4 { bottom: 0; left: 50%; transform: translateX(-50%); }           /* 6 Uhr */
-        .cn--5 { bottom: 20%; left: -6%; }                                       /* 8 Uhr */
-        .cn--6 { top: 20%; left: -6%; }                                          /* 10 Uhr */
+        .cn--5 { bottom: 18%; left: -8%; }                                       /* 8 Uhr */
+        .cn--6 { top: 18%; left: -8%; }                                          /* 10 Uhr */
 
         .cn--1:hover { transform: translateX(-50%) scale(1.05); }
         .cn--4:hover { transform: translateX(-50%) scale(1.05); }
 
         @media (max-width: 540px) {
             .cycle-wrap { max-width: 360px; }
-            .cn { padding: 10px 14px; border-radius: 12px; }
-            .cn b { font-size: 0.78rem; }
+            .cn { width: 120px; border-radius: 12px; }
+            .cn b { font-size: 0.7rem; padding: 8px 10px 12px; }
+            .cn-img { height: 72px; }
             .cn span { font-size: 0.62rem; }
         }
 
@@ -3704,10 +3700,10 @@
             <!-- Social proof -->
             <div class="hero-proof">
                 <div class="proof-avatars">
-                    <div class="proof-av"><span>S</span></div>
-                    <div class="proof-av"><span>M</span></div>
-                    <div class="proof-av"><span>L</span></div>
-                    <div class="proof-av"><span>A</span></div>
+                    <img class="proof-av" src="trafo 1.jpeg" alt="">
+                    <img class="proof-av" src="trafo 2.jpeg" alt="">
+                    <img class="proof-av" src="trafo 3.jpeg" alt="">
+                    <img class="proof-av" src="trafo 4.jpeg" alt="">
                 </div>
                 <span class="hero-proof-text"><strong>2.500+ Frauen</strong> haben ihre Analyse bereits erhalten.</span>
             </div>

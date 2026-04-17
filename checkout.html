@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dein persönliches Angebot | Elliott Aziz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sansita+Swashed:wght@400;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg:#F6F4F0;--bg2:#EEECE6;--dark:#071411;--text:#1e1e1e;--soft:#5a5a5a;--muted:#9a9a9a;--green:#619240;--green-soft:rgba(97,146,64,.07);--cta:#F04A23;--cta2:#F24B2A;--white:#fff;--card:#fff;--shadow:0 1px 4px rgba(0,0,0,.02),0 8px 28px rgba(0,0,0,.04);--shadow-lg:0 2px 8px rgba(0,0,0,.03),0 16px 48px rgba(0,0,0,.06);--radius:20px}
+        html{scroll-behavior:smooth}
+        body{font-family:'Instrument Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+        h1,h2,h3,h4{font-family:'Plus Jakarta Sans',sans-serif;letter-spacing:-.03em}
+        .sw{font-family:'Sansita Swashed',cursive;font-weight:600}
+        img{max-width:100%;display:block}
+
+        /* ═══ OFFER BAR ═══ */
+        .offer-bar{position:fixed;top:0;left:0;right:0;z-index:100;background:#03140F;border-bottom:none;box-shadow:none;padding:0 24px}
+        .offer-bar-inner{max-width:720px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px}
+        .offer-bar-left{display:flex;align-items:center;gap:14px;flex:1;min-width:0}
+        .offer-bar-badge{flex-shrink:0;padding:4px 12px;border-radius:6px;background:linear-gradient(135deg,rgba(240,74,35,.15),rgba(240,74,35,.08));border:1px solid rgba(240,74,35,.2);font-family:'Plus Jakarta Sans',sans-serif;font-size:.58rem;font-weight:800;color:#FF6B4A;letter-spacing:.04em;text-transform:uppercase;white-space:nowrap}
+        .offer-bar-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:.68rem;font-weight:500;color:rgba(240,237,232,.55);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+        .offer-bar-timer{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.05rem;font-weight:800;color:#f0ede8;letter-spacing:.04em;flex-shrink:0;min-width:52px;text-align:center}
+        .offer-bar-cta{flex-shrink:0}
+        .offer-bar-cta a{display:inline-flex;align-items:center;padding:10px 24px;background:linear-gradient(135deg,var(--cta),var(--cta2));color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.02em;border-radius:100px;text-decoration:none;box-shadow:0 2px 12px rgba(240,74,35,.2);transition:transform .2s ease,box-shadow .2s ease}
+        .offer-bar-cta a:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(240,74,35,.28)}
+
+        @media(max-width:640px){
+            .offer-bar-inner{flex-wrap:wrap;gap:8px;padding:10px 0}
+            .offer-bar-left{order:1;width:100%;justify-content:center;gap:10px}
+            .offer-bar-text{display:none}
+            .offer-bar-cta{order:2;width:100%;text-align:center;padding-bottom:2px}
+            .offer-bar-cta a{width:100%;justify-content:center;padding:11px 20px}
+        }
+
+        /* ═══ SPACER ═══ */
+        .bar-spacer{height:56px}
+        @media(max-width:640px){.bar-spacer{height:96px}}
+
+        /* ═══ HERO ═══ */
+        .co-hero{padding:40px 24px 12px;text-align:center}
+        .co-hero-eyebrow{display:flex;justify-content:center;margin-bottom:20px}
+        .co-hero-eyebrow .eb-pill{display:inline-flex;align-items:center;gap:10px;padding:8px 22px;border-radius:100px;background:rgba(246,244,240,.6);border:1px solid rgba(97,146,64,.12);font-family:'Plus Jakarta Sans',sans-serif;font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em}
+        .eb-dot{position:relative;width:7px;height:7px;border-radius:50%;background:#619240;flex-shrink:0}
+        .eb-dot::after{content:'';position:absolute;inset:-3px;border-radius:50%;background:rgba(97,146,64,.25);animation:dotPulse 3s ease-in-out infinite}
+        @keyframes dotPulse{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.7;transform:scale(1.6)}}
+        .co-hero-eyebrow .eb-label{background:linear-gradient(135deg,#7FB45B,#619240);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .co-hero h1{font-size:clamp(1.6rem,5vw,2.4rem);font-weight:800;line-height:1.15;margin-bottom:12px}
+        .co-hero h1 .sw{color:var(--cta)}
+        .co-hero-sub{font-size:clamp(.92rem,2.2vw,1.05rem);color:var(--soft);max-width:480px;margin:0 auto;line-height:1.7}
+
+        /* ═══ TRAFO HERO ZONE ═══ */
+        .trafo-zone{background:linear-gradient(180deg,#03140F 0%,#041A14 35%,#072019 70%,#0A241D 100%);padding-bottom:48px}
+
+        /* ═══ TRANSFORMATION CARD ═══ */
+        .trafo-wrap{max-width:488px;margin:0 auto;padding:0 24px}
+        .trafo-card{background:var(--card);border-radius:20px;box-shadow:var(--shadow-lg);overflow:hidden;border:1px solid rgba(0,0,0,.03)}
+
+        /* Header row */
+        .trafo-header{display:grid;grid-template-columns:1fr 1fr;border-bottom:1px solid rgba(0,0,0,.04)}
+        .trafo-header-col{padding:12px 16px;text-align:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em}
+        .trafo-header-col:first-child{color:var(--muted);border-right:1px solid rgba(0,0,0,.04)}
+        .trafo-header-col:last-child{color:var(--green)}
+
+        /* Images row */
+        .trafo-images{display:grid;grid-template-columns:1fr 1fr;position:relative}
+        .trafo-img{aspect-ratio:3/4;overflow:hidden;position:relative}
+        .trafo-img img{width:100%;height:100%;object-fit:cover}
+        .trafo-img:first-child{border-right:1px solid rgba(0,0,0,.04)}
+        .trafo-img:first-child::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(0,0,0,.03) 100%)}
+
+        /* Arrow indicator */
+        .trafo-arrow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);z-index:2;width:34px;height:34px;border-radius:50%;background:var(--card);box-shadow:0 2px 10px rgba(0,0,0,.08);display:flex;align-items:center;justify-content:center}
+        .trafo-arrow svg{width:13px;height:13px;stroke:var(--cta);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+        /* Stats area */
+        .trafo-stats{padding:16px 16px 20px}
+        .trafo-stat-row{display:grid;grid-template-columns:1fr 1fr;gap:0;margin-bottom:12px}
+        .trafo-stat-row:last-child{margin-bottom:0}
+        .trafo-stat{padding:0 12px}
+        .trafo-stat:first-child{border-right:1px solid rgba(0,0,0,.04)}
+        .trafo-stat-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:.62rem;font-weight:600;margin-bottom:6px;color:var(--text)}
+        .trafo-stat-bar{height:5px;border-radius:100px;overflow:hidden;background:rgba(0,0,0,.04)}
+        .trafo-stat-fill{height:100%;border-radius:100px;transition:width .8s cubic-bezier(.23,1,.32,1)}
+        .trafo-stat-fill--low{width:25%;background:rgba(0,0,0,.1)}
+        .trafo-stat-fill--high{width:90%;background:linear-gradient(90deg,var(--green),#7FB45B)}
+        .trafo-stat-val{font-family:'Plus Jakarta Sans',sans-serif;font-size:.52rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;margin-top:4px}
+        .trafo-stat-val--low{color:var(--muted)}
+        .trafo-stat-val--high{color:var(--green)}
+
+        /* ═══ OFFER SECTION ═══ */
+        .co-offer{padding:20px 24px 32px;text-align:center}
+        .co-offer-card{max-width:440px;margin:0 auto;background:var(--card);border-radius:24px;padding:36px 28px;box-shadow:var(--shadow-lg);border:1px solid rgba(0,0,0,.03)}
+        .co-offer-eyebrow{font-family:'Plus Jakarta Sans',sans-serif;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--cta);margin-bottom:16px}
+        .co-offer-title{font-size:clamp(1.2rem,3.5vw,1.5rem);font-weight:800;margin-bottom:6px}
+        .co-offer-desc{font-size:.84rem;color:var(--soft);margin-bottom:24px;line-height:1.6}
+
+        /* Pricing */
+        .co-pricing{display:flex;align-items:baseline;justify-content:center;gap:12px;margin-bottom:8px}
+        .co-price-old{font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:600;color:var(--muted);text-decoration:line-through}
+        .co-price-new{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(2rem,6vw,2.8rem);font-weight:800;color:var(--text);letter-spacing:-.03em}
+        .co-price-note{font-size:.68rem;color:var(--muted);margin-bottom:28px}
+
+        /* CTA */
+        .co-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 44px;background:linear-gradient(135deg,var(--cta),var(--cta2));color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.94rem;font-weight:700;letter-spacing:.02em;border:none;border-radius:30px;cursor:pointer;text-decoration:none;box-shadow:0 4px 16px rgba(240,74,35,.18);transition:transform .3s ease,box-shadow .3s ease,filter .3s ease}
+        .co-cta:hover{transform:translateY(-2px) scale(1.02);filter:brightness(1.06);box-shadow:0 6px 24px rgba(240,74,35,.24),0 0 44px rgba(240,74,35,.08)}
+        .co-cta:active{transform:scale(.98)}
+
+        /* Trust */
+        .co-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:20px}
+        .co-trust span{display:flex;align-items:center;gap:4px;font-size:.6rem;color:var(--muted)}
+        .co-trust svg{width:11px;height:11px;stroke:var(--green);stroke-width:2.5;fill:none}
+
+        /* Card countdown */
+        .co-countdown{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;background:linear-gradient(135deg,rgba(240,74,35,.06),rgba(240,160,80,.04));border:1px solid rgba(240,74,35,.1);margin-bottom:20px}
+        .co-countdown svg{width:14px;height:14px;stroke:var(--cta);stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+        .co-countdown-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:.72rem;font-weight:600;color:var(--text)}
+        .co-countdown-time{font-weight:800;color:var(--cta);letter-spacing:.02em}
+
+        /* ═══ SOCIAL PROOF ═══ */
+        .co-proof{max-width:440px;margin:0 auto;padding:16px 0 32px;text-align:center}
+        .co-proof-inner{padding:18px 24px;border-radius:24px;background:var(--green-soft);border:1px solid rgba(97,146,64,.08)}
+        .co-proof-inner h3{font-size:.82rem;font-weight:800;margin-bottom:5px;letter-spacing:-.01em}
+        .co-proof-inner>p{font-size:.7rem;color:var(--soft);line-height:1.55;max-width:320px;margin:0 auto 14px}
+        .co-proof-thumbs{display:flex;justify-content:center;gap:8px;margin-bottom:12px}
+        .co-proof-thumbs img{width:44px;height:44px;border-radius:11px;object-fit:cover;box-shadow:0 1px 4px rgba(0,0,0,.05);border:1.5px solid var(--card)}
+        .co-proof-rating{display:flex;align-items:center;justify-content:center;gap:5px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.62rem;font-weight:600;color:var(--soft)}
+        .co-proof-stars{display:flex;gap:1px}
+        .co-proof-stars svg{width:11px;height:11px;fill:#f5d020}
+        @media(max-width:480px){.co-proof-thumbs img{width:38px;height:38px;border-radius:10px}}
+
+        /* ═══ PLAN INCLUDES ═══ */
+        .co-includes-bg{background:#FAF9F6;position:relative;box-shadow:inset 0 1px 0 rgba(0,0,0,.02),inset 0 -1px 0 rgba(0,0,0,.02)}
+        .co-includes-bg::before{content:'';position:absolute;top:0;left:0;right:0;height:32px;background:linear-gradient(180deg,var(--bg),#FAF9F6);pointer-events:none}
+        .co-includes-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:32px;background:linear-gradient(180deg,#FAF9F6,var(--bg));pointer-events:none}
+        .co-includes{max-width:540px;margin:0 auto;padding:48px 24px 40px}
+        .co-includes-title{font-size:clamp(1.2rem,3.5vw,1.5rem);font-weight:800;text-align:center;margin-bottom:28px}
+        .co-inc-list{display:flex;flex-direction:column;gap:14px}
+        .co-inc-card{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;background:var(--card);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.03)}
+        .co-inc-icon{width:44px;height:44px;border-radius:11px;background:var(--green-soft);display:flex;align-items:center;justify-content:center}
+        .co-inc-icon svg{width:20px;height:20px;stroke:var(--green);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
+        .co-inc-card h3{font-size:.86rem;font-weight:700;margin-bottom:3px}
+        .co-inc-card p{font-size:.76rem;color:var(--soft);line-height:1.55}
+        .co-inc-cta{text-align:center;margin-top:28px}
+        .co-inc-cta a{display:inline-flex;align-items:center;justify-content:center;padding:16px 44px;background:linear-gradient(135deg,var(--cta),var(--cta2));color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.94rem;font-weight:700;letter-spacing:.02em;border-radius:30px;text-decoration:none;box-shadow:0 4px 16px rgba(240,74,35,.18);transition:transform .3s ease,box-shadow .3s ease}
+        .co-inc-cta a:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(240,74,35,.24)}
+        .co-inc-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:16px}
+        .co-inc-trust span{display:flex;align-items:center;gap:4px;font-size:.6rem;color:var(--muted)}
+        .co-inc-trust svg{width:11px;height:11px;stroke:var(--green);stroke-width:2.5;fill:none}
+        @media(max-width:480px){.co-includes{padding:36px 16px 32px}.co-inc-card{grid-template-columns:38px 1fr;gap:12px;padding:16px 14px}.co-inc-icon{width:38px;height:38px;border-radius:10px}.co-inc-icon svg{width:18px;height:18px}.co-inc-card h3{font-size:.82rem}.co-inc-card p{font-size:.72rem}}
+
+        /* ═══ RESPONSIVE ═══ */
+        @media(max-width:480px){
+            .co-hero{padding:32px 20px 8px}
+            .trafo-wrap{padding:0 16px}
+            .trafo-card{border-radius:16px}
+            .trafo-header-col{padding:10px 10px;font-size:.56rem}
+            .trafo-stat{padding:0 8px}
+            .trafo-stat-label{font-size:.58rem}
+            .co-offer-card{padding:28px 20px;border-radius:18px}
+            .co-cta{padding:14px 36px;font-size:.9rem}
+            .faq-item-q{padding:16px 18px;font-size:.82rem}
+            .faq-item-a{padding:0 18px}
+        }
+
+        /* ═══ FAQ ═══ */
+        .faq-sec{max-width:540px;margin:0 auto;padding:48px 24px 64px}
+        .faq-title{font-size:clamp(1.2rem,3.5vw,1.5rem);font-weight:800;text-align:center;margin-bottom:8px}
+        .faq-sub{font-size:.78rem;color:var(--muted);text-align:center;margin-bottom:32px}
+        .faq-list{display:flex;flex-direction:column;gap:10px}
+        .faq-item{background:var(--card);border-radius:16px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.03);overflow:hidden}
+        .faq-item-q{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;cursor:pointer;font-family:'Plus Jakarta Sans',sans-serif;font-size:.86rem;font-weight:700;color:var(--text);transition:color .2s ease;-webkit-user-select:none;user-select:none}
+        .faq-item-q:hover{color:var(--cta)}
+        .faq-item-icon{width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.03);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:background .2s ease,transform .3s ease}
+        .faq-item-icon svg{width:12px;height:12px;stroke:var(--soft);stroke-width:2.5;fill:none;stroke-linecap:round;stroke-linejoin:round;transition:stroke .2s ease}
+        .faq-item.open .faq-item-icon{background:rgba(240,74,35,.06);transform:rotate(45deg)}
+        .faq-item.open .faq-item-icon svg{stroke:var(--cta)}
+        .faq-item-a{max-height:0;overflow:hidden;transition:max-height .35s cubic-bezier(.23,1,.32,1),padding .35s ease}
+        .faq-item.open .faq-item-a{max-height:300px}
+        .faq-item-a-inner{padding:0 22px 18px;font-size:.8rem;color:var(--soft);line-height:1.65}
+        @media(max-width:480px){.faq-sec{padding:36px 16px 48px}.faq-item{border-radius:14px}}
+
+        /* Reveal */
+        .rv{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s cubic-bezier(.23,1,.32,1)}.rv.vis{opacity:1;transform:translateY(0)}
+    </style>
+</head>
+<body>
+
+<!-- ═══ OFFER BAR ═══ -->
+<div class="offer-bar" id="offerBar">
+    <div class="offer-bar-inner">
+        <div class="offer-bar-left">
+            <span class="offer-bar-badge">70% Rabatt</span>
+            <span class="offer-bar-text">Dein Angebot ist reserviert f&uuml;r:</span>
+            <span class="offer-bar-timer" id="barTimer">15:00</span>
+        </div>
+        <div class="offer-bar-cta">
+            <a href="#secure">Plan jetzt sichern</a>
+        </div>
+    </div>
+</div>
+
+<div class="bar-spacer"></div>
+
+<!-- ═══ TRAFO HERO ZONE ═══ -->
+<div class="trafo-zone">
+
+<!-- ═══ TRANSFORMATION CARD ═══ -->
+<div class="trafo-wrap rv" data-d="0" style="padding-top:40px">
+    <div class="trafo-card">
+        <div class="trafo-header">
+            <div class="trafo-header-col">Heute</div>
+            <div class="trafo-header-col">Dein Ziel</div>
+        </div>
+        <div class="trafo-images">
+            <div class="trafo-img">
+                <img src="mona vorher.JPG" alt="Heute" draggable="false">
+            </div>
+            <div class="trafo-img">
+                <img src="mona nachher.JPG" alt="Dein Ziel" draggable="false">
+            </div>
+            <div class="trafo-arrow">
+                <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+            </div>
+        </div>
+        <div class="trafo-stats">
+            <div class="trafo-stat-row">
+                <div class="trafo-stat">
+                    <div class="trafo-stat-label">Kontrolle &uuml;ber Essen</div>
+                    <div class="trafo-stat-bar"><div class="trafo-stat-fill trafo-stat-fill--low"></div></div>
+                    <div class="trafo-stat-val trafo-stat-val--low">Niedrig</div>
+                </div>
+                <div class="trafo-stat">
+                    <div class="trafo-stat-label">Kontrolle &uuml;ber Essen</div>
+                    <div class="trafo-stat-bar"><div class="trafo-stat-fill trafo-stat-fill--high"></div></div>
+                    <div class="trafo-stat-val trafo-stat-val--high">Hoch</div>
+                </div>
+            </div>
+            <div class="trafo-stat-row">
+                <div class="trafo-stat">
+                    <div class="trafo-stat-label">Energie im Alltag</div>
+                    <div class="trafo-stat-bar"><div class="trafo-stat-fill trafo-stat-fill--low"></div></div>
+                    <div class="trafo-stat-val trafo-stat-val--low">Niedrig</div>
+                </div>
+                <div class="trafo-stat">
+                    <div class="trafo-stat-label">Energie im Alltag</div>
+                    <div class="trafo-stat-bar"><div class="trafo-stat-fill trafo-stat-fill--high"></div></div>
+                    <div class="trafo-stat-val trafo-stat-val--high">Hoch</div>
+                </div>
+            </div>
+            <div class="trafo-stat-row">
+                <div class="trafo-stat">
+                    <div class="trafo-stat-label">Ruhe im Kopf</div>
+                    <div class="trafo-stat-bar"><div class="trafo-stat-fill trafo-stat-fill--low"></div></div>
+                    <div class="trafo-stat-val trafo-stat-val--low">Niedrig</div>
+                </div>
+                <div class="trafo-stat">
+                    <div class="trafo-stat-label">Ruhe im Kopf</div>
+                    <div class="trafo-stat-bar"><div class="trafo-stat-fill trafo-stat-fill--high"></div></div>
+                    <div class="trafo-stat-val trafo-stat-val--high">Hoch</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div><!-- /trafo-zone -->
+
+<!-- ═══ HERO TEXT ═══ -->
+<section class="co-hero">
+    <div class="co-hero-eyebrow rv" data-d="0">
+        <span class="eb-pill"><span class="eb-dot"></span><span class="eb-label">Exklusiver Sonderpreis</span></span>
+    </div>
+    <h1 class="rv" data-d="80">Dein personalisierter<br><span class="sw">Abnehm-Plan</span> ist bereit!</h1>
+</section>
+
+<!-- ═══ OFFER CARD ═══ -->
+<section class="co-offer" id="secure">
+    <div class="co-offer-card rv" data-d="0">
+        <p class="co-offer-eyebrow">Exklusiv f&uuml;r dich reserviert</p>
+        <h2 class="co-offer-title">7 Tage Reset Challenge</h2>
+        <p class="co-offer-desc">Dein kompletter Abnehm-Plan: Ern&auml;hrung, Training, Mindset, Community und pers&ouml;nliche Begleitung.</p>
+
+        <div class="co-countdown">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="co-countdown-text">Dein Sonderpreis l&auml;uft ab in <span class="co-countdown-time" id="cardTimer">15:00</span></span>
+        </div>
+
+        <div class="co-pricing" style="margin-bottom:24px">
+            <span class="co-price-old">149 &euro;</span>
+            <span class="co-price-new">29,90 &euro;</span>
+        </div>
+
+        <a href="#" class="co-cta">Plan jetzt sichern</a>
+
+        <div class="co-trust">
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sofortzugang</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sichere Zahlung</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Kein Abo</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ SOCIAL PROOF ═══ -->
+<div class="co-proof rv" data-d="0">
+    <div class="co-proof-inner">
+        <h3>Bereits &uuml;ber 13.000 Frauen erfolgreich gestartet</h3>
+        <p>Tausende Frauen haben Kontrolle &uuml;ber Essen gewonnen und nachhaltig abgenommen.</p>
+        <div class="co-proof-thumbs">
+            <img src="trafo 1.jpeg" alt="Teilnehmerin" draggable="false">
+            <img src="trafo 2.jpeg" alt="Teilnehmerin" draggable="false">
+            <img src="trafo 3.jpeg" alt="Teilnehmerin" draggable="false">
+            <img src="trafo 4.jpeg" alt="Teilnehmerin" draggable="false">
+        </div>
+        <div class="co-proof-rating">
+            <span class="co-proof-stars"><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span>
+            <span>4.9/5 Zufriedenheit</span>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ PLAN INCLUDES ═══ -->
+<div class="co-includes-bg">
+<div class="co-includes">
+    <div class="co-hero-eyebrow rv" data-d="0" style="margin-bottom:14px">
+        <span class="eb-pill"><span class="eb-dot"></span><span class="eb-label">Dein pers&ouml;nlicher Plan</span></span>
+    </div>
+    <h2 class="co-includes-title rv" data-d="60">Alles, was du brauchst, um diesmal wirklich abzunehmen</h2>
+
+    <div class="co-inc-list">
+        <div class="co-inc-card rv" data-d="80">
+            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+            <div>
+                <h3>Ern&auml;hrungsplan, den du durchziehst</h3>
+                <p>Einfach, alltagstauglich und ohne Verzicht.</p>
+            </div>
+        </div>
+
+        <div class="co-inc-card rv" data-d="130">
+            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+            <div>
+                <h3>Trainingsplan, der ins Leben passt</h3>
+                <p>Effektiv, leicht umsetzbar und ohne Fitnessstudio.</p>
+            </div>
+        </div>
+
+        <div class="co-inc-card rv" data-d="180">
+            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M22 12A10 10 0 1 1 12 2"/><path d="M22 4v4h-4"/></svg></div>
+            <div>
+                <h3>Mentales Training gegen R&uuml;ckf&auml;lle</h3>
+                <p>Damit du endlich dranbleibst.</p>
+            </div>
+        </div>
+
+        <div class="co-inc-card rv" data-d="230">
+            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+                <h3>Community, die dich mitzieht</h3>
+                <p>Gemeinsam f&auml;llt Durchziehen leichter.</p>
+            </div>
+        </div>
+
+        <div class="co-inc-card rv" data-d="280">
+            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div>
+                <h3>1:1 Support &amp; Live-Gespr&auml;che</h3>
+                <p>Fragen kl&auml;ren und echte Unterst&uuml;tzung bekommen.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="co-inc-cta rv" data-d="100">
+        <a href="#secure">Ja, ich will meinen Plan</a>
+        <div class="co-inc-trust">
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Alltagstauglich</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ohne Verzicht</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mit Begleitung</span>
+        </div>
+    </div>
+</div>
+</div><!-- /co-includes-bg -->
+
+<!-- ═══ FINAL CTA / SECOND OFFER ═══ -->
+<section class="co-offer" style="padding-top:48px;padding-bottom:48px">
+    <h2 class="rv" data-d="0" style="font-size:clamp(1.3rem,4vw,1.7rem);font-weight:800;text-align:center;margin-bottom:24px;padding:0 24px">Sp&uuml;re erste Ver&auml;nderungen in 7 Tagen!</h2>
+    <div class="co-offer-card rv" data-d="80">
+        <p class="co-offer-eyebrow">Exklusiv f&uuml;r dich reserviert</p>
+        <h2 class="co-offer-title">7 Tage Reset Challenge</h2>
+        <p class="co-offer-desc">Dein kompletter Abnehm-Plan: Ern&auml;hrung, Training, Mindset, Community und pers&ouml;nliche Begleitung.</p>
+
+        <div class="co-countdown">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            <span class="co-countdown-text">Dein Sonderpreis l&auml;uft ab in <span class="co-countdown-time" id="cardTimer2">15:00</span></span>
+        </div>
+
+        <div class="co-pricing" style="margin-bottom:24px">
+            <span class="co-price-old">149 &euro;</span>
+            <span class="co-price-new">29,90 &euro;</span>
+        </div>
+
+        <a href="#" class="co-cta">Plan jetzt sichern</a>
+
+        <div class="co-trust">
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sofortzugang</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sichere Zahlung</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Kein Abo</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<div class="faq-sec">
+    <h2 class="faq-title rv" data-d="0">Hast du noch Fragen?</h2>
+    <p class="faq-sub rv" data-d="60">Hier findest du die wichtigsten Antworten vor deinem Start.</p>
+
+    <div class="faq-list">
+        <div class="faq-item rv" data-d="80">
+            <div class="faq-item-q">Warum sollte es diesmal klappen, wenn ich schon alles probiert habe?<span class="faq-item-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+            <div class="faq-item-a"><div class="faq-item-a-inner">Weil du nicht einfach den n&auml;chsten Di&auml;tplan bekommst. Du bekommst Struktur, mentale Begleitung und ein System, das auf Dranbleiben im echten Alltag ausgelegt ist.</div></div>
+        </div>
+
+        <div class="faq-item rv" data-d="120">
+            <div class="faq-item-q">Ist das wieder nur eine neue Di&auml;t?<span class="faq-item-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+            <div class="faq-item-a"><div class="faq-item-a-inner">Nein. Du musst nicht hungern, verzichten oder dein Leben komplett umstellen. Der Plan ist darauf ausgelegt, alltagstauglich und langfristig umsetzbar zu sein.</div></div>
+        </div>
+
+        <div class="faq-item rv" data-d="160">
+            <div class="faq-item-q">Ich habe kaum Zeit &ndash; funktioniert das trotzdem?<span class="faq-item-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+            <div class="faq-item-a"><div class="faq-item-a-inner">Ja. Gerade f&uuml;r besch&auml;ftigte Frauen entwickelt. Klare Schritte, einfache Umsetzung und kein unn&ouml;tiger Aufwand.</div></div>
+        </div>
+
+        <div class="faq-item rv" data-d="200">
+            <div class="faq-item-q">Was passiert direkt nach dem Kauf?<span class="faq-item-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+            <div class="faq-item-a"><div class="faq-item-a-inner">Du erh&auml;ltst sofort Zugang zu deinem Bereich. Dort findest du direkt deinen Ern&auml;hrungsplan, Trainingsplan und alle Inhalte.</div></div>
+        </div>
+
+        <div class="faq-item rv" data-d="240">
+            <div class="faq-item-q">Wie lange habe ich Zugriff?<span class="faq-item-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+            <div class="faq-item-a"><div class="faq-item-a-inner">Du erh&auml;ltst lebenslangen Zugriff auf alle Inhalte. Du kannst jederzeit starten, pausieren und wieder einsteigen.</div></div>
+        </div>
+
+        <div class="faq-item rv" data-d="280">
+            <div class="faq-item-q">Was ist hier anders als bei anderen Programmen?<span class="faq-item-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></div>
+            <div class="faq-item-a"><div class="faq-item-a-inner">Hier geht es nicht nur um Essen. Wir l&ouml;sen auch die Gr&uuml;nde, warum du immer wieder r&uuml;ckf&auml;llig wirst: Stress, Hei&szlig;hunger, Chaos und fehlendes Dranbleiben.</div></div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Scroll reveal
+    var ro=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){var d=parseInt(e.target.dataset.d)||0;setTimeout(function(){e.target.classList.add('vis')},d);ro.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -20px 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){ro.observe(el)});
+
+    // 15-minute countdown (synced bar + card)
+    (function(){
+        var barEl=document.getElementById('barTimer');
+        var cardEl=document.getElementById('cardTimer');
+        var cardEl2=document.getElementById('cardTimer2');
+        if(!barEl) return;
+
+        var key='checkout_timer_end';
+        var stored=sessionStorage.getItem(key);
+        var end;
+
+        if(stored){
+            end=parseInt(stored,10);
+        } else {
+            end=Date.now()+15*60*1000;
+            sessionStorage.setItem(key,end.toString());
+        }
+
+        function update(){
+            var diff=Math.max(0,end-Date.now());
+            var m=Math.floor(diff/60000);
+            var s=Math.floor((diff%60000)/1000);
+            var t=(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+            barEl.textContent=t;
+            if(cardEl) cardEl.textContent=t;
+            if(cardEl2) cardEl2.textContent=t;
+            if(diff>0){requestAnimationFrame(update)}
+            else{barEl.textContent='00:00';if(cardEl) cardEl.textContent='00:00';if(cardEl2) cardEl2.textContent='00:00'}
+        }
+        update();
+    })();
+
+    // Animate stat bars on scroll
+    (function(){
+        var bars=document.querySelectorAll('.trafo-stat-fill--high');
+        if(!bars.length) return;
+        bars.forEach(function(b){b.style.width='0%'});
+        var obs=new IntersectionObserver(function(entries){
+            entries.forEach(function(entry){
+                if(entry.isIntersecting){
+                    bars.forEach(function(b){setTimeout(function(){b.style.width='90%'},300)});
+                    obs.disconnect();
+                }
+            });
+        },{threshold:.3});
+        var statsEl=document.querySelector('.trafo-stats');
+        if(statsEl) obs.observe(statsEl);
+    })();
+
+    // FAQ accordion
+    document.querySelectorAll('.faq-item-q').forEach(function(q){
+        q.addEventListener('click',function(){
+            var item=q.parentElement;
+            var wasOpen=item.classList.contains('open');
+            document.querySelectorAll('.faq-item.open').forEach(function(el){el.classList.remove('open')});
+            if(!wasOpen) item.classList.add('open');
+        });
+    });
+</script>
+
+</body>
+</html>
