@@ -279,6 +279,7 @@
         buildOverlay();
 
         const overlay = document.getElementById('quizOverlay');
+        document.documentElement.classList.add('quiz-active');
         // Small delay for DOM paint
         requestAnimationFrame(() => {
             overlay.classList.add('active');
