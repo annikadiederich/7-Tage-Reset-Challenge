@@ -246,9 +246,11 @@
 
         /* Responsive */
         @media (max-width: 480px) {
-            .email-title { font-size: 1.3rem; }
-            .email-input { padding: 15px 18px; font-size: 0.88rem; }
-            .email-btn { padding: 14px 24px; font-size: 0.92rem; }
+            body { padding: 32px 20px; }
+            .email-title { font-size: 1.2rem; margin-bottom: 28px; }
+            .email-input { padding: 15px 18px; font-size: 0.88rem; min-height: 52px; }
+            .email-btn { padding: 15px 24px; font-size: 0.92rem; width: 100%; min-height: 52px; }
+            .email-trust { font-size: 0.6rem; }
         }
     </style>
 </head>
@@ -260,7 +262,6 @@
     <h1 class="email-title">Gib deine E-Mail ein, um deinen personalisierten Abnehm-Plan zu erhalten.</h1>
 
     <form class="email-form" id="emailForm" novalidate>
-        <input type="text" class="email-input" id="inputName" placeholder="Dein Vorname" autocomplete="given-name" required>
         <input type="email" class="email-input" id="inputEmail" placeholder="Deine E-Mail-Adresse" autocomplete="email" required>
         <p class="email-error" id="emailError"></p>
         <button type="submit" class="email-btn" id="emailBtn" disabled>Weiter<span class="btn-lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path class="btn-lock-shackle" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span></button>
@@ -273,7 +274,6 @@
 </div>
 
 <script>
-    var nameInput = document.getElementById('inputName');
     var emailInput = document.getElementById('inputEmail');
     var btn = document.getElementById('emailBtn');
     var errorEl = document.getElementById('emailError');
@@ -284,32 +284,19 @@
     }
 
     function checkValid() {
-        var nameOk = nameInput.value.trim().length >= 2;
         var emailOk = emailInput.value.trim().length > 0;
-        btn.disabled = !(nameOk && emailOk);
+        btn.disabled = !emailOk;
 
-        // Clear errors on typing
-        nameInput.classList.remove('error');
         emailInput.classList.remove('error');
         errorEl.textContent = '';
     }
 
-    nameInput.addEventListener('input', checkValid);
     emailInput.addEventListener('input', checkValid);
 
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
-        var name = nameInput.value.trim();
         var email = emailInput.value.trim();
-
-        // Validate name
-        if (name.length < 2) {
-            nameInput.classList.add('error');
-            errorEl.textContent = 'Bitte gib deinen Vornamen ein.';
-            nameInput.focus();
-            return;
-        }
 
         // Validate email
         if (!isValidEmail(email)) {
@@ -321,7 +308,6 @@
 
         // Store data
         try {
-            localStorage.setItem('funnelName', name);
             localStorage.setItem('funnelEmail', email);
         } catch(err) {}
 

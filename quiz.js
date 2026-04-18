@@ -7,44 +7,46 @@
 
     // ── Question data (Q2–Q35, Q1 is on the landing page) ──
     const questions = [
-        { id: 2, q: 'Wie viel möchtest du gerne abnehmen?', type: 'single', opts: ['<5kg', '5–10kg', '10–15kg', '15+'] },
-        { id: 3, q: 'Wie oft hast du ein schlechtes Gewissen wegen deinem Essen?', type: 'single', opts: ['Täglich', 'Mehrmals pro Woche', 'Ab und zu', 'Kaum / nie'] },
-        { id: 4, q: 'Was trifft am ehesten auf dich zu?', type: 'single', opts: ['Ich denke ständig darüber nach, was ich essen darf / sollte', 'Ich kann Essen kaum noch entspannt genießen', 'Ich plane, kontrolliere oder hinterfrage mein Essen ständig', 'Ich fühle mich oft hin- und hergerissen zwischen „richtig machen" und „einfach essen"', 'Eigentlich alles davon'] },
-        { id: 5, q: 'Wann verlierst du am häufigsten die Kontrolle über dein Essen?', type: 'single', opts: ['Abends, wenn endlich Ruhe ist', 'Nach stressigen Tagen', 'Wenn ich emotional bin', 'Eigentlich den ganzen Tag verteilt', 'Ich habe keinen Kontrollverlust'] },
-        { id: 6, q: 'Was passiert dann meistens?', type: 'multi', opts: ['Ich esse mehr als ich wollte', 'Ich greife zu Süßem / Snacks', 'Ich kann nicht mehr aufhören', 'Ich fühle mich danach schlecht', 'Alles davon'] },
-        { id: 7, q: 'Wie oft passiert dir das?', type: 'single', opts: ['Fast täglich', 'Mehrmals pro Woche', 'Ab und zu', 'Selten'] },
-        { id: 8, q: 'Was geht diesen Momenten meistens voraus?', type: 'single', opts: ['Ein stressiger oder überfordernder Tag', 'Emotionale Situationen (z.\u00a0B. Streit, Gedanken, Druck)', 'Leere oder Langeweile', 'Ich funktioniere nur noch und bin innerlich angespannt', 'Ich kann keinen klaren Auslöser erkennen'] },
-        { id: 9, q: 'Was denkst du in diesen Momenten über dich?', type: 'single', opts: ['„Ich hab einfach nicht genug Disziplin"', '„Warum schaffe ich es nicht, das durchzuziehen?"', '„Ich weiß doch, wie es geht – warum mache ich es nicht?"', '„Vielleicht werde ich es nie wirklich schaffen"', 'Ich versuche, nicht darüber nachzudenken'] },
-        { id: 10, q: 'Was versuchst du in diesen Momenten zu vermeiden?', type: 'single', opts: ['Druck und inneren Stress', 'Enttäuschung über mich selbst', 'Das Gefühl, nicht gut genug zu sein', 'Unruhe oder innere Leere', 'Ich kann es nicht genau greifen'] },
-        { id: 11, q: 'Wie fühlst du dich nach einem Rückfall meistens?', type: 'single', opts: ['Enttäuscht von mir selbst', 'Beschämt', 'Machtlos', 'Frustriert', 'Gleichgültig / leer'] },
-        { id: 12, q: 'Welcher Satz beschreibt dein inneres Gefühl am besten?', type: 'single', opts: ['„Warum kriege ich das nicht hin?"', '„Ich sabotiere mich immer wieder selbst"', '„Andere schaffen es – ich irgendwie nicht"', '„Ich verliere die Kontrolle über mich"', '„Ich starte immer wieder neu und komme nicht raus"'] },
-        { id: 13, q: 'Was hast du schon versucht, um das in den Griff zu bekommen?', type: 'multi', opts: ['Diäten', 'Kalorien zählen', 'Mehr Sport', 'Disziplin & „zusammenreißen"', 'Alles davon'] },
-        { id: 14, q: 'Und warum hat es nie dauerhaft funktioniert?', type: 'single', opts: ['Ich halte es nicht durch', 'Ich falle immer wieder zurück', 'Es fühlt sich zu anstrengend an', 'Ich verliere irgendwann die Motivation', 'Ich weiß es ehrlich gesagt nicht'] },
-        { id: 15, q: 'Kennst du das Gefühl, dass du eigentlich weißt, was zu tun ist… aber es trotzdem nicht schaffst umzusetzen?', type: 'single', opts: ['Ja, extrem', 'Oft', 'Manchmal', 'Eher nicht'] },
-        { id: 16, q: 'Wie würdest du deinen Alltag beschreiben?', type: 'single', opts: ['Sehr stressig, ich funktioniere nur', 'Oft unter Druck', 'Mal so, mal so', 'Eher entspannt'] },
-        { id: 17, q: 'Wenn Probleme im Leben auftauchen – wie reagierst du innerlich meistens?', type: 'single', opts: ['Ich fühle mich schnell überfordert', 'Ich funktioniere weiter, aber innerlich kippe ich', 'Ich verliere schnell den Glauben an mich', 'Ich ziehe mich zurück', 'Ich kompensiere es oft über Essen', 'Ich bleibe entspannt'] },
-        { id: 18, q: 'Kennst du das Gefühl, dass dich schon kleine Rückschläge sofort aus deiner Spur bringen?', type: 'single', opts: ['Ja, total', 'Oft', 'Manchmal', 'Eher nicht'] },
-        { id: 19, q: 'Wie sehr hast du das Gefühl, dir selbst wirklich vertrauen zu können?', type: 'single', opts: ['Gar nicht', 'Wenig', 'Teilweise', 'Eigentlich schon'] },
-        { id: 20, q: 'Kennst du das Gefühl, dass Essen für dich eine Art „Ausgleich" ist?', type: 'single', opts: ['Ja, absolut', 'Oft', 'Manchmal', 'Nein'] },
-        { id: 21, q: 'Wie oft denkst du am Tag an Essen?', type: 'single', opts: ['Sehr oft', 'Regelmäßig', 'Geht so', 'Kaum'] },
-        { id: 22, q: 'Wie stark ist dein Heißhunger? Überisst du dich oft?', type: 'single', opts: ['Extrem stark', 'Stark', 'Mittel', 'Kaum vorhanden'] },
-        { id: 23, q: 'Fühlst du dich mit diesem Thema von deinem Umfeld wirklich verstanden?', type: 'single', opts: ['Nein, überhaupt nicht', 'Eher nicht', 'Teilweise', 'Ja'] },
-        { id: 24, q: 'Hast du das Gefühl, dass jemand in deinem Leben wirklich an dich glaubt – auch dann, wenn du selbst es gerade nicht kannst?', type: 'single', opts: ['Nein', 'Eher selten', 'Teilweise', 'Ja'] },
-        { id: 25, q: 'Wie sehr bist du von Menschen umgeben, die selbst gestresst, zweifelnd oder im „Funktionieren" sind?', type: 'single', opts: ['Sehr stark', 'Ziemlich', 'Teilweise', 'Kaum'] },
-        { id: 26, q: 'Was beschreibt dein Umfeld am ehesten?', type: 'single', opts: ['Viel Druck, wenig echte Ruhe', 'Viele Ausreden statt Veränderung', 'Man funktioniert, aber lebt nicht wirklich', 'Es fehlt an Menschen, die größer denken', 'Eigentlich alles davon'] },
-        { id: 27, q: 'Wenn sich nichts ändert… wo stehst du in 6 Monaten?', type: 'single', opts: ['Genau am gleichen Punkt', 'Noch frustrierter', 'Mit noch mehr Gewicht', 'Ich will gar nicht daran denken'] },
-        { id: 28, q: 'Was kostet dich das aktuell wirklich?', type: 'multi', opts: ['Energie', 'Selbstvertrauen', 'Lebensfreude', 'Beziehungen', 'Alles davon'] },
-        { id: 29, q: 'Was schmerzt mehr als das Gewicht selbst?', type: 'single', opts: ['Das Gefühl, mich nicht im Griff zu haben', 'Mich immer wieder selbst zu enttäuschen', 'Mich zu verstecken', 'Nicht frei zu sein', 'Nicht mehr an mich zu glauben'] },
-        { id: 30, q: 'Was würdest du dir innerlich am meisten zurückwünschen?', type: 'single', opts: ['Ruhe', 'Kontrolle', 'Leichtigkeit', 'Selbstvertrauen', 'Das Gefühl, wieder ich selbst zu sein'] },
-        { id: 31, q: 'Wie würde dein Leben aussehen, wenn du das endlich im Griff hast?', type: 'single', opts: ['Leichter, freier, entspannter', 'Ich würde mich wieder wohlfühlen', 'Ich hätte Kontrolle', 'Ich wäre stolz auf mich'] },
-        { id: 32, q: 'Was belastet dich aktuell am meisten an deiner Situation?', type: 'mixed', opts: ['Der ständige Heißhunger & Kontrollverlust', 'Mein Gewicht verändert sich nicht (oder kommt immer zurück)', 'Ich denke ständig an Essen', 'Ich verliere immer mehr Vertrauen in mich', 'Ich fühle mich einfach nicht mehr wohl in meinem Körper'], placeholder: 'Oder beschreibe es in deinen eigenen Worten' },
-        { id: 33, q: 'Was wünschst du dir stattdessen?', type: 'mixed', opts: ['Endlich Ruhe im Kopf', 'Kontrolle über mein Essverhalten', 'Dauerhaft abnehmen ohne Rückfälle', 'Mich wieder wohl und sicher fühlen', 'Einfach wieder ich selbst sein'], placeholder: 'Oder beschreibe deinen Wunsch in deinen eigenen Worten' },
-        { id: 34, q: 'Kurze Reflexion: Was ist dir bereits durch die Fragen bewusst geworden?', type: 'single', opts: ['Dass es so nicht weitergehen kann', 'Dass mein Problem tiefer liegt als Ernährung', 'Dass ich mich selbst immer wieder blockiere', 'Dass ich endlich etwas verändern muss', 'Ich weiß es noch nicht genau, aber irgendwas stimmt nicht'] },
-        { id: 35, q: 'Willst du aktuell wirklich etwas verändern oder kann es für dich so weitergehen?', type: 'text', placeholder: 'Schreib hier deine ehrliche Antwort' },
-        { id: 36, q: 'Bist du bereit, einen neuen Ansatz kennenzulernen, der nichts mit Diäten oder Disziplin zu tun hat?', type: 'single', opts: ['Ja, ich will das endlich lösen', 'Ich bin neugierig', 'Ich bin noch skeptisch'] },
+        { id: 2, q: 'Wie alt bist du?', type: 'single', opts: ['Unter 25', '25–34', '35–44', '45–54', '55+'] },
+        { id: 3, q: 'Wie oft denkst du am Tag über Essen oder Abnehmen nach?', type: 'single', opts: ['Ständig', 'Sehr oft', 'Immer wieder', 'Selten'] },
+        { id: 4, q: 'Wie viel möchtest du abnehmen?', type: 'single', opts: ['Unter 5 kg', '5–10 kg', '10–15 kg', 'Über 15 kg'] },
+        { id: 5, q: 'Hast du oft ein schlechtes Gewissen nach dem Essen?', type: 'single', opts: ['Ja, täglich', 'Mehrmals pro Woche', 'Ab und zu', 'Kaum'] },
+        { id: 6, q: 'Welcher Satz passt am besten zu dir?', type: 'single', opts: ['Ich denke ständig darüber nach, was ich essen darf', 'Ich kann Essen nicht mehr entspannt genießen', 'Ich kontrolliere mein Essen ständig', 'Ich schwanke zwischen Kontrolle und Aufgeben', 'Alles davon'] },
+        { id: 7, q: 'Wann verlierst du am ehesten die Kontrolle beim Essen?', type: 'single', opts: ['Abends', 'Nach Stress', 'Bei Emotionen', 'Über den ganzen Tag', 'Eigentlich nie'] },
+        { id: 8, q: 'Was passiert dann?', type: 'multi', opts: ['Ich esse mehr als geplant', 'Ich greife zu Süßem', 'Ich kann nicht aufhören', 'Ich fühle mich danach schlecht', 'Alles davon'] },
+        { id: 9, q: 'Wie oft passiert das?', type: 'single', opts: ['Fast täglich', 'Mehrmals pro Woche', 'Ab und zu', 'Selten'] },
+        { id: 10, q: 'Was passiert meistens davor?', type: 'single', opts: ['Stress oder Überforderung', 'Emotionale Situationen', 'Langeweile oder Leere', 'Innere Anspannung', 'Ich weiß es nicht genau'] },
+        { id: 11, q: 'Was denkst du dann über dich?', type: 'single', opts: ['Mir fehlt die Disziplin', 'Warum schaffe ich es nicht?', 'Ich weiß es doch eigentlich besser', 'Vielleicht schaffe ich es nie', 'Ich denke lieber nicht darüber nach'] },
+        { id: 12, q: 'Was willst du in diesen Momenten vermeiden?', type: 'single', opts: ['Inneren Druck', 'Enttäuschung über mich', 'Das Gefühl, nicht gut genug zu sein', 'Innere Unruhe', 'Ich kann es nicht genau sagen'] },
+        { id: 13, q: 'Wie fühlst du dich nach einem Rückfall?', type: 'single', opts: ['Enttäuscht', 'Beschämt', 'Machtlos', 'Frustriert', 'Leer'] },
+        { id: 14, q: 'Welcher Gedanke kommt dir am häufigsten?', type: 'single', opts: ['Warum schaffe ich das nicht?', 'Ich sabotiere mich selbst', 'Andere schaffen es, ich nicht', 'Ich verliere die Kontrolle', 'Ich starte immer wieder neu'] },
+        { id: 15, q: 'Was hast du schon versucht?', type: 'multi', opts: ['Diäten', 'Kalorien zählen', 'Mehr Sport', 'Disziplin', 'Alles davon'] },
+        { id: 16, q: 'Warum hat es nie dauerhaft geklappt?', type: 'single', opts: ['Ich halte nicht durch', 'Ich falle immer zurück', 'Es ist zu anstrengend', 'Die Motivation geht verloren', 'Ich weiß es nicht'] },
+        { id: 17, q: 'Du weißt, was zu tun ist, aber setzt es nicht um?', type: 'single', opts: ['Ja, total', 'Oft', 'Manchmal', 'Eher nicht'] },
+        { id: 18, q: 'Wie stressig ist dein Alltag?', type: 'single', opts: ['Sehr stressig', 'Oft unter Druck', 'Mal so, mal so', 'Eher entspannt'] },
+        { id: 19, q: 'Wie reagierst du auf Probleme?', type: 'single', opts: ['Schnell überfordert', 'Funktioniere, aber kippe innerlich', 'Verliere den Glauben an mich', 'Ziehe mich zurück', 'Kompensiere über Essen', 'Bleibe entspannt'] },
+        { id: 20, q: 'Bringen dich kleine Rückschläge schnell aus der Bahn?', type: 'single', opts: ['Ja, total', 'Oft', 'Manchmal', 'Eher nicht'] },
+        { id: 21, q: 'Vertraust du dir selbst?', type: 'single', opts: ['Gar nicht', 'Wenig', 'Teilweise', 'Ja'] },
+        { id: 22, q: 'Ist Essen für dich eine Art Ausgleich?', type: 'single', opts: ['Ja, absolut', 'Oft', 'Manchmal', 'Nein'] },
+        { id: 23, q: 'Wie oft kreisen deine Gedanken ums Essen?', type: 'single', opts: ['Sehr oft', 'Regelmäßig', 'Geht so', 'Kaum'] },
+        { id: 24, q: 'Wie stark ist dein Heißhunger?', type: 'single', opts: ['Extrem', 'Stark', 'Mittel', 'Kaum'] },
+        { id: 25, q: 'Fühlt sich dein Umfeld verständnisvoll?', type: 'single', opts: ['Gar nicht', 'Eher nicht', 'Teilweise', 'Ja'] },
+        { id: 26, q: 'Glaubt jemand wirklich an dich?', type: 'single', opts: ['Nein', 'Eher selten', 'Teilweise', 'Ja'] },
+        { id: 27, q: 'Sind die Menschen um dich herum selbst gestresst?', type: 'single', opts: ['Sehr', 'Ziemlich', 'Teilweise', 'Kaum'] },
+        { id: 28, q: 'Was beschreibt dein Umfeld am besten?', type: 'single', opts: ['Viel Druck, wenig Ruhe', 'Viele Ausreden', 'Man funktioniert nur', 'Es fehlen inspirierende Menschen', 'Alles davon'] },
+        { id: 29, q: 'Wo stehst du in 6 Monaten, wenn sich nichts ändert?', type: 'single', opts: ['Am gleichen Punkt', 'Noch frustrierter', 'Mit mehr Gewicht', 'Will ich nicht dran denken'] },
+        { id: 30, q: 'Was kostet dich die Situation gerade?', type: 'multi', opts: ['Energie', 'Selbstvertrauen', 'Lebensfreude', 'Beziehungen', 'Alles davon'] },
+        { id: 31, q: 'Was schmerzt dich am meisten?', type: 'single', opts: ['Keine Kontrolle zu haben', 'Mich immer zu enttäuschen', 'Mich zu verstecken', 'Nicht frei zu sein', 'Nicht an mich zu glauben'] },
+        { id: 32, q: 'Was wünschst du dir am meisten zurück?', type: 'single', opts: ['Ruhe', 'Kontrolle', 'Leichtigkeit', 'Selbstvertrauen', 'Ich selbst zu sein'] },
+        { id: 33, q: 'Wie wäre dein Leben, wenn du es im Griff hast?', type: 'single', opts: ['Leichter und freier', 'Ich würde mich wohlfühlen', 'Ich hätte Kontrolle', 'Ich wäre stolz auf mich'] },
+        { id: 34, q: 'Was belastet dich gerade am meisten?', type: 'mixed', opts: ['Heißhunger & Kontrollverlust', 'Gewicht verändert sich nicht', 'Essen ist ständig im Kopf', 'Ich verliere Vertrauen in mich', 'Ich fühle mich nicht wohl'], placeholder: 'Oder in eigenen Worten' },
+        { id: 35, q: 'Was wünschst du dir stattdessen?', type: 'mixed', opts: ['Ruhe im Kopf', 'Kontrolle über mein Essen', 'Dauerhaft abnehmen', 'Mich wieder wohlfühlen', 'Einfach ich selbst sein'], placeholder: 'Oder in eigenen Worten' },
+        { id: 36, q: 'Was ist dir durch die Fragen bewusst geworden?', type: 'single', opts: ['So kann es nicht weitergehen', 'Mein Problem liegt tiefer', 'Ich blockiere mich selbst', 'Ich muss etwas ändern', 'Irgendwas stimmt nicht'] },
+        { id: 37, q: 'Willst du wirklich etwas verändern?', type: 'text', placeholder: 'Deine ehrliche Antwort' },
+        { id: 38, q: 'Bist du bereit für einen neuen Ansatz?', type: 'single', opts: ['Ja, ich will das lösen', 'Ich bin neugierig', 'Noch skeptisch'] },
     ];
 
-    const totalQuestions = questions.length + 1; // +1 for Q1 on landing page
+    const totalQuestions = questions.length + 1; // +1 for gender on landing page
     const answers = {};
 
     // ── Build overlay DOM ──
@@ -109,7 +111,7 @@
                 <div class="qz-trust">
                     <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 100% anonym</span>
                     <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> Keine Daten</span>
-                    <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 3 Min.</span>
+                    <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg> 5 Min.</span>
                 </div>
             `;
 
@@ -271,9 +273,9 @@
         }, 350);
     }
 
-    // ── Start quiz (called after Q1 answer on landing page) ──
+    // ── Start quiz (called after gender selection on landing page) ──
     function startQuiz(q1Answer) {
-        answers[1] = q1Answer;
+        answers[1] = q1Answer; // gender
         buildOverlay();
 
         const overlay = document.getElementById('quizOverlay');

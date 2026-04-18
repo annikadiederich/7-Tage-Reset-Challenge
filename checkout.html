@@ -92,7 +92,7 @@
 
         /* ═══ OFFER SECTION ═══ */
         .co-offer{padding:20px 24px 32px;text-align:center}
-        .co-offer-card{max-width:440px;margin:0 auto;background:var(--card);border-radius:24px;padding:36px 28px;box-shadow:var(--shadow-lg);border:1px solid rgba(0,0,0,.03)}
+        .co-offer-card{max-width:492px;margin:0 auto;background:var(--card);border-radius:24px;padding:36px 28px;box-shadow:var(--shadow-lg);border:1px solid rgba(0,0,0,.03)}
         .co-offer-eyebrow{font-family:'Plus Jakarta Sans',sans-serif;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--cta);margin-bottom:16px}
         .co-offer-title{font-size:clamp(1.2rem,3.5vw,1.5rem);font-weight:800;margin-bottom:6px}
         .co-offer-desc{font-size:.84rem;color:var(--soft);margin-bottom:24px;line-height:1.6}
@@ -104,7 +104,10 @@
         .co-price-note{font-size:.68rem;color:var(--muted);margin-bottom:28px}
 
         /* CTA */
-        .co-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 44px;background:linear-gradient(135deg,var(--cta),var(--cta2));color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.94rem;font-weight:700;letter-spacing:.02em;border:none;border-radius:30px;cursor:pointer;text-decoration:none;box-shadow:0 4px 16px rgba(240,74,35,.18);transition:transform .3s ease,box-shadow .3s ease,filter .3s ease}
+        .co-cta{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:16px 44px;background:linear-gradient(135deg,var(--cta),var(--cta2));color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.94rem;font-weight:700;letter-spacing:.02em;border:none;border-radius:30px;cursor:pointer;text-decoration:none;box-shadow:0 4px 16px rgba(240,74,35,.18);transition:transform .3s ease,box-shadow .3s ease,filter .3s ease;position:relative;overflow:hidden}
+        .co-cta::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);transform:skewX(-20deg);animation:ctaShimmer 4s ease-in-out 2s infinite}
+        @keyframes ctaShimmer{0%{left:-100%}30%{left:150%}100%{left:150%}}
+        .co-savings{font-family:'Plus Jakarta Sans',sans-serif;font-size:.6rem;font-weight:600;color:var(--green);text-align:center;margin-top:14px;letter-spacing:.02em;opacity:.7}
         .co-cta:hover{transform:translateY(-2px) scale(1.02);filter:brightness(1.06);box-shadow:0 6px 24px rgba(240,74,35,.24),0 0 44px rgba(240,74,35,.08)}
         .co-cta:active{transform:scale(.98)}
 
@@ -120,8 +123,8 @@
         .co-countdown-time{font-weight:800;color:var(--cta);letter-spacing:.02em}
 
         /* ═══ SOCIAL PROOF ═══ */
-        .co-proof{max-width:440px;margin:0 auto;padding:16px 0 32px;text-align:center}
-        .co-proof-inner{padding:18px 24px;border-radius:24px;background:var(--green-soft);border:1px solid rgba(97,146,64,.08)}
+        .co-proof{max-width:540px;margin:0 auto;padding:16px 24px 32px;text-align:center}
+        .co-proof-inner{padding:18px 24px;border-radius:18px;background:var(--green-soft);border:1px solid rgba(97,146,64,.08)}
         .co-proof-inner h3{font-size:.82rem;font-weight:800;margin-bottom:5px;letter-spacing:-.01em}
         .co-proof-inner>p{font-size:.7rem;color:var(--soft);line-height:1.55;max-width:320px;margin:0 auto 14px}
         .co-proof-thumbs{display:flex;justify-content:center;gap:8px;margin-bottom:12px}
@@ -132,37 +135,84 @@
         @media(max-width:480px){.co-proof-thumbs img{width:38px;height:38px;border-radius:10px}}
 
         /* ═══ PLAN INCLUDES ═══ */
-        .co-includes-bg{background:#FAF9F6;position:relative;box-shadow:inset 0 1px 0 rgba(0,0,0,.02),inset 0 -1px 0 rgba(0,0,0,.02)}
-        .co-includes-bg::before{content:'';position:absolute;top:0;left:0;right:0;height:32px;background:linear-gradient(180deg,var(--bg),#FAF9F6);pointer-events:none}
-        .co-includes-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:32px;background:linear-gradient(180deg,#FAF9F6,var(--bg));pointer-events:none}
-        .co-includes{max-width:540px;margin:0 auto;padding:48px 24px 40px}
-        .co-includes-title{font-size:clamp(1.2rem,3.5vw,1.5rem);font-weight:800;text-align:center;margin-bottom:28px}
+        .co-includes-bg{background:#FAF9F6;position:relative;overflow:hidden}
+        .co-includes-bg::before{content:'';position:absolute;top:0;left:0;right:0;height:40px;background:linear-gradient(180deg,var(--bg),#FAF9F6);pointer-events:none;z-index:1}
+        .co-includes-bg::after{content:'';position:absolute;bottom:0;left:0;right:0;height:40px;background:linear-gradient(180deg,#FAF9F6,var(--bg));pointer-events:none;z-index:1}
+        .co-includes-glow{position:absolute;top:20%;left:50%;transform:translateX(-50%);width:500px;height:400px;background:radial-gradient(ellipse,rgba(97,146,64,.04) 0%,rgba(240,74,35,.02) 40%,transparent 65%);border-radius:50%;pointer-events:none;filter:blur(40px)}
+        .co-includes-hero{text-align:center;padding:56px 24px 0;max-width:540px;margin:0 auto;position:relative;z-index:1}
+        .co-includes-hero h1{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.8rem,5.5vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.12;margin-bottom:14px}
+        .co-includes-hero h1 .sw{font-family:'Sansita Swashed',cursive;font-weight:600;color:var(--cta)}
+        .co-includes-hero p{font-size:clamp(.9rem,2.2vw,1.02rem);color:var(--soft);max-width:460px;margin:0 auto 32px;line-height:1.7}
+        .co-reveal-text{margin:32px auto 36px;text-align:center;max-width:540px;animation:revealUp .7s ease .4s both}
+        .co-reveal-text p{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.1rem,3vw,1.35rem);font-weight:800;letter-spacing:-.02em;line-height:1.35;color:#F04A23;text-shadow:0 0 24px rgba(240,74,35,.08)}
+        @keyframes revealUp{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
+        .co-includes{max-width:540px;margin:0 auto;padding:0 24px 40px;position:relative;z-index:1}
+        .co-includes-title{font-size:clamp(1.15rem,3.2vw,1.4rem);font-weight:800;text-align:center;margin-bottom:24px}
         .co-inc-list{display:flex;flex-direction:column;gap:14px}
-        .co-inc-card{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:center;background:var(--card);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.03)}
+        .co-inc-card{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;background:var(--card);border-radius:16px;padding:16px 18px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.03)}
         .co-inc-icon{width:44px;height:44px;border-radius:11px;background:var(--green-soft);display:flex;align-items:center;justify-content:center}
         .co-inc-icon svg{width:20px;height:20px;stroke:var(--green);stroke-width:1.8;fill:none;stroke-linecap:round;stroke-linejoin:round}
         .co-inc-card h3{font-size:.86rem;font-weight:700;margin-bottom:3px}
         .co-inc-card p{font-size:.76rem;color:var(--soft);line-height:1.55}
+        .co-inc-val{font-family:'Plus Jakarta Sans',sans-serif;font-size:.78rem;font-weight:700;color:var(--muted);white-space:nowrap;text-align:right}
+
+        /* Value total */
+        .co-val-total{max-width:540px;margin:0 auto;padding:28px 24px 0;text-align:center}
+        .co-val-total-card{background:var(--card);border-radius:18px;padding:28px 24px;box-shadow:var(--shadow-lg);border:1px solid rgba(0,0,0,.03)}
+        .co-val-line{font-family:'Plus Jakarta Sans',sans-serif;font-size:.72rem;font-weight:600;color:var(--muted);margin-bottom:4px}
+        .co-val-line span{text-decoration:line-through}
+        .co-val-old{font-family:'Plus Jakarta Sans',sans-serif;font-size:1.1rem;font-weight:800;color:var(--muted);text-decoration:line-through;margin-bottom:14px;display:block}
+        .co-val-label{font-family:'Plus Jakarta Sans',sans-serif;font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--cta);margin-bottom:6px}
+        .co-val-price{font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(2.2rem,7vw,3rem);font-weight:800;color:var(--text);letter-spacing:-.03em;margin-bottom:20px}
         .co-inc-cta{text-align:center;margin-top:28px}
         .co-inc-cta a{display:inline-flex;align-items:center;justify-content:center;padding:16px 44px;background:linear-gradient(135deg,var(--cta),var(--cta2));color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.94rem;font-weight:700;letter-spacing:.02em;border-radius:30px;text-decoration:none;box-shadow:0 4px 16px rgba(240,74,35,.18);transition:transform .3s ease,box-shadow .3s ease}
         .co-inc-cta a:hover{transform:translateY(-2px);box-shadow:0 6px 24px rgba(240,74,35,.24)}
         .co-inc-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:16px}
         .co-inc-trust span{display:flex;align-items:center;gap:4px;font-size:.6rem;color:var(--muted)}
         .co-inc-trust svg{width:11px;height:11px;stroke:var(--green);stroke-width:2.5;fill:none}
-        @media(max-width:480px){.co-includes{padding:36px 16px 32px}.co-inc-card{grid-template-columns:38px 1fr;gap:12px;padding:16px 14px}.co-inc-icon{width:38px;height:38px;border-radius:10px}.co-inc-icon svg{width:18px;height:18px}.co-inc-card h3{font-size:.82rem}.co-inc-card p{font-size:.72rem}}
+        @media(max-width:480px){.co-includes-hero{padding:40px 16px 0}.co-includes{padding:0 16px 32px}.co-inc-card{grid-template-columns:38px 1fr auto;gap:10px;padding:14px 12px}.co-inc-icon{width:38px;height:38px;border-radius:10px}.co-inc-icon svg{width:18px;height:18px}.co-inc-card h3{font-size:.8rem}.co-inc-card p{font-size:.7rem}.co-inc-val{font-size:.7rem}.co-val-total{padding:20px 16px 0}.co-val-total-card{padding:22px 18px}}
+
+        /* ═══ WHY 7 DAYS ═══ */
+        .co-why7{max-width:540px;margin:0 auto;padding:48px 24px;text-align:center}
+        .co-why7-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 18px;border-radius:100px;background:linear-gradient(135deg,rgba(127,180,91,.07),rgba(97,146,64,.04));border:1px solid rgba(97,146,64,.14);font-family:'Plus Jakarta Sans',sans-serif;font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--green);margin-bottom:16px}
+        .co-why7 h2{font-size:clamp(1.4rem,4.5vw,1.8rem);font-weight:800;margin-bottom:28px;letter-spacing:-.03em}
+        .co-why7-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:28px}
+        .co-why7-card{background:var(--card);border-radius:16px;padding:20px 14px;box-shadow:var(--shadow);border:1px solid rgba(0,0,0,.03)}
+        .co-why7-card .day{font-family:'Plus Jakarta Sans',sans-serif;font-size:.6rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--green);margin-bottom:8px}
+        .co-why7-card p{font-size:.78rem;font-weight:600;color:var(--text);line-height:1.4}
+        .co-why7-note{font-size:.82rem;color:var(--soft);line-height:1.65;max-width:420px;margin:0 auto;font-style:italic}
+        @media(max-width:520px){.co-why7-grid{grid-template-columns:1fr;gap:10px}.co-why7{padding:36px 16px}.co-why7-card{padding:16px 14px}}
 
         /* ═══ RESPONSIVE ═══ */
         @media(max-width:480px){
-            .co-hero{padding:32px 20px 8px}
+            .co-hero{padding:32px 16px 8px}
+            .co-includes-hero h1{font-size:1.5rem}
+            .co-includes-hero p{font-size:.88rem;margin-bottom:24px}
+            .co-reveal-text p{font-size:1rem}
             .trafo-wrap{padding:0 16px}
             .trafo-card{border-radius:16px}
             .trafo-header-col{padding:10px 10px;font-size:.56rem}
             .trafo-stat{padding:0 8px}
             .trafo-stat-label{font-size:.58rem}
-            .co-offer-card{padding:28px 20px;border-radius:18px}
-            .co-cta{padding:14px 36px;font-size:.9rem}
-            .faq-item-q{padding:16px 18px;font-size:.82rem}
-            .faq-item-a{padding:0 18px}
+            .co-offer-card{padding:24px 18px;border-radius:18px}
+            .co-offer-title{font-size:1.05rem}
+            .co-offer-desc{font-size:.78rem}
+            .co-countdown{padding:9px 16px}
+            .co-countdown-text{font-size:.66rem}
+            .co-pricing{gap:10px}
+            .co-price-new{font-size:1.6rem}
+            .co-cta{padding:14px 28px;font-size:.88rem;min-height:50px}
+            .co-trust{gap:10px;margin-top:16px}
+            .co-trust span{font-size:.54rem}
+            .co-proof-inner h3{font-size:.78rem}
+            .co-proof-inner>p{font-size:.66rem}
+            .co-val-price{font-size:2rem}
+            .co-val-line{font-size:.66rem}
+            .faq-sec{padding:36px 16px 48px}
+            .faq-item{border-radius:14px}
+            .faq-item-q{padding:14px 16px;font-size:.8rem;gap:10px}
+            .faq-item-a{padding:0 16px}
+            .faq-item-a-inner{padding:0 16px 16px;font-size:.76rem}
         }
 
         /* ═══ FAQ ═══ */
@@ -192,7 +242,7 @@
 <div class="offer-bar" id="offerBar">
     <div class="offer-bar-inner">
         <div class="offer-bar-left">
-            <span class="offer-bar-badge">70% Rabatt</span>
+            <span class="offer-bar-badge">90% Rabatt</span>
             <span class="offer-bar-text">Dein Angebot ist reserviert f&uuml;r:</span>
             <span class="offer-bar-timer" id="barTimer">15:00</span>
         </div>
@@ -268,40 +318,100 @@
 
 </div><!-- /trafo-zone -->
 
-<!-- ═══ HERO TEXT ═══ -->
-<section class="co-hero">
-    <div class="co-hero-eyebrow rv" data-d="0">
-        <span class="eb-pill"><span class="eb-dot"></span><span class="eb-label">Exklusiver Sonderpreis</span></span>
+<!-- ═══ VALUE REVEAL ZONE ═══ -->
+<div class="co-includes-bg">
+<div class="co-includes-glow"></div>
+
+<div class="co-includes-hero">
+    <h1 class="rv" data-d="0">Gehe deine Abnahme<br>endlich <span class="sw">richtig</span> an</h1>
+    <p class="rv" data-d="80">Lerne in 7 Tagen, wie du Ern&auml;hrung und Training an deinen K&ouml;rper anpasst, inneren Stress senkst und endlich leichter abnimmst.</p>
+    <div class="rv" data-d="120" style="text-align:center;margin-top:24px">
+        <span style="display:inline-flex;align-items:center;padding:8px 22px;border-radius:100px;background:linear-gradient(135deg,var(--cta),var(--cta2));color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.64rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;box-shadow:0 2px 10px rgba(240,74,35,.18)">Dein Zugang enth&auml;lt</span>
     </div>
-    <h1 class="rv" data-d="80">Dein personalisierter<br><span class="sw">Abnehm-Plan</span> ist bereit!</h1>
-</section>
+</div>
 
-<!-- ═══ OFFER CARD ═══ -->
-<section class="co-offer" id="secure">
-    <div class="co-offer-card rv" data-d="0">
-        <p class="co-offer-eyebrow">Exklusiv f&uuml;r dich reserviert</p>
-        <h2 class="co-offer-title">7 Tage Reset Challenge</h2>
-        <p class="co-offer-desc">Dein kompletter Abnehm-Plan: Ern&auml;hrung, Training, Mindset, Community und pers&ouml;nliche Begleitung.</p>
+<div class="co-includes" style="padding-top:24px">
 
-        <div class="co-countdown">
+    <div class="co-inc-list">
+        <div class="co-inc-card rv" data-d="80">
+            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+            <div>
+                <h3>Ern&auml;hrungsplan, den du durchziehst</h3>
+                <p>Einfach, alltagstauglich und ohne Verzicht.</p>
+            </div>
+            <span class="co-inc-val">99 &euro;</span>
+        </div>
+
+        <div class="co-inc-card rv" data-d="130">
+            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+            <div>
+                <h3>Trainingsplan, der ins Leben passt</h3>
+                <p>Effektiv, leicht umsetzbar und ohne Fitnessstudio.</p>
+            </div>
+            <span class="co-inc-val">79 &euro;</span>
+        </div>
+
+        <div class="co-inc-card rv" data-d="180">
+            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M22 12A10 10 0 1 1 12 2"/><path d="M22 4v4h-4"/></svg></div>
+            <div>
+                <h3>Mentales Training gegen R&uuml;ckf&auml;lle</h3>
+                <p>Damit du endlich dranbleibst.</p>
+            </div>
+            <span class="co-inc-val">149 &euro;</span>
+        </div>
+
+        <div class="co-inc-card rv" data-d="230">
+            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+            <div>
+                <h3>Nervensystem-Regulierung</h3>
+                <p>Damit dein K&ouml;rper aus dem Dauerstress kommt und wieder auf Abnahme reagiert.</p>
+            </div>
+            <span class="co-inc-val">129 &euro;</span>
+        </div>
+
+        <div class="co-inc-card rv" data-d="280">
+            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+                <h3>Community, die dich mitzieht</h3>
+                <p>Gemeinsam f&auml;llt Durchziehen leichter.</p>
+            </div>
+            <span class="co-inc-val">59 &euro;</span>
+        </div>
+
+        <div class="co-inc-card rv" data-d="330">
+            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <div>
+                <h3>1:1 Support &amp; Live-Gespr&auml;che</h3>
+                <p>Fragen kl&auml;ren und echte Unterst&uuml;tzung bekommen.</p>
+            </div>
+            <span class="co-inc-val">199 &euro;</span>
+        </div>
+    </div>
+</div>
+</div><!-- /co-includes-bg -->
+
+<!-- ═══ VALUE TOTAL + OFFER ═══ -->
+<div class="co-val-total rv" data-d="0" id="secure">
+    <div class="co-val-total-card">
+        <p class="co-val-line">Gesamtwert: <span>714 &euro;</span></p>
+        <p class="co-val-label">Dein Sonderpreis nur heute</p>
+        <p class="co-val-price">29,90 &euro;</p>
+
+        <div class="co-countdown" style="margin-bottom:20px">
             <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             <span class="co-countdown-text">Dein Sonderpreis l&auml;uft ab in <span class="co-countdown-time" id="cardTimer">15:00</span></span>
         </div>
 
-        <div class="co-pricing" style="margin-bottom:24px">
-            <span class="co-price-old">149 &euro;</span>
-            <span class="co-price-new">29,90 &euro;</span>
-        </div>
-
-        <a href="#" class="co-cta">Plan jetzt sichern</a>
+        <a href="#" class="co-cta">Ja, ich will an der Challenge teilnehmen</a>
 
         <div class="co-trust">
             <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sofortzugang</span>
             <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sichere Zahlung</span>
             <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Kein Abo</span>
         </div>
+        <p class="co-savings">Du sparst heute 684 &euro;</p>
     </div>
-</section>
+</div>
 
 <!-- ═══ SOCIAL PROOF ═══ -->
 <div class="co-proof rv" data-d="0">
@@ -321,70 +431,30 @@
     </div>
 </div>
 
-<!-- ═══ PLAN INCLUDES ═══ -->
-<div class="co-includes-bg">
-<div class="co-includes">
-    <div class="co-hero-eyebrow rv" data-d="0" style="margin-bottom:14px">
-        <span class="eb-pill"><span class="eb-dot"></span><span class="eb-label">Dein pers&ouml;nlicher Plan</span></span>
-    </div>
-    <h2 class="co-includes-title rv" data-d="60">Alles, was du brauchst, um diesmal wirklich abzunehmen</h2>
-
-    <div class="co-inc-list">
-        <div class="co-inc-card rv" data-d="80">
-            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
-            <div>
-                <h3>Ern&auml;hrungsplan, den du durchziehst</h3>
-                <p>Einfach, alltagstauglich und ohne Verzicht.</p>
-            </div>
+<!-- ═══ WHY 7 DAYS ═══ -->
+<div class="co-why7">
+    <span class="co-why7-badge rv" data-d="0">Warum 7 Tage?</span>
+    <h2 class="rv" data-d="60">7 Tage reichen, um den Kreislauf zu durchbrechen</h2>
+    <div class="co-why7-grid">
+        <div class="co-why7-card rv" data-d="100">
+            <p class="day">Tag 1–2</p>
+            <p>Ruhe im Kopf &amp; Klarheit</p>
         </div>
-
-        <div class="co-inc-card rv" data-d="130">
-            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
-            <div>
-                <h3>Trainingsplan, der ins Leben passt</h3>
-                <p>Effektiv, leicht umsetzbar und ohne Fitnessstudio.</p>
-            </div>
+        <div class="co-why7-card rv" data-d="160">
+            <p class="day">Tag 3–5</p>
+            <p>Weniger Hei&szlig;hunger &amp; mehr Kontrolle</p>
         </div>
-
-        <div class="co-inc-card rv" data-d="180">
-            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M22 12A10 10 0 1 1 12 2"/><path d="M22 4v4h-4"/></svg></div>
-            <div>
-                <h3>Mentales Training gegen R&uuml;ckf&auml;lle</h3>
-                <p>Damit du endlich dranbleibst.</p>
-            </div>
-        </div>
-
-        <div class="co-inc-card rv" data-d="230">
-            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <div>
-                <h3>Community, die dich mitzieht</h3>
-                <p>Gemeinsam f&auml;llt Durchziehen leichter.</p>
-            </div>
-        </div>
-
-        <div class="co-inc-card rv" data-d="280">
-            <div class="co-inc-icon"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-            <div>
-                <h3>1:1 Support &amp; Live-Gespr&auml;che</h3>
-                <p>Fragen kl&auml;ren und echte Unterst&uuml;tzung bekommen.</p>
-            </div>
+        <div class="co-why7-card rv" data-d="220">
+            <p class="day">Tag 6–7</p>
+            <p>Du sp&uuml;rst: Abnehmen kann leicht sein</p>
         </div>
     </div>
-
-    <div class="co-inc-cta rv" data-d="100">
-        <a href="#secure">Ja, ich will meinen Plan</a>
-        <div class="co-inc-trust">
-            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Alltagstauglich</span>
-            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ohne Verzicht</span>
-            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mit Begleitung</span>
-        </div>
-    </div>
+    <p class="rv" data-d="260" style="text-align:center;font-size:.88rem;font-weight:600;color:var(--soft);line-height:1.6;margin-top:28px;max-width:400px;margin-left:auto;margin-right:auto">Es geht nicht darum, in 7 Tagen alles zu schaffen.<br>Es geht darum, endlich richtig zu starten.</p>
 </div>
-</div><!-- /co-includes-bg -->
 
 <!-- ═══ FINAL CTA / SECOND OFFER ═══ -->
 <section class="co-offer" style="padding-top:48px;padding-bottom:48px">
-    <h2 class="rv" data-d="0" style="font-size:clamp(1.3rem,4vw,1.7rem);font-weight:800;text-align:center;margin-bottom:24px;padding:0 24px">Sp&uuml;re erste Ver&auml;nderungen in 7 Tagen!</h2>
+    <h2 class="rv" data-d="0" style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(1.7rem,5vw,2.4rem);font-weight:800;text-align:center;letter-spacing:-.03em;line-height:1.15;margin-bottom:28px;padding:0 24px">Sp&uuml;re erste Ver&auml;nderungen<br>in <span class="sw" style="color:#619240">7 Tagen!</span></h2>
     <div class="co-offer-card rv" data-d="80">
         <p class="co-offer-eyebrow">Exklusiv f&uuml;r dich reserviert</p>
         <h2 class="co-offer-title">7 Tage Reset Challenge</h2>
@@ -396,7 +466,7 @@
         </div>
 
         <div class="co-pricing" style="margin-bottom:24px">
-            <span class="co-price-old">149 &euro;</span>
+            <span class="co-price-old">714 &euro;</span>
             <span class="co-price-new">29,90 &euro;</span>
         </div>
 
@@ -407,6 +477,7 @@
             <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sichere Zahlung</span>
             <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Kein Abo</span>
         </div>
+        <p class="co-savings">Du sparst heute 684 &euro;</p>
     </div>
 </section>
 
