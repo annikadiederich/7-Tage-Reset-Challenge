@@ -309,20 +309,11 @@
             display: flex; align-items: center; gap: 10px;
         }
 
-        .topbar-avatar {
-            width: 34px; height: 34px;
-            border-radius: 50%;
-            border: 2px solid var(--white);
-            box-shadow: 0 1px 4px rgba(30,28,26,0.06);
-            object-fit: cover;
-            object-position: center 18%;
-            background: #1a2a20;
-        }
-
-        .hero-logo {
-            font-family: 'Sansita Swashed', cursive;
-            font-size: 1.15rem; font-weight: 700;
-            color: var(--text);
+        .topbar-logo-img {
+            height: 30px;
+            width: auto;
+            mix-blend-mode: multiply;
+            object-fit: contain;
         }
 
         /* Right: trustpilot */
@@ -389,8 +380,7 @@
             }
             .cd-num { width: 34px; font-size: 0.8rem; padding: 5px 0; border-radius: 7px; }
             .cd-label { font-size: 0.38rem; }
-            .topbar-avatar { width: 28px; height: 28px; }
-            .hero-logo { font-size: 0.95rem; }
+            .topbar-logo-img { height: 24px; }
             .tp { flex-direction: column; align-items: flex-end; gap: 3px; }
             .tp-stars { gap: 1px; }
             .tp-star { width: 12px; height: 12px; }
@@ -406,9 +396,12 @@
             .h-badge { padding: 4px 6px !important; font-size: 0.46rem !important; gap: 3px !important; white-space: nowrap !important; }
             .h-badge-icon { width: 11px !important; height: 11px !important; }
             .h-badge-icon svg { width: 6px !important; height: 6px !important; }
+            .quiz-opt-gender { min-height: 88px; padding: 14px 110px 14px 18px; }
+            .quiz-opt-label { font-size: 0.95rem; }
             .hero-proof { flex-direction: column; align-items: center; gap: 5px; margin-top: 14px; }
             .proof-avatars { order: -1; }
-            .hero-proof-text { font-size: 0.58rem; text-align: center; order: 1; }
+            .proof-av { width: 40px !important; height: 40px !important; margin-left: -10px !important; }
+            .hero-proof-text { font-size: 0.62rem; text-align: center; order: 1; }
             .hero-left { padding-bottom: 0 !important; }
         }
 
@@ -422,7 +415,7 @@
         .hero h1 { color: #faf8f5; }
         .hero .hero-sub { color: rgba(250,248,245,0.65); }
         .hero .hero-sub strong { color: rgba(250,248,245,0.9); }
-        .hero .hero-logo { color: #faf8f5; }
+        .hero .topbar-logo-img { filter: brightness(0) invert(1); mix-blend-mode: normal; opacity: 0.9; }
         .hero .tp-label, .hero .tp-score { color: rgba(250,248,245,0.45); }
         .hero .cd-num { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.06); color: rgba(250,248,245,0.9); }
         .hero .cd-label { color: rgba(250,248,245,0.35); }
@@ -433,7 +426,7 @@
             background: rgba(255,255,255,0.88);
             border: 1px solid rgba(255,255,255,0.5);
             border-radius: 20px;
-            padding: 32px 28px 28px;
+            padding: 10px;
             box-shadow: 0 8px 32px rgba(0,0,0,0.15);
         }
         .hero .hero-quiz-q { color: var(--text); font-size: 1.05rem; }
@@ -449,7 +442,6 @@
         .hero .proof-av { border-color: rgba(20,31,26,0.6); }
         .hero .hbt--green { background: rgba(200,233,157,0.07); border-color: rgba(200,233,157,0.12); color: rgba(200,233,157,0.7); }
         .hero .hbt--green .hbt-dot { background: rgba(200,233,157,0.5); box-shadow: 0 0 6px rgba(200,233,157,0.25); }
-        .hero .topbar-avatar { border-color: rgba(255,255,255,0.08); }
 
         /* Dual badges above headline */
         .hero-badges-top {
@@ -717,6 +709,37 @@
             border-color: var(--cta-1);
             background: rgba(232,83,14,0.04);
             box-shadow: 0 0 0 3px rgba(232,83,14,0.08);
+        }
+
+        .quiz-opt-gender {
+            position: relative;
+            min-height: 140px;
+            padding: 24px 170px 24px 28px;
+            background: #ffffff;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .quiz-opt-gender:hover { background: #ffffff; }
+        .quiz-opt-gender.selected { background: #ffffff; }
+
+        .quiz-opt-label {
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        .quiz-opt-figure {
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 180px;
+            height: auto;
+            pointer-events: none;
+            user-select: none;
+            -webkit-mask-image: linear-gradient(to right, transparent 0%, black 22%);
+            mask-image: linear-gradient(to right, transparent 0%, black 22%);
         }
 
         .hero-quiz-trust {
@@ -3697,8 +3720,7 @@
 <div class="hero-topbar">
         <!-- Left: avatar + logo -->
         <div class="topbar-left">
-            <img class="topbar-avatar" src="elliott logo.jpg" alt="Elliott Aziz">
-            <span class="hero-logo">Elliott Aziz</span>
+            <img class="topbar-logo-img" src="elliott-aziz-logo.png" alt="Elliott Aziz">
         </div>
 
         <!-- Center: countdown -->
@@ -3769,7 +3791,7 @@
             <!-- Headline -->
             <h1><span class="hl">Heißhunger</span> stoppen.<br>Ohne <span class="hl">Rückfälle</span> abnehmen.</h1>
             <p class="hero-sub">
-                Finde heraus, was dich blockiert und was du tun musst, um endlich <strong>dauerhaft abzunehmen</strong>.
+                In 5 Minuten siehst du <strong>schwarz auf weiß</strong>, was deine Abnahme wirklich blockiert – und welche 2–3 Schritte du als Nächstes gehen solltest.
             </p>
 
             <!-- Progress bar -->
@@ -3780,28 +3802,18 @@
             <!-- First quiz question: Gender -->
             <div class="hero-quiz" id="quiz-start">
                 <div class="quiz-opts">
-                    <button class="quiz-opt" data-v="Weiblich">Weiblich</button>
-                    <button class="quiz-opt" data-v="Männlich">Männlich</button>
+                    <button class="quiz-opt quiz-opt-gender" data-v="Weiblich">
+                        <span class="quiz-opt-label">Weiblich</span>
+                        <img class="quiz-opt-figure" src="generated-images/female-v3.png" alt="" aria-hidden="true">
+                    </button>
+                    <button class="quiz-opt quiz-opt-gender" data-v="Männlich">
+                        <span class="quiz-opt-label">Männlich</span>
+                        <img class="quiz-opt-figure" src="generated-images/male-v1.png" alt="" aria-hidden="true">
+                    </button>
                 </div>
             </div>
 
-            <!-- Trust badges -->
-            <div class="hero-badges">
-                <span class="h-badge">
-                    <span class="h-badge-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                    5 Minuten
-                </span>
-                <span class="h-badge">
-                    <span class="h-badge-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                    100% Kostenlos
-                </span>
-                <span class="h-badge">
-                    <span class="h-badge-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
-                    Anonym
-                </span>
-            </div>
-
-            <!-- Social proof -->
+            <!-- Social proof — directly under buttons -->
             <div class="hero-proof">
                 <div class="proof-avatars">
                     <img class="proof-av" src="trafo 1.jpeg" alt="">
@@ -3809,7 +3821,23 @@
                     <img class="proof-av" src="trafo 3.jpeg" alt="">
                     <img class="proof-av" src="trafo 4.jpeg" alt="">
                 </div>
-                <span class="hero-proof-text"><strong>2.500+ Frauen</strong> haben ihre Analyse bereits erhalten.</span>
+                <span class="hero-proof-text"><strong>Über 2.500 Frauen</strong> haben diese Analyse bereits gemacht.</span>
+            </div>
+
+            <!-- Trust badges -->
+            <div class="hero-badges">
+                <span class="h-badge">
+                    <span class="h-badge-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    100 % anonym
+                </span>
+                <span class="h-badge">
+                    <span class="h-badge-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    5 Minuten
+                </span>
+                <span class="h-badge">
+                    <span class="h-badge-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                    Kostenfrei
+                </span>
             </div>
         </div>
 
@@ -4022,8 +4050,8 @@
             </div>
             <div class="step reveal" data-d="200">
                 <div class="step-num">3</div>
-                <h3>Klaren Abnehmplan erhalten</h3>
-                <p>Du hast Klarheit, was du tun musst, um ohne Rückfälle abzunehmen.</p>
+                <h3>Klare nächste Schritte erhalten</h3>
+                <p>Du weißt, wo du ansetzen musst, um ohne Rückfälle abzunehmen.</p>
             </div>
         </div>
     </div>
@@ -4277,7 +4305,7 @@
         btn.addEventListener('click', () => {
             document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
-            const answer = btn.textContent;
+            const answer = btn.dataset.v || btn.textContent.trim();
             setTimeout(() => {
                 if (typeof startQuiz === 'function') {
                     startQuiz(answer);

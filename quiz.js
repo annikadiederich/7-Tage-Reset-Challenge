@@ -56,7 +56,7 @@
         overlay.id = 'quizOverlay';
         overlay.innerHTML = `
             <div class="qz-progress"><div class="qz-progress-fill" id="qzProgressFill"></div></div>
-            <div class="qz-logo" style="text-align:center; padding:24px 0 0; font-family:'Sansita Swashed',cursive; font-size:1.15rem; font-weight:700; color:#1e1c1a;">Elliott Aziz</div>
+            <div class="qz-logo" style="text-align:center; padding:24px 0 0;"><img src="elliott-aziz-logo.png" alt="Elliott Aziz" style="height:30px; width:auto; mix-blend-mode:multiply;"></div>
             <div class="qz-body"><div class="qz-question" id="qzQuestion"></div></div>
         `;
         document.body.appendChild(overlay);
