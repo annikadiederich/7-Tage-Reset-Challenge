@@ -49,6 +49,107 @@
     const totalQuestions = questions.length + 1; // +1 for gender on landing page
     const answers = {};
 
+    // ── Category mapping for progress context ──
+    const categories = [
+        { name: 'Über dich', range: [1, 2] },
+        { name: 'Dein Muster', range: [3, 16] },
+        { name: 'Dein Alltag', range: [17, 28] },
+        { name: 'Deine Vision', range: [29, 33] },
+        { name: 'Dein Wunsch', range: [34, 38] },
+    ];
+
+    function categoryFor(qId) {
+        return categories.find(c => qId >= c.range[0] && qId <= c.range[1]) || categories[0];
+    }
+
+    // Show breather screen when entering a new category (after this question finishes)
+    const BREATHERS = {
+        2: { title: 'Super, starten wir!', sub: 'Jetzt geht\'s um dein Essverhalten.' },
+        16: { title: 'Starke Offenheit.', sub: 'Weiter mit deinem Alltag.' },
+        28: { title: 'Fast geschafft!', sub: 'Lass uns deine Zukunft anschauen.' },
+        33: { title: 'Nur noch wenige Schritte.', sub: 'Was wünschst du dir wirklich?' },
+    };
+
+    // ── Emoji mapping by keyword (first match in option text wins) ──
+    const EMOJI_RULES = [
+        // Age groups
+        [/^unter 25$/i, '🌱'], [/^25.34$/i, '🌿'], [/^35.44$/i, '🌳'],
+        [/^45.54$/i, '🍂'], [/^55\+$/i, '🌲'],
+        // Weight goals
+        [/unter 5.?kg/i, '🎯'], [/5.10.?kg/i, '💫'], [/10.15.?kg/i, '🚀'], [/über 15.?kg/i, '🌟'],
+        // Frequency high → low
+        [/ständig/i, '🔄'], [/sehr oft/i, '⏱️'], [/fast täglich/i, '📅'],
+        [/täglich/i, '📅'], [/mehrmals/i, '📆'], [/immer wieder/i, '♻️'],
+        [/regelmäßig/i, '🔁'], [/ab und zu/i, '🌀'], [/manchmal/i, '💭'],
+        [/geht so/i, '🤷'], [/selten/i, '💤'], [/kaum/i, '🌾'],
+        [/eigentlich nie/i, '🚫'], [/^nie$/i, '🚫'],
+        // Times of day
+        [/abends/i, '🌙'], [/morgens/i, '🌅'],
+        [/ganzen tag/i, '☀️'],
+        // Triggers / emotions (negative)
+        [/stress/i, '😰'], [/überforder/i, '🌊'], [/druck/i, '🫨'],
+        [/emotional/i, '💔'], [/langeweile/i, '🥱'], [/leere/i, '🕳️'],
+        [/anspannung/i, '⚡'], [/unruhe/i, '🌪️'],
+        [/enttäusch/i, '😞'], [/beschämt|scham/i, '😔'],
+        [/machtlos/i, '🪫'], [/frustr/i, '😤'], [/^leer$/i, '🍂'],
+        // Self-doubt
+        [/disziplin fehlt|mir fehlt die disziplin/i, '💪'],
+        [/warum schaffe/i, '❓'], [/weiß.+besser/i, '🧠'],
+        [/nie schaffe/i, '🥀'], [/lieber nicht/i, '🙈'],
+        [/sabotier/i, '🔻'], [/andere schaffen/i, '👥'],
+        [/verliere.+kontrolle|kontrollverlust/i, '🌊'],
+        [/starte.+neu/i, '🔄'],
+        // Past attempts
+        [/diät/i, '🥬'], [/kalorien/i, '🔢'], [/sport/i, '🏃'],
+        [/^disziplin$/i, '💪'],
+        // Food
+        [/süß/i, '🍫'], [/essen/i, '🍽️'], [/heißhunger/i, '🍰'],
+        [/mehr als geplant/i, '🍕'], [/nicht aufhören/i, '🌀'],
+        [/danach schlecht/i, '😣'],
+        // Self-trust scale
+        [/gar nicht/i, '❌'], [/^wenig$/i, '🔸'], [/teilweise/i, '🔹'],
+        [/eher nicht/i, '🚫'], [/^sehr$/i, '🔥'], [/ziemlich/i, '🔶'],
+        // Environment
+        [/viel druck/i, '🌪️'], [/ausreden/i, '💬'], [/funktionier/i, '🤖'],
+        [/inspirierend/i, '✨'],
+        // Future pain
+        [/gleichen punkt/i, '🔁'], [/frustrierter/i, '😖'],
+        [/mehr gewicht/i, '⚖️'], [/will ich nicht/i, '🙈'],
+        [/energie/i, '🔋'], [/selbstvertrauen/i, '💎'],
+        [/lebensfreude/i, '🌈'], [/beziehungen/i, '🤝'],
+        // Positive desires
+        [/^ruhe$|ruhe im kopf/i, '🕊️'], [/^kontrolle$|kontrolle über/i, '🎯'],
+        [/leichtigkeit|leichter/i, '🍃'],
+        [/ich selbst/i, '🦋'], [/dauerhaft abnehmen/i, '⚖️'],
+        [/wohlfühlen|wohl/i, '🤗'], [/stolz/i, '🏆'],
+        [/frei/i, '🕊️'],
+        // Awareness
+        [/nicht weitergehen/i, '🛑'], [/tiefer/i, '🧭'],
+        [/blockier/i, '🔓'], [/muss.+ändern|etwas ändern/i, '🔥'],
+        [/irgendwas stimmt/i, '⚠️'],
+        // Commitment
+        [/will das lösen/i, '🔥'], [/neugierig/i, '🤔'],
+        [/skeptisch/i, '🤨'],
+        // "Alles davon" catchall
+        [/alles davon/i, '✨'],
+        // Generic scale fallbacks
+        [/ja, total/i, '✅'], [/^ja/i, '✅'], [/^nein/i, '❌'],
+        [/extrem/i, '🔥'], [/^stark$/i, '💥'], [/^mittel$/i, '🔸'],
+        [/^oft$/i, '🕐'],
+    ];
+
+    function emojiFor(text) {
+        for (const [pattern, emoji] of EMOJI_RULES) {
+            if (pattern.test(text)) return emoji;
+        }
+        return '💭';
+    }
+
+    function shouldUseGrid(opts) {
+        if (opts.length < 4 || opts.length > 8) return false;
+        return opts.every(o => o.length <= 22);
+    }
+
     // ── Build overlay DOM ──
     function buildOverlay() {
         const overlay = document.createElement('div');
@@ -74,21 +175,40 @@
         container.classList.add('exit');
 
         setTimeout(() => {
-            let html = `<p class="qz-q">${q.q}</p>`;
+            const cat = categoryFor(q.id);
+            const posInCat = q.id - cat.range[0] + 1;
+            const totalInCat = cat.range[1] - cat.range[0] + 1;
+
+            let html = `
+                <div class="qz-cat-label">
+                    <span class="qz-cat-name">${cat.name}</span>
+                    <span class="qz-cat-dot">·</span>
+                    <span class="qz-cat-count">${posInCat}/${totalInCat}</span>
+                </div>
+                <p class="qz-q">${q.q}</p>
+            `;
+
+            const useGrid = (q.type === 'single' || q.type === 'multi' || q.type === 'mixed') && q.opts && shouldUseGrid(q.opts);
+            const optsClass = 'qz-opts' + (useGrid ? ' qz-opts-grid' : '');
+
+            const renderOpt = (o, i, isMulti) => {
+                const emoji = emojiFor(o);
+                const multiAttr = isMulti ? ' data-multi' : '';
+                return `<button class="qz-opt"${multiAttr} data-idx="${i}">
+                    <span class="qz-opt-emoji" aria-hidden="true">${emoji}</span>
+                    <span class="qz-opt-text">${o}</span>
+                </button>`;
+            };
 
             if (q.type === 'single') {
-                html += `<div class="qz-opts">`;
-                q.opts.forEach((o, i) => {
-                    html += `<button class="qz-opt" data-idx="${i}">${o}</button>`;
-                });
+                html += `<div class="${optsClass}">`;
+                q.opts.forEach((o, i) => { html += renderOpt(o, i, false); });
                 html += `</div>`;
                 html += `<button class="qz-next hidden">Weiter</button>`;
             }
             else if (q.type === 'multi') {
-                html += `<div class="qz-opts">`;
-                q.opts.forEach((o, i) => {
-                    html += `<button class="qz-opt" data-multi data-idx="${i}">${o}</button>`;
-                });
+                html += `<div class="${optsClass}">`;
+                q.opts.forEach((o, i) => { html += renderOpt(o, i, true); });
                 html += `</div>`;
                 html += `<button class="qz-next" id="qzNext">Weiter</button>`;
             }
@@ -97,10 +217,8 @@
                 html += `<button class="qz-next" id="qzNext">Weiter</button>`;
             }
             else if (q.type === 'mixed') {
-                html += `<div class="qz-opts">`;
-                q.opts.forEach((o, i) => {
-                    html += `<button class="qz-opt" data-multi data-idx="${i}">${o}</button>`;
-                });
+                html += `<div class="${optsClass}">`;
+                q.opts.forEach((o, i) => { html += renderOpt(o, i, true); });
                 html += `</div>`;
                 html += `<div class="qz-mixed-divider">oder</div>`;
                 html += `<div class="qz-input-wrap"><textarea class="qz-input" id="qzText" placeholder="${q.placeholder || ''}"></textarea></div>`;
@@ -131,6 +249,48 @@
         }, 350);
     }
 
+    // ── Breather screen between categories ──
+    function showBreather(breather, onDone) {
+        const container = document.getElementById('qzQuestion');
+        container.classList.remove('visible');
+        container.classList.add('exit');
+
+        setTimeout(() => {
+            container.innerHTML = `
+                <div class="qz-breather">
+                    <div class="qz-breather-icon">✨</div>
+                    <h2 class="qz-breather-title">${breather.title}</h2>
+                    <p class="qz-breather-sub">${breather.sub}</p>
+                </div>
+            `;
+            container.classList.remove('exit');
+            void container.offsetHeight;
+            container.classList.add('visible');
+
+            setTimeout(onDone, 1600);
+        }, 350);
+    }
+
+    // ── Advance to next question, possibly through a breather ──
+    function advance(fromQId) {
+        const breather = BREATHERS[fromQId];
+        const next = () => {
+            currentIdx++;
+            renderQuestion(currentIdx);
+        };
+        if (breather) {
+            showBreather(breather, next);
+        } else {
+            next();
+        }
+    }
+
+    // ── Get the text of the option (ignoring emoji span) ──
+    function optText(btn) {
+        const textEl = btn.querySelector('.qz-opt-text');
+        return textEl ? textEl.textContent : btn.textContent.trim();
+    }
+
     // ── Bind interaction events ──
     function bindEvents(q, idx) {
         const container = document.getElementById('qzQuestion');
@@ -140,12 +300,9 @@
                 btn.addEventListener('click', () => {
                     container.querySelectorAll('.qz-opt').forEach(b => b.classList.remove('selected'));
                     btn.classList.add('selected');
-                    answers[q.id] = btn.textContent;
+                    answers[q.id] = optText(btn);
                     // Auto-advance after brief delay
-                    setTimeout(() => {
-                        currentIdx++;
-                        renderQuestion(currentIdx);
-                    }, 400);
+                    setTimeout(() => advance(q.id), 500);
                 });
             });
         }
@@ -164,10 +321,9 @@
             });
             nextBtn.addEventListener('click', () => {
                 if (!nextBtn.classList.contains('enabled')) return;
-                const selected = Array.from(container.querySelectorAll('.qz-opt.selected')).map(b => b.textContent);
+                const selected = Array.from(container.querySelectorAll('.qz-opt.selected')).map(optText);
                 answers[q.id] = selected;
-                currentIdx++;
-                renderQuestion(currentIdx);
+                advance(q.id);
             });
         }
         else if (q.type === 'text') {
@@ -183,8 +339,7 @@
             nextBtn.addEventListener('click', () => {
                 if (!nextBtn.classList.contains('enabled')) return;
                 answers[q.id] = input.value.trim();
-                currentIdx++;
-                renderQuestion(currentIdx);
+                advance(q.id);
             });
         }
         else if (q.type === 'mixed') {
@@ -214,11 +369,10 @@
 
             nextBtn.addEventListener('click', () => {
                 if (!nextBtn.classList.contains('enabled')) return;
-                const selected = Array.from(container.querySelectorAll('.qz-opt.selected')).map(b => b.textContent);
+                const selected = Array.from(container.querySelectorAll('.qz-opt.selected')).map(optText);
                 const text = input ? input.value.trim() : '';
                 answers[q.id] = { selected, text };
-                currentIdx++;
-                renderQuestion(currentIdx);
+                advance(q.id);
             });
         }
     }
