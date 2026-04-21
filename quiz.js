@@ -5,45 +5,165 @@
 (function () {
     'use strict';
 
-    // ── Question data (Q2–Q35, Q1 is on the landing page) ──
+    // ── Question data (Q2–Q29, Q1 is gender on landing page) ──
     const questions = [
-        { id: 2, q: 'Wie alt bist du?', type: 'single', opts: ['Unter 25', '25–34', '35–44', '45–54', '55+'] },
-        { id: 3, q: 'Wie oft denkst du am Tag über Essen oder Abnehmen nach?', type: 'single', opts: ['Ständig', 'Sehr oft', 'Immer wieder', 'Selten'] },
-        { id: 4, q: 'Wie viel möchtest du abnehmen?', type: 'single', opts: ['Unter 5 kg', '5–10 kg', '10–15 kg', 'Über 15 kg'] },
-        { id: 5, q: 'Hast du oft ein schlechtes Gewissen nach dem Essen?', type: 'single', opts: ['Ja, täglich', 'Mehrmals pro Woche', 'Ab und zu', 'Kaum'] },
-        { id: 6, q: 'Welcher Satz passt am besten zu dir?', type: 'single', opts: ['Ich denke ständig darüber nach, was ich essen darf', 'Ich kann Essen nicht mehr entspannt genießen', 'Ich kontrolliere mein Essen ständig', 'Ich schwanke zwischen Kontrolle und Aufgeben', 'Alles davon'] },
-        { id: 7, q: 'Wann verlierst du am ehesten die Kontrolle beim Essen?', type: 'single', opts: ['Abends', 'Nach Stress', 'Bei Emotionen', 'Über den ganzen Tag', 'Eigentlich nie'] },
-        { id: 8, q: 'Was passiert dann?', type: 'multi', opts: ['Ich esse mehr als geplant', 'Ich greife zu Süßem', 'Ich kann nicht aufhören', 'Ich fühle mich danach schlecht', 'Alles davon'] },
-        { id: 9, q: 'Wie oft passiert das?', type: 'single', opts: ['Fast täglich', 'Mehrmals pro Woche', 'Ab und zu', 'Selten'] },
-        { id: 10, q: 'Was passiert meistens davor?', type: 'single', opts: ['Stress oder Überforderung', 'Emotionale Situationen', 'Langeweile oder Leere', 'Innere Anspannung', 'Ich weiß es nicht genau'] },
-        { id: 11, q: 'Was denkst du dann über dich?', type: 'single', opts: ['Mir fehlt die Disziplin', 'Warum schaffe ich es nicht?', 'Ich weiß es doch eigentlich besser', 'Vielleicht schaffe ich es nie', 'Ich denke lieber nicht darüber nach'] },
-        { id: 12, q: 'Was willst du in diesen Momenten vermeiden?', type: 'single', opts: ['Inneren Druck', 'Enttäuschung über mich', 'Das Gefühl, nicht gut genug zu sein', 'Innere Unruhe', 'Ich kann es nicht genau sagen'] },
-        { id: 13, q: 'Wie fühlst du dich nach einem Rückfall?', type: 'single', opts: ['Enttäuscht', 'Beschämt', 'Machtlos', 'Frustriert', 'Leer'] },
-        { id: 14, q: 'Welcher Gedanke kommt dir am häufigsten?', type: 'single', opts: ['Warum schaffe ich das nicht?', 'Ich sabotiere mich selbst', 'Andere schaffen es, ich nicht', 'Ich verliere die Kontrolle', 'Ich starte immer wieder neu'] },
-        { id: 15, q: 'Was hast du schon versucht?', type: 'multi', opts: ['Diäten', 'Kalorien zählen', 'Mehr Sport', 'Disziplin', 'Alles davon'] },
-        { id: 16, q: 'Warum hat es nie dauerhaft geklappt?', type: 'single', opts: ['Ich halte nicht durch', 'Ich falle immer zurück', 'Es ist zu anstrengend', 'Die Motivation geht verloren', 'Ich weiß es nicht'] },
-        { id: 17, q: 'Du weißt, was zu tun ist, aber setzt es nicht um?', type: 'single', opts: ['Ja, total', 'Oft', 'Manchmal', 'Eher nicht'] },
-        { id: 18, q: 'Wie stressig ist dein Alltag?', type: 'single', opts: ['Sehr stressig', 'Oft unter Druck', 'Mal so, mal so', 'Eher entspannt'] },
-        { id: 19, q: 'Wie reagierst du auf Probleme?', type: 'single', opts: ['Schnell überfordert', 'Funktioniere, aber kippe innerlich', 'Verliere den Glauben an mich', 'Ziehe mich zurück', 'Kompensiere über Essen', 'Bleibe entspannt'] },
-        { id: 20, q: 'Bringen dich kleine Rückschläge schnell aus der Bahn?', type: 'single', opts: ['Ja, total', 'Oft', 'Manchmal', 'Eher nicht'] },
-        { id: 21, q: 'Vertraust du dir selbst?', type: 'single', opts: ['Gar nicht', 'Wenig', 'Teilweise', 'Ja'] },
-        { id: 22, q: 'Ist Essen für dich eine Art Ausgleich?', type: 'single', opts: ['Ja, absolut', 'Oft', 'Manchmal', 'Nein'] },
-        { id: 23, q: 'Wie oft kreisen deine Gedanken ums Essen?', type: 'single', opts: ['Sehr oft', 'Regelmäßig', 'Geht so', 'Kaum'] },
-        { id: 24, q: 'Wie stark ist dein Heißhunger?', type: 'single', opts: ['Extrem', 'Stark', 'Mittel', 'Kaum'] },
-        { id: 25, q: 'Fühlt sich dein Umfeld verständnisvoll?', type: 'single', opts: ['Gar nicht', 'Eher nicht', 'Teilweise', 'Ja'] },
-        { id: 26, q: 'Glaubt jemand wirklich an dich?', type: 'single', opts: ['Nein', 'Eher selten', 'Teilweise', 'Ja'] },
-        { id: 27, q: 'Sind die Menschen um dich herum selbst gestresst?', type: 'single', opts: ['Sehr', 'Ziemlich', 'Teilweise', 'Kaum'] },
-        { id: 28, q: 'Was beschreibt dein Umfeld am besten?', type: 'single', opts: ['Viel Druck, wenig Ruhe', 'Viele Ausreden', 'Man funktioniert nur', 'Es fehlen inspirierende Menschen', 'Alles davon'] },
-        { id: 29, q: 'Wo stehst du in 6 Monaten, wenn sich nichts ändert?', type: 'single', opts: ['Am gleichen Punkt', 'Noch frustrierter', 'Mit mehr Gewicht', 'Will ich nicht dran denken'] },
-        { id: 30, q: 'Was kostet dich die Situation gerade?', type: 'multi', opts: ['Energie', 'Selbstvertrauen', 'Lebensfreude', 'Beziehungen', 'Alles davon'] },
-        { id: 31, q: 'Was schmerzt dich am meisten?', type: 'single', opts: ['Keine Kontrolle zu haben', 'Mich immer zu enttäuschen', 'Mich zu verstecken', 'Nicht frei zu sein', 'Nicht an mich zu glauben'] },
-        { id: 32, q: 'Was wünschst du dir am meisten zurück?', type: 'single', opts: ['Ruhe', 'Kontrolle', 'Leichtigkeit', 'Selbstvertrauen', 'Ich selbst zu sein'] },
-        { id: 33, q: 'Wie wäre dein Leben, wenn du es im Griff hast?', type: 'single', opts: ['Leichter und freier', 'Ich würde mich wohlfühlen', 'Ich hätte Kontrolle', 'Ich wäre stolz auf mich'] },
-        { id: 34, q: 'Was belastet dich gerade am meisten?', type: 'mixed', opts: ['Heißhunger & Kontrollverlust', 'Gewicht verändert sich nicht', 'Essen ist ständig im Kopf', 'Ich verliere Vertrauen in mich', 'Ich fühle mich nicht wohl'], placeholder: 'Oder in eigenen Worten' },
-        { id: 35, q: 'Was wünschst du dir stattdessen?', type: 'mixed', opts: ['Ruhe im Kopf', 'Kontrolle über mein Essen', 'Dauerhaft abnehmen', 'Mich wieder wohlfühlen', 'Einfach ich selbst sein'], placeholder: 'Oder in eigenen Worten' },
-        { id: 36, q: 'Was ist dir durch die Fragen bewusst geworden?', type: 'single', opts: ['So kann es nicht weitergehen', 'Mein Problem liegt tiefer', 'Ich blockiere mich selbst', 'Ich muss etwas ändern', 'Irgendwas stimmt nicht'] },
-        { id: 37, q: 'Willst du wirklich etwas verändern?', type: 'text', placeholder: 'Deine ehrliche Antwort' },
-        { id: 38, q: 'Bist du bereit für einen neuen Ansatz?', type: 'single', opts: ['Ja, ich will das lösen', 'Ich bin neugierig', 'Noch skeptisch'] },
+        { id: 2, q: 'Wie alt bist du?', type: 'single', layout: 'stack', opts: ['Unter 25', '25 – 34', '35 – 44', '45 – 54', '55+'] },
+        { id: 3, q: 'Wähle deinen Körpertyp', type: 'bodytype', opts: [
+            { label: 'Normal', img: 'bodytype-female-1.png' },
+            { label: 'Kurvig', img: 'bodytype-female-3.png' },
+            { label: 'Deutlich kurvig', img: 'bodytype-female-4.png' },
+            { label: 'Kräftig', img: 'bodytype-female-5.png' },
+        ]},
+        { id: 4, q: 'Wie viel möchtest du abnehmen?', type: 'stepcards', opts: [
+            { label: 'Unter 5 kg', level: 1 },
+            { label: '5–10 kg', level: 2 },
+            { label: '10–15 kg', level: 3 },
+            { label: 'Über 15 kg', level: 4 },
+        ] },
+        { id: 5, q: 'Wie oft denkst du am Tag über Essen oder Abnehmen nach?', type: 'stepcards', opts: [
+            { label: 'Selten', sub: 'Kaum Gedanken daran', level: 1 },
+            { label: 'Immer wieder', sub: 'Ein paar Mal täglich', level: 2 },
+            { label: 'Sehr oft', sub: 'Viele Male pro Stunde', level: 3 },
+            { label: 'Ständig', sub: 'Durchgehend im Kopf', level: 4 },
+        ] },
+        { id: 6, q: 'Hast du oft ein schlechtes Gewissen nach dem Essen?', type: 'stepcards', opts: [
+            { label: 'Kaum', sub: 'Fast nie', level: 1 },
+            { label: 'Ab und zu', sub: 'Ein paar Mal im Monat', level: 2 },
+            { label: 'Mehrmals pro Woche', sub: 'Regelmäßig', level: 3 },
+            { label: 'Ja, täglich', sub: 'Nach fast jeder Mahlzeit', level: 4 },
+        ] },
+        // ── Breather 1 nach Q6 ──
+        { id: 7, q: 'Welcher Satz passt am besten zu dir?', type: 'single', opts: [
+            { text: 'Ich denke ständig darüber nach, was ich essen darf', emoji: '🧠', highlight: 'ständig' },
+            { text: 'Ich kann Essen nicht mehr entspannt genießen',        emoji: '😣', highlight: 'nicht mehr entspannt' },
+            { text: 'Ich kontrolliere mein Essen ständig',                 emoji: '🔒', highlight: 'kontrolliere' },
+            { text: 'Ich schwanke zwischen Kontrolle und Aufgeben',        emoji: '🔄', highlight: 'Kontrolle und Aufgeben' },
+            { text: 'Alles davon',                                         emoji: '🎯', highlight: 'Alles' },
+        ] },
+        { id: 8, q: 'Wann verlierst du am ehesten die Kontrolle beim Essen?', type: 'single', opts: ['Abends', 'Nach Stress', 'Bei Emotionen', 'Über den ganzen Tag', 'Eigentlich nie'] },
+        { id: 9, q: 'Was passiert dann?', type: 'single', opts: [
+            { text: 'Ich esse mehr als geplant',     emoji: '🍽️', highlight: 'mehr als geplant' },
+            { text: 'Ich greife zu Süßem',            emoji: '🍬', highlight: 'Süßem' },
+            { text: 'Ich kann nicht aufhören',        emoji: '🛑', highlight: 'nicht aufhören' },
+            { text: 'Ich fühle mich danach schlecht', emoji: '😔', highlight: 'schlecht' },
+            { text: 'Alles davon',                    emoji: '🎯', highlight: 'Alles' },
+        ] },
+        { id: 10, q: 'Wie oft passiert das?', type: 'stepcards', opts: [
+            { label: 'Selten', sub: 'Ein paar Mal im Monat', level: 1 },
+            { label: 'Ab und zu', sub: 'Ein paar Mal pro Woche', level: 2 },
+            { label: 'Mehrmals pro Woche', sub: 'Regelmäßig', level: 3 },
+            { label: 'Fast täglich', sub: 'Nahezu jeden Tag', level: 4 },
+        ] },
+        { id: 11, q: 'Was passiert meistens davor?', type: 'single', opts: [
+            { text: 'Stress oder Überforderung', emoji: '🌀', highlight: 'Stress' },
+            { text: 'Emotionale Situationen',    emoji: '💭', highlight: 'Emotionale' },
+            { text: 'Langeweile oder Leere',     emoji: '🕳️', highlight: 'Leere' },
+            { text: 'Innere Anspannung',         emoji: '⚡', highlight: 'Anspannung' },
+            { text: 'Ich weiß es nicht genau',   emoji: '🤷' },
+        ] },
+        { id: 12, q: 'Wie stark ist dein Heißhunger?', type: 'scale', opts: [
+            { label: 'Kaum',   sub: 'Kaum spürbar' },
+            { label: 'Mittel', sub: 'Kommt und geht' },
+            { label: 'Stark',  sub: 'Regelmäßig stark' },
+            { label: 'Extrem', sub: 'Dauerhaft intensiv' },
+        ] },
+        { id: 13, q: 'Du weißt, was zu tun ist — aber setzt es nicht um?', hint: 'Sei ehrlich zu dir. Deine Antwort bleibt anonym.', type: 'stepcards', opts: [
+            { label: 'Eher nicht', sub: 'Ich setze um, was ich weiß', level: 1 },
+            { label: 'Manchmal', sub: 'Mal so, mal so', level: 2 },
+            { label: 'Oft', sub: 'Regelmäßig', level: 3 },
+            { label: 'Ja, total', sub: 'Das ist genau mein Problem', level: 4 },
+        ] },
+        // ── Breather 2 nach Q13 ──
+        { id: 14, q: 'Welcher Gedanke kommt dir am häufigsten?', type: 'single', opts: [
+            { text: 'Warum schaffe ich das nicht?', emoji: '❓', highlight: 'Warum' },
+            { text: 'Ich sabotiere mich selbst',     emoji: '💥', highlight: 'sabotiere' },
+            { text: 'Andere schaffen es, ich nicht', emoji: '👥', highlight: 'Andere schaffen' },
+            { text: 'Ich verliere die Kontrolle',    emoji: '🌊', highlight: 'Kontrolle' },
+            { text: 'Ich starte immer wieder neu',   emoji: '🔄', highlight: 'immer wieder' },
+        ] },
+        { id: 15, q: 'Wie fühlst du dich nach einem Rückfall?', type: 'single', opts: ['Enttäuscht', 'Beschämt', 'Machtlos', 'Frustriert', 'Leer'] },
+        { id: 16, q: 'Was hast du schon versucht?', type: 'multi', opts: ['Diäten', 'Kalorien zählen', 'Mehr Sport', 'Disziplin', 'Alles davon'] },
+        { id: 17, q: 'Warum hat es nie dauerhaft geklappt?', type: 'single', opts: [
+            { text: 'Ich halte nicht durch',         emoji: '🪫', highlight: 'nicht durch' },
+            { text: 'Ich falle immer zurück',        emoji: '📉', highlight: 'immer zurück' },
+            { text: 'Es ist zu anstrengend',         emoji: '🏋️‍♀️', highlight: 'anstrengend' },
+            { text: 'Die Motivation geht verloren',  emoji: '💨', highlight: 'Motivation' },
+            { text: 'Ich weiß es nicht',             emoji: '🤷' },
+        ] },
+        { id: 18, q: 'Wie stressig ist dein Alltag?', type: 'scale', opts: [
+            { label: 'Eher entspannt',  sub: 'Wenig Druck im Alltag' },
+            { label: 'Mal so, mal so',  sub: 'Gute und schwere Tage wechseln sich ab' },
+            { label: 'Oft unter Druck', sub: 'Regelmäßig angespannt' },
+            { label: 'Sehr stressig',   sub: 'Dauerhaft unter Druck' },
+        ] },
+        { id: 19, q: 'Ist Essen für dich eine Art Ausgleich?', type: 'scale', opts: [
+            { label: 'Nein',        sub: 'Gar nicht' },
+            { label: 'Manchmal',    sub: 'Ab und zu' },
+            { label: 'Oft',         sub: 'Regelmäßig' },
+            { label: 'Ja, absolut', sub: 'Fast immer' },
+        ] },
+        { id: 20, q: 'Wie reagierst du auf Probleme?', type: 'single', opts: [
+            { text: 'Schnell überfordert',             emoji: '😰', highlight: 'überfordert' },
+            { text: 'Funktioniere, aber kippe innerlich', emoji: '🎭', highlight: 'kippe innerlich' },
+            { text: 'Verliere den Glauben an mich',    emoji: '📉', highlight: 'Glauben' },
+            { text: 'Ziehe mich zurück',               emoji: '🙈', highlight: 'zurück' },
+            { text: 'Kompensiere über Essen',          emoji: '🍩', highlight: 'über Essen' },
+            { text: 'Bleibe entspannt',                emoji: '🌿', highlight: 'entspannt' },
+        ] },
+        { id: 21, q: 'Bringen dich kleine Rückschläge schnell aus der Bahn?', type: 'scale', opts: [
+            { label: 'Eher nicht', sub: 'Ich bleibe stabil' },
+            { label: 'Manchmal',   sub: 'Kommt drauf an' },
+            { label: 'Oft',        sub: 'Regelmäßig' },
+            { label: 'Ja, total',  sub: 'Komplett raus' },
+        ] },
+        { id: 22, q: 'Vertraust du dir selbst?', type: 'scale', opts: [
+            { label: 'Gar nicht',  sub: 'Kein Vertrauen' },
+            { label: 'Wenig',      sub: 'Kaum noch' },
+            { label: 'Teilweise',  sub: 'Hier und da' },
+            { label: 'Ja',         sub: 'Voll und ganz' },
+        ] },
+        // ── Breather 3 nach Q22 ──
+        { id: 23, q: 'Wo stehst du in 6 Monaten, wenn sich nichts ändert?', type: 'single', opts: [
+            { text: 'Am gleichen Punkt',        emoji: '📍', highlight: 'gleichen Punkt' },
+            { text: 'Noch frustrierter',        emoji: '😤', highlight: 'frustrierter' },
+            { text: 'Mit mehr Gewicht',         emoji: '⚖️', highlight: 'mehr Gewicht' },
+            { text: 'Will ich nicht dran denken', emoji: '🙈', highlight: 'nicht dran denken' },
+        ] },
+        { id: 24, q: 'Was kostet dich die Situation gerade?', type: 'multi', opts: ['Energie', 'Selbstvertrauen', 'Lebensfreude', 'Beziehungen', 'Alles davon'] },
+        { id: 25, q: 'Was schmerzt dich am meisten?', type: 'single', opts: [
+            { text: 'Keine Kontrolle zu haben',   emoji: '🌊', highlight: 'Kontrolle' },
+            { text: 'Mich immer zu enttäuschen',  emoji: '😔', highlight: 'enttäuschen' },
+            { text: 'Mich zu verstecken',         emoji: '🙈', highlight: 'verstecken' },
+            { text: 'Nicht frei zu sein',         emoji: '⛓️', highlight: 'frei' },
+            { text: 'Nicht an mich zu glauben',   emoji: '💔', highlight: 'glauben' },
+        ] },
+        { id: 26, q: 'Was wünschst du dir stattdessen?', type: 'mixed', opts: [
+            { text: 'Ruhe im Kopf',                         emoji: '🧘‍♀️', highlight: 'Ruhe' },
+            { text: 'Kontrolle über mein Essen',            emoji: '🎯', highlight: 'Kontrolle' },
+            { text: 'Dauerhaft abnehmen',                   emoji: '⚖️', highlight: 'Dauerhaft' },
+            { text: 'Mich wieder wohlfühlen',               emoji: '🌿', highlight: 'wohlfühlen' },
+            { text: 'Mit Selbstvertrauen ich selbst sein',  emoji: '💪', highlight: 'Selbstvertrauen' },
+            { text: 'Leichtigkeit',                         emoji: '✨', highlight: 'Leichtigkeit' },
+        ], placeholder: 'Oder in eigenen Worten' },
+        { id: 27, q: 'Was belastet dich gerade am meisten?', type: 'mixed', opts: [
+            { text: 'Heißhunger & Kontrollverlust',    emoji: '🔥', highlight: 'Kontrollverlust' },
+            { text: 'Gewicht verändert sich nicht',    emoji: '⚖️', highlight: 'nicht' },
+            { text: 'Essen ist ständig im Kopf',       emoji: '🧠', highlight: 'ständig' },
+            { text: 'Ich verliere Vertrauen in mich',  emoji: '💔', highlight: 'Vertrauen' },
+            { text: 'Ich fühle mich nicht wohl',       emoji: '😔', highlight: 'nicht wohl' },
+        ], placeholder: 'Oder in eigenen Worten' },
+        { id: 28, q: 'Was ist dir durch die Fragen bewusst geworden?', type: 'single', opts: [
+            { text: 'So kann es nicht weitergehen', emoji: '🚦', highlight: 'nicht weitergehen' },
+            { text: 'Mein Problem liegt tiefer',    emoji: '🔍', highlight: 'tiefer' },
+            { text: 'Ich blockiere mich selbst',    emoji: '🧱', highlight: 'blockiere' },
+            { text: 'Ich muss etwas ändern',        emoji: '🔄', highlight: 'ändern' },
+            { text: 'Irgendwas stimmt nicht',       emoji: '❗', highlight: 'stimmt nicht' },
+        ] },
+        { id: 29, q: 'Bist du bereit für einen neuen Ansatz für deine Abnahme?', type: 'single', opts: [
+            { text: 'Ja, ich will das lösen', emoji: '✅', highlight: 'lösen' },
+            { text: 'Ich bin neugierig',      emoji: '👀', highlight: 'neugierig' },
+            { text: 'Noch skeptisch',         emoji: '🤨', highlight: 'skeptisch' },
+        ] },
     ];
 
     const totalQuestions = questions.length + 1; // +1 for gender on landing page
@@ -51,23 +171,96 @@
 
     // ── Category mapping for progress context ──
     const categories = [
-        { name: 'Über dich', range: [1, 2] },
-        { name: 'Dein Muster', range: [3, 16] },
-        { name: 'Dein Alltag', range: [17, 28] },
-        { name: 'Deine Vision', range: [29, 33] },
-        { name: 'Dein Wunsch', range: [34, 38] },
+        { name: 'Über dich', range: [1, 6] },
+        { name: 'Deine Abnehmblockade', range: [7, 13] },
+        { name: 'Stress & Alltag', range: [14, 22] },
+        { name: 'Kosten & Wunsch', range: [23, 29] },
     ];
 
     function categoryFor(qId) {
         return categories.find(c => qId >= c.range[0] && qId <= c.range[1]) || categories[0];
     }
 
-    // Show breather screen when entering a new category (after this question finishes)
+    // Breather screen shown AFTER this question finishes
     const BREATHERS = {
-        2: { title: 'Super, starten wir!', sub: 'Jetzt geht\'s um dein Essverhalten.' },
-        16: { title: 'Starke Offenheit.', sub: 'Weiter mit deinem Alltag.' },
-        28: { title: 'Fast geschafft!', sub: 'Lass uns deine Zukunft anschauen.' },
-        33: { title: 'Nur noch wenige Schritte.', sub: 'Was wünschst du dir wirklich?' },
+        6: {
+            chapter: 1,
+            total: 3,
+            chapterName: 'Basis-Check',
+            title: 'Du bist nicht <span class="qz-script">allein</span>.',
+            intro: 'Viele Frauen in deinem Alter erleben gerade genau das — und glauben, sie wären die Einzigen.',
+            points: [
+                { icon: 'head',   text: 'Der Kopf ist voll mit Essen und Abnehmen' },
+                { icon: 'guilt',  text: 'Schlechtes Gewissen nach dem Essen' },
+                { icon: 'spark',  text: 'Wissen, was zu tun ist — und es trotzdem nicht schaffen' },
+            ],
+            outro: 'Die nächsten Fragen zeigen, was deine Abnahme <span class="qz-script">konkret</span> blockiert.',
+            cta: 'Weiter zur Analyse',
+            icon: 'strength'
+        },
+        13: {
+            chapter: 2,
+            total: 3,
+            chapterName: 'Muster-Analyse',
+            title: '<span class="qz-script">Heißhunger</span> ist kein Zufall.',
+            intro: 'Deine Antworten zeigen: Essen ist für dich nicht nur „Energie" — es ist Ausgleich, Beruhigung und Ventil.',
+            points: [
+                { icon: 'swirl', text: 'Stress, Druck, Emotionen' },
+                { icon: 'gear',  text: 'Du funktionierst am Tag' },
+                { icon: 'moon',  text: 'Abends holt sich dein Körper Ruhe über Essen' },
+            ],
+            outro: 'Das hat nichts mit <span class="qz-script">„zu schwach"</span> zu tun.<br>Es ist ein überlastetes System.',
+            cta: 'Weiter zur Auswertung',
+        },
+        22: {
+            chapter: 3,
+            total: 3,
+            chapterName: 'Dein Reset',
+            title: 'System im Dauer-<span class="qz-script">Alarmmodus</span>?',
+            intro: 'Dann fühlt sich Abnehmen immer wie ein Kampf an — und Willenskraft reicht nicht mehr aus.',
+            points: [
+                { icon: 'swirl', text: 'Jeder Rückschlag wirft dich gefühlt komplett zurück' },
+                { icon: 'heart', text: 'Du zweifelst an dir und deinem Weg' },
+                { icon: 'spark', text: 'Du weißt, was zu tun ist — setzt es aber nicht konstant um' },
+            ],
+            outro: 'Im Ergebnis bekommst du deinen <span class="qz-script">Haupt-Abnehmblocker</span> schwarz auf weiß.',
+            cta: 'Zeig mir mein Ergebnis',
+        },
+    };
+
+    // ── Fitness-style breather icons (inline SVG) ──
+    const BREATHER_ICONS = {
+        strength: `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="4" y="24" width="8" height="16" rx="2" fill="currentColor"/>
+            <rect x="52" y="24" width="8" height="16" rx="2" fill="currentColor"/>
+            <rect x="12" y="28" width="6" height="8" rx="1" fill="currentColor"/>
+            <rect x="46" y="28" width="6" height="8" rx="1" fill="currentColor"/>
+            <rect x="18" y="30" width="28" height="4" rx="2" fill="currentColor"/>
+        </svg>`,
+        fire: `<svg viewBox="0 0 64 64" fill="currentColor" aria-hidden="true">
+            <path d="M32 6 C 28 14, 22 18, 22 28 C 22 32, 24 36, 28 36 C 26 32, 27 28, 30 26 C 30 32, 34 36, 34 42 C 34 46, 30 48, 28 46 C 30 50, 34 52, 38 52 C 46 52, 50 46, 50 38 C 50 30, 44 24, 42 20 C 40 26, 36 28, 36 22 C 36 16, 34 10, 32 6 Z"/>
+        </svg>`,
+        trophy: `<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 10 h24 v12 a12 12 0 0 1 -24 0 z" fill="currentColor"/>
+            <path d="M12 14 h8 v8 a6 6 0 0 1 -8 0 z"/>
+            <path d="M44 14 h8 v8 a6 6 0 0 1 -8 0 z" transform="translate(-44 0) scale(-1 1) translate(-64 0)"/>
+            <path d="M44 14 h8 v6 a6 6 0 0 1 -8 0 z"/>
+            <path d="M28 34 h8 v8 h-8 z" fill="currentColor" stroke="none"/>
+            <path d="M22 44 h20 v6 h-20 z" fill="currentColor" stroke="none"/>
+        </svg>`
+    };
+
+    // Emojis for breather point cards
+    const POINT_ICONS = {
+        head:  '🧠',
+        guilt: '😔',
+        spark: '💡',
+        swirl: '🌀',
+        gear:  '⚙️',
+        moon:  '🌙',
+        fire:  '🔥',
+        heart: '💗',
+        target: '🎯',
     };
 
     // ── Emoji mapping by keyword (first match in option text wins) ──
@@ -147,7 +340,18 @@
 
     function shouldUseGrid(opts) {
         if (opts.length < 4 || opts.length > 8) return false;
-        return opts.every(o => o.length <= 22);
+        return opts.every(o => {
+            const t = typeof o === 'object' && o !== null ? o.text : o;
+            return (t || '').length <= 22;
+        });
+    }
+
+    // ── Body type photo per option (gender-aware) ──
+    function bodyTypeImage(opt) {
+        const gender = answers[1] || 'Weiblich';
+        const isMan = gender === 'Männlich';
+        const file = isMan ? opt.img.replace('female', 'male') : opt.img;
+        return `<img class="qz-bt-photo" src="generated-images/${file}" alt="" draggable="false">`;
     }
 
     // ── Build overlay DOM ──
@@ -156,8 +360,10 @@
         overlay.className = 'quiz-overlay';
         overlay.id = 'quizOverlay';
         overlay.innerHTML = `
-            <div class="qz-progress"><div class="qz-progress-fill" id="qzProgressFill"></div></div>
-            <div class="qz-logo" style="text-align:center; padding:24px 0 0;"><img src="elliott-aziz-logo.png" alt="Elliott Aziz" style="height:30px; width:auto; mix-blend-mode:multiply;"></div>
+            <div class="qz-logo"><img src="elliott-aziz-logo.png" alt="Elliott Aziz"></div>
+            <div class="qz-progress-wrap">
+                <div class="qz-progress"><div class="qz-progress-fill" id="qzProgressFill"></div></div>
+            </div>
             <div class="qz-body"><div class="qz-question" id="qzQuestion"></div></div>
         `;
         document.body.appendChild(overlay);
@@ -179,6 +385,7 @@
             const posInCat = q.id - cat.range[0] + 1;
             const totalInCat = cat.range[1] - cat.range[0] + 1;
 
+            const hintHTML = q.hint ? `<p class="qz-q-hint">${q.hint}</p>` : '';
             let html = `
                 <div class="qz-cat-label">
                     <span class="qz-cat-name">${cat.name}</span>
@@ -186,17 +393,42 @@
                     <span class="qz-cat-count">${posInCat}/${totalInCat}</span>
                 </div>
                 <p class="qz-q">${q.q}</p>
+                ${hintHTML}
             `;
 
-            const useGrid = (q.type === 'single' || q.type === 'multi' || q.type === 'mixed') && q.opts && shouldUseGrid(q.opts);
+            const useGrid = q.layout !== 'stack'
+                && (q.type === 'single' || q.type === 'multi' || q.type === 'mixed')
+                && q.opts && shouldUseGrid(q.opts);
             const optsClass = 'qz-opts' + (useGrid ? ' qz-opts-grid' : '');
 
+            const SOFT_PATTERN = /wei(?:ß|ss) (?:es )?nicht|keine ahnung|nicht sicher/i;
             const renderOpt = (o, i, isMulti) => {
-                const emoji = emojiFor(o);
+                // Option may be a plain string OR an object { text, emoji?, highlight? }
+                const isObj = typeof o === 'object' && o !== null;
+                const text = isObj ? o.text : o;
+                const customEmoji = isObj ? o.emoji : null;
+                const highlight = isObj ? o.highlight : null;
+
+                // Emoji: custom wins, else grid auto-emoji, else none
+                let emojiHTML = '';
+                if (customEmoji) {
+                    emojiHTML = `<span class="qz-opt-emoji" aria-hidden="true">${customEmoji}</span>`;
+                } else if (useGrid) {
+                    emojiHTML = `<span class="qz-opt-emoji" aria-hidden="true">${emojiFor(text)}</span>`;
+                }
+
+                // Inject highlight span around the accent phrase
+                let textHTML = text;
+                if (highlight) {
+                    const escapedHL = highlight.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    textHTML = text.replace(new RegExp(escapedHL), `<span class="qz-opt-highlight">${highlight}</span>`);
+                }
+
                 const multiAttr = isMulti ? ' data-multi' : '';
-                return `<button class="qz-opt"${multiAttr} data-idx="${i}">
-                    <span class="qz-opt-emoji" aria-hidden="true">${emoji}</span>
-                    <span class="qz-opt-text">${o}</span>
+                const softClass = (!useGrid && SOFT_PATTERN.test(text)) ? ' qz-opt--soft' : '';
+                return `<button class="qz-opt${softClass}"${multiAttr} data-idx="${i}">
+                    ${emojiHTML}
+                    <span class="qz-opt-text">${textHTML}</span>
                 </button>`;
             };
 
@@ -224,6 +456,68 @@
                 html += `<div class="qz-input-wrap"><textarea class="qz-input" id="qzText" placeholder="${q.placeholder || ''}"></textarea></div>`;
                 html += `<button class="qz-next" id="qzNext">Weiter</button>`;
             }
+            else if (q.type === 'scale') {
+                const optLabel = (o) => typeof o === 'object' && o !== null ? o.label : o;
+                const anySub = q.opts.some(o => typeof o === 'object' && o.sub);
+                html += `<div class="qz-scale">`;
+                html += `<div class="qz-scale-track"><div class="qz-scale-fill" id="qzScaleFill"></div>`;
+                html += `<div class="qz-scale-stops">`;
+                q.opts.forEach((o, i) => {
+                    html += `<button class="qz-scale-stop" data-idx="${i}" aria-label="${optLabel(o)}"><span class="qz-scale-dot"></span></button>`;
+                });
+                html += `</div></div>`;
+                html += `<div class="qz-scale-labels">`;
+                q.opts.forEach((o, i) => {
+                    html += `<span class="qz-scale-label" data-idx="${i}">${optLabel(o)}</span>`;
+                });
+                html += `</div>`;
+                html += `<div class="qz-scale-selection qz-scale-selection--empty" id="qzScaleSel">
+                    <div class="qz-scale-sel-kicker">Deine Auswahl</div>
+                    <div class="qz-scale-sel-name" id="qzScaleSelName">Tippe eine Option</div>
+                    ${anySub ? `<div class="qz-scale-sel-sub" id="qzScaleSelSub"></div>` : ''}
+                </div>`;
+                html += `</div>`;
+                html += `<button class="qz-next hidden">Weiter</button>`;
+            }
+            else if (q.type === 'bodytype') {
+                html += `<div class="qz-bodytypes">`;
+                q.opts.forEach((opt, i) => {
+                    html += `<button class="qz-bodytype" data-idx="${i}">
+                        <span class="qz-bt-fig">${bodyTypeImage(opt)}</span>
+                        <span class="qz-bt-label">${opt.label}</span>
+                    </button>`;
+                });
+                html += `</div>`;
+                html += `<button class="qz-next hidden">Weiter</button>`;
+            }
+            else if (q.type === 'numcards') {
+                html += `<div class="qz-numgrid">`;
+                q.opts.forEach((opt, i) => {
+                    html += `<button class="qz-numcard" data-idx="${i}">
+                        <span class="qz-numcard-num">${opt.display}</span>
+                    </button>`;
+                });
+                html += `</div>`;
+                html += `<button class="qz-next hidden">Weiter</button>`;
+            }
+            else if (q.type === 'stepcards') {
+                const total = q.opts.length;
+                html += `<div class="qz-stepcards">`;
+                q.opts.forEach((opt, i) => {
+                    let bars = '';
+                    for (let b = 1; b <= total; b++) {
+                        bars += `<span class="qz-step-bar${b <= opt.level ? ' filled' : ''}"></span>`;
+                    }
+                    const sub = opt.sub ? `<span class="qz-stepcard-sub">${opt.sub}</span>` : '';
+                    html += `<button class="qz-stepcard${opt.sub ? ' has-sub' : ''}" data-idx="${i}">
+                        <span class="qz-stepcard-bars">${bars}</span>
+                        <span class="qz-stepcard-label">${opt.label}</span>
+                        ${sub}
+                    </button>`;
+                });
+                html += `</div>`;
+                html += `<button class="qz-next hidden">Weiter</button>`;
+            }
 
             html += `
                 <div class="qz-trust">
@@ -240,8 +534,9 @@
             void container.offsetHeight;
             container.classList.add('visible');
 
-            // Update progress
-            const pct = ((idx + 2) / totalQuestions) * 100; // +2 because Q1 is done
+            // Update progress — overall, over all questions (no text counter)
+            const currentNum = idx + 2; // +2 because Q1 (gender) is done
+            const pct = (currentNum / totalQuestions) * 100;
             document.getElementById('qzProgressFill').style.width = pct + '%';
 
             // Bind events
@@ -256,27 +551,55 @@
         container.classList.add('exit');
 
         setTimeout(() => {
+            const chapterNum = String(breather.chapter || 1).padStart(2, '0');
+            const chapterLabel = `KAPITEL ${chapterNum} · ${(breather.chapterName || '').toUpperCase()}`;
+
+            // Build the main content block (new layout if points present, else fallback body HTML)
+            let contentHTML = '';
+            if (breather.points && breather.points.length) {
+                if (breather.intro) contentHTML += `<p class="qz-br-intro">${breather.intro}</p>`;
+                contentHTML += `<div class="qz-br-points">`;
+                breather.points.forEach(p => {
+                    const ico = POINT_ICONS[p.icon] || POINT_ICONS.spark;
+                    contentHTML += `<div class="qz-br-point">
+                        <span class="qz-br-point-ico">${ico}</span>
+                        <span class="qz-br-point-text">${p.text}</span>
+                    </div>`;
+                });
+                contentHTML += `</div>`;
+                if (breather.outro) contentHTML += `<p class="qz-br-outro">${breather.outro}</p>`;
+            } else {
+                contentHTML = `<div class="qz-breather-body">${breather.body || `<p>${breather.sub || ''}</p>`}</div>`;
+            }
+
             container.innerHTML = `
                 <div class="qz-breather">
-                    <div class="qz-breather-icon">✨</div>
+                    <div class="qz-breather-chapter-pill">${chapterLabel}</div>
                     <h2 class="qz-breather-title">${breather.title}</h2>
-                    <p class="qz-breather-sub">${breather.sub}</p>
+                    ${contentHTML}
+                    <button class="qz-breather-btn">${breather.cta || 'Weiter'} <span class="qz-breather-arrow">→</span></button>
                 </div>
             `;
             container.classList.remove('exit');
             void container.offsetHeight;
             container.classList.add('visible');
 
-            setTimeout(onDone, 1600);
+            const btn = container.querySelector('.qz-breather-btn');
+            if (btn) btn.addEventListener('click', onDone);
         }, 350);
     }
 
     // ── Advance to next question, possibly through a breather ──
+    let advancing = false;
     function advance(fromQId) {
+        if (advancing) return; // prevent double-advance (e.g. slider stop click + pointerup)
+        advancing = true;
         const breather = BREATHERS[fromQId];
         const next = () => {
             currentIdx++;
             renderQuestion(currentIdx);
+            // Keep guard up until the new question has fully rendered (render has 350 ms exit + paint)
+            setTimeout(() => { advancing = false; }, 700);
         };
         if (breather) {
             showBreather(breather, next);
@@ -373,6 +696,95 @@
                 const text = input ? input.value.trim() : '';
                 answers[q.id] = { selected, text };
                 advance(q.id);
+            });
+        }
+        else if (q.type === 'scale') {
+            const stops = Array.from(container.querySelectorAll('.qz-scale-stop'));
+            const labels = Array.from(container.querySelectorAll('.qz-scale-label'));
+            const fill = container.querySelector('#qzScaleFill');
+            const selCard = container.querySelector('#qzScaleSel');
+            const selName = container.querySelector('#qzScaleSelName');
+            const selSub = container.querySelector('#qzScaleSelSub');
+            const count = stops.length;
+
+            function selectIdx(i, autoAdvance) {
+                stops.forEach((s, j) => s.classList.toggle('active', j <= i));
+                stops.forEach((s, j) => s.classList.toggle('selected', j === i));
+                labels.forEach((l, j) => l.classList.toggle('active', j === i));
+                const pct = count <= 1 ? 0 : (i / (count - 1)) * 100;
+                if (fill) fill.style.width = pct + '%';
+
+                const opt = q.opts[i];
+                const optLabel = typeof opt === 'object' && opt !== null ? opt.label : opt;
+                const optSub = typeof opt === 'object' && opt !== null ? opt.sub : null;
+                if (selCard) selCard.classList.remove('qz-scale-selection--empty');
+                if (selName) selName.textContent = optLabel;
+                if (selSub) selSub.textContent = optSub || '';
+                answers[q.id] = optLabel;
+                if (autoAdvance) setTimeout(() => advance(q.id), 550);
+            }
+
+            stops.forEach((s, i) => s.addEventListener('click', () => selectIdx(i, true)));
+            labels.forEach((l, i) => l.addEventListener('click', () => selectIdx(i, true)));
+
+            // Drag support on the track
+            const track = container.querySelector('.qz-scale-track');
+            if (track) {
+                let dragging = false;
+                function idxFromEvent(e) {
+                    const rect = track.getBoundingClientRect();
+                    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
+                    const ratio = Math.max(0, Math.min(1, x / rect.width));
+                    return Math.round(ratio * (count - 1));
+                }
+                track.addEventListener('pointerdown', (e) => {
+                    dragging = true;
+                    track.setPointerCapture(e.pointerId);
+                    selectIdx(idxFromEvent(e), false);
+                });
+                track.addEventListener('pointermove', (e) => {
+                    if (!dragging) return;
+                    selectIdx(idxFromEvent(e), false);
+                });
+                track.addEventListener('pointerup', (e) => {
+                    if (!dragging) return;
+                    dragging = false;
+                    const i = idxFromEvent(e);
+                    setTimeout(() => advance(q.id), 400);
+                });
+            }
+        }
+        else if (q.type === 'bodytype') {
+            container.querySelectorAll('.qz-bodytype').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    container.querySelectorAll('.qz-bodytype').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    const idx = parseInt(btn.dataset.idx, 10);
+                    answers[q.id] = q.opts[idx].label;
+                    setTimeout(() => advance(q.id), 500);
+                });
+            });
+        }
+        else if (q.type === 'numcards') {
+            container.querySelectorAll('.qz-numcard').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    container.querySelectorAll('.qz-numcard').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    const idx = parseInt(btn.dataset.idx, 10);
+                    answers[q.id] = q.opts[idx].value;
+                    setTimeout(() => advance(q.id), 500);
+                });
+            });
+        }
+        else if (q.type === 'stepcards') {
+            container.querySelectorAll('.qz-stepcard').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    container.querySelectorAll('.qz-stepcard').forEach(b => b.classList.remove('selected'));
+                    btn.classList.add('selected');
+                    const idx = parseInt(btn.dataset.idx, 10);
+                    answers[q.id] = q.opts[idx].label;
+                    setTimeout(() => advance(q.id), 500);
+                });
             });
         }
     }
