@@ -82,7 +82,13 @@
             { text: 'Ich starte immer wieder neu',   emoji: '🔄', highlight: 'immer wieder' },
         ] },
         { id: 15, q: 'Wie fühlst du dich nach einem Rückfall?', type: 'single', opts: ['Enttäuscht', 'Beschämt', 'Machtlos', 'Frustriert', 'Leer'] },
-        { id: 16, q: 'Was hast du schon versucht?', type: 'multi', opts: ['Diäten', 'Kalorien zählen', 'Mehr Sport', 'Disziplin', 'Alles davon'] },
+        { id: 16, q: 'Was hast du schon versucht?', type: 'multi', opts: [
+            'Diäten',
+            'Kalorien zählen',
+            'Mehr Sport',
+            'Disziplin',
+            { text: 'Alles davon', emoji: '✔️', critical: true, highlight: 'Alles davon' },
+        ] },
         { id: 17, q: 'Warum hat es nie dauerhaft geklappt?', type: 'single', opts: [
             { text: 'Ich halte nicht durch',         emoji: '🪫', highlight: 'nicht durch' },
             { text: 'Ich falle immer zurück',        emoji: '📉', highlight: 'immer zurück' },
@@ -134,7 +140,7 @@
             { text: 'Selbstvertrauen',  emoji: '😔' },
             { text: 'Lebensfreude',     emoji: '🙁' },
             { text: 'Beziehungen',      emoji: '👥' },
-            { text: 'Alles davon',      emoji: '❌' },
+            { text: 'Alles davon',      emoji: '❌', critical: true, highlight: 'Alles davon' },
         ] },
         { id: 25, q: 'Was schmerzt dich am meisten?', type: 'single', opts: [
             { text: 'Keine Kontrolle zu haben',   emoji: '🌊', highlight: 'Kontrolle' },
@@ -165,7 +171,7 @@
             { text: 'Irgendwas stimmt nicht',       emoji: '❗', highlight: 'stimmt nicht' },
         ] },
         { id: 29, q: 'Bist du bereit für einen neuen Ansatz für deine Abnahme?', type: 'single', opts: [
-            { text: 'Ja, ich will das lösen', emoji: '✅', highlight: 'lösen' },
+            { text: 'Ja, ich will das lösen', emoji: '✅', highlight: 'lösen', positive: true },
             { text: 'Ich bin neugierig',      emoji: '👀', highlight: 'neugierig' },
         ] },
     ];
@@ -220,16 +226,16 @@
             chapter: 3,
             total: 3,
             chapterName: 'Dein Reset',
-            title: 'System im Dauer-<span class="qz-script">Alarmmodus</span>?',
-            intro: 'Dann fühlt sich Abnehmen wie ein ständiger Kampf an – und Willenskraft allein reicht irgendwann nicht mehr.',
+            title: 'Wenn dein Nervensystem kaum <span class="qz-script">zur Ruhe</span> kommt …',
+            intro: '… fühlt sich Abnehmen immer wie <strong>ein Kampf</strong> an:',
             points: [
-                { icon: 'downturn', text: 'Jeder Rückschlag wirft dich komplett zurück' },
-                { icon: 'question', text: 'Du zweifelst an dir und deinem Weg' },
+                { icon: 'downturn', text: 'Jeder Rückschlag wirft dich gefühlt komplett zurück' },
+                { icon: 'question', text: 'Du zweifelst an dir' },
                 { icon: 'restart',  text: 'Du weißt, was zu tun ist – setzt es aber nicht konstant um' },
             ],
-            outro: 'Gleich bekommst du deinen <span class="qz-script">Haupt-Abnehmblocker</span> schwarz auf weiß.',
-            proofText: 'bereits über 47.000 Auswertungen',
-            cta: 'Zeig mir mein Ergebnis',
+            outro: 'Gleich bekommst du deinen <span class="qz-br-outro-accent">Haupt-Abnehmblocker</span> schwarz auf weiß.',
+            trustStrip: true,
+            cta: 'Zu den letzten Fragen',
         },
     };
 
@@ -571,8 +577,8 @@
         setTimeout(() => {
             const chapterNum = breather.chapter || 1;
             const chapterLabel = chapterNum === 1
-                ? 'DEIN ZWISCHENFAZIT'
-                : `DEIN ZWISCHENFAZIT #${chapterNum}`;
+                ? 'ZWISCHENFAZIT'
+                : `ZWISCHENFAZIT <span class="qz-br-pill-num">#${chapterNum}</span>`;
 
             // Build the main content block (new layout if points present, else fallback body HTML)
             let contentHTML = '';
@@ -581,23 +587,48 @@
                 contentHTML += `<div class="qz-br-points">`;
                 breather.points.forEach(p => {
                     const ico = POINT_ICONS[p.icon] || POINT_ICONS.spark;
-                    contentHTML += `<div class="qz-br-point">
+                    const subHTML = p.sub ? `<span class="qz-br-point-sub">${p.sub}</span>` : '';
+                    contentHTML += `<div class="qz-br-point${p.sub ? ' has-sub' : ''}">
                         <span class="qz-br-point-ico">${ico}</span>
-                        <span class="qz-br-point-text">${p.text}</span>
+                        <span class="qz-br-point-body">
+                            <span class="qz-br-point-text">${p.text}</span>
+                            ${subHTML}
+                        </span>
                     </div>`;
                 });
                 contentHTML += `</div>`;
-                if (breather.outro) contentHTML += `<p class="qz-br-outro">${breather.outro}</p>`;
+                if (breather.outro) {
+                    contentHTML += `<p class="qz-br-outro">${breather.outro}</p>`;
+                }
             } else {
                 contentHTML = `<div class="qz-breather-body">${breather.body || `<p>${breather.sub || ''}</p>`}</div>`;
             }
 
-            const proofHTML = breather.proofText
-                ? `<div class="qz-br-proof">
-                    <span class="qz-br-stars">${'★'.repeat(5)}</span>
+            let proofHTML = '';
+            if (breather.trustStrip) {
+                const star = `<span class="qz-tb-star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8l-5.8 3.1 1.1-6.5L2.6 8.8l6.5-.9z"/></svg></span>`;
+                proofHTML = `<div class="qz-br-trustbanner">
+                    <div class="qz-tb-col">
+                        <div class="qz-tb-stars">${star.repeat(5)}</div>
+                        <span class="qz-tb-text">4,9/5 aus 100+ Bewertungen</span>
+                    </div>
+                    <div class="qz-tb-col">
+                        <div class="qz-tb-avatars">
+                            <div class="qz-tb-av" style="background-image:url('trafo 1.jpeg')"></div>
+                            <div class="qz-tb-av" style="background-image:url('trafo 2.jpeg')"></div>
+                            <div class="qz-tb-av" style="background-image:url('trafo 3.jpeg')"></div>
+                            <div class="qz-tb-av" style="background-image:url('trafo 4.jpeg')"></div>
+                        </div>
+                        <span class="qz-tb-sub">Bereits über <strong>10.000</strong> Teilnehmer</span>
+                    </div>
+                </div>`;
+            } else if (breather.proofText) {
+                const starsHTML = `<span class="qz-br-stars">${'★'.repeat(5)}</span>`;
+                proofHTML = `<div class="qz-br-proof">
+                    ${starsHTML}
                     <span class="qz-br-proof-text">${breather.proofText}</span>
-                </div>`
-                : '';
+                </div>`;
+            }
 
             container.innerHTML = `
                 <div class="qz-breather">
@@ -881,47 +912,135 @@
         container.classList.remove('visible');
         container.classList.add('exit');
 
-        document.getElementById('qzProgressFill').style.width = '100%';
+        const progFill = document.getElementById('qzProgressFill');
+        if (progFill) progFill.style.width = '100%';
 
         try { sessionStorage.setItem('quizAnswers', JSON.stringify(answers)); } catch(e) {}
 
         setTimeout(() => {
             container.innerHTML = `
                 <div class="qz-loading">
-                    <p class="qz-loading-title">Deine Analyse wird erstellt&hellip;</p>
-                    <div class="qz-loading-bar"><div class="qz-loading-bar-fill" id="qzLoadFill"></div></div>
-                    <p class="qz-loading-status" id="qzLoadStatus">Antworten werden analysiert&hellip;</p>
+                    <p class="qz-loading-caption">Deine persönliche Auswertung</p>
+                    <div class="qz-loading-ring">
+                        <svg class="qz-ring-svg" viewBox="0 0 200 200" aria-hidden="true">
+                            <defs>
+                                <linearGradient id="qzRingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" stop-color="#1f5d3a"/>
+                                    <stop offset="55%" stop-color="#14482c"/>
+                                    <stop offset="100%" stop-color="#e8530e"/>
+                                </linearGradient>
+                            </defs>
+                            <circle class="qz-ring-track" cx="100" cy="100" r="86"/>
+                            <circle class="qz-ring-progress" cx="100" cy="100" r="86" id="qzRingProgress"/>
+                            <circle class="qz-ring-dot" cx="100" cy="14" r="7" id="qzRingDot"/>
+                        </svg>
+                        <div class="qz-ring-decor" aria-hidden="true"></div>
+                        <div class="qz-ring-center">
+                            <div class="qz-ring-percent"><span id="qzRingPercent">0</span><span class="qz-ring-sign">%</span></div>
+                            <div class="qz-ring-label">Analyse läuft</div>
+                        </div>
+                    </div>
+                    <div class="qz-load-phase" id="qzLoadPhase">
+                        <h2 class="qz-load-title" id="qzLoadTitle">Muster werden erkannt</h2>
+                        <p class="qz-load-sub" id="qzLoadSub">Deine Antworten werden auf wiederkehrende Blockaden geprüft.</p>
+                    </div>
+                    <div class="qz-load-steps">
+                        <div class="qz-load-step" data-step="0">
+                            <span class="qz-load-step-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <span>Antwortmuster werden analysiert</span>
+                        </div>
+                        <div class="qz-load-step" data-step="1">
+                            <span class="qz-load-step-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <span>Dein Haupt-Abnehmblocker wird identifiziert</span>
+                        </div>
+                        <div class="qz-load-step" data-step="2">
+                            <span class="qz-load-step-ico"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></span>
+                            <span>Dein persönlicher Reset-Pfad wird gebaut</span>
+                        </div>
+                    </div>
                 </div>
             `;
             container.classList.remove('exit');
             void container.offsetHeight;
             container.classList.add('visible');
 
-            var fill = document.getElementById('qzLoadFill');
-            var status = document.getElementById('qzLoadStatus');
-            var steps = [
-                { pct: 35, text: 'Antworten werden analysiert\u2026', time: 0 },
-                { pct: 68, text: 'Muster werden erkannt\u2026', time: 1600 },
-                { pct: 95, text: 'Dein Abnehmprofil wird erstellt\u2026', time: 3200 },
-                { pct: 100, text: '', time: 4500 }
-            ];
+            const R = 86;
+            const CIRC = 2 * Math.PI * R;
+            const ring = document.getElementById('qzRingProgress');
+            const dot = document.getElementById('qzRingDot');
+            const pctEl = document.getElementById('qzRingPercent');
+            const titleEl = document.getElementById('qzLoadTitle');
+            const subEl = document.getElementById('qzLoadSub');
+            const phaseWrap = document.getElementById('qzLoadPhase');
+            const stepEls = container.querySelectorAll('.qz-load-step');
 
-            steps.forEach(function(s) {
-                setTimeout(function() {
-                    if (fill) fill.style.width = s.pct + '%';
-                    if (status && s.text) {
-                        status.style.opacity = '0';
-                        setTimeout(function() {
-                            status.textContent = s.text;
-                            status.style.opacity = '1';
-                        }, 200);
-                    }
-                }, s.time);
-            });
+            if (ring) {
+                ring.setAttribute('stroke-dasharray', CIRC.toFixed(2));
+                ring.setAttribute('stroke-dashoffset', CIRC.toFixed(2));
+            }
+
+            const phases = [
+                { until: 34, title: 'Muster werden erkannt', sub: 'Deine Antworten werden auf wiederkehrende Blockaden geprueft.', step: 0 },
+                { until: 72, title: 'Dein Blocker kristallisiert sich', sub: 'Wir gleichen deine Werte mit ueber 10.000 Auswertungen ab.', step: 1 },
+                { until: 95, title: 'Dein Reset-Pfad entsteht', sub: 'Ein klarer, umsetzbarer Weg \u2014 individuell auf dich zugeschnitten.', step: 2 },
+                { until: 100, title: 'Fast geschafft \u2014 du bist nah dran', sub: 'Der Weg raus aus der Blockade wird gleich sichtbar.', step: 2 }
+            ];
+            let currentPhase = -1;
+
+            function setRing(p) {
+                p = Math.max(0, Math.min(100, p));
+                if (ring) ring.setAttribute('stroke-dashoffset', (CIRC * (1 - p/100)).toFixed(2));
+                if (dot) {
+                    const a = (p/100) * 2 * Math.PI - Math.PI/2;
+                    dot.setAttribute('cx', (100 + R*Math.cos(a)).toFixed(2));
+                    dot.setAttribute('cy', (100 + R*Math.sin(a)).toFixed(2));
+                }
+                if (pctEl) pctEl.textContent = Math.round(p);
+            }
+            function setPhase(p) {
+                let idx = phases.findIndex(ph => p <= ph.until);
+                if (idx === -1) idx = phases.length - 1;
+                if (idx === currentPhase) return;
+                currentPhase = idx;
+                const ph = phases[idx];
+                if (phaseWrap) phaseWrap.classList.add('swap');
+                setTimeout(() => {
+                    if (titleEl) titleEl.textContent = ph.title;
+                    if (subEl) subEl.textContent = ph.sub;
+                    if (phaseWrap) phaseWrap.classList.remove('swap');
+                }, 280);
+                stepEls.forEach((el, i) => {
+                    el.classList.remove('active', 'done');
+                    if (i < ph.step) el.classList.add('done');
+                    else if (i === ph.step) el.classList.add('active');
+                });
+            }
+
+            const DURATION = 5200;
+            const startTime = performance.now();
+            function tick(now) {
+                const t = Math.min(1, (now - startTime) / DURATION);
+                const eased = 1 - Math.pow(1 - t, 2.2);
+                const p = eased * 100;
+                setRing(p);
+                setPhase(p);
+                if (t < 1) requestAnimationFrame(tick);
+                else {
+                    setRing(100);
+                    stepEls.forEach(el => { el.classList.remove('active'); el.classList.add('done'); });
+                    if (phaseWrap) phaseWrap.classList.add('swap');
+                    setTimeout(() => {
+                        if (titleEl) titleEl.textContent = 'Deine Analyse ist bereit';
+                        if (subEl) subEl.textContent = 'Gleich siehst du, was dich bisher blockiert hat.';
+                        if (phaseWrap) phaseWrap.classList.remove('swap');
+                    }, 280);
+                }
+            }
+            requestAnimationFrame(tick);
 
             setTimeout(function() {
                 window.location.href = 'result.html';
-            }, 5000);
+            }, 5800);
         }, 350);
     }
 

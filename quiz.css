@@ -302,9 +302,12 @@ html.quiz-active body {
 .qz-opt--positive .qz-opt-highlight {
     color: #2a5a3a;
 }
+.qz-opt--positive {
+    background: rgba(42,90,58,0.035);
+}
 .qz-opt--positive.selected {
     border-color: #2a5a3a;
-    background: rgba(42,90,58,0.06);
+    background: rgba(42,90,58,0.08);
     box-shadow: 0 0 0 3px rgba(42,90,58,0.14), 0 8px 22px rgba(42,90,58,0.16);
 }
 .qz-opt--positive:hover {
@@ -325,6 +328,11 @@ html.quiz-active body {
     border-color: #c32b1f;
     background: rgba(223,3,28,0.05);
     box-shadow: 0 0 0 3px rgba(195,43,31,0.14), 0 8px 22px rgba(195,43,31,0.16);
+}
+/* Black check-badge on selected critical multi option */
+.qz-opt--critical[data-multi].selected::after {
+    background: #1e1c1a;
+    box-shadow: 0 2px 6px rgba(30,28,26,0.35);
 }
 
 /* Soft variant for "don't know" / uncertain answers — grayer + italic */
@@ -477,7 +485,7 @@ html.quiz-active body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 22px;
+    gap: 18px;
     padding: 12px 20px 28px;
     text-align: center;
     max-width: 620px;
@@ -591,7 +599,8 @@ html.quiz-active body {
     align-items: center;
     justify-content: center;
     gap: 12px;
-    margin-top: 6px;
+    margin-top: 16px;
+    flex-wrap: wrap;
 }
 .qz-br-stars {
     color: #e8b83e;
@@ -599,29 +608,118 @@ html.quiz-active body {
     letter-spacing: 0.12em;
     line-height: 1;
 }
+.qz-br-stars--tp {
+    display: inline-flex;
+    gap: 3px;
+}
+.qz-br-star-sq {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: #00b67a;
+    color: #fff;
+    border-radius: 2px;
+}
+.qz-br-star-sq svg { width: 13px; height: 13px; }
 .qz-br-proof-text {
     font-family: 'Instrument Sans', sans-serif;
     font-size: 0.92rem;
-    color: #7a7568;
+    color: #5c5650;
     font-weight: 500;
 }
+.qz-br-proof-text strong { color: #1e1c1a; font-weight: 700; }
 
-/* Outro — upright sans-serif bold, only accent word stays italic serif */
+/* Point card optional subtitle */
+.qz-br-point-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
+    min-width: 0;
+}
+.qz-br-point-sub {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.85rem;
+    color: #7a7568;
+    font-weight: 500;
+    line-height: 1.35;
+}
+
+/* Trust banner below outro — compact, matches result-page style */
+.qz-br-trustbanner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 10px auto 0;
+    padding: 8px 16px;
+}
+.qz-tb-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+.qz-tb-stars { display: flex; gap: 2px; }
+.qz-tb-star {
+    width: 14px; height: 14px;
+    background: #00b67a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+}
+.qz-tb-star svg { width: 8px; height: 8px; fill: #fff; }
+.qz-tb-text {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: #5c5650;
+}
+.qz-tb-avatars { display: flex; }
+.qz-tb-av {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 1.5px solid #f6f4f1;
+    margin-left: -7px;
+    background-size: cover;
+    background-position: center;
+}
+.qz-tb-av:first-child { margin-left: 0; }
+.qz-tb-sub {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.7rem;
+    color: #9b938a;
+}
+.qz-tb-sub strong { color: #1e1c1a; font-weight: 700; }
+
+/* Outro — flowing serif sentence on page bg, only accent stays orange italic */
 .qz-br-outro {
-    font-family: 'Plus Jakarta Sans', sans-serif !important;
-    font-weight: 800 !important;
-    font-style: normal !important;
-    font-size: clamp(1.1rem, 2.6vw, 1.3rem);
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: clamp(1.2rem, 3vw, 1.5rem);
     color: #1e1c1a;
     line-height: 1.35;
-    margin: 8px 0 0;
-    max-width: 560px;
-    letter-spacing: -0.02em;
+    letter-spacing: -0.015em;
+    margin: 6px auto 0;
+    max-width: 520px;
+    text-align: center;
+    padding: 0 6px;
+}
+.qz-br-outro-accent {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-weight: 700;
+    color: #e8530e;
 }
 .qz-br-outro .qz-script {
-    /* accent word keeps orange italic serif */
-    font-family: 'Playfair Display', Georgia, serif !important;
-    font-style: italic !important;
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    color: #e8530e;
 }
 
 .qz-breather-sub {
@@ -669,7 +767,7 @@ html.quiz-active body {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    margin-top: 14px;
+    margin-top: 6px;
     padding: 17px 38px;
     background: linear-gradient(135deg, #e8530e, #DF031C);
     color: #fff;
@@ -1187,65 +1285,213 @@ html.quiz-active body {
     line-height: 1.3;
 }
 
-/* ── Loading screen ── */
-
+/* ── Loading screen — Ring analysis ── */
 .qz-loading {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 28px;
-    max-width: 400px;
+    gap: 24px;
+    max-width: 520px;
     margin: 0 auto;
-}
-
-.qz-loading-title {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1.25rem;
-    font-weight: 700;
-    color: #1e1c1a;
-    text-align: center;
-}
-
-.qz-loading-bar {
     width: 100%;
-    height: 6px;
-    background: rgba(30,28,26,0.06);
-    border-radius: 100px;
-    overflow: hidden;
-    position: relative;
 }
 
-.qz-loading-bar-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #1F3D2B, #2a5a38);
-    border-radius: 100px;
-    transition: width 0.3s ease;
-    position: relative;
+.qz-loading-caption {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-style: italic;
+    font-size: 0.98rem;
+    color: #7a7568;
+    margin: 0;
+    letter-spacing: 0.02em;
 }
 
-/* Shimmer on the fill */
-.qz-loading-bar-fill::after {
+.qz-loading-ring {
+    position: relative;
+    width: min(320px, 72vw);
+    aspect-ratio: 1;
+    margin: 8px auto;
+}
+.qz-ring-svg {
+    width: 100%; height: 100%;
+    transform: rotate(-90deg);
+    overflow: visible;
+}
+.qz-ring-track {
+    fill: none;
+    stroke: rgba(14,42,27,0.08);
+    stroke-width: 6;
+}
+.qz-ring-progress {
+    fill: none;
+    stroke: url(#qzRingGradient);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset .35s ease-out;
+    filter: drop-shadow(0 2px 6px rgba(14,42,27,0.25));
+}
+.qz-ring-dot {
+    fill: #fff;
+    stroke: #14482c;
+    stroke-width: 2.5;
+    filter: drop-shadow(0 2px 8px rgba(14,42,27,0.35));
+}
+.qz-ring-decor {
+    position: absolute;
+    inset: 14px;
+    border-radius: 50%;
+    border: 1px dashed rgba(14,42,27,0.12);
+    animation: qzRingRotate 24s linear infinite;
+}
+.qz-ring-decor::before,
+.qz-ring-decor::after {
     content: '';
     position: absolute;
-    top: 0; left: -40%;
-    width: 30%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-    animation: loadShimmer 1.5s ease-in-out infinite;
+    width: 6px; height: 6px;
+    background: #e8530e;
+    border-radius: 50%;
+    top: -3px; left: 50%;
+    transform: translateX(-50%);
 }
-
-@keyframes loadShimmer {
-    0% { left: -40%; }
-    100% { left: 140%; }
+.qz-ring-decor::after {
+    top: auto; bottom: -3px;
+    background: #14482c;
 }
+@keyframes qzRingRotate { to { transform: rotate(360deg); } }
 
-.qz-loading-status {
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 0.82rem;
-    color: #9b938a;
+.qz-ring-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
-    min-height: 1.2em;
-    transition: opacity 0.3s ease;
+}
+.qz-ring-percent {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(56px, 15vw, 84px);
+    line-height: 1;
+    color: #14482c;
+    letter-spacing: -0.04em;
+    display: flex;
+    align-items: flex-start;
+}
+.qz-ring-sign {
+    font-size: 0.42em;
+    margin-top: 0.6em;
+    margin-left: 4px;
+    color: #e8530e;
+    font-weight: 700;
+    letter-spacing: 0;
+}
+.qz-ring-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #7a7568;
+    margin-top: 6px;
+}
+
+.qz-load-phase {
+    min-height: 72px;
+    text-align: center;
+    margin: 0;
+    max-width: 440px;
+}
+.qz-load-title {
+    font-family: 'Playfair Display', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(1.3rem, 4.5vw, 1.7rem);
+    line-height: 1.2;
+    color: #1e1c1a;
+    letter-spacing: -0.015em;
+    margin: 0 0 8px;
+    transition: opacity .4s ease, transform .4s ease;
+}
+.qz-load-sub {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.95rem;
+    color: #7a7568;
+    font-weight: 400;
+    margin: 0;
+    line-height: 1.45;
+    transition: opacity .4s ease, transform .4s ease;
+}
+.qz-load-phase.swap .qz-load-title,
+.qz-load-phase.swap .qz-load-sub {
+    opacity: 0;
+    transform: translateY(6px);
+}
+
+.qz-load-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 420px;
+    margin-top: 12px;
+}
+.qz-load-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.55);
+    border: 1px solid rgba(14,42,27,0.08);
+    border-radius: 12px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.92rem;
+    color: #3d3d38;
+    font-weight: 500;
+    opacity: 0.5;
+    transition: all .35s ease;
+}
+.qz-load-step.active {
+    opacity: 1;
+    background: #fff;
+    color: #1e1c1a;
+    border-color: rgba(14,42,27,0.18);
+    box-shadow: 0 2px 8px rgba(20,20,15,0.05);
+}
+.qz-load-step.done { opacity: 0.78; }
+
+.qz-load-step-ico {
+    flex-shrink: 0;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: rgba(14,42,27,0.08);
+    display: grid;
+    place-items: center;
+    color: transparent;
+    transition: all .3s ease;
+}
+.qz-load-step.active .qz-load-step-ico {
+    background: transparent;
+    border: 2px solid #14482c;
+    animation: qzLoadPulse 1.2s ease-in-out infinite;
+}
+.qz-load-step.done .qz-load-step-ico {
+    background: #14482c;
+    color: #fff;
+    border: none;
+    animation: none;
+}
+.qz-load-step-ico svg {
+    width: 13px; height: 13px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 3;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    opacity: 0;
+}
+.qz-load-step.done .qz-load-step-ico svg { opacity: 1; }
+@keyframes qzLoadPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(20,72,44,0.35); }
+    50%      { box-shadow: 0 0 0 6px rgba(20,72,44,0); }
 }
 
 /* ── Responsive ── */
@@ -1322,7 +1568,7 @@ html.quiz-active body {
     /* Scale on mobile */
     .qz-scale { max-width: 100%; padding: 8px 4px 4px; gap: 14px; }
     .qz-scale-instruction { font-size: 0.88rem; }
-    .qz-scale-track { margin: 0 22px; height: 52px; }
+    .qz-scale-track { margin: 0 46px; height: 52px; }  /* more room so tooltip never clips */
     .qz-scale-track::before { height: 7px; }
     .qz-scale-fill { height: 7px; }
     .qz-scale-label { font-size: 0.82rem; }
@@ -1330,7 +1576,17 @@ html.quiz-active body {
     .qz-scale-dot { width: 10px; height: 10px; }
     .qz-scale-thumb { width: 40px; height: 40px; border-width: 3px; }
     .qz-scale-thumb-grip { width: 12px; height: 12px; }
-    .qz-scale-thumb-tip { font-size: 0.66rem; padding: 5px 10px; }
+    .qz-scale-thumb-tip {
+        font-size: 0.62rem;
+        padding: 4px 9px;
+        letter-spacing: 0.06em;
+    }
+    .qz-scale-thumb-tip svg { width: 10px; height: 10px; }
+
+    /* Labels aligned under stops, match the new indented track */
+    .qz-scale-labels {
+        padding: 0 46px;
+    }
 
     /* Body types on mobile — 2x2 */
     .qz-bodytypes { gap: 10px; grid-template-columns: repeat(2, 1fr); }
