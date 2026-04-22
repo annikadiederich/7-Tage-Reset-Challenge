@@ -38,7 +38,7 @@
             { text: 'Ich kann Essen nicht mehr entspannt genießen',        emoji: '😣', highlight: 'nicht mehr entspannt' },
             { text: 'Ich kontrolliere mein Essen ständig',                 emoji: '🔒', highlight: 'kontrolliere' },
             { text: 'Ich schwanke zwischen Kontrolle und Aufgeben',        emoji: '🔄', highlight: 'Kontrolle und Aufgeben' },
-            { text: 'Alles davon',                                         emoji: '🎯', highlight: 'Alles' },
+            { text: 'Alles davon',                                         emoji: '🎯', highlight: 'Alles davon', critical: true },
         ] },
         { id: 8, q: 'Wann verlierst du am ehesten die Kontrolle beim Essen?', type: 'single', opts: ['Abends', 'Nach Stress', 'Bei Emotionen', 'Über den ganzen Tag', 'Eigentlich nie'] },
         { id: 9, q: 'Was passiert dann?', type: 'single', opts: [
@@ -46,7 +46,7 @@
             { text: 'Ich greife zu Süßem',            emoji: '🍬', highlight: 'Süßem' },
             { text: 'Ich kann nicht aufhören',        emoji: '🛑', highlight: 'nicht aufhören' },
             { text: 'Ich fühle mich danach schlecht', emoji: '😔', highlight: 'schlecht' },
-            { text: 'Alles davon',                    emoji: '🎯', highlight: 'Alles' },
+            { text: 'Alles davon',                    emoji: '🎯', highlight: 'Alles davon', critical: true },
         ] },
         { id: 10, q: 'Wie oft passiert das?', type: 'stepcards', opts: [
             { label: 'Selten', sub: 'Ein paar Mal im Monat', level: 1 },
@@ -108,7 +108,7 @@
             { text: 'Verliere den Glauben an mich',    emoji: '📉', highlight: 'Glauben' },
             { text: 'Ziehe mich zurück',               emoji: '🙈', highlight: 'zurück' },
             { text: 'Kompensiere über Essen',          emoji: '🍩', highlight: 'über Essen' },
-            { text: 'Bleibe entspannt',                emoji: '🌿', highlight: 'entspannt' },
+            { text: 'Bleibe entspannt',                emoji: '🌿', highlight: 'entspannt', positive: true },
         ] },
         { id: 21, q: 'Bringen dich kleine Rückschläge schnell aus der Bahn?', type: 'scale', opts: [
             { label: 'Eher nicht', sub: 'Ich bleibe stabil' },
@@ -126,10 +126,16 @@
         { id: 23, q: 'Wo stehst du in 6 Monaten, wenn sich nichts ändert?', type: 'single', opts: [
             { text: 'Am gleichen Punkt',        emoji: '📍', highlight: 'gleichen Punkt' },
             { text: 'Noch frustrierter',        emoji: '😤', highlight: 'frustrierter' },
-            { text: 'Mit mehr Gewicht',         emoji: '⚖️', highlight: 'mehr Gewicht' },
-            { text: 'Will ich nicht dran denken', emoji: '🙈', highlight: 'nicht dran denken' },
+            { text: 'Mit mehr Gewicht',         emoji: '📈', highlight: 'mehr Gewicht' },
+            { text: 'Will ich nicht dran denken', emoji: '❌', highlight: 'nicht dran denken' },
         ] },
-        { id: 24, q: 'Was kostet dich die Situation gerade?', type: 'multi', opts: ['Energie', 'Selbstvertrauen', 'Lebensfreude', 'Beziehungen', 'Alles davon'] },
+        { id: 24, q: 'Was kostet dich die Situation gerade?', type: 'single', opts: [
+            { text: 'Energie',          emoji: '🪫' },
+            { text: 'Selbstvertrauen',  emoji: '😔' },
+            { text: 'Lebensfreude',     emoji: '🙁' },
+            { text: 'Beziehungen',      emoji: '👥' },
+            { text: 'Alles davon',      emoji: '❌' },
+        ] },
         { id: 25, q: 'Was schmerzt dich am meisten?', type: 'single', opts: [
             { text: 'Keine Kontrolle zu haben',   emoji: '🌊', highlight: 'Kontrolle' },
             { text: 'Mich immer zu enttäuschen',  emoji: '😔', highlight: 'enttäuschen' },
@@ -137,21 +143,20 @@
             { text: 'Nicht frei zu sein',         emoji: '⛓️', highlight: 'frei' },
             { text: 'Nicht an mich zu glauben',   emoji: '💔', highlight: 'glauben' },
         ] },
-        { id: 26, q: 'Was wünschst du dir stattdessen?', type: 'mixed', opts: [
+        { id: 26, q: 'Was wünschst du dir stattdessen?', type: 'multi', opts: [
             { text: 'Ruhe im Kopf',                         emoji: '🧘‍♀️', highlight: 'Ruhe' },
             { text: 'Kontrolle über mein Essen',            emoji: '🎯', highlight: 'Kontrolle' },
             { text: 'Dauerhaft abnehmen',                   emoji: '⚖️', highlight: 'Dauerhaft' },
-            { text: 'Mich wieder wohlfühlen',               emoji: '🌿', highlight: 'wohlfühlen' },
             { text: 'Mit Selbstvertrauen ich selbst sein',  emoji: '💪', highlight: 'Selbstvertrauen' },
             { text: 'Leichtigkeit',                         emoji: '✨', highlight: 'Leichtigkeit' },
-        ], placeholder: 'Oder in eigenen Worten' },
-        { id: 27, q: 'Was belastet dich gerade am meisten?', type: 'mixed', opts: [
+        ] },
+        { id: 27, q: 'Was belastet dich gerade am meisten?', type: 'multi', opts: [
             { text: 'Heißhunger & Kontrollverlust',    emoji: '🔥', highlight: 'Kontrollverlust' },
             { text: 'Gewicht verändert sich nicht',    emoji: '⚖️', highlight: 'nicht' },
             { text: 'Essen ist ständig im Kopf',       emoji: '🧠', highlight: 'ständig' },
             { text: 'Ich verliere Vertrauen in mich',  emoji: '💔', highlight: 'Vertrauen' },
             { text: 'Ich fühle mich nicht wohl',       emoji: '😔', highlight: 'nicht wohl' },
-        ], placeholder: 'Oder in eigenen Worten' },
+        ] },
         { id: 28, q: 'Was ist dir durch die Fragen bewusst geworden?', type: 'single', opts: [
             { text: 'So kann es nicht weitergehen', emoji: '🚦', highlight: 'nicht weitergehen' },
             { text: 'Mein Problem liegt tiefer',    emoji: '🔍', highlight: 'tiefer' },
@@ -162,7 +167,6 @@
         { id: 29, q: 'Bist du bereit für einen neuen Ansatz für deine Abnahme?', type: 'single', opts: [
             { text: 'Ja, ich will das lösen', emoji: '✅', highlight: 'lösen' },
             { text: 'Ich bin neugierig',      emoji: '👀', highlight: 'neugierig' },
-            { text: 'Noch skeptisch',         emoji: '🤨', highlight: 'skeptisch' },
         ] },
     ];
 
@@ -188,7 +192,7 @@
             total: 3,
             chapterName: 'Basis-Check',
             title: 'Du bist nicht <span class="qz-script">allein</span>.',
-            intro: 'Viele Frauen in deinem Alter erleben gerade genau das — und glauben, sie wären die Einzigen.',
+            intro: 'Viele Frauen in deinem Alter erleben gerade genau das:',
             points: [
                 { icon: 'head',   text: 'Der Kopf ist voll mit Essen und Abnehmen' },
                 { icon: 'guilt',  text: 'Schlechtes Gewissen nach dem Essen' },
@@ -217,13 +221,14 @@
             total: 3,
             chapterName: 'Dein Reset',
             title: 'System im Dauer-<span class="qz-script">Alarmmodus</span>?',
-            intro: 'Dann fühlt sich Abnehmen immer wie ein Kampf an — und Willenskraft reicht nicht mehr aus.',
+            intro: 'Dann fühlt sich Abnehmen wie ein ständiger Kampf an – und Willenskraft allein reicht irgendwann nicht mehr.',
             points: [
-                { icon: 'swirl', text: 'Jeder Rückschlag wirft dich gefühlt komplett zurück' },
-                { icon: 'heart', text: 'Du zweifelst an dir und deinem Weg' },
-                { icon: 'spark', text: 'Du weißt, was zu tun ist — setzt es aber nicht konstant um' },
+                { icon: 'downturn', text: 'Jeder Rückschlag wirft dich komplett zurück' },
+                { icon: 'question', text: 'Du zweifelst an dir und deinem Weg' },
+                { icon: 'restart',  text: 'Du weißt, was zu tun ist – setzt es aber nicht konstant um' },
             ],
-            outro: 'Im Ergebnis bekommst du deinen <span class="qz-script">Haupt-Abnehmblocker</span> schwarz auf weiß.',
+            outro: 'Gleich bekommst du deinen <span class="qz-script">Haupt-Abnehmblocker</span> schwarz auf weiß.',
+            proofText: 'bereits über 47.000 Auswertungen',
             cta: 'Zeig mir mein Ergebnis',
         },
     };
@@ -250,17 +255,24 @@
         </svg>`
     };
 
-    // Emojis for breather point cards
+    // Line-style SVG icons for breather point cards — peach tinted badge
     const POINT_ICONS = {
-        head:  '🧠',
-        guilt: '😔',
-        spark: '💡',
-        swirl: '🌀',
-        gear:  '⚙️',
-        moon:  '🌙',
-        fire:  '🔥',
-        heart: '💗',
-        target: '🎯',
+        // Breather 1
+        head: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M8 5c-2 0-4 1.5-4 3.8 0 1-.8 1.7-1.2 2.8-.5 1.5.3 2.9 1.7 3.3-.2 1.9 1.2 3.6 3 3.8.5 1.4 2 2.3 3.5 2.3 1.8 0 3.3-1.3 3.5-3 1.9-.2 3.3-1.9 3.1-3.8 1.4-.4 2.2-1.8 1.7-3.3-.4-1.1-1.2-1.8-1.2-2.8C18 6.5 16 5 14 5c-.8 0-1.5.3-2 .7-.5-.4-1.2-.7-2-.7-.8 0-1.5.3-2 .7-.5-.4-1.2-.7-2-.7z"/><path d="M12 6v12"/></svg>`,
+        guilt: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M8 16 Q 12 13 16 16"/><circle cx="9" cy="10" r="0.9" fill="currentColor" stroke="none"/><circle cx="15" cy="10" r="0.9" fill="currentColor" stroke="none"/></svg>`,
+        spark: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6"/><path d="M10 21.5h4"/><path d="M12 2a7 7 0 0 0-4 12.5c.9.8 1 1.9 1 2.5h6c0-.6.1-1.7 1-2.5A7 7 0 0 0 12 2z"/></svg>`,
+        // Breather 2
+        swirl: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-18 0 6 6 0 0 1 12 0 3 3 0 0 1-6 0"/></svg>`,
+        gear: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3.2"/><path d="M12 3v3M12 18v3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M3 12h3M18 12h3M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1"/></svg>`,
+        moon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>`,
+        // Breather 3
+        downturn: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 6 3-3 9 9"/><path d="M21 19v-5"/><path d="M21 19h-5"/></svg>`,
+        question: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.5 9.2a2.5 2.5 0 0 1 5 0c0 1.7-2.5 2-2.5 3.8"/><circle cx="12" cy="17" r="0.9" fill="currentColor" stroke="none"/></svg>`,
+        restart: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 3-6.7"/><path d="M3 4v5h5"/></svg>`,
+        // Extras
+        fire: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2s4 4 4 8a4 4 0 0 1-8 0c0-2 1-3 1-3s-5 2-5 7a8 8 0 0 0 16 0c0-6-8-12-8-12z"/></svg>`,
+        heart: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.5-7-10a4 4 0 0 1 7-2.5A4 4 0 0 1 19 10c0 5.5-7 10-7 10z"/></svg>`,
+        target: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/></svg>`,
     };
 
     // ── Emoji mapping by keyword (first match in option text wins) ──
@@ -403,11 +415,13 @@
 
             const SOFT_PATTERN = /wei(?:ß|ss) (?:es )?nicht|keine ahnung|nicht sicher/i;
             const renderOpt = (o, i, isMulti) => {
-                // Option may be a plain string OR an object { text, emoji?, highlight? }
+                // Option may be a plain string OR an object { text, emoji?, highlight?, positive?, critical? }
                 const isObj = typeof o === 'object' && o !== null;
                 const text = isObj ? o.text : o;
                 const customEmoji = isObj ? o.emoji : null;
                 const highlight = isObj ? o.highlight : null;
+                const positive = isObj ? o.positive : false;
+                const critical = isObj ? o.critical : false;
 
                 // Emoji: custom wins, else grid auto-emoji, else none
                 let emojiHTML = '';
@@ -426,7 +440,9 @@
 
                 const multiAttr = isMulti ? ' data-multi' : '';
                 const softClass = (!useGrid && SOFT_PATTERN.test(text)) ? ' qz-opt--soft' : '';
-                return `<button class="qz-opt${softClass}"${multiAttr} data-idx="${i}">
+                const posClass = positive ? ' qz-opt--positive' : '';
+                const critClass = critical ? ' qz-opt--critical' : '';
+                return `<button class="qz-opt${softClass}${posClass}${critClass}"${multiAttr} data-idx="${i}">
                     ${emojiHTML}
                     <span class="qz-opt-text">${textHTML}</span>
                 </button>`;
@@ -458,24 +474,26 @@
             }
             else if (q.type === 'scale') {
                 const optLabel = (o) => typeof o === 'object' && o !== null ? o.label : o;
-                const anySub = q.opts.some(o => typeof o === 'object' && o.sub);
+                const arrowSVG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>`;
                 html += `<div class="qz-scale">`;
-                html += `<div class="qz-scale-track"><div class="qz-scale-fill" id="qzScaleFill"></div>`;
-                html += `<div class="qz-scale-stops">`;
+                html += `<p class="qz-scale-instruction">Ziehe den Regler zu deiner Antwort <span class="qz-scale-instr-arrow">${arrowSVG}</span></p>`;
+                html += `<div class="qz-scale-track" id="qzScaleTrack">
+                    <div class="qz-scale-fill" id="qzScaleFill"></div>
+                    <div class="qz-scale-stops">`;
                 q.opts.forEach((o, i) => {
-                    html += `<button class="qz-scale-stop" data-idx="${i}" aria-label="${optLabel(o)}"><span class="qz-scale-dot"></span></button>`;
+                    html += `<div class="qz-scale-stop" data-idx="${i}"><span class="qz-scale-dot"></span></div>`;
                 });
-                html += `</div></div>`;
+                html += `</div>
+                    <div class="qz-scale-thumb qz-scale-thumb--hint" id="qzScaleThumb">
+                        <span class="qz-scale-thumb-grip"></span>
+                        <span class="qz-scale-thumb-tip" id="qzScaleThumbTip">Ziehen ${arrowSVG}</span>
+                    </div>
+                </div>`;
                 html += `<div class="qz-scale-labels">`;
                 q.opts.forEach((o, i) => {
-                    html += `<span class="qz-scale-label" data-idx="${i}">${optLabel(o)}</span>`;
+                    html += `<button class="qz-scale-label${i === 0 ? ' active' : ''}" data-idx="${i}">${optLabel(o)}</button>`;
                 });
                 html += `</div>`;
-                html += `<div class="qz-scale-selection qz-scale-selection--empty" id="qzScaleSel">
-                    <div class="qz-scale-sel-kicker">Deine Auswahl</div>
-                    <div class="qz-scale-sel-name" id="qzScaleSelName">Tippe eine Option</div>
-                    ${anySub ? `<div class="qz-scale-sel-sub" id="qzScaleSelSub"></div>` : ''}
-                </div>`;
                 html += `</div>`;
                 html += `<button class="qz-next hidden">Weiter</button>`;
             }
@@ -509,7 +527,7 @@
                         bars += `<span class="qz-step-bar${b <= opt.level ? ' filled' : ''}"></span>`;
                     }
                     const sub = opt.sub ? `<span class="qz-stepcard-sub">${opt.sub}</span>` : '';
-                    html += `<button class="qz-stepcard${opt.sub ? ' has-sub' : ''}" data-idx="${i}">
+                    html += `<button class="qz-stepcard${opt.sub ? ' has-sub' : ''}" data-idx="${i}" data-level="${opt.level}">
                         <span class="qz-stepcard-bars">${bars}</span>
                         <span class="qz-stepcard-label">${opt.label}</span>
                         ${sub}
@@ -551,8 +569,10 @@
         container.classList.add('exit');
 
         setTimeout(() => {
-            const chapterNum = String(breather.chapter || 1).padStart(2, '0');
-            const chapterLabel = `KAPITEL ${chapterNum} · ${(breather.chapterName || '').toUpperCase()}`;
+            const chapterNum = breather.chapter || 1;
+            const chapterLabel = chapterNum === 1
+                ? 'DEIN ZWISCHENFAZIT'
+                : `DEIN ZWISCHENFAZIT #${chapterNum}`;
 
             // Build the main content block (new layout if points present, else fallback body HTML)
             let contentHTML = '';
@@ -572,11 +592,19 @@
                 contentHTML = `<div class="qz-breather-body">${breather.body || `<p>${breather.sub || ''}</p>`}</div>`;
             }
 
+            const proofHTML = breather.proofText
+                ? `<div class="qz-br-proof">
+                    <span class="qz-br-stars">${'★'.repeat(5)}</span>
+                    <span class="qz-br-proof-text">${breather.proofText}</span>
+                </div>`
+                : '';
+
             container.innerHTML = `
                 <div class="qz-breather">
                     <div class="qz-breather-chapter-pill">${chapterLabel}</div>
                     <h2 class="qz-breather-title">${breather.title}</h2>
                     ${contentHTML}
+                    ${proofHTML}
                     <button class="qz-breather-btn">${breather.cta || 'Weiter'} <span class="qz-breather-arrow">→</span></button>
                 </div>
             `;
@@ -702,57 +730,115 @@
             const stops = Array.from(container.querySelectorAll('.qz-scale-stop'));
             const labels = Array.from(container.querySelectorAll('.qz-scale-label'));
             const fill = container.querySelector('#qzScaleFill');
-            const selCard = container.querySelector('#qzScaleSel');
-            const selName = container.querySelector('#qzScaleSelName');
-            const selSub = container.querySelector('#qzScaleSelSub');
+            const thumb = container.querySelector('#qzScaleThumb');
+            const track = container.querySelector('#qzScaleTrack');
             const count = stops.length;
+            let hasInteracted = false;
+            let wiggleTimer = null;
+            let wiggleInterval = null;
 
-            function selectIdx(i, autoAdvance) {
+            // Initial state: thumb at position 0, labels[0] active
+            setVisual(0, true);
+
+            function markInteracted() {
+                if (hasInteracted) return;
+                hasInteracted = true;
+                if (thumb) {
+                    thumb.classList.remove('qz-scale-thumb--hint', 'qz-scale-thumb--wiggle');
+                    thumb.classList.add('qz-scale-thumb--touched');
+                }
+                if (wiggleTimer) { clearTimeout(wiggleTimer); wiggleTimer = null; }
+                if (wiggleInterval) { clearInterval(wiggleInterval); wiggleInterval = null; }
+            }
+
+            function setVisual(i, instant) {
+                const pct = count <= 1 ? 0 : (i / (count - 1)) * 100;
+                if (fill) fill.style.width = pct + '%';
+                if (thumb) {
+                    thumb.style.left = pct + '%';
+                    if (instant) thumb.classList.add('qz-scale-thumb--instant');
+                    else thumb.classList.remove('qz-scale-thumb--instant');
+                }
                 stops.forEach((s, j) => s.classList.toggle('active', j <= i));
                 stops.forEach((s, j) => s.classList.toggle('selected', j === i));
                 labels.forEach((l, j) => l.classList.toggle('active', j === i));
-                const pct = count <= 1 ? 0 : (i / (count - 1)) * 100;
-                if (fill) fill.style.width = pct + '%';
+            }
 
+            function setContinuousVisual(ratio) {
+                const pct = Math.max(0, Math.min(1, ratio)) * 100;
+                if (fill) fill.style.width = pct + '%';
+                if (thumb) {
+                    thumb.classList.add('qz-scale-thumb--instant');
+                    thumb.style.left = pct + '%';
+                }
+                const nearest = Math.round(ratio * (count - 1));
+                stops.forEach((s, j) => s.classList.toggle('active', j <= nearest));
+                stops.forEach((s, j) => s.classList.toggle('selected', j === nearest));
+                labels.forEach((l, j) => l.classList.toggle('active', j === nearest));
+            }
+
+            function commit(i, autoAdvance) {
+                setVisual(i, false);
                 const opt = q.opts[i];
                 const optLabel = typeof opt === 'object' && opt !== null ? opt.label : opt;
-                const optSub = typeof opt === 'object' && opt !== null ? opt.sub : null;
-                if (selCard) selCard.classList.remove('qz-scale-selection--empty');
-                if (selName) selName.textContent = optLabel;
-                if (selSub) selSub.textContent = optSub || '';
                 answers[q.id] = optLabel;
                 if (autoAdvance) setTimeout(() => advance(q.id), 550);
             }
 
-            stops.forEach((s, i) => s.addEventListener('click', () => selectIdx(i, true)));
-            labels.forEach((l, i) => l.addEventListener('click', () => selectIdx(i, true)));
+            function ratioFromEvent(e) {
+                const rect = track.getBoundingClientRect();
+                const clientX = e.clientX !== undefined ? e.clientX : (e.touches && e.touches[0] ? e.touches[0].clientX : 0);
+                const x = clientX - rect.left;
+                return Math.max(0, Math.min(1, x / rect.width));
+            }
 
-            // Drag support on the track
-            const track = container.querySelector('.qz-scale-track');
+            // Label click: jump + commit + advance
+            labels.forEach((l, i) => l.addEventListener('click', () => {
+                markInteracted();
+                commit(i, true);
+            }));
+
+            // Track: handles tap + drag
             if (track) {
                 let dragging = false;
-                function idxFromEvent(e) {
-                    const rect = track.getBoundingClientRect();
-                    const x = (e.touches ? e.touches[0].clientX : e.clientX) - rect.left;
-                    const ratio = Math.max(0, Math.min(1, x / rect.width));
-                    return Math.round(ratio * (count - 1));
-                }
+
                 track.addEventListener('pointerdown', (e) => {
+                    e.preventDefault();
                     dragging = true;
-                    track.setPointerCapture(e.pointerId);
-                    selectIdx(idxFromEvent(e), false);
+                    markInteracted();
+                    if (thumb) thumb.classList.add('qz-scale-thumb--dragging');
+                    try { track.setPointerCapture(e.pointerId); } catch(_) {}
+                    setContinuousVisual(ratioFromEvent(e));
                 });
                 track.addEventListener('pointermove', (e) => {
                     if (!dragging) return;
-                    selectIdx(idxFromEvent(e), false);
+                    setContinuousVisual(ratioFromEvent(e));
                 });
                 track.addEventListener('pointerup', (e) => {
                     if (!dragging) return;
                     dragging = false;
-                    const i = idxFromEvent(e);
-                    setTimeout(() => advance(q.id), 400);
+                    if (thumb) thumb.classList.remove('qz-scale-thumb--dragging');
+                    try { track.releasePointerCapture(e.pointerId); } catch(_) {}
+                    const ratio = ratioFromEvent(e);
+                    const nearest = Math.round(ratio * (count - 1));
+                    commit(nearest, true);
+                });
+                track.addEventListener('pointercancel', () => {
+                    dragging = false;
+                    if (thumb) thumb.classList.remove('qz-scale-thumb--dragging');
                 });
             }
+
+            // Wiggle after 1.2s if no interaction, then repeat every 4.5s
+            wiggleTimer = setTimeout(() => {
+                if (!hasInteracted && thumb) thumb.classList.add('qz-scale-thumb--wiggle');
+            }, 1200);
+            wiggleInterval = setInterval(() => {
+                if (hasInteracted || !thumb) return;
+                thumb.classList.remove('qz-scale-thumb--wiggle');
+                void thumb.offsetWidth;
+                thumb.classList.add('qz-scale-thumb--wiggle');
+            }, 4500);
         }
         else if (q.type === 'bodytype') {
             container.querySelectorAll('.qz-bodytype').forEach(btn => {
