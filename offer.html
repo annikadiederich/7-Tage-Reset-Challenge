@@ -422,24 +422,24 @@
   .modules {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 22px;
   }
   .module {
     display: grid;
-    grid-template-columns: 200px 1fr;
-    gap: 22px;
+    grid-template-columns: 180px 1fr;
+    gap: 32px;
     align-items: center;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 18px 22px 18px 18px;
+    padding: 20px 24px 20px 20px;
     box-shadow: var(--shadow-card);
     transition: transform .2s ease, box-shadow .2s ease;
     overflow: visible;
   }
   .module:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
   .module-image {
-    width: 200px;
+    width: 180px;
     aspect-ratio: 1/1;
     background: transparent;
     display: grid;
@@ -449,17 +449,20 @@
   }
   .module-image svg { width: 100%; height: 100%; display: block; }
   .module-image img {
-    width: 116%;
-    height: 116%;
+    width: 108%;
+    height: 108%;
     object-fit: contain;
     display: block;
-    margin: -8%;
-    transform: rotate(-5deg);
+    margin: -4%;
+    transform: rotate(5deg) scale(0.9);
     transform-origin: 50% 55%;
     filter: drop-shadow(0 14px 22px rgba(20,20,15,0.22)) drop-shadow(0 4px 8px rgba(20,20,15,0.12));
     transition: transform .35s cubic-bezier(.2,.8,.2,1);
   }
-  .module:hover .module-image img { transform: rotate(-3deg) translateY(-2px); }
+  .module:hover .module-image img { transform: rotate(3deg) scale(0.9) translateY(-2px); }
+  /* Per-image size override — community mockup 20% smaller */
+  .module-image img[src*="community"] { transform: rotate(5deg) scale(0.72); }
+  .module:hover .module-image img[src*="community"] { transform: rotate(3deg) scale(0.72) translateY(-2px); }
   .module-image img.module-image--cover {
     width: 100%;
     height: 100%;
@@ -501,29 +504,29 @@
   }
 
   @media (max-width: 560px) {
-    .module { grid-template-columns: 130px 1fr; gap: 14px; padding: 14px; }
-    .module-image { width: 130px; }
+    .module { grid-template-columns: 120px 1fr; gap: 20px; padding: 14px 16px 14px 14px; }
+    .module-image { width: 120px; }
     .module-title { font-size: 0.98rem; }
     .module-outcome { font-size: 0.85rem; }
   }
 
   /* ══════ Stack Shot ══════ */
   .stack-shot {
-    max-width: 560px;
-    margin: 48px auto 0;
+    max-width: 680px;
+    margin: 56px auto;
     text-align: center;
   }
   .stack-shot-img {
     width: 100%;
-    max-width: 480px;
-    margin: 0 auto 20px;
+    max-width: 640px;
+    margin: 0 auto 24px;
     border-radius: 20px;
     overflow: hidden;
-    background: linear-gradient(180deg, #f8f5ed 0%, #eae4d5 100%);
+    background: #ffffff;
     border: 1px solid var(--border);
-    padding: 32px 20px;
     box-shadow: 0 20px 50px rgba(30,28,26,0.12), 0 4px 10px rgba(30,28,26,0.05);
   }
+  .stack-shot-img img { width: 100%; height: auto; display: block; }
   .stack-shot-img svg { width: 100%; height: auto; display: block; }
   .stack-shot-caption {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -1128,9 +1131,6 @@
     max-width: 380px;
     border-radius: 14px;
     overflow: hidden;
-    background: #eceae4;
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 10px rgba(30, 28, 26, 0.06);
   }
   .testimonial-screenshot img {
     display: block;
@@ -1579,7 +1579,7 @@
   </section>
 
   <!-- MODULES -->
-  <section class="section">
+  <section class="section" style="padding-bottom: 28px;">
     <div style="text-align:center; margin-bottom: 24px;">
       <span class="section-eyebrow">Dein Zugang enthält</span>
     </div>
@@ -1591,8 +1591,8 @@
           <img src="module-images/ernaehrung.png" alt="Ernährungsplan App-Ansicht" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Ernährungsplan, den du wirklich durchziehst</h3>
-          <p class="module-outcome">Satt, alltagstauglich, ohne Verbote – und trotzdem Abnahme.</p>
+          <h3 class="module-title">1x Ernährungsplanerstellung</h3>
+          <p class="module-outcome">Wir erstellen dir in der Challenge einen Ernährungsplan, der dich länger satt hält – ohne viel Aufwand.</p>
           <span class="module-tag">Wert: 99 €</span>
         </div>
       </div>
@@ -1602,8 +1602,8 @@
           <img src="module-images/training.png" alt="Trainingsplan App-Ansicht" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Trainingsplan, der in dein Leben passt</h3>
-          <p class="module-outcome">Kurze, effiziente Einheiten – kein Fitnessstudio nötig.</p>
+          <h3 class="module-title">1x Trainingsplanerstellung</h3>
+          <p class="module-outcome">Wir erstellen dir einen Trainingsplan, der kurz, effizient und durchhaltbar ist.</p>
           <span class="module-tag">Wert: 79 €</span>
         </div>
       </div>
@@ -1613,8 +1613,8 @@
           <img src="module-images/mindset.png" alt="Mentales Training – Videomodul" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">7 konkrete Mindset-Lektionen gegen Rückfälle</h3>
-          <p class="module-outcome">Damit du nach stressigen Tagen nicht mehr eskalierst.</p>
+          <h3 class="module-title">7 konkrete Video-Mindsetlektionen</h3>
+          <p class="module-outcome">Du bekommst jeden Tag eine Mindsetlektion, die dir hilft, dein Mindset zu stärken – damit du nie wieder in den Jojo-Effekt rutschst.</p>
           <span class="module-tag">Wert: 149 €</span>
         </div>
       </div>
@@ -1625,7 +1625,7 @@
         </div>
         <div class="module-content">
           <h3 class="module-title">3 klare Nervensystem-Regulierungs-Übungen</h3>
-          <p class="module-outcome">Einfache Übungen, die deinen Körper aus dem Stressmodus holen.</p>
+          <p class="module-outcome">Du bekommst Übungen, die dir helfen, im stressigen Alltag runterzufahren – und so deine Fettverbrennung zu unterstützen.</p>
           <span class="module-tag">Wert: 129 €</span>
         </div>
       </div>
@@ -1635,19 +1635,19 @@
           <img src="module-images/community.png" alt="Community-Zoom-Call auf Laptop" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Zugang zur Community-Gruppe</h3>
-          <p class="module-outcome">Gemeinsam fällt Durchziehen leichter – du bist nicht mehr allein.</p>
+          <h3 class="module-title">Zugang zu 2 Live-Workshops in der Challenge</h3>
+          <p class="module-outcome">An zwei Tagen der Challenge gehen wir zusammen live – du bekommst direkte Live-Unterstützung auf deinem Weg.</p>
           <span class="module-tag">Wert: 59 €</span>
         </div>
       </div>
 
       <div class="module">
         <div class="module-image">
-          <img src="module-images/workshop.png" alt="Live-Abnehm-Workshop mit Coaching-Team" loading="lazy" decoding="async">
+          <img src="module-images/workshop.png?v=2" alt="Group of Commitment – Community-App auf dem Handy" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">1:1 Chat-Support &amp; 2 Live-Abnehm-Workshops</h3>
-          <p class="module-outcome">Echte Antworten auf deine Fragen – keine leere Forum-Stille.</p>
+          <h3 class="module-title">Lebenslanger Zugang zur Community-Gruppe</h3>
+          <p class="module-outcome">Du hast täglichen intensiven Austausch mit Gleichgesinnten und die direkte Möglichkeit, deinen Coach 1:1 zu kontaktieren.</p>
           <span class="module-tag">Wert: 199 €</span>
         </div>
       </div>
@@ -1657,43 +1657,7 @@
     <!-- Stack Shot -->
     <div class="stack-shot">
       <div class="stack-shot-img">
-        <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
-          <rect x="80" y="50" width="240" height="140" rx="8" fill="#1e1c1a"/>
-          <rect x="88" y="58" width="224" height="124" rx="2" fill="#ffffff"/>
-          <rect x="96" y="66" width="208" height="20" rx="2" fill="#0e2a1b"/>
-          <text x="200" y="80" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="12" fill="#ffffff">7-Tage Reset-Challenge</text>
-          <rect x="96" y="94" width="100" height="80" rx="3" fill="rgba(232,83,14,0.15)"/>
-          <rect x="200" y="94" width="104" height="38" rx="3" fill="#f6f4f1"/>
-          <rect x="200" y="136" width="104" height="38" rx="3" fill="#efece4"/>
-          <rect x="104" y="102" width="40" height="3" rx="1" fill="#e8530e"/>
-          <rect x="104" y="110" width="80" height="2" rx="1" fill="#1e1c1a" opacity="0.3"/>
-          <rect x="104" y="116" width="60" height="2" rx="1" fill="#1e1c1a" opacity="0.3"/>
-          <rect x="60" y="188" width="280" height="6" rx="1" fill="#1e1c1a"/>
-          <rect x="170" y="188" width="60" height="6" rx="3" fill="#0a0a08"/>
-
-          <rect x="280" y="100" width="60" height="110" rx="10" fill="#1e1c1a"/>
-          <rect x="284" y="106" width="52" height="98" rx="4" fill="#ffffff"/>
-          <rect x="288" y="110" width="44" height="18" rx="2" fill="#e8530e"/>
-          <rect x="291" y="115" width="16" height="2" rx="1" fill="#ffffff"/>
-          <rect x="291" y="120" width="24" height="2" rx="1" fill="#ffffff" opacity="0.7"/>
-          <rect x="288" y="132" width="44" height="12" rx="2" fill="#efece4"/>
-          <rect x="288" y="148" width="44" height="12" rx="2" fill="#efece4"/>
-          <rect x="288" y="164" width="44" height="12" rx="2" fill="#efece4"/>
-          <rect x="288" y="180" width="44" height="12" rx="2" fill="#0e2a1b"/>
-
-          <rect x="50" y="150" width="70" height="60" rx="2" fill="#0e2a1b" transform="rotate(-4 85 180)"/>
-          <rect x="58" y="148" width="54" height="2" fill="#c8e99d" transform="rotate(-4 85 180)"/>
-          <text x="85" y="180" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-style="italic" font-weight="700" font-size="10" fill="#c8e99d" transform="rotate(-4 85 180)">Mindset</text>
-          <text x="85" y="192" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="11" fill="#f6f4f1" transform="rotate(-4 85 180)">RESET</text>
-
-          <rect x="130" y="160" width="65" height="55" rx="2" fill="#e8530e" transform="rotate(3 162 187)"/>
-          <text x="162" y="185" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="9" fill="#ffffff" transform="rotate(3 162 187)">Ernährung</text>
-          <text x="162" y="197" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="9" fill="#ffffff" transform="rotate(3 162 187)">7 Tage</text>
-
-          <circle cx="350" cy="55" r="30" fill="rgba(232,83,14,0.15)" stroke="#e8530e" stroke-width="1.5"/>
-          <text x="350" y="50" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="7" fill="#e8530e">+ COMMUNITY</text>
-          <text x="350" y="62" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="7" fill="#e8530e">&amp; SUPPORT</text>
-        </svg>
+        <img src="generated-images/stack-shot.png" alt="Alle Module der 7-Tage Reset-Challenge: Ernährungsplan, Trainingsplan, Mindset-Lektionen, Nervensystem-Regulierung, Community & 1:1 Coaching" loading="lazy" decoding="async">
       </div>
       <p class="stack-shot-caption">Das alles bekommst du heute für nur <span class="price">29,90 €</span></p>
     </div>
@@ -1701,7 +1665,7 @@
   </section>
 
   <!-- 7-Tage -->
-  <section class="section" style="background: var(--bg-soft); max-width: none; margin: 0; padding: 56px 24px;">
+  <section class="section" style="background: var(--bg-soft); max-width: none; margin: 0; padding: 28px 24px 56px;">
     <div style="max-width: 560px; margin: 0 auto;">
       <div class="section-head">
         <div style="text-align:center;">
@@ -1952,7 +1916,6 @@
         <div class="carousel-track" id="carouselTrack">
 
           <article class="testimonial-card">
-            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
             <div class="testimonial-screenshot">
               <img src="feedback-screenshots/fb-4.jpg" alt="WhatsApp-Feedback von Sarah M." loading="lazy" decoding="async">
             </div>
@@ -1970,14 +1933,13 @@
           </article>
 
           <article class="testimonial-card">
-            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
             <div class="testimonial-screenshot">
-              <img src="feedback-screenshots/fb-2.jpg" alt="WhatsApp-Feedback von Julia K." loading="lazy" decoding="async">
+              <img src="feedback-screenshots/fb-2.jpg" alt="WhatsApp-Feedback von Sandra" loading="lazy" decoding="async">
             </div>
             <div class="testimonial-author">
-              <div class="testimonial-avatar v2">J</div>
+              <div class="testimonial-avatar v2">S</div>
               <div class="testimonial-author-info">
-                <p class="testimonial-name">Julia K.</p>
+                <p class="testimonial-name">Sandra</p>
                 <p class="testimonial-meta">41, München</p>
               </div>
               <span class="testimonial-verified">
@@ -1988,14 +1950,13 @@
           </article>
 
           <article class="testimonial-card">
-            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
             <div class="testimonial-screenshot">
-              <img src="feedback-screenshots/fb-3.jpg" alt="WhatsApp-Feedback von Nadine H." loading="lazy" decoding="async">
+              <img src="feedback-screenshots/fb-3.jpg" alt="WhatsApp-Feedback von Sandra" loading="lazy" decoding="async">
             </div>
             <div class="testimonial-author">
-              <div class="testimonial-avatar v3">N</div>
+              <div class="testimonial-avatar v3">S</div>
               <div class="testimonial-author-info">
-                <p class="testimonial-name">Nadine H.</p>
+                <p class="testimonial-name">Sandra</p>
                 <p class="testimonial-meta">38, Köln</p>
               </div>
               <span class="testimonial-verified">
@@ -2006,7 +1967,6 @@
           </article>
 
           <article class="testimonial-card">
-            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
             <div class="testimonial-screenshot">
               <img src="feedback-screenshots/fb-6.jpg" alt="WhatsApp-Feedback von Laura B." loading="lazy" decoding="async">
             </div>
@@ -2024,7 +1984,6 @@
           </article>
 
           <article class="testimonial-card">
-            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
             <div class="testimonial-screenshot">
               <img src="feedback-screenshots/fb-5.jpg" alt="WhatsApp-Feedback von Melanie R." loading="lazy" decoding="async">
             </div>
@@ -2042,7 +2001,6 @@
           </article>
 
           <article class="testimonial-card">
-            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
             <div class="testimonial-screenshot">
               <img src="feedback-screenshots/fb-1.jpg" alt="WhatsApp-Feedback von Anna W." loading="lazy" decoding="async">
             </div>
