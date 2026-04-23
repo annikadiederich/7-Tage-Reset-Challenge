@@ -212,20 +212,24 @@
             chapter: 2,
             total: 3,
             chapterName: 'Muster-Analyse',
+            titleLayout: 'split',
             title: '<span class="qz-script">Heißhunger</span> ist kein Zufall.',
-            intro: 'Deine Antworten zeigen: Essen ist für dich nicht nur „Energie" — es ist Ausgleich, Beruhigung und Ventil.',
+            intro: 'Deine Antworten zeigen: Essen ist für dich nicht nur „Energie" — <strong>es ist Ausgleich, Beruhigung und Ventil.</strong>',
             points: [
-                { icon: 'swirl', text: 'Stress, Druck, Emotionen' },
-                { icon: 'gear',  text: 'Du funktionierst am Tag' },
-                { icon: 'moon',  text: 'Abends holt sich dein Körper Ruhe über Essen' },
+                { icon: 'swirl', text: 'Stress, Druck, Emotionen',                     sub: 'Dein tägliches Grundrauschen' },
+                { icon: 'gear',  text: 'Du funktionierst am Tag',                      sub: 'Aber innen tickt die Uhr' },
+                { icon: 'moon',  text: 'Abends holt sich dein Körper Ruhe über Essen', sub: 'Der einzige Moment, der „dir" gehört' },
             ],
-            outro: 'Das hat nichts mit <span class="qz-script">„zu schwach"</span> zu tun.<br>Es ist ein überlastetes System.',
+            outro: 'Das hat nichts mit <span class="qz-strike">„zu schwach"</span> zu tun.<br><span class="qz-outro-emph">Es ist ein überlastetes System.</span>',
+            outroVerdict: true,
+            trustStrip: 'card',
             cta: 'Weiter zur Auswertung',
         },
         22: {
             chapter: 3,
             total: 3,
             chapterName: 'Dein Reset',
+            pillLabel: 'Dein Zwischenfazit',
             title: 'Wenn dein Nervensystem kaum <span class="qz-script">zur Ruhe</span> kommt …',
             intro: '… fühlt sich Abnehmen immer wie <strong>ein Kampf</strong> an:',
             points: [
@@ -233,8 +237,9 @@
                 { icon: 'question', text: 'Du zweifelst an dir' },
                 { icon: 'restart',  text: 'Du weißt, was zu tun ist – setzt es aber nicht konstant um' },
             ],
-            outro: 'Gleich bekommst du deinen <span class="qz-br-outro-accent">Haupt-Abnehmblocker</span> schwarz auf weiß.',
-            trustStrip: true,
+            outro: 'Gleich bekommst du deinen <span class="qz-br-outro-accent">Haupt-Abnehmblocker</span><br><span class="qz-outro-emph">schwarz auf weiß.</span>',
+            outroVerdict: true,
+            trustStrip: 'card',
             cta: 'Zu den letzten Fragen',
         },
     };
@@ -576,9 +581,11 @@
 
         setTimeout(() => {
             const chapterNum = breather.chapter || 1;
-            const chapterLabel = chapterNum === 1
-                ? 'ZWISCHENFAZIT'
-                : `ZWISCHENFAZIT <span class="qz-br-pill-num">#${chapterNum}</span>`;
+            const chapterLabel = breather.pillLabel
+                ? breather.pillLabel
+                : (chapterNum === 1
+                    ? 'ZWISCHENFAZIT'
+                    : `ZWISCHENFAZIT <span class="qz-br-pill-num">#${chapterNum}</span>`);
 
             // Build the main content block (new layout if points present, else fallback body HTML)
             let contentHTML = '';
@@ -604,8 +611,29 @@
                 contentHTML = `<div class="qz-breather-body">${breather.body || `<p>${breather.sub || ''}</p>`}</div>`;
             }
 
+            // Wrap outro in verdict block if flagged
+            let finalContentHTML = contentHTML;
+            if (breather.outroVerdict && breather.outro) {
+                // Replace plain outro with verdict-styled outro
+                finalContentHTML = finalContentHTML.replace(
+                    `<p class="qz-br-outro">${breather.outro}</p>`,
+                    `<div class="qz-br-verdict"><p class="qz-br-verdict-text">${breather.outro}</p></div>`
+                );
+            }
+
             let proofHTML = '';
-            if (breather.trustStrip) {
+            const starSq = `<span class="qz-br-tp-star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8l-5.8 3.1 1.1-6.5L2.6 8.8l6.5-.9z"/></svg></span>`;
+            if (breather.trustStrip === 'card') {
+                proofHTML = `<div class="qz-br-tp-card">
+                    <div class="qz-br-tp-stars">${starSq.repeat(5)}</div>
+                    <div class="qz-br-tp-meta">
+                        <span class="qz-br-tp-label">Trustpilot</span>
+                        <span class="qz-br-tp-sep">—</span>
+                        <span class="qz-br-tp-rating"><strong>4.9 / 5</strong> · Ausgezeichnet</span>
+                    </div>
+                    <p class="qz-br-tp-count">Bereits über <strong>10.000 Teilnehmer</strong></p>
+                </div>`;
+            } else if (breather.trustStrip) {
                 const star = `<span class="qz-tb-star"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8l-5.8 3.1 1.1-6.5L2.6 8.8l6.5-.9z"/></svg></span>`;
                 proofHTML = `<div class="qz-br-trustbanner">
                     <div class="qz-tb-col">
@@ -630,11 +658,27 @@
                 </div>`;
             }
 
+            // Title: split layout extracts the script accent as big eyebrow
+            let titleHTML;
+            if (breather.titleLayout === 'split') {
+                const m = breather.title.match(/^\s*<span class="qz-script">([\s\S]*?)<\/span>\s*([\s\S]*)$/);
+                if (m) {
+                    titleHTML = `<div class="qz-breather-title qz-breather-title--split">
+                        <span class="qz-breather-eyebrow">${m[1]}</span>
+                        <h2 class="qz-breather-main">${m[2]}</h2>
+                    </div>`;
+                } else {
+                    titleHTML = `<h2 class="qz-breather-title">${breather.title}</h2>`;
+                }
+            } else {
+                titleHTML = `<h2 class="qz-breather-title">${breather.title}</h2>`;
+            }
+
             container.innerHTML = `
                 <div class="qz-breather">
                     <div class="qz-breather-chapter-pill">${chapterLabel}</div>
-                    <h2 class="qz-breather-title">${breather.title}</h2>
-                    ${contentHTML}
+                    ${titleHTML}
+                    ${finalContentHTML}
                     ${proofHTML}
                     <button class="qz-breather-btn">${breather.cta || 'Weiter'} <span class="qz-breather-arrow">→</span></button>
                 </div>
@@ -784,7 +828,11 @@
 
             function setVisual(i, instant) {
                 const pct = count <= 1 ? 0 : (i / (count - 1)) * 100;
-                if (fill) fill.style.width = pct + '%';
+                if (fill) {
+                    fill.style.width = pct + '%';
+                    if (instant) fill.classList.add('qz-scale-fill--instant');
+                    else fill.classList.remove('qz-scale-fill--instant');
+                }
                 if (thumb) {
                     thumb.style.left = pct + '%';
                     if (instant) thumb.classList.add('qz-scale-thumb--instant');
@@ -797,7 +845,10 @@
 
             function setContinuousVisual(ratio) {
                 const pct = Math.max(0, Math.min(1, ratio)) * 100;
-                if (fill) fill.style.width = pct + '%';
+                if (fill) {
+                    fill.classList.add('qz-scale-fill--instant');
+                    fill.style.width = pct + '%';
+                }
                 if (thumb) {
                     thumb.classList.add('qz-scale-thumb--instant');
                     thumb.style.left = pct + '%';
@@ -832,6 +883,15 @@
             // Track: handles tap + drag
             if (track) {
                 let dragging = false;
+                let pendingRatio = null;
+                let rafId = 0;
+                function flushDrag() {
+                    rafId = 0;
+                    if (pendingRatio === null) return;
+                    const r = pendingRatio;
+                    pendingRatio = null;
+                    setContinuousVisual(r);
+                }
 
                 track.addEventListener('pointerdown', (e) => {
                     e.preventDefault();
@@ -843,7 +903,8 @@
                 });
                 track.addEventListener('pointermove', (e) => {
                     if (!dragging) return;
-                    setContinuousVisual(ratioFromEvent(e));
+                    pendingRatio = ratioFromEvent(e);
+                    if (!rafId) rafId = requestAnimationFrame(flushDrag);
                 });
                 track.addEventListener('pointerup', (e) => {
                     if (!dragging) return;

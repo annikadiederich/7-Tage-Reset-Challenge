@@ -1,327 +1,449 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dein Plan ist bereit | Abnehm-Analyse</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sansita+Swashed:wght@400;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deine Analyse per E-Mail · Elliott Aziz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Sansita+Swashed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f4f1;
+    --card: #ffffff;
+    --ink: #1e1c1a;
+    --ink-soft: #3a332e;
+    --muted: #5c5650;
+    --muted-2: #7a7568;
+    --muted-3: #9b938a;
 
-        body {
-            font-family: 'Instrument Sans', sans-serif;
-            background: #141f1a;
-            color: #f0ede8;
-            min-height: 100dvh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            -webkit-font-smoothing: antialiased;
-            padding: 40px 24px;
-        }
+    --green-dark: #0e2a1b;
+    --green-mid: #14482c;
+    --green-accent: #c8e99d;
 
-        h1, h2 { font-family: 'Plus Jakarta Sans', sans-serif; }
+    --accent: #e8530e;
+    --accent-deep: #DF031C;
 
-        .email-wrap {
-            width: 100%;
-            max-width: 440px;
-            text-align: center;
-        }
+    --field-border: rgba(30,28,26,0.12);
+  }
 
-        /* Logo */
-        .email-logo {
-            margin-bottom: 48px;
-            animation: fadeUp 0.6s ease both;
-        }
-        .email-logo img {
-            height: 28px;
-            width: auto;
-            filter: brightness(0) invert(1);
-            opacity: 0.25;
-        }
+  * { box-sizing: border-box; }
 
-        /* Headline */
-        .email-title {
-            font-size: clamp(1.4rem, 4.5vw, 1.85rem);
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            line-height: 1.25;
-            margin-bottom: 36px;
-            animation: fadeUp 0.7s ease 0.1s both;
-        }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Instrument Sans', 'Plus Jakarta Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
 
-        /* Subline */
-        .email-sub {
-            font-size: 0.9rem;
-            color: rgba(240,237,232,0.5);
-            line-height: 1.6;
-            margin-bottom: 40px;
-            animation: fadeUp 0.7s ease 0.2s both;
-        }
+  .page {
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 32px 22px 24px;
+    position: relative;
+  }
 
-        /* Form */
-        .email-form {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 20px;
-            animation: fadeUp 0.7s ease 0.3s both;
-        }
+  /* Brand top (gleiches Logo wie im Quiz) */
+  .brand {
+    text-align: center;
+    margin-top: 4px;
+    padding: 4px 0 0;
+    flex-shrink: 0;
+  }
+  .brand img {
+    height: 30px;
+    width: auto;
+    mix-blend-mode: multiply;
+    object-fit: contain;
+  }
 
-        .email-input {
-            width: 100%;
-            align-self: stretch;
-            padding: 17px 22px;
-            background: rgba(255,255,255,0.05);
-            border: 1.5px solid rgba(255,255,255,0.07);
-            border-radius: 14px;
-            font-family: 'Instrument Sans', sans-serif;
-            font-size: 0.92rem;
-            font-weight: 500;
-            color: #f0ede8;
-            outline: none;
-            transition: border-color 0.25s ease, background 0.25s ease, box-shadow 0.25s ease;
-        }
+  /* ══════ LOADER (initial state) ══════ */
+  .loader {
+    flex: 1;
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 26px;
+    padding: 24px 0 40px;
+    transition: opacity .55s ease;
+  }
+  .loader-caption {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: italic;
+    font-size: 0.95rem;
+    color: var(--muted-2);
+    margin: 0;
+    letter-spacing: 0.02em;
+    text-align: center;
+  }
 
-        .email-input::placeholder {
-            color: rgba(240,237,232,0.3);
-        }
+  .ring {
+    position: relative;
+    width: min(240px, 64vw);
+    aspect-ratio: 1;
+  }
+  .ring-svg { width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
+  .ring-track { fill: none; stroke: rgba(14,42,27,0.08); stroke-width: 6; }
+  .ring-progress {
+    fill: none;
+    stroke: url(#emailRingGradient);
+    stroke-width: 10;
+    stroke-linecap: round;
+    transition: stroke-dashoffset .35s ease-out;
+    filter: drop-shadow(0 2px 6px rgba(14,42,27,0.25));
+  }
+  .ring-dot { fill: #fff; stroke: var(--green-mid); stroke-width: 2.5; filter: drop-shadow(0 2px 8px rgba(14,42,27,0.35)); }
+  .ring-decor {
+    position: absolute;
+    inset: 12px;
+    border-radius: 50%;
+    border: 1px dashed rgba(14,42,27,0.12);
+    animation: ringRotate 24s linear infinite;
+  }
+  .ring-decor::before,
+  .ring-decor::after {
+    content: '';
+    position: absolute;
+    width: 5px; height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    top: -2.5px; left: 50%;
+    transform: translateX(-50%);
+  }
+  .ring-decor::after { top: auto; bottom: -2.5px; background: var(--green-mid); }
+  @keyframes ringRotate { to { transform: rotate(360deg); } }
+  .ring-center {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  .ring-percent {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(44px, 12vw, 60px);
+    line-height: 1;
+    color: var(--green-mid);
+    letter-spacing: -0.04em;
+    display: flex;
+    align-items: flex-start;
+  }
+  .ring-sign {
+    font-size: 0.42em;
+    margin-top: 0.6em;
+    margin-left: 3px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .ring-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin-top: 4px;
+  }
+  .loader-phase {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 4vw, 1.4rem);
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    line-height: 1.2;
+    text-align: center;
+    max-width: 380px;
+    margin: 0;
+    transition: opacity .4s ease, transform .4s ease;
+  }
+  .loader-phase.swap { opacity: 0; transform: translateY(6px); }
 
-        .email-input:focus {
-            border-color: rgba(240,100,50,0.35);
-            background: rgba(255,255,255,0.07);
-            box-shadow: 0 0 0 3px rgba(240,100,50,0.06);
-        }
+  .loader.hidden { opacity: 0; pointer-events: none; position: absolute; }
 
-        .email-input.error {
-            border-color: rgba(240,60,30,0.5);
-            box-shadow: 0 0 0 3px rgba(240,60,30,0.08);
-        }
+  /* ══════ FORM (after loader) ══════ */
+  .form-wrap {
+    flex: 1;
+    width: 100%;
+    max-width: 440px;
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px 0 40px;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .6s ease, transform .6s ease;
+  }
+  .form-wrap.visible {
+    display: flex;
+    opacity: 1;
+    transform: translateY(0);
+  }
 
-        .email-error {
-            font-size: 0.72rem;
-            color: rgba(240,100,50,0.7);
-            text-align: left;
-            margin-top: -6px;
-            min-height: 1em;
-            align-self: stretch;
-        }
+  h1 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 6vw, 2rem);
+    line-height: 1.18;
+    letter-spacing: -0.015em;
+    text-align: center;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
 
-        /* CTA Button */
-        .email-btn {
-            width: auto;
-            padding: 15px 52px;
-            background: linear-gradient(90deg, #FF4D1A, #FF3B1F, #FF1F1F);
-            color: #fff;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            font-size: 0.96rem;
-            font-weight: 700;
-            letter-spacing: 0.03em;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 4px 16px rgba(255,60,31,0.2), 0 0 40px rgba(255,77,26,0.08);
-            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease, opacity 0.3s ease;
-            animation: fadeUp 0.7s ease 0.4s both;
-        }
+  .subhead {
+    text-align: center;
+    color: var(--muted);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.95rem;
+    line-height: 1.55;
+    margin: 0 0 28px;
+    font-weight: 400;
+  }
 
-        .email-btn:hover {
-            transform: translateY(-2px) scale(1.02);
-            filter: brightness(1.08);
-            box-shadow: 0 6px 24px rgba(255,60,31,0.28), 0 0 52px rgba(255,77,26,0.1);
-        }
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
-        .email-btn:active {
-            transform: translateY(0) scale(0.98);
-            filter: brightness(0.96);
-        }
+  .input-wrap { position: relative; }
+  .input-icon {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px; height: 16px;
+    color: var(--muted-3);
+    pointer-events: none;
+    transition: color .2s ease;
+  }
+  .input-icon svg {
+    width: 100%; height: 100%;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .email-input {
+    width: 100%;
+    background: var(--card);
+    border: 1px solid var(--field-border);
+    border-radius: 12px;
+    padding: 16px 18px 16px 44px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--ink);
+    outline: none;
+    transition: border-color .2s ease, box-shadow .2s ease;
+    box-shadow: 0 1px 2px rgba(30,28,26,0.03);
+  }
+  .email-input::placeholder { color: var(--muted-3); }
+  .email-input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(232,83,14,0.14);
+  }
+  .input-wrap:focus-within .input-icon { color: var(--accent); }
 
-        .email-btn .btn-lock {
-            display: inline-flex;
-            align-items: center;
-            margin-left: 11px;
-            vertical-align: middle;
-        }
+  .cta {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #fff;
+    border: none;
+    padding: 16px 24px;
+    border-radius: 12px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    box-shadow:
+      0 8px 24px rgba(223,3,28,0.26),
+      0 2px 6px rgba(232,83,14,0.18),
+      inset 0 1px 0 rgba(255,255,255,0.2);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  }
+  .cta:hover {
+    transform: translateY(-1px);
+    box-shadow:
+      0 10px 28px rgba(223,3,28,0.32),
+      0 3px 8px rgba(232,83,14,0.22),
+      inset 0 1px 0 rgba(255,255,255,0.25);
+    filter: brightness(1.04);
+  }
+  .cta:active { transform: translateY(0) scale(0.99); }
 
-        .email-btn .btn-lock svg {
-            width: 16px; height: 16px;
-            stroke: rgba(255,255,255,0.9);
-            stroke-width: 2;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
+  .privacy {
+    text-align: center;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.76rem;
+    color: var(--muted-3);
+    letter-spacing: 0.02em;
+    margin: 14px 0 0;
+    padding-top: 12px;
+  }
 
-        .btn-lock-shackle {
-            transform-origin: 17px 11px;
-            animation: lockToggle 3.5s ease-in-out infinite;
-        }
-
-        @keyframes lockToggle {
-            0%, 15% { transform: translateY(0) rotate(0deg); }
-            25% { transform: translateY(-3px) rotate(-15deg); }
-            45% { transform: translateY(-3px) rotate(-15deg); }
-            60%, 100% { transform: translateY(0) rotate(0deg); }
-        }
-
-        .email-btn:disabled {
-            opacity: 0.45;
-            cursor: not-allowed;
-            transform: none;
-            filter: none;
-        }
-
-        /* Trust text */
-        .email-trust {
-            font-size: 0.66rem;
-            color: rgba(240,237,232,0.22);
-            line-height: 1.6;
-            margin-top: 20px;
-            max-width: 360px;
-            margin-left: auto;
-            margin-right: auto;
-            animation: fadeUp 0.7s ease 0.5s both;
-        }
-
-        /* Animations */
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(14px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Plan ready visual */
-        .plan-icon {
-            width: 64px; height: 64px;
-            margin: 0 auto 32px;
-            position: relative;
-            animation: fadeUp 0.7s ease 0.25s both;
-        }
-
-        .plan-icon-card {
-            width: 100%; height: 100%;
-            border-radius: 16px;
-            background: rgba(255,255,255,0.04);
-            border: 1px solid rgba(255,255,255,0.06);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            box-shadow: 0 0 20px rgba(240,100,50,0.04);
-            animation: planGlow 4s ease-in-out infinite;
-        }
-
-        @keyframes planGlow {
-            0%, 100% { box-shadow: 0 0 20px rgba(240,100,50,0.04); }
-            50% { box-shadow: 0 0 28px rgba(240,100,50,0.08); }
-        }
-
-        .plan-icon-card svg {
-            width: 28px; height: 28px;
-            stroke: rgba(240,100,50,0.5);
-            stroke-width: 1.5;
-            fill: none;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-
-        /* Small check badge */
-        .plan-icon-check {
-            position: absolute;
-            bottom: -4px; right: -4px;
-            width: 20px; height: 20px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #FF4D1A, #FF3B1F);
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 0 10px rgba(255,60,31,0.2);
-        }
-
-        .plan-icon-check svg {
-            width: 10px; height: 10px;
-            stroke: #fff;
-            stroke-width: 2.5;
-            fill: none;
-        }
-
-
-        /* Responsive */
-        @media (max-width: 480px) {
-            body { padding: 32px 20px; }
-            .email-title { font-size: 1.2rem; margin-bottom: 28px; }
-            .email-input { padding: 15px 18px; font-size: 0.88rem; min-height: 52px; }
-            .email-btn { padding: 15px 24px; font-size: 0.92rem; width: 100%; min-height: 52px; }
-            .email-trust { font-size: 0.6rem; }
-        }
-    </style>
+  @media (max-width: 480px) {
+    .page { padding: 24px 18px 20px; }
+    .brand img { height: 27px; }
+    h1 { font-size: 1.5rem; }
+    .subhead { font-size: 0.92rem; }
+    .email-input { padding: 15px 16px 15px 42px; font-size: 0.95rem; }
+    .cta { padding: 15px 22px; font-size: 0.9rem; }
+  }
+</style>
 </head>
 <body>
 
-<div class="email-wrap">
-    <p class="email-logo"><img src="elliott-aziz-logo.png" alt="Elliott Aziz"></p>
+  <div class="page">
 
-    <h1 class="email-title">Gib deine E-Mail ein, um deinen personalisierten Abnehm-Plan zu erhalten.</h1>
+    <div class="brand"><img src="elliott-aziz-logo.png" alt="Elliott Aziz"></div>
 
-    <form class="email-form" id="emailForm" novalidate>
-        <input type="email" class="email-input" id="inputEmail" placeholder="Deine E-Mail-Adresse" autocomplete="email" required>
-        <p class="email-error" id="emailError"></p>
-        <button type="submit" class="email-btn" id="emailBtn" disabled>Weiter<span class="btn-lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path class="btn-lock-shackle" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span></button>
-    </form>
+    <!-- LOADER -->
+    <div class="loader" id="loader">
+      <p class="loader-caption">Wir bereiten deine vollständige Auswertung vor</p>
 
-    <p class="email-trust">
-        Deine Daten sind bei uns sicher und werden nur für die Auswertung deiner Analyse verwendet. Kein Spam.
-    </p>
+      <div class="ring">
+        <svg class="ring-svg" viewBox="0 0 200 200" aria-hidden="true">
+          <defs>
+            <linearGradient id="emailRingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1f5d3a"/>
+              <stop offset="55%" stop-color="#14482c"/>
+              <stop offset="100%" stop-color="#e8530e"/>
+            </linearGradient>
+          </defs>
+          <circle class="ring-track" cx="100" cy="100" r="86"/>
+          <circle class="ring-progress" cx="100" cy="100" r="86" id="ringProgress"/>
+          <circle class="ring-dot" cx="100" cy="14" r="6" id="ringDot"/>
+        </svg>
+        <div class="ring-decor" aria-hidden="true"></div>
+        <div class="ring-center">
+          <div class="ring-percent"><span id="ringPercent">0</span><span class="ring-sign">%</span></div>
+          <div class="ring-label">Wird vorbereitet</div>
+        </div>
+      </div>
 
-</div>
+      <p class="loader-phase" id="loaderPhase">Deine Antworten werden gebündelt …</p>
+    </div>
+
+    <!-- FORM (hidden until loader done) -->
+    <div class="form-wrap" id="formWrap">
+      <h1>Wohin sollen wir dir deine Analyse schicken?</h1>
+
+      <p class="subhead">Wir senden dir deine vollständige Abnehm-Analyse &amp; Empfehlung per E-Mail – inkl. Stress- &amp; Heißhunger-Profil und den nächsten Schritten.</p>
+
+      <form class="form" id="emailForm" onsubmit="return false;">
+        <div class="input-wrap">
+          <span class="input-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="5" width="18" height="14" rx="2"/>
+              <path d="M3 7l9 6 9-6"/>
+            </svg>
+          </span>
+          <input type="email" class="email-input" id="emailInput" placeholder="Deine E-Mail-Adresse" required autocomplete="email">
+        </div>
+
+        <button type="submit" class="cta">Analyse per E-Mail erhalten</button>
+      </form>
+
+      <p class="privacy">Sofort per E-Mail · Kein Spam · Deine Daten sind sicher</p>
+    </div>
+
+  </div>
 
 <script>
-    var emailInput = document.getElementById('inputEmail');
-    var btn = document.getElementById('emailBtn');
-    var errorEl = document.getElementById('emailError');
-    var form = document.getElementById('emailForm');
+  // ══════ Loader animation ══════
+  const R = 86;
+  const CIRC = 2 * Math.PI * R;
+  const ring = document.getElementById('ringProgress');
+  const dot = document.getElementById('ringDot');
+  const pctEl = document.getElementById('ringPercent');
+  const phaseEl = document.getElementById('loaderPhase');
+  const loader = document.getElementById('loader');
+  const formWrap = document.getElementById('formWrap');
+  const emailForm = document.getElementById('emailForm');
+  const emailInput = document.getElementById('emailInput');
 
-    function isValidEmail(e) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+  ring.setAttribute('stroke-dasharray', CIRC.toFixed(2));
+  ring.setAttribute('stroke-dashoffset', CIRC.toFixed(2));
+
+  const phases = [
+    { until: 30, text: 'Deine Antworten werden gebündelt …' },
+    { until: 65, text: 'Dein Profil wird abgeglichen …' },
+    { until: 92, text: 'Deine Empfehlungen werden erstellt …' },
+    { until: 100, text: 'Fertig – wohin schicken wir sie?' },
+  ];
+  let currentPhase = -1;
+
+  function setRing(p) {
+    p = Math.max(0, Math.min(100, p));
+    ring.setAttribute('stroke-dashoffset', (CIRC * (1 - p/100)).toFixed(2));
+    const a = (p/100) * 2 * Math.PI - Math.PI/2;
+    dot.setAttribute('cx', (100 + R*Math.cos(a)).toFixed(2));
+    dot.setAttribute('cy', (100 + R*Math.sin(a)).toFixed(2));
+    pctEl.textContent = Math.round(p);
+  }
+  function setPhase(p) {
+    let idx = phases.findIndex(ph => p <= ph.until);
+    if (idx === -1) idx = phases.length - 1;
+    if (idx === currentPhase) return;
+    currentPhase = idx;
+    phaseEl.classList.add('swap');
+    setTimeout(() => {
+      phaseEl.textContent = phases[idx].text;
+      phaseEl.classList.remove('swap');
+    }, 240);
+  }
+
+  const DURATION = 3600;
+  const start = performance.now();
+  function tick(now) {
+    const t = Math.min(1, (now - start) / DURATION);
+    const eased = 1 - Math.pow(1 - t, 2.2);
+    const p = eased * 100;
+    setRing(p);
+    setPhase(p);
+    if (t < 1) requestAnimationFrame(tick);
+    else {
+      setRing(100);
+      setTimeout(() => {
+        loader.classList.add('hidden');
+        formWrap.classList.add('visible');
+        setTimeout(() => { try { emailInput.focus({ preventScroll: true }); } catch(_) {} }, 300);
+      }, 400);
     }
+  }
+  requestAnimationFrame(tick);
 
-    function checkValid() {
-        var emailOk = emailInput.value.trim().length > 0;
-        btn.disabled = !emailOk;
-
-        emailInput.classList.remove('error');
-        errorEl.textContent = '';
+  // ══════ Form submit ══════
+  emailForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = (emailInput.value || '').trim();
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      emailInput.focus();
+      return;
     }
-
-    emailInput.addEventListener('input', checkValid);
-
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-
-        var email = emailInput.value.trim();
-
-        // Validate email
-        if (!isValidEmail(email)) {
-            emailInput.classList.add('error');
-            errorEl.textContent = 'Bitte gib eine gültige E-Mail-Adresse ein.';
-            emailInput.focus();
-            return;
-        }
-
-        // Store data
-        try {
-            localStorage.setItem('funnelEmail', email);
-        } catch(err) {}
-
-        // Disable button, show loading
-        btn.disabled = true;
-        btn.textContent = 'Wird geladen…';
-
-        // Redirect
-        setTimeout(function() {
-            window.location.href = 'offer-v2.html';
-        }, 1200);
-    });
+    try { sessionStorage.setItem('userEmail', email); } catch(_) {}
+    // Smooth fade-out before redirect
+    document.body.style.transition = 'opacity .45s ease';
+    document.body.style.opacity = '0';
+    setTimeout(() => { window.location.href = 'offer.html'; }, 450);
+  });
 </script>
 
 </body>

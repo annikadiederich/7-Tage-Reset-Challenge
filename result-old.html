@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dein Ergebnis | Abnehm-Analyse</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sansita+Swashed:wght@400;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --bg: #141f1a;
+            --bg-light: #1a2b22;
+            --bg-card: rgba(255,255,255,0.05);
+            --text: #f0ede8;
+            --text-soft: rgba(240,237,232,0.6);
+            --text-muted: rgba(240,237,232,0.35);
+            --green: #2a5a38;
+            --green-light: #3a7a4a;
+            --accent: #f07848;
+            --accent-glow: rgba(240,120,72,0.15);
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Instrument Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            position: relative;
+        }
+
+        h1, h2, h3 { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        .container { max-width: 680px; margin: 0 auto; padding: 0 24px; }
+
+
+        /* ── Enhanced reveal animation ── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(16px);
+            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.23,1,.32,1);
+        }
+
+        .reveal.vis {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ── Section base ── */
+        .rs {
+            padding: 80px 0;
+            position: relative;
+        }
+
+        .rs--tight { padding: 10px 0 50px; }
+        .rs--compact { padding: 50px 0 40px; }
+
+        /* Section label */
+        .rs-label {
+            font-size: 0.62rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.14em;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        /* Section title */
+        .rs-title {
+            font-size: clamp(1.3rem, 4vw, 1.7rem);
+            font-weight: 800;
+            text-align: center;
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+            margin-bottom: 40px;
+        }
+
+        /* Fade-in animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.23,1,.32,1);
+        }
+
+        .reveal.vis {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ═══════════════════════
+           TRUST BANNER
+           ═══════════════════════ */
+        .trust-banner {
+            background: #f6f4f1;
+            padding: 12px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .tb-stars { display: flex; gap: 2px; }
+        .tb-star { width: 14px; height: 14px; background: #00b67a; display: flex; align-items: center; justify-content: center; border-radius: 2px; }
+        .tb-star svg { width: 8px; height: 8px; fill: #fff; }
+
+        .tb-text { font-size: 0.7rem; font-weight: 600; color: #5c5650; }
+
+        .tb-avatars { display: flex; }
+        .tb-av {
+            width: 24px; height: 24px;
+            border-radius: 50%;
+            border: 1.5px solid #f6f4f1;
+            margin-left: -7px;
+            background-size: cover;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.42rem; font-weight: 700;
+            color: rgba(255,255,255,0.7);
+            display: flex; align-items: center; justify-content: center;
+        }
+
+        .tb-av:first-child { margin-left: 0; }
+        .tb-av { background-position: center; }
+
+        .tb-sub { font-size: 0.62rem; color: #9b938a; }
+        .tb-col { display: contents; }
+
+        /* ═══════════════════════
+           SECTION 1 — HEADER
+           ═══════════════════════ */
+        .result-header {
+            padding: 60px 0 28px;
+            text-align: center;
+        }
+
+        .result-header .rs-label { margin-bottom: 16px; }
+
+        .result-header h1 {
+            font-size: clamp(1.5rem, 5vw, 2.2rem);
+            font-weight: 800;
+            letter-spacing: -0.03em;
+        }
+
+        /* ═══════════════════════
+           SECTION 2 — LEVEL BAR
+           ═══════════════════════ */
+        /* Scale card container */
+        .level-card {
+            max-width: 100%;
+            margin: 0 auto 20px;
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 28px 28px 24px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .level-card-label {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--text-muted);
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Status card */
+        .level-status-card {
+            max-width: 100%;
+            margin: 0 auto;
+            background: rgba(255,60,30,0.06);
+            border: 1px solid rgba(255,60,30,0.1);
+            border-radius: 16px;
+            padding: 22px 24px;
+            text-align: center;
+        }
+
+        .level-status-card h2 {
+            font-size: clamp(1.1rem, 3.2vw, 1.3rem);
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: var(--text);
+        }
+
+        .level-status-card p {
+            font-size: clamp(1rem, 2.8vw, 1.12rem);
+            font-weight: 600;
+            color: var(--accent);
+        }
+
+        @media(max-width:480px) {
+            .level-card { padding: 18px 16px 16px; }
+            .level-status-card { padding: 16px 16px; }
+            .level-status-card h2 { font-size: 1.05rem; }
+            .level-status-card p { font-size: .92rem; }
+            .level-labels { font-size: .54rem; }
+        }
+
+        .level-bar-wrap {
+            max-width: 100%;
+            margin: 0 auto 0;
+            position: relative;
+        }
+
+        .level-bar {
+            height: 6px;
+            background: rgba(255,255,255,0.06);
+            border-radius: 3px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .level-bar-fill {
+            height: 100%;
+            width: 0%;
+            border-radius: 3px;
+            background: linear-gradient(90deg, #2a5a38, #3a8a44, #c87020, #ff5020, #ff3018);
+            transition: width 1.4s cubic-bezier(.4,0,.2,1);
+            position: relative;
+        }
+
+        /* Light sweep — contained inside bar via overflow:hidden */
+        .level-bar-fill::before {
+            content: '';
+            position: absolute; top: 0; bottom: 0;
+            left: -30%; width: 25%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.12), transparent);
+            border-radius: 3px;
+            animation: barSweep 3.5s ease-in-out 2s infinite;
+            pointer-events: none;
+        }
+
+        @keyframes barSweep {
+            0% { left: -30%; }
+            100% { left: 105%; }
+        }
+
+        /* Marker — separate element, sits outside overflow */
+        .level-marker {
+            position: absolute;
+            top: 3px; right: 12%;
+            transform: translate(50%, -50%);
+            width: 3px; height: 18px;
+            border-radius: 2px;
+            background: #ff3018;
+            box-shadow: 0 0 10px rgba(255,48,24,0.35);
+            z-index: 2;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+
+        .level-marker.vis {
+            opacity: 1;
+            animation: mPulse 1.3s ease-in-out infinite;
+        }
+
+        @keyframes mPulse {
+            0%, 100% { transform: translate(50%,-50%) scaleY(1); box-shadow: 0 0 10px rgba(255,48,24,0.35); }
+            50% { transform: translate(50%,-50%) scaleY(1.25); box-shadow: 0 0 20px rgba(255,48,24,0.5), 0 0 40px rgba(255,48,24,0.15); }
+        }
+
+        /* Glow ring expanding from marker */
+        .level-marker::after {
+            content: '';
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            transform: translate(-50%,-50%) scale(1);
+            opacity: 0;
+        }
+
+        .level-marker.vis::after {
+            animation: mRing 1.8s ease-out 0.5s infinite;
+        }
+
+        @keyframes mRing {
+            0% { opacity: 0.45; transform: translate(-50%,-50%) scale(1); box-shadow: 0 0 0 0 rgba(255,48,24,0.4); }
+            100% { opacity: 0; transform: translate(-50%,-50%) scale(2.2); box-shadow: 0 0 0 10px rgba(255,48,24,0); }
+        }
+
+        .level-labels {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 14px;
+            font-size: 0.62rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .level-labels span { color: var(--text-muted); }
+        .level-labels .lvl-high {
+            color: #ff4828;
+            font-weight: 800;
+            text-shadow: 0 0 14px rgba(255,72,40,0.35), 0 0 28px rgba(255,72,40,0.12);
+        }
+
+        .level-result { display: none; }
+
+        /* ═══════════════════════
+           SECTION 3 — DIAGNOSIS
+           ═══════════════════════ */
+        .diag-card {
+            background: var(--bg-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 20px;
+            padding: 36px 32px;
+            box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+        }
+
+        .diag-card-label {
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            color: var(--accent);
+            margin-bottom: 24px;
+        }
+
+        .diag-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 14px;
+            margin-bottom: 18px;
+        }
+
+        .diag-row:last-child { margin-bottom: 0; }
+
+        .diag-icon {
+            flex-shrink: 0;
+            width: 28px; height: 28px;
+            border-radius: 8px;
+            background: rgba(240,120,72,0.08);
+            display: flex; align-items: center; justify-content: center;
+            margin-top: 1px;
+            box-shadow: 0 0 10px rgba(240,120,72,0.06);
+        }
+
+        .diag-icon svg {
+            width: 13px; height: 13px;
+            stroke: var(--accent);
+            stroke-width: 2.5; fill: none;
+        }
+
+        .diag-text {
+            font-size: 0.9rem;
+            color: var(--text);
+            line-height: 1.5;
+        }
+
+        /* ═══════════════════════
+           SECTION 4 — BODY IMPACT
+           ═══════════════════════ */
+
+        /* Larger headline for this section */
+        .impact-section .rs-label {
+            font-size: 0.82rem;
+            letter-spacing: 0.1em;
+            margin-bottom: 40px;
+        }
+
+        /* Core statement — dominant */
+        .impact-core {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .impact-core p {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: clamp(1.05rem, 3vw, 1.25rem);
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.4;
+            text-shadow: 0 0 24px rgba(42,90,56,0.08);
+        }
+
+        .impact-core-icon {
+            width: 36px; height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(42,90,56,0.25), rgba(42,90,56,0.1));
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px;
+            box-shadow: 0 0 16px rgba(42,90,56,0.1);
+        }
+
+        .impact-core-icon svg {
+            width: 16px; height: 16px;
+            stroke: #6aaa5a;
+            stroke-width: 2; fill: none;
+        }
+
+        /* ── Pinned scroll-driven stack ── */
+        .impact-pin {
+            height: 450vh;
+            position: relative;
+        }
+
+        .impact-pin-inner {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 0 24px;
+            margin-top: -15vh;
+        }
+
+        /* ── Organic background layer ── */
+        .impact-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        /* Nerve-like organic shapes */
+        .impact-bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(50px);
+            opacity: 0;
+            animation: bgDrift 20s ease-in-out infinite;
+        }
+
+        .impact-bg-shape--1 {
+            width: 300px; height: 180px;
+            top: 20%; left: 10%;
+            background: radial-gradient(ellipse, rgba(42,90,56,0.08) 0%, transparent 70%);
+            animation-duration: 22s;
+            border-radius: 60% 40% 55% 45%;
+        }
+
+        .impact-bg-shape--2 {
+            width: 200px; height: 250px;
+            top: 50%; right: 8%;
+            background: radial-gradient(ellipse, rgba(42,90,56,0.06) 0%, transparent 65%);
+            animation-duration: 26s;
+            animation-delay: 4s;
+            border-radius: 45% 55% 50% 50%;
+        }
+
+        .impact-bg-shape--3 {
+            width: 150px; height: 150px;
+            bottom: 25%; left: 25%;
+            background: radial-gradient(circle, rgba(240,100,50,0.04) 0%, transparent 60%);
+            animation-duration: 18s;
+            animation-delay: 8s;
+        }
+
+        /* Subtle energy point */
+        .impact-bg-shape--4 {
+            width: 80px; height: 80px;
+            top: 35%; right: 30%;
+            background: radial-gradient(circle, rgba(240,100,50,0.03) 0%, transparent 55%);
+            animation-duration: 15s;
+            animation-delay: 2s;
+            filter: blur(30px);
+        }
+
+        @keyframes bgDrift {
+            0%, 100% {
+                opacity: 0.5;
+                transform: translate(0, 0) scale(1);
+            }
+            25% {
+                opacity: 0.8;
+                transform: translate(8px, -6px) scale(1.03);
+            }
+            50% {
+                opacity: 1;
+                transform: translate(-5px, 10px) scale(1.05);
+            }
+            75% {
+                opacity: 0.7;
+                transform: translate(6px, 4px) scale(1.01);
+            }
+        }
+
+        /* DNA / nerve strands */
+        .dna-strand {
+            position: absolute;
+            height: 100%;
+            pointer-events: none;
+            filter: blur(3px);
+        }
+
+        .dna-strand--1 {
+            width: 80px;
+            left: 12%;
+            top: 0;
+            opacity: 0.6;
+            animation: dnaDrift1 24s ease-in-out infinite;
+        }
+
+        .dna-strand--2 {
+            width: 60px;
+            right: 10%;
+            top: 5%;
+            opacity: 0.4;
+            animation: dnaDrift2 28s ease-in-out 6s infinite;
+        }
+
+        @keyframes dnaDrift1 {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            33% { transform: translateY(-8px) translateX(3px); }
+            66% { transform: translateY(5px) translateX(-2px); }
+        }
+
+        @keyframes dnaDrift2 {
+            0%, 100% { transform: translateY(0) translateX(0) scaleY(1); }
+            50% { transform: translateY(6px) translateX(-4px) scaleY(1.02); }
+        }
+
+        /* Central radial focus glow */
+        .impact-bg-focus {
+            position: absolute;
+            top: 38%; left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px; height: 300px;
+            background: radial-gradient(ellipse,
+                rgba(255,255,255,0.02) 0%,
+                transparent 60%);
+            pointer-events: none;
+            z-index: 0;
+            filter: blur(20px);
+            animation: focusPulse 7s ease-in-out infinite;
+        }
+
+        @keyframes focusPulse {
+            0%, 100% { opacity: 0.4; transform: translate(-50%,-50%) scale(1); }
+            50% { opacity: 0.7; transform: translate(-50%,-50%) scale(1.04); }
+        }
+
+        .impact-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .impact-stack {
+            position: relative;
+            max-width: 420px;
+            width: 100%;
+            height: 130px;
+        }
+
+        .impact-card {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 120px;
+            background: rgba(22,38,30,0.92);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 18px;
+            padding: 0 24px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.15), 0 8px 28px rgba(0,0,0,0.1);
+            transform: translateY(calc(100vh - 50%));
+            will-change: transform;
+            pointer-events: none;
+        }
+
+        .impact-card:nth-child(1) { z-index: 4; }
+        .impact-card:nth-child(2) { z-index: 5; }
+        .impact-card:nth-child(3) { z-index: 6; }
+        .impact-card:nth-child(4) { z-index: 7; }
+
+        .impact-icon {
+            flex-shrink: 0;
+            width: 44px; height: 44px;
+            border-radius: 14px;
+            background: linear-gradient(145deg, rgba(42,90,56,0.3), rgba(42,90,56,0.12));
+            display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 14px rgba(42,90,56,0.08);
+        }
+
+        .impact-icon svg {
+            width: 18px; height: 18px;
+            stroke: #6aaa5a;
+            stroke-width: 2; fill: none;
+        }
+
+        .impact-text {
+            font-size: 0.9rem;
+            color: rgba(240,237,232,0.78);
+            line-height: 1.5;
+            font-weight: 500;
+        }
+
+        @media (max-width: 520px) {
+            .impact-pin { height: 400vh; }
+            .impact-card { height: 110px; padding: 0 18px; border-radius: 14px; }
+            .impact-icon { width: 38px; height: 38px; }
+            .impact-text { font-size: 0.82rem; }
+        }
+
+        /* ═══════════════════════
+           SECTION 5 — DAILY LIFE
+           ═══════════════════════ */
+        /* Larger section headline */
+        .daily-section .rs-label {
+            font-size: 1.08rem;
+            margin-bottom: 44px;
+        }
+
+        .daily-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .daily-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 18px 20px;
+            background: linear-gradient(90deg, rgba(240,100,50,0.04), rgba(255,255,255,0.03) 40%, rgba(255,255,255,0.025));
+            border-radius: 14px;
+            border-left: 3px solid rgba(240,100,50,0.3);
+            box-shadow: inset 3px 0 12px rgba(240,100,50,0.04), 0 2px 10px rgba(0,0,0,0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+        }
+
+        .daily-item:hover {
+            transform: scale(1.015);
+            border-color: rgba(240,100,50,0.45);
+            box-shadow: inset 3px 0 16px rgba(240,100,50,0.06), 0 4px 16px rgba(0,0,0,0.08);
+        }
+
+        .daily-item p {
+            font-size: 0.88rem;
+            color: rgba(240,237,232,0.75);
+            line-height: 1.5;
+        }
+
+        /* ═══════════════════════
+           SECTION 6 — CONSEQUENCES
+           ═══════════════════════ */
+        .consequences {
+            background: rgba(0,0,0,0.15);
+            border-radius: 20px;
+            padding: 40px 32px;
+        }
+
+        .consequences .rs-title { color: var(--accent); margin-bottom: 28px; }
+
+        .cons-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .cons-item:last-child { margin-bottom: 0; }
+
+        .cons-x {
+            flex-shrink: 0;
+            width: 20px; height: 20px;
+            border-radius: 50%;
+            background: rgba(240,120,72,0.1);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.6rem; font-weight: 800;
+            color: var(--accent);
+            margin-top: 2px;
+        }
+
+        .cons-item p {
+            font-size: 0.88rem;
+            color: rgba(240,237,232,0.75);
+            line-height: 1.5;
+        }
+
+        /* ═══════════════════════
+           SECTION 7 — LIFE IMPACT
+           ═══════════════════════ */
+        .life-section {
+            padding: 100px 0 80px;
+            position: relative;
+        }
+
+        .life-section .rs-label {
+            font-size: 1.1rem;
+            margin-bottom: 28px;
+        }
+
+        .life-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0;
+            max-width: 560px;
+            margin: 0 auto;
+        }
+
+        .life-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 26px 0;
+            border-bottom: 1px solid rgba(240,120,72,0.05);
+            opacity: 0;
+            transform: translateY(18px);
+            transition: opacity 0.7s ease, transform 0.7s cubic-bezier(.23,1,.32,1);
+        }
+
+        .life-item.vis { opacity: 1; transform: translateY(0); }
+        .life-item:last-child { border-bottom: none; }
+
+        /* Icon container */
+        .life-icon {
+            flex-shrink: 0;
+            width: 40px; height: 40px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.04);
+            display: flex; align-items: center; justify-content: center;
+            transition: box-shadow 0.4s ease, border-color 0.4s ease;
+        }
+
+        .life-icon svg {
+            width: 18px; height: 18px;
+            stroke: rgba(42,90,56,0.5);
+            stroke-width: 1.5;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .life-item.vis .life-icon {
+            border-color: rgba(240,100,50,0.1);
+            box-shadow: 0 0 12px rgba(240,100,50,0.05);
+        }
+
+        .life-item.vis .life-icon svg { stroke: rgba(240,100,50,0.45); }
+
+        .life-item p {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: rgba(240,237,232,0.55);
+            line-height: 1.55;
+            transition: color 0.4s ease;
+        }
+
+        .life-item.vis p { color: rgba(240,237,232,0.75); }
+
+        /* Per-icon animations */
+        .li-battery .li-fill { animation: liBatteryDrain 4s ease-in-out 0.5s infinite; transform-origin: bottom; }
+        @keyframes liBatteryDrain { 0%,100%{ transform:scaleY(1); opacity:0.5; } 50%{ transform:scaleY(0.3); opacity:0.25; } }
+
+        .li-connect .li-line { animation: liFlicker 3s ease-in-out infinite; }
+        @keyframes liFlicker { 0%,100%{ opacity:0.5; } 30%{ opacity:0.15; } 60%{ opacity:0.45; } }
+
+        .li-retreat .li-circle { animation: liShrink 3.5s ease-in-out infinite; }
+        @keyframes liShrink { 0%,100%{ r:5; opacity:0.4; } 50%{ r:3; opacity:0.2; } }
+
+        .li-energy .li-bar { animation: liDrop 4s ease-in-out infinite; }
+        @keyframes liDrop { 0%{ height:10px; } 50%{ height:3px; } 100%{ height:10px; } }
+
+        .li-disconnect .li-half { animation: liDrift 5s ease-in-out infinite; }
+        .li-disconnect .li-half--r { animation: liDriftR 5s ease-in-out infinite; }
+        @keyframes liDrift { 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(-2px); } }
+        @keyframes liDriftR { 0%,100%{ transform:translateX(0); } 50%{ transform:translateX(2px); } }
+
+        .li-spiral .li-spin { animation: liSpin 8s linear infinite; transform-origin: center; }
+        @keyframes liSpin { to { transform: rotate(360deg); } }
+
+        /* Final item — strongest */
+        .life-item--final { padding: 40px 0 28px; border-bottom: none; }
+        .life-item--final p { font-size: 1.05rem; font-weight: 700; color: rgba(240,237,232,0.5); }
+        .life-item--final.vis p { color: rgba(240,237,232,0.88); }
+        .life-item--final .life-icon { width: 44px; height: 44px; }
+        .life-item--final.vis .life-icon { box-shadow: 0 0 16px rgba(240,100,50,0.08); }
+
+        /* ═══════════════════════
+           SECTION 8 — PUNCH
+           ═══════════════════════ */
+        .punch {
+            text-align: center;
+            padding: 100px 24px;
+        }
+
+        .punch h2 {
+            font-size: clamp(1.4rem, 4.5vw, 2rem);
+            font-weight: 800;
+            line-height: 1.25;
+            letter-spacing: -0.03em;
+            max-width: 580px;
+            margin: 0 auto;
+        }
+
+        .punch-line {
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--accent), rgba(240,120,72,0.3));
+            border-radius: 2px;
+            margin: 24px auto 0;
+            box-shadow: 0 0 16px var(--accent-glow);
+        }
+
+        /* ═══════════════════════
+           SECTION 9 — CTA
+           ═══════════════════════ */
+        .result-cta {
+            text-align: center;
+            padding: 20px 24px 100px;
+        }
+
+        .result-cta .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 22px 72px;
+            background: linear-gradient(90deg, #FF4D1A, #FF3B1F, #FF1F1F);
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1.12rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow:
+                0 4px 16px rgba(255,60,31,0.18),
+                0 0 50px rgba(255,77,26,0.12);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+        }
+
+        .result-cta .btn:hover {
+            transform: translateY(-2px) scale(1.03);
+            filter: brightness(1.08);
+            box-shadow:
+                0 6px 24px rgba(255,60,31,0.25),
+                0 0 60px rgba(255,77,26,0.15);
+        }
+
+        .result-cta .btn:active {
+            transform: translateY(0) scale(0.98);
+            filter: brightness(0.96);
+        }
+
+        /* ── Sticky CTA ── */
+        .sticky-cta {
+            position: fixed;
+            bottom: 0; left: 0; right: 0;
+            padding: 16px 24px calc(16px + env(safe-area-inset-bottom, 0px));
+            background: rgba(20,31,26,0.85);
+            backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+            border-top: 1px solid rgba(255,255,255,0.04);
+            z-index: 50;
+            text-align: center;
+            transform: translateY(100%);
+            opacity: 0;
+            transition: transform 0.4s cubic-bezier(.23,1,.32,1), opacity 0.3s ease;
+            pointer-events: none;
+        }
+
+        .sticky-cta.show {
+            transform: translateY(0);
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .sticky-cta .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px 56px;
+            background: linear-gradient(90deg, #FF4D1A, #FF3B1F, #FF1F1F);
+            color: #fff;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 1rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            text-decoration: none;
+            box-shadow: 0 4px 16px rgba(255,60,31,0.2), 0 0 40px rgba(255,77,26,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+        }
+
+        .sticky-cta .btn:hover {
+            transform: translateY(-1px) scale(1.02);
+            filter: brightness(1.06);
+            box-shadow: 0 6px 20px rgba(255,60,31,0.25), 0 0 48px rgba(255,77,26,0.1);
+        }
+
+        @media (max-width: 480px) {
+            .sticky-cta .btn { width: 100%; max-width: 360px; padding: 15px 32px; font-size: 0.95rem; }
+        }
+
+        /* ═══════════════════════
+           ANIMATIONS
+           ═══════════════════════ */
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ═══════════════════════
+           RESPONSIVE
+           ═══════════════════════ */
+        @media (max-width: 480px) {
+            .container { padding: 0 18px; }
+            .result-header { padding: 48px 0 20px; }
+            .result-header h1 { font-size: 1.4rem; }
+            .rs { padding: 60px 0; }
+            .rs--tight { padding: 8px 0 40px; }
+            .rs--compact { padding: 40px 0 32px; }
+            .diag-card { padding: 24px 18px; }
+            .diag-text { font-size: .82rem; }
+            .consequences { padding: 28px 18px; }
+            .punch h2 { font-size: 1.2rem; }
+            .impact-text { font-size: .82rem; }
+            .daily-item p { font-size: .82rem; }
+            .life-section .rs-label { font-size: .95rem; margin-bottom: 20px; }
+            .life-item p { font-size: .82rem; }
+            .trust-banner { padding: 14px 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 0; justify-items: center; }
+            .tb-col { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+            .tb-text { font-size: .52rem; }
+            .tb-sub { font-size: .52rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ═══ TRUST BANNER ═══ -->
+<div class="trust-banner">
+    <div class="tb-col">
+        <div class="tb-stars">
+            <span class="tb-star"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8l-5.8 3.1 1.1-6.5L2.6 8.8l6.5-.9z"/></svg></span>
+            <span class="tb-star"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8l-5.8 3.1 1.1-6.5L2.6 8.8l6.5-.9z"/></svg></span>
+            <span class="tb-star"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8l-5.8 3.1 1.1-6.5L2.6 8.8l6.5-.9z"/></svg></span>
+            <span class="tb-star"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8l-5.8 3.1 1.1-6.5L2.6 8.8l6.5-.9z"/></svg></span>
+            <span class="tb-star"><svg viewBox="0 0 24 24"><path d="M12 2l2.9 5.9 6.5.9-4.7 4.6 1.1 6.5L12 16.8l-5.8 3.1 1.1-6.5L2.6 8.8l6.5-.9z"/></svg></span>
+        </div>
+        <span class="tb-text">4,9/5 aus 100+ Bewertungen</span>
+    </div>
+    <div class="tb-col">
+        <div class="tb-avatars">
+            <div class="tb-av" style="background-image:url('trafo 1.jpeg')"></div>
+            <div class="tb-av" style="background-image:url('trafo 2.jpeg')"></div>
+            <div class="tb-av" style="background-image:url('trafo 3.jpeg')"></div>
+            <div class="tb-av" style="background-image:url('trafo 4.jpeg')"></div>
+        </div>
+        <span class="tb-sub">Bereits über 10.000 Teilnehmer</span>
+    </div>
+</div>
+
+<!-- ═══ HEADER ═══ -->
+<div class="result-header reveal" data-d="0">
+    <div class="container">
+        <p class="rs-label">Dein persönliches Ergebnis ist da</p>
+        <h1>Zustand deines Nervensystems</h1>
+    </div>
+</div>
+
+<!-- ═══ LEVEL BAR ═══ -->
+<div class="rs rs--tight">
+    <div class="container">
+        <div class="level-card reveal" data-d="300">
+            <div class="level-bar-wrap">
+                <div class="level-bar">
+                    <div class="level-bar-fill" id="levelFill"></div>
+                </div>
+                <div class="level-marker" id="levelMarker"></div>
+                <div class="level-labels">
+                    <span>Ausgeglichen</span>
+                    <span>Angespannt</span>
+                    <span class="lvl-high">Überlastet</span>
+                </div>
+            </div>
+        </div>
+        <div class="level-status-card reveal" data-d="600">
+            <h2>Dein Nervensystem ist aktuell überlastet</h2>
+            <p>und genau das blockiert deine Abnahme</p>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ DIAGNOSIS ═══ -->
+<div class="rs rs--compact">
+    <div class="container">
+        <div class="diag-card reveal" data-d="200">
+            <p class="diag-card-label">Dein Ergebnis zeigt:</p>
+            <div class="diag-row">
+                <div class="diag-icon"><svg viewBox="0 0 24 24"><path d="M12 9v4M12 17h.01"/><circle cx="12" cy="12" r="10"/></svg></div>
+                <p class="diag-text">Deine Rückfälle sind kein Zufall</p>
+            </div>
+            <div class="diag-row">
+                <div class="diag-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78L12 21.23l8.84-8.84a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+                <p class="diag-text">Dein Essverhalten ist emotional gesteuert</p>
+            </div>
+            <div class="diag-row">
+                <div class="diag-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <p class="diag-text">Dein Körper steht dauerhaft unter Stress</p>
+            </div>
+            <div class="diag-row">
+                <div class="diag-icon"><svg viewBox="0 0 24 24"><path d="M17 18a5 5 0 0 0-10 0"/><line x1="12" y1="2" x2="12" y2="9"/><line x1="4.22" y1="10.22" x2="5.64" y2="11.64"/><line x1="1" y1="18" x2="3" y2="18"/><line x1="21" y1="18" x2="23" y2="18"/><line x1="18.36" y1="11.64" x2="19.78" y2="10.22"/></svg></div>
+                <p class="diag-text">Dein System kommt nicht mehr richtig zur Ruhe</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ BODY IMPACT ═══ -->
+<div class="impact-pin" id="impactPin">
+    <div class="impact-pin-inner">
+
+        <!-- Organic background -->
+        <div class="impact-bg">
+            <div class="impact-bg-shape impact-bg-shape--1"></div>
+            <div class="impact-bg-shape impact-bg-shape--2"></div>
+            <div class="impact-bg-shape impact-bg-shape--3"></div>
+            <div class="impact-bg-shape impact-bg-shape--4"></div>
+
+            <!-- DNA / nerve structure -->
+            <svg class="dna-strand dna-strand--1" viewBox="0 0 120 600" fill="none" preserveAspectRatio="none">
+                <!-- Helix strand A -->
+                <path d="M30 0 C80 50, 40 100, 90 150 C40 200, 80 250, 30 300 C80 350, 40 400, 90 450 C40 500, 80 550, 30 600" stroke="rgba(255,255,255,0.05)" stroke-width="0.8" fill="none"/>
+                <!-- Helix strand B -->
+                <path d="M90 0 C40 50, 80 100, 30 150 C80 200, 40 250, 90 300 C40 350, 80 400, 30 450 C80 500, 40 550, 90 600" stroke="rgba(255,255,255,0.04)" stroke-width="0.8" fill="none"/>
+                <!-- Rungs -->
+                <line x1="42" y1="25" x2="78" y2="25" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="55" y1="75" x2="65" y2="75" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="42" y1="125" x2="78" y2="125" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="55" y1="175" x2="65" y2="175" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="42" y1="225" x2="78" y2="225" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="55" y1="275" x2="65" y2="275" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="42" y1="325" x2="78" y2="325" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="55" y1="375" x2="65" y2="375" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="42" y1="425" x2="78" y2="425" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="55" y1="475" x2="65" y2="475" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="42" y1="525" x2="78" y2="525" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+                <line x1="55" y1="575" x2="65" y2="575" stroke="rgba(255,255,255,0.03)" stroke-width="0.5"/>
+            </svg>
+
+            <svg class="dna-strand dna-strand--2" viewBox="0 0 120 600" fill="none" preserveAspectRatio="none">
+                <path d="M30 0 C80 50, 40 100, 90 150 C40 200, 80 250, 30 300 C80 350, 40 400, 90 450 C40 500, 80 550, 30 600" stroke="rgba(255,255,255,0.035)" stroke-width="0.6" fill="none"/>
+                <path d="M90 0 C40 50, 80 100, 30 150 C80 200, 40 250, 90 300 C40 350, 80 400, 30 450 C80 500, 40 550, 90 600" stroke="rgba(255,255,255,0.03)" stroke-width="0.6" fill="none"/>
+                <line x1="42" y1="50" x2="78" y2="50" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+                <line x1="55" y1="150" x2="65" y2="150" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+                <line x1="42" y1="250" x2="78" y2="250" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+                <line x1="55" y1="350" x2="65" y2="350" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+                <line x1="42" y1="450" x2="78" y2="450" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+                <line x1="55" y1="550" x2="65" y2="550" stroke="rgba(255,255,255,0.02)" stroke-width="0.5"/>
+            </svg>
+        </div>
+        <div class="impact-bg-focus"></div>
+
+        <div class="impact-header">
+            <p class="rs-label">Dein Körper steht unbewusst unter Stress</p>
+            <div class="impact-core">
+                <div class="impact-core-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <p>Dein Körper produziert zu viele Stresshormone (Cortisol)<br><span style="font-family:'Sansita Swashed',cursive;color:var(--accent);font-weight:600;display:inline-block;margin-top:6px">und das blockiert deine Abnahme:</span></p>
+            </div>
+        </div>
+
+        <div class="impact-stack">
+            <div class="impact-card" data-card="0">
+                <div class="impact-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg></div>
+                <p class="impact-text">Cortisol fördert gezielt Bauchfett</p>
+            </div>
+            <div class="impact-card" data-card="1">
+                <div class="impact-icon"><svg viewBox="0 0 24 24"><path d="M12 20V10M18 20V4M6 20v-4"/></svg></div>
+                <p class="impact-text">Dein Körper speichert eher Fett, statt es zu verbrennen</p>
+            </div>
+            <div class="impact-card" data-card="2">
+                <div class="impact-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+                <p class="impact-text">Dein Stoffwechsel fährt runter und ein Kaloriendefizit wird schwerer bis unmöglich</p>
+            </div>
+            <div class="impact-card" data-card="3">
+                <div class="impact-icon"><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 6v6l4 2"/></svg></div>
+                <p class="impact-text">Heißhunger entsteht automatisch &ndash; nicht bewusst</p>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!-- ═══ DAILY LIFE ═══ -->
+<div class="rs daily-section">
+    <div class="container">
+        <p class="rs-label reveal" data-d="0" style="color:#fff">Das bedeutet für dich im Alltag</p>
+        <div class="daily-list">
+            <div class="daily-item reveal" data-d="100"><p>Du bist oft müde und funktionierst nur noch</p></div>
+            <div class="daily-item reveal" data-d="200"><p>Ernährung &amp; Training sind nicht langfristig durchhaltbar</p></div>
+            <div class="daily-item reveal" data-d="300"><p>Essen bleibt ständig ein Thema in deinem Kopf</p></div>
+            <div class="daily-item reveal" data-d="400"><p>Du fühlst dich fremdbestimmt durch Heißhunger</p></div>
+            <div class="daily-item reveal" data-d="500"><p>Du nimmst nicht richtig ab, auch wenn du dich an alles hältst</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ CONSEQUENCES ═══ -->
+<div class="rs">
+    <div class="container">
+        <div class="consequences reveal" data-d="200">
+            <h2 class="rs-title">Die Folge:</h2>
+            <div class="cons-item"><span class="cons-x">&times;</span><p>Du startest immer wieder neu und wirst deine Kilos nicht los</p></div>
+            <div class="cons-item"><span class="cons-x">&times;</span><p>Du landest im Jojo-Effekt statt langfristiger Ergebnisse</p></div>
+            <div class="cons-item"><span class="cons-x">&times;</span><p>Dein Selbstvertrauen sinkt weiter</p></div>
+            <div class="cons-item"><span class="cons-x">&times;</span><p>Scham und Selbstzweifel bleiben bestehen</p></div>
+        </div>
+    </div>
+</div>
+
+<!-- ═══ LIFE IMPACT ═══ -->
+<div class="life-section">
+    <div class="container">
+        <p class="rs-label reveal" data-d="0">Was das mit deinem Leben macht</p>
+        <div class="life-list">
+
+            <!-- 1: Energy draining -->
+            <div class="life-item reveal" data-d="200">
+                <div class="life-icon li-battery">
+                    <svg viewBox="0 0 18 18"><rect x="3" y="4" width="10" height="12" rx="1.5" stroke-width="1.2"/><line x1="6" y1="2" x2="10" y2="2" stroke-width="1.5"/><rect class="li-fill" x="5" y="8" width="6" height="6" rx="0.5" fill="rgba(240,100,50,0.3)" stroke="none"/></svg>
+                </div>
+                <p>Du hast weniger Energie für deinen Alltag</p>
+            </div>
+
+            <!-- 2: Connection breaking -->
+            <div class="life-item reveal" data-d="400">
+                <div class="life-icon li-connect">
+                    <svg viewBox="0 0 18 18"><circle cx="4" cy="9" r="2.5"/><circle cx="14" cy="9" r="2.5"/><line class="li-line" x1="6.5" y1="9" x2="11.5" y2="9" stroke-dasharray="2 1.5"/></svg>
+                </div>
+                <p>Beziehungen leiden, weil du mit dir selbst beschäftigt bist</p>
+            </div>
+
+            <!-- 3: Retreat -->
+            <div class="life-item reveal" data-d="600">
+                <div class="life-icon li-retreat">
+                    <svg viewBox="0 0 18 18"><circle cx="9" cy="9" r="7" stroke-dasharray="3 2" opacity="0.3"/><circle class="li-circle" cx="9" cy="9" r="5" fill="rgba(240,100,50,0.12)" stroke="none"/></svg>
+                </div>
+                <p>Du vermeidest Situationen, in denen du dich unwohl fühlst</p>
+            </div>
+
+            <!-- 4: Activity declining -->
+            <div class="life-item reveal" data-d="800">
+                <div class="life-icon li-energy">
+                    <svg viewBox="0 0 18 18"><rect x="3" y="14" width="2" height="2" rx="0.5" fill="rgba(240,100,50,0.25)" stroke="none"/><rect x="6.5" y="11" width="2" height="5" rx="0.5" fill="rgba(240,100,50,0.2)" stroke="none"/><rect x="10" y="8" width="2" class="li-bar" height="8" rx="0.5" fill="rgba(240,100,50,0.15)" stroke="none"/><rect x="13.5" y="5" width="2" height="11" rx="0.5" fill="rgba(42,90,56,0.15)" stroke="none"/></svg>
+                </div>
+                <p>Du hast weniger Lust auf Unternehmungen</p>
+            </div>
+
+            <!-- 5: Disconnect from self -->
+            <div class="life-item reveal" data-d="1000">
+                <div class="life-icon li-disconnect">
+                    <svg viewBox="0 0 18 18"><circle class="li-half" cx="7" cy="9" r="4" stroke-dasharray="2 2"/><circle class="li-half li-half--r" cx="11" cy="9" r="4" stroke-dasharray="2 2" opacity="0.4"/></svg>
+                </div>
+                <p>Du bist nicht mehr die Version von dir, die du eigentlich sein willst</p>
+            </div>
+
+            <!-- 6: Thought spiral — heaviest -->
+            <div class="life-item life-item--final reveal" data-d="1300">
+                <div class="life-icon">
+                    <svg viewBox="0 0 18 18" class="li-spiral"><circle cx="9" cy="9" r="3" stroke-dasharray="1.5 1.5"/><path class="li-spin" d="M9 2 A7 7 0 0 1 16 9" stroke-dasharray="2 3"/><path class="li-spin" d="M9 16 A7 7 0 0 1 2 9" stroke-dasharray="2 3" style="animation-delay:-4s"/></svg>
+                </div>
+                <p>Du verbringst Stunden in deinem Kopf, analysierst, planst, denkst&hellip; und kommst trotzdem nicht raus</p>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- ═══ PUNCH ═══ -->
+<div class="punch reveal" data-d="200">
+    <p style="font-family:'Plus Jakarta Sans',sans-serif;font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent);text-align:center;margin-bottom:14px">Die unangenehme Wahrheit:</p>
+    <h2>Solange dein Nervensystem überlastet ist,<br>wird dein Körper nicht dauerhaft abnehmen.</h2>
+    <div class="punch-line"></div>
+</div>
+
+<!-- ═══ CTA ═══ -->
+<div class="result-cta reveal" data-d="400" id="resultCta">
+    <a href="plan-loading.html" class="btn">Weiter</a>
+</div>
+
+<!-- ═══ STICKY CTA ═══ -->
+<div class="sticky-cta" id="stickyCta">
+    <a href="plan-loading.html" class="btn">Weiter</a>
+</div>
+
+<script>
+    // Staggered reveal on scroll
+    const ro = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                const d = parseInt(e.target.dataset.d) || 0;
+                setTimeout(() => e.target.classList.add('vis'), d);
+                ro.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => ro.observe(el));
+
+    // ── Sticky CTA show/hide ──
+    var stickyCta = document.getElementById('stickyCta');
+    var resultCta = document.getElementById('resultCta');
+
+    if (stickyCta && resultCta) {
+        // Show after scrolling past the header area
+        var stickyShown = false;
+        var resultVisible = false;
+
+        new IntersectionObserver(function(entries) {
+            resultVisible = entries[0].isIntersecting;
+            if (resultVisible) {
+                stickyCta.classList.remove('show');
+            } else if (stickyShown) {
+                stickyCta.classList.add('show');
+            }
+        }, { threshold: 0.3 }).observe(resultCta);
+
+        // Delay initial appearance
+        setTimeout(function() {
+            stickyShown = true;
+            if (!resultVisible) {
+                stickyCta.classList.add('show');
+            }
+        }, 2000);
+    }
+
+    // Animate level bar after header visible
+    setTimeout(() => {
+        const fill = document.getElementById('levelFill');
+        const marker = document.getElementById('levelMarker');
+        if (fill) fill.style.width = '88%';
+        if (marker) setTimeout(() => marker.classList.add('vis'), 1500);
+    }, 600);
+
+    // ── Scroll-driven card stack ──
+    var pin = document.getElementById('impactPin');
+    var sCards = pin ? pin.querySelectorAll('.impact-card') : [];
+    var totalCards = sCards.length; // 4
+
+    if (pin && totalCards > 0) {
+        function tickStack() {
+            var rect = pin.getBoundingClientRect();
+            var pinH = pin.offsetHeight;
+            var scrolled = -rect.top;
+            var runway = pinH - window.innerHeight;
+            if (runway <= 0) { requestAnimationFrame(tickStack); return; }
+
+            // 0..1 progress through the pin
+            var progress = Math.max(0, Math.min(1, scrolled / runway));
+
+            // First 15% = no cards (just headline visible)
+            // Then each card gets 20% of the runway
+            // Last 5% = all stacked, about to release
+            var cardStart = 0.15;
+            var cardSlice = 0.20;
+
+            for (var i = 0; i < totalCards; i++) {
+                var start = cardStart + (i * cardSlice);
+                var end = start + cardSlice;
+                var cardProgress = Math.max(0, Math.min(1, (progress - start) / (end - start)));
+
+                // Card travels from 100vh below to its stacked position
+                // Stacked Y = i * 28px (75% overlap on 120px card)
+                var offscreen = window.innerHeight * 0.6;
+                var targetY = i * 28;
+                var currentY = offscreen - (offscreen - targetY) * cardProgress;
+
+                if (cardProgress <= 0) {
+                    currentY = offscreen;
+                }
+
+                sCards[i].style.transform = 'translateY(' + currentY + 'px)';
+            }
+
+            requestAnimationFrame(tickStack);
+        }
+
+        requestAnimationFrame(tickStack);
+    }
+</script>
+
+</body>
+</html>

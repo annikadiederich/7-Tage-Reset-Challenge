@@ -93,7 +93,7 @@ html.quiz-active body {
 .qz-body {
     flex: 1;
     display: flex;
-    align-items: center;
+    align-items: safe center;
     justify-content: center;
     padding: 60px 24px 80px;
     min-height: 100dvh;
@@ -163,7 +163,7 @@ html.quiz-active body {
 
 /* Question text — serif to match brand pattern (landing + offer + breathers) */
 .qz-q {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: clamp(1.4rem, 3.6vw, 1.7rem);
     font-weight: 700;
     color: #1e1c1a;
@@ -303,7 +303,8 @@ html.quiz-active body {
     color: #2a5a3a;
 }
 .qz-opt--positive {
-    background: rgba(42,90,58,0.035);
+    background: rgba(42,90,58,0.12);
+    border-color: rgba(42,90,58,0.28);
 }
 .qz-opt--positive.selected {
     border-color: #2a5a3a;
@@ -509,10 +510,10 @@ html.quiz-active body {
     animation: qzBreatherPop 0.5s cubic-bezier(.34,1.56,.64,1) both;
 }
 
-/* Script accent — orange italic serif */
+/* Script accent — Sansita Swashed (matches offer/checkout) */
 .qz-script {
-    font-family: 'Playfair Display', 'Instrument Serif', Georgia, serif;
-    font-style: italic;
+    font-family: 'Sansita Swashed', cursive;
+    font-weight: 700;
     font-weight: 700;
     color: #e8530e;
     text-transform: none;
@@ -526,14 +527,194 @@ html.quiz-active body {
 }
 
 .qz-breather-title {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-size: clamp(2rem, 6vw, 3rem);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: clamp(1.9rem, 3.4vw, 2.4rem);
     font-weight: 800;
     color: #1e1c1a;
     letter-spacing: -0.015em;
-    line-height: 1.1;
+    line-height: 1.15;
     margin: 8px 0 0;
     text-transform: none;
+    max-width: 640px;
+    text-wrap: balance;
+}
+
+/* Split-title layout: big italic eyebrow on top, smaller h2 below */
+.qz-breather-title--split {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin: 8px 0 0;
+}
+.qz-breather-eyebrow {
+    font-family: 'Sansita Swashed', cursive;
+    font-weight: 700;
+    font-weight: 700;
+    font-size: clamp(3rem, 11vw, 4.5rem);
+    line-height: 1;
+    color: #e8530e;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin: 0;
+    position: relative;
+}
+.qz-breather-eyebrow::after {
+    content: '';
+    display: block;
+    width: 64px;
+    height: 3px;
+    background: #e8530e;
+    border-radius: 2px;
+    margin: 16px auto 18px;
+    opacity: 0.85;
+}
+.qz-breather-main {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 5.5vw, 2.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: #1e1c1a;
+    margin: 0;
+    text-align: center;
+}
+
+/* Chapter pill number (#2, #3) in gold */
+.qz-br-pill-num {
+    color: #c9a27a;
+    margin-left: 8px;
+    font-weight: 800;
+}
+
+/* Verdict block — peach BG with quote mark */
+.qz-br-verdict {
+    background: linear-gradient(180deg, rgba(232,83,14,0.04) 0%, rgba(232,83,14,0.08) 100%);
+    border: 1px solid rgba(232,83,14,0.15);
+    border-radius: 18px;
+    padding: 28px 24px 26px;
+    text-align: center;
+    margin: 14px auto 0;
+    max-width: 560px;
+    width: 100%;
+    position: relative;
+}
+.qz-br-verdict::before {
+    content: '"';
+    position: absolute;
+    top: -6px;
+    left: 20px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 4rem;
+    color: #e8530e;
+    line-height: 1;
+    opacity: 0.55;
+    font-style: italic;
+}
+.qz-br-verdict-text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 4vw, 1.45rem);
+    line-height: 1.4;
+    color: #1e1c1a;
+    margin: 0;
+    letter-spacing: -0.015em;
+}
+.qz-strike {
+    font-family: 'Sansita Swashed', cursive;
+    color: #e8530e;
+    font-weight: 700;
+    font-weight: 700;
+    position: relative;
+    white-space: nowrap;
+    padding: 0 2px;
+}
+.qz-strike::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 55%;
+    height: 2px;
+    background: #e8530e;
+    opacity: 0.65;
+}
+.qz-outro-emph {
+    display: block;
+    margin-top: 12px;
+    color: #14482c;
+    font-style: normal;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+}
+
+/* Trustpilot card (card variant, not inline banner) */
+.qz-br-tp-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin: 14px auto 0;
+    padding: 18px 22px;
+    background: #fff;
+    border: 1px solid rgba(30,28,26,0.08);
+    border-radius: 14px;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 2px 8px rgba(30,28,26,0.05);
+}
+.qz-br-tp-stars {
+    display: inline-flex;
+    gap: 3px;
+}
+.qz-br-tp-star {
+    width: 26px;
+    height: 26px;
+    background: #00b67a;
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+}
+.qz-br-tp-star svg {
+    width: 15px;
+    height: 15px;
+    fill: #fff;
+}
+.qz-br-tp-meta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.82rem;
+    color: #3a332e;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.qz-br-tp-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #1e1c1a;
+}
+.qz-br-tp-sep {
+    color: #9b938a;
+    opacity: 0.6;
+}
+.qz-br-tp-rating strong {
+    color: #00b67a;
+    font-weight: 700;
+}
+.qz-br-tp-count {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.8rem;
+    color: #7a7568;
+    text-align: center;
+    margin: 0;
+}
+.qz-br-tp-count strong {
+    color: #1e1c1a;
+    font-weight: 700;
 }
 
 /* Intro paragraph above the points list */
@@ -698,7 +879,7 @@ html.quiz-active body {
 
 /* Outro — flowing serif sentence on page bg, only accent stays orange italic */
 .qz-br-outro {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 700;
     font-style: normal;
     font-size: clamp(1.2rem, 3vw, 1.5rem);
@@ -711,14 +892,14 @@ html.quiz-active body {
     padding: 0 6px;
 }
 .qz-br-outro-accent {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic;
+    font-family: 'Sansita Swashed', cursive;
+    font-weight: 700;
     font-weight: 700;
     color: #e8530e;
 }
 .qz-br-outro .qz-script {
-    font-family: 'Playfair Display', Georgia, serif;
-    font-style: italic;
+    font-family: 'Sansita Swashed', cursive;
+    font-weight: 700;
     color: #e8530e;
 }
 
@@ -862,7 +1043,9 @@ html.quiz-active body {
     border-radius: 999px;
     transition: width .18s cubic-bezier(.4,0,.2,1);
     pointer-events: none;
+    will-change: width;
 }
+.qz-scale-fill--instant { transition: none; }
 
 .qz-scale-stops {
     position: absolute;
@@ -912,6 +1095,9 @@ html.quiz-active body {
     display: grid;
     place-items: center;
     z-index: 3;
+}
+.qz-scale-thumb {
+    will-change: left, transform;
 }
 .qz-scale-thumb--instant { transition: none; }
 
@@ -1057,7 +1243,7 @@ html.quiz-active body {
     margin-bottom: 8px;
 }
 .qz-scale-sel-name {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-size: 1.9rem;
     font-weight: 700;
     color: #0e2a1b;
@@ -1297,7 +1483,7 @@ html.quiz-active body {
 }
 
 .qz-loading-caption {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-style: italic;
     font-size: 0.98rem;
     color: #7a7568;
@@ -1368,7 +1554,7 @@ html.quiz-active body {
     text-align: center;
 }
 .qz-ring-percent {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 700;
     font-size: clamp(56px, 15vw, 84px);
     line-height: 1;
@@ -1402,7 +1588,7 @@ html.quiz-active body {
     max-width: 440px;
 }
 .qz-load-title {
-    font-family: 'Playfair Display', Georgia, serif;
+    font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 700;
     font-size: clamp(1.3rem, 4.5vw, 1.7rem);
     line-height: 1.2;

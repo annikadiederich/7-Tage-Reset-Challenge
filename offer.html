@@ -1,384 +1,1913 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dein Abnehm-Reset | Elliott Aziz</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sansita+Swashed:wght@400;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
-        :root{--bg:#F7F6F2;--bg-green:#EEF5F0;--bg-card:#ffffff;--text:#2c2c2c;--text-soft:#6b6b6b;--text-muted:#a0a0a0;--green:#619240;--green-soft:rgba(97,146,64,.08);--cta1:#FF3B1F;--cta2:#FF6A3D;--shadow:0 2px 8px rgba(0,0,0,.03),0 8px 32px rgba(0,0,0,.04);--shadow-hover:0 4px 12px rgba(0,0,0,.04),0 12px 40px rgba(0,0,0,.06)}
-        html{scroll-behavior:smooth}
-        body{font-family:'Instrument Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
-        h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif}
-        .sw{font-family:'Sansita Swashed',cursive;font-weight:600}
-        .ctn{max-width:720px;margin:0 auto;padding:0 24px}
-        .ctn--sm{max-width:580px;margin:0 auto;padding:0 24px}
-        .rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s cubic-bezier(.23,1,.32,1)}.rv.vis{opacity:1;transform:translateY(0)}
-        .sec{padding:80px 0}
-        .sec--green{background:var(--bg-green)}
-        .sec-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);text-align:center;margin-bottom:12px}
-        .sec-title{font-size:clamp(1.35rem,4vw,1.75rem);font-weight:800;text-align:center;letter-spacing:-.03em;line-height:1.25;margin-bottom:16px}
-        .sec-sub{font-size:.9rem;color:var(--text-soft);text-align:center;max-width:480px;margin:0 auto 40px;line-height:1.7}
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>7-Tage Reset-Challenge · Dein empfohlener Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Sansita+Swashed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f4f1;
+    --bg-soft: #faf7ef;
+    --bg-dark: #0e2a1b;
+    --bg-dark-2: #0a2015;
+    --card: #ffffff;
 
-        /* ═══ STICKY BANNER ═══ */
-        .topbar{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(90deg,#fdf3d0,#f5e6a3);padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid rgba(0,0,0,.04)}
-        .topbar-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:.76rem;font-weight:700;color:#5a4a10}
-        .topbar-timer{font-family:'Plus Jakarta Sans',sans-serif;font-size:.86rem;font-weight:800;color:#3a3010;font-variant-numeric:tabular-nums}
-        .topbar-cta{padding:7px 18px;background:linear-gradient(90deg,var(--cta1),var(--cta2));color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.7rem;font-weight:700;border:none;border-radius:100px;cursor:pointer;text-decoration:none;transition:transform .2s ease;box-shadow:0 2px 8px rgba(255,59,31,.15)}
-        .topbar-cta:hover{transform:scale(1.04)}
-        @media(max-width:520px){.topbar{gap:8px;padding:8px 14px}.topbar-text{font-size:.64rem}.topbar-timer{font-size:.74rem}}
+    --ink: #1e1c1a;
+    --ink-soft: #3a332e;
+    --muted: #5c5650;
+    --muted-2: #7a7568;
+    --muted-3: #9b938a;
 
-        /* ═══ HERO ═══ */
-        .hero{padding:100px 24px 60px;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,#f2f1ec 100%)}
-        .hero h1{font-size:clamp(1.6rem,5.5vw,2.3rem);font-weight:800;letter-spacing:-.035em;line-height:1.2;margin-bottom:14px;color:var(--text)}
-        .hero h1 .sw{color:var(--cta1)}
-        .hero-sub{font-size:.95rem;color:var(--text-soft);margin-bottom:48px}
+    --green-dark: #0e2a1b;
+    --green-mid: #14482c;
+    --green-700: #1f5d3a;
+    --green-600: #2a7048;
+    --green-500: #3fb57a;
+    --trust-green: #00b67a;
 
-        .hero-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:520px;margin:0 auto}
-        .hs-card{background:var(--bg-card);border-radius:20px;padding:28px 22px;box-shadow:var(--shadow);text-align:center;transition:transform .3s ease,box-shadow .3s ease}
-        .hs-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
-        .hs-label{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
-        .hs-now .hs-label{color:var(--cta1)}
-        .hs-goal .hs-label{color:var(--green)}
-        .hs-thought{font-size:.76rem;color:var(--text-soft);font-style:italic;padding:8px 12px;background:rgba(255,59,31,.03);border-radius:8px;margin-bottom:8px;line-height:1.45}
-        .hs-goal p{font-size:.78rem;color:var(--text-soft);margin-bottom:6px;line-height:1.5}
-        @media(max-width:520px){.hero-split{grid-template-columns:1fr;gap:12px}}
+    --accent: #e8530e;
+    --accent-bright: #f06a3a;
+    --accent-deep: #DF031C;
+    --accent-soft: rgba(232,83,14,0.08);
 
-        /* ═══ CONTRAST ═══ */
-        .contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:560px;margin:0 auto}
-        .cc{border-radius:18px;padding:28px 22px;box-shadow:var(--shadow);transition:transform .3s ease}
-        .cc:hover{transform:translateY(-2px)}
-        .cc-now{background:#fef5f2;border:1px solid rgba(255,59,31,.06)}
-        .cc-want{background:var(--bg-green);border:1px solid rgba(97,146,64,.08)}
-        .cc h3{font-size:.88rem;font-weight:800;margin-bottom:18px}
-        .cc-now h3{color:var(--cta1)}
-        .cc-want h3{color:var(--green)}
-        .cc-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:.82rem;color:var(--text-soft)}
-        .cc-row:last-child{margin-bottom:0}
-        .cc-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
-        .cc-now .cc-dot{background:rgba(255,59,31,.3)}
-        .cc-want .cc-dot{background:rgba(97,146,64,.4)}
-        @media(max-width:520px){.contrast-grid{grid-template-columns:1fr}}
+    --border: rgba(30,28,26,0.06);
+    --border-strong: rgba(30,28,26,0.1);
+    --shadow-card: 0 1px 2px rgba(30,28,26,.03), 0 2px 10px rgba(30,28,26,.04);
+    --shadow-card-hover: 0 6px 20px rgba(30,28,26,.08), 0 2px 6px rgba(30,28,26,.05);
+    --shadow-cta: 0 10px 28px rgba(223,3,28,.28), 0 2px 6px rgba(232,83,14,.18);
+  }
 
-        /* ═══ PLAN ═══ */
-        .plan-card{background:var(--bg-card);border-radius:20px;padding:36px 28px;box-shadow:var(--shadow);max-width:480px;margin:0 auto;text-align:center}
-        .plan-card h2{font-size:1.15rem;font-weight:800;margin-bottom:8px}
-        .plan-card .sub{font-size:.82rem;color:var(--text-muted);margin-bottom:24px}
-        .plan-row{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:.84rem;color:var(--text-soft)}
-        .plan-row svg{width:16px;height:16px;stroke:var(--green);stroke-width:2.5;fill:none;flex-shrink:0}
+  * { box-sizing: border-box; }
 
-        /* ═══ OFFER ═══ */
-        .offer-card{background:var(--bg-card);border-radius:24px;padding:44px 32px;box-shadow:0 2px 8px rgba(0,0,0,.02),0 16px 48px rgba(0,0,0,.05);max-width:500px;margin:0 auto;text-align:center;border:1px solid rgba(97,146,64,.06)}
-        .offer-card h2{font-size:clamp(1.3rem,4vw,1.65rem);font-weight:800;margin-bottom:24px}
-        .offer-ck{display:flex;align-items:center;gap:10px;margin-bottom:11px;font-size:.86rem;color:var(--text-soft);text-align:left}
-        .offer-ck:last-of-type{margin-bottom:0}
-        .offer-ck svg{width:16px;height:16px;stroke:var(--green);stroke-width:2.5;fill:none;flex-shrink:0}
-        .offer-price{margin:32px 0 28px}
-        .offer-old{font-size:.86rem;color:var(--text-muted);text-decoration:line-through}
-        .offer-new{font-size:2rem;font-weight:800;color:var(--text);margin-top:4px}
-        .offer-new span{font-size:.85rem;font-weight:500;color:var(--text-soft)}
-        .offer-inc{font-size:.72rem;color:var(--text-muted);margin-top:16px;line-height:1.7}
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Instrument Sans', 'Plus Jakarta Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
 
-        /* ═══ CTA ═══ */
-        .cta-main{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:17px 48px;background:linear-gradient(135deg,var(--cta1),var(--cta2));color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.02em;border:none;border-radius:30px;cursor:pointer;text-decoration:none;box-shadow:0 4px 16px rgba(255,59,31,.15),0 0 32px rgba(255,59,31,.05);transition:transform .3s ease,box-shadow .3s ease,filter .3s ease}
-        .cta-main:hover{transform:translateY(-2px) scale(1.02);filter:brightness(1.06);box-shadow:0 6px 24px rgba(255,59,31,.2),0 0 44px rgba(255,59,31,.08)}
-        .cta-main:active{transform:translateY(0) scale(.98)}
-        .cta-lock svg{width:16px;height:16px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
-        .cta-lock .shackle{transform-origin:17px 11px;animation:lockAnim 3.5s ease-in-out infinite}
-        @keyframes lockAnim{0%,15%{transform:translateY(0) rotate(0)}25%{transform:translateY(-3px) rotate(-15deg)}45%{transform:translateY(-3px) rotate(-15deg)}60%,100%{transform:translateY(0) rotate(0)}}
+  /* Smooth page-fade-in so the arrival from email-page feels soft */
+  body { opacity: 0; transition: opacity .55s ease; }
+  body.is-ready { opacity: 1; }
 
-        .cta-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:18px}
-        .cta-trust span{display:flex;align-items:center;gap:5px;font-size:.65rem;color:var(--text-muted)}
-        .cta-trust svg{width:11px;height:11px;stroke:var(--green);stroke-width:2.5;fill:none}
-        .cta-pay{display:flex;justify-content:center;gap:10px;margin-top:14px}
-        .cta-pay span{font-size:.58rem;font-weight:600;color:var(--text-muted);padding:3px 10px;border:1px solid rgba(0,0,0,.06);border-radius:4px}
+  /* ══════ Brand Header (top) — matches quiz style ══════ */
+  .brand-header {
+    text-align: center;
+    padding: 24px 0 20px;
+    background: var(--bg);
+    border-bottom: 1px solid rgba(30,28,26,0.08);
+  }
+  .brand-header img {
+    height: 30px;
+    width: auto;
+    mix-blend-mode: multiply;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  @media (max-width: 640px) {
+    .brand-header { padding: 18px 0 14px; }
+    .brand-header img { height: 27px; }
+  }
 
-        /* ═══ STACK ═══ */
-        .stack-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:560px;margin:0 auto}
-        .stack-card{background:var(--bg-card);border-radius:18px;padding:26px 22px;box-shadow:var(--shadow);transition:transform .3s ease}
-        .stack-card:hover{transform:translateY(-2px)}
-        .stack-icon{width:36px;height:36px;border-radius:10px;background:var(--green-soft);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
-        .stack-icon svg{width:16px;height:16px;stroke:var(--green);stroke-width:2;fill:none}
-        .stack-card h3{font-size:.88rem;font-weight:700;margin-bottom:6px}
-        .stack-card p{font-size:.78rem;color:var(--text-soft);line-height:1.5}
-        @media(max-width:520px){.stack-grid{grid-template-columns:1fr}}
+  /* ══════ Sticky Bottom Bar ══════ */
+  body { padding-bottom: 84px; }
+  .topbar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    background: var(--bg-dark);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 -10px 28px rgba(0,0,0,0.18);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    color: #fff;
+  }
+  .topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .tag-discount {
+    background: transparent;
+    color: var(--accent-bright);
+    border: 1.5px solid var(--accent);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    padding: 6px 12px;
+    border-radius: 8px;
+    text-transform: uppercase;
+  }
+  .topbar-text {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.8);
+    font-weight: 500;
+  }
+  .topbar-timer {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: 0.02em;
+  }
+  .topbar-cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 999px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.86rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(232,83,14,0.4), 0 0 0 6px rgba(232,83,14,0.06);
+    transition: transform .15s ease, filter .15s ease;
+    flex-shrink: 0;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .topbar-cta:hover { transform: translateY(-1px); filter: brightness(1.06); }
 
-        /* ═══ TESTIMONIALS ═══ */
-        .testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:560px;margin:0 auto}
-        .testi-card{background:var(--bg-card);border-radius:18px;padding:24px 22px;box-shadow:var(--shadow)}
-        .testi-stars{display:flex;gap:2px;margin-bottom:10px}
-        .testi-stars span{width:14px;height:14px;background:#f5d020;border-radius:2px;display:flex;align-items:center;justify-content:center}
-        .testi-stars svg{width:8px;height:8px;fill:#6a5a10}
-        .testi-card p{font-size:.8rem;color:var(--text-soft);line-height:1.55;font-style:italic;margin-bottom:10px}
-        .testi-name{font-size:.68rem;font-weight:700;color:var(--text-muted)}
-        .testi-proof{text-align:center;margin-top:28px;font-size:.78rem;color:var(--text-muted)}
-        .testi-proof strong{color:var(--text-soft)}
-        .testi-badges{display:flex;justify-content:center;gap:14px;margin-top:10px;flex-wrap:wrap}
-        .testi-badges span{display:flex;align-items:center;gap:4px;font-size:.64rem;color:var(--text-muted)}
-        .testi-badges svg{width:11px;height:11px;stroke:var(--green);stroke-width:2.5;fill:none}
-        @media(max-width:520px){.testi-grid{grid-template-columns:1fr}}
+  /* Mobile sticky bottom bar — 2 rows: [badge + timer] / [full-width CTA] */
+  @media (max-width: 640px) {
+    body { padding-bottom: 130px; }
+    .topbar {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 10px;
+      padding: 12px 16px 14px;
+    }
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .topbar-left .topbar-text { display: none; }
+    .topbar-cta {
+      width: 100%;
+      padding: 14px 20px;
+      font-size: 0.92rem;
+    }
+    .topbar-timer {
+      font-size: 1.35rem;
+    }
+  }
 
-        /* ═══ TRANSFORM ═══ */
-        .tf-list{max-width:420px;margin:0 auto}
-        .tf-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:.86rem;color:var(--text-soft)}
-        .tf-item:last-child{border-bottom:none}
-        .tf-item svg{width:16px;height:16px;stroke:var(--green);stroke-width:2.5;fill:none;flex-shrink:0}
+  /* ══════ HERO (dark green) ══════ */
+  .hero {
+    background: linear-gradient(180deg, var(--bg-dark) 0%, var(--bg-dark-2) 100%);
+    padding: 36px 20px 56px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -80px; right: -80px;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(232,83,14,0.14), transparent 70%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: -100px; left: -60px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, rgba(200,233,157,0.08), transparent 70%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    max-width: 560px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
 
-        /* ═══ YELLOW BANNER ═══ */
-        .ybanner{background:linear-gradient(90deg,#fdf3d0,#f5e6a3);padding:16px 24px;text-align:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:.86rem;font-weight:700;color:#5a4a10;border-top:1px solid rgba(0,0,0,.03);border-bottom:1px solid rgba(0,0,0,.03)}
+  /* Comparison card */
+  .comparison {
+    background: #fff;
+    border-radius: 14px;
+    padding: 0;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    max-width: 440px;
+    margin: 0 auto;
+    overflow: hidden;
+  }
+  .comparison-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: #fff;
+  }
+  .comparison-tab {
+    text-align: center;
+    padding: 16px 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    background: #fff;
+  }
+  .comparison-tab.goal { color: var(--green-700); }
 
-        /* ═══ FINAL CTA ═══ */
-        .final-sec{padding:60px 24px 100px;text-align:center}
-        .final-sec .save{font-size:.82rem;color:var(--cta1);margin-top:14px;font-weight:600}
+  .comparison-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    background: #fff;
+  }
+  .comparison-img {
+    aspect-ratio: 3/4;
+    position: relative;
+    overflow: hidden;
+    background: #2a2620;
+  }
+  .comparison-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .comparison-arrow {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 38px; height: 38px;
+    background: #fff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    z-index: 2;
+  }
+  .comparison-arrow svg { width: 16px; height: 16px; color: var(--accent); }
 
-        /* ═══ FAQ ═══ */
-        .faq-list{max-width:540px;margin:0 auto}
-        .faq-item{border-bottom:1px solid rgba(0,0,0,.05)}
-        .faq-q{width:100%;background:none;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);text-align:left;padding:20px 0;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px}
-        .faq-q:hover{color:var(--green)}
-        .faq-ic{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.03);display:flex;align-items:center;justify-content:center;transition:transform .3s ease,background .3s ease}
-        .faq-ic svg{width:12px;height:12px;stroke:var(--text-soft);stroke-width:2;fill:none;transition:stroke .3s ease}
-        .faq-item.open .faq-ic{transform:rotate(45deg);background:var(--green)}.faq-item.open .faq-ic svg{stroke:#fff}
-        .faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease;opacity:0}
-        .faq-item.open .faq-a{max-height:300px;opacity:1}
-        .faq-a p{padding-bottom:20px;font-size:.82rem;color:var(--text-soft);line-height:1.65}
+  .comparison-metrics {
+    background: #fff;
+    padding: 24px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .metric-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .metric { display: flex; flex-direction: column; gap: 6px; }
+  .metric-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .metric-bar {
+    height: 4px;
+    background: #ebe7dc;
+    border-radius: 999px;
+    overflow: hidden;
+  }
+  .metric-bar-fill {
+    height: 100%;
+    border-radius: 999px;
+  }
+  .metric-bar-fill.low { background: var(--accent-deep); width: 22%; }
+  .metric-bar-fill.high { background: var(--green-500); width: 90%; }
+  .metric-state {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+  .metric-state.low { color: var(--accent-deep); }
+  .metric-state.high { color: var(--green-500); }
 
-        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-        @media(max-width:480px){.cta-main{padding:15px 36px;font-size:.94rem;width:auto}}
-    </style>
+  /* Hero Trust-Line */
+  .hero-trust {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px auto 0;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 999px;
+    max-width: fit-content;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.85);
+    font-weight: 500;
+  }
+  .hero-trust .sep {
+    width: 3px; height: 3px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.4);
+    flex-shrink: 0;
+  }
+  .hero-trust .stars {
+    color: #e8b83e;
+    letter-spacing: 1px;
+    font-size: 0.86rem;
+  }
+  .hero-trust strong { color: #fff; font-weight: 700; }
+
+  /* ══════ Empfehlung-Banner (schräg) ══════ */
+  .reco-banner {
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-2deg);
+    z-index: 5;
+    white-space: nowrap;
+  }
+  .reco-banner-pill {
+    display: inline-flex;
+    align-items: center;
+    background: var(--green-mid);
+    color: #fff;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    box-shadow: 0 12px 28px rgba(14,72,44,0.25), 0 2px 6px rgba(14,72,44,0.15);
+  }
+
+  .section.with-banner {
+    padding-top: 110px;
+    position: relative;
+  }
+
+  @media (max-width: 560px) {
+    .reco-banner-pill { font-size: 0.66rem; padding: 11px 20px; letter-spacing: 0.12em; }
+    .section.with-banner { padding-top: 92px; }
+    .reco-banner { top: 14px; }
+  }
+  @media (max-width: 380px) {
+    .reco-banner-pill { font-size: 0.58rem; padding: 10px 16px; letter-spacing: 0.1em; }
+  }
+
+  /* ══════ Sections ══════ */
+  .section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 56px 24px;
+  }
+
+  .section-eyebrow {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 7px 16px;
+    border-radius: 999px;
+    margin: 0 auto 18px;
+  }
+  .section-eyebrow.green {
+    background: rgba(42,112,72,0.1);
+    color: var(--green-700);
+  }
+  .section-head { text-align: center; margin-bottom: 32px; }
+
+  h2 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.7rem, 5.5vw, 2.2rem);
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin: 0 0 14px;
+    color: var(--ink);
+  }
+  h2 .italic { font-family: 'Sansita Swashed', cursive; font-weight: 700; color: var(--accent); }
+  h2 .italic-green { font-family: 'Sansita Swashed', cursive; font-weight: 700; color: var(--green-700); }
+
+  .section-sub {
+    font-family: 'Instrument Sans', sans-serif;
+    color: var(--ink-soft);
+    font-size: 1rem;
+    line-height: 1.55;
+    max-width: 460px;
+    margin: 0 auto;
+  }
+
+  /* ══════ Modules ══════ */
+  .modules {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .module {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: 18px;
+    align-items: center;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 18px;
+    box-shadow: var(--shadow-card);
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .module:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
+  .module-image {
+    width: 140px;
+    aspect-ratio: 4/3;
+    border-radius: 10px;
+    background: var(--bg-soft);
+    overflow: hidden;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border);
+    position: relative;
+  }
+  .module-image svg { width: 100%; height: 100%; display: block; }
+  .module-content { min-width: 0; }
+  .module-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.08rem;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .module-outcome {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.9rem;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin: 0 0 10px;
+  }
+  .module-tag {
+    display: inline-block;
+    background: var(--accent-soft);
+    color: var(--accent-deep);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    padding: 4px 11px;
+    border-radius: 999px;
+    border: 1px solid rgba(232,83,14,0.18);
+  }
+
+  @media (max-width: 560px) {
+    .module { grid-template-columns: 100px 1fr; gap: 14px; padding: 14px; }
+    .module-image { width: 100px; }
+    .module-title { font-size: 0.98rem; }
+    .module-outcome { font-size: 0.85rem; }
+  }
+
+  /* ══════ Stack Shot ══════ */
+  .stack-shot {
+    max-width: 560px;
+    margin: 48px auto 0;
+    text-align: center;
+  }
+  .stack-shot-img {
+    width: 100%;
+    max-width: 480px;
+    margin: 0 auto 20px;
+    border-radius: 20px;
+    overflow: hidden;
+    background: linear-gradient(180deg, #f8f5ed 0%, #eae4d5 100%);
+    border: 1px solid var(--border);
+    padding: 32px 20px;
+    box-shadow: 0 20px 50px rgba(30,28,26,0.12), 0 4px 10px rgba(30,28,26,0.05);
+  }
+  .stack-shot-img svg { width: 100%; height: auto; display: block; }
+  .stack-shot-caption {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 4.5vw, 1.4rem);
+    line-height: 1.3;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .stack-shot-caption .price {
+    color: var(--accent);
+    white-space: nowrap;
+  }
+
+  /* ══════ Transformations ══════ */
+  .transformations {
+    max-width: 920px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+  .transformations-head { text-align: center; margin-bottom: 24px; }
+  .transformations-head h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.4rem, 5vw, 1.75rem);
+    line-height: 1.2;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+    margin: 0 0 8px;
+  }
+  .transformations-head h3 .italic { font-family: 'Sansita Swashed', cursive; font-weight: 700; color: var(--accent); }
+  .transformations-head p {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--muted-2);
+    margin: 0;
+  }
+  .trafo-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+  .trafo-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 10px 10px 18px;
+    box-shadow: var(--shadow-card);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .trafo-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
+  .trafo-images {
+    width: 100%;
+    aspect-ratio: 1/1.2;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--border);
+    position: relative;
+  }
+  .trafo-img {
+    background: linear-gradient(135deg, #7a7568 0%, #4a4538 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .trafo-img.after { background: linear-gradient(135deg, #8a8578 0%, #5a5548 100%); }
+  .trafo-img::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 55%;
+    aspect-ratio: 1/1.8;
+    background:
+      radial-gradient(ellipse 40% 15% at 50% 10%, rgba(255,255,255,0.15), transparent 60%),
+      radial-gradient(ellipse 55% 25% at 50% 40%, rgba(255,255,255,0.08), transparent 60%);
+    border-radius: 40% 40% 30% 30%;
+    opacity: 0.6;
+  }
+  .trafo-badge {
+    display: inline-block;
+    background: #fff;
+    color: var(--ink);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 7px 14px;
+    border-radius: 999px;
+    margin-top: -14px;
+    z-index: 2;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(30,28,26,0.12);
+    border: 1px solid var(--border);
+  }
+  .trafo-caption {
+    margin-top: 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    text-align: center;
+    line-height: 1.3;
+  }
+  .trafo-caption .script {
+    display: block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: 0.88rem;
+    letter-spacing: 0;
+    color: var(--muted-2);
+    text-transform: none;
+    margin-top: 2px;
+  }
+
+  @media (max-width: 640px) {
+    .trafo-card { padding: 8px 8px 16px; }
+    .trafo-badge { font-size: 0.66rem; padding: 6px 10px; }
+    .trafo-caption { font-size: 0.56rem; letter-spacing: 0.16em; }
+    .trafo-caption .script { font-size: 0.7rem; }
+  }
+  @media (max-width: 420px) {
+    .trafo-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      max-width: 320px;
+      margin: 0 auto;
+    }
+    .trafo-badge { font-size: 0.78rem; padding: 7px 14px; }
+    .trafo-caption { font-size: 0.68rem; letter-spacing: 0.2em; }
+    .trafo-caption .script { font-size: 0.82rem; }
+  }
+
+  /* ══════ Value bridge ══════ */
+  .value-bridge {
+    max-width: 540px;
+    margin: 40px auto 24px;
+    text-align: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.05rem, 3.2vw, 1.2rem);
+    line-height: 1.55;
+    color: var(--ink);
+    background: linear-gradient(180deg, rgba(232,83,14,0.04) 0%, rgba(232,83,14,0.08) 100%);
+    border: 1px solid rgba(232,83,14,0.15);
+    border-radius: 18px;
+    padding: 28px 28px;
+    letter-spacing: -0.005em;
+  }
+  .value-bridge strong { color: var(--ink); font-weight: 800; }
+  .value-bridge .old-price {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 1.45em;
+    color: var(--muted);
+    position: relative;
+    display: inline-block;
+    padding: 0 2px;
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+  .value-bridge .old-price::after {
+    content: '';
+    position: absolute;
+    left: -2px;
+    right: -2px;
+    top: 52%;
+    height: 3px;
+    background: var(--muted);
+    border-radius: 2px;
+    transform: rotate(-4deg);
+    opacity: 0.85;
+  }
+  .value-bridge .new-price {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 1.55em;
+    color: var(--accent-deep);
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+  }
+
+  /* ══════ Offer Card ══════ */
+  .offer-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 22px;
+    padding: 32px 26px;
+    box-shadow: 0 10px 30px rgba(30,28,26,0.06), 0 2px 8px rgba(30,28,26,0.04);
+    max-width: 460px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+  .offer-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 22px 22px 0 0;
+    background: linear-gradient(90deg, var(--accent-bright), var(--accent), var(--accent-deep));
+  }
+  .offer-reserved {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+  .offer-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1.1;
+    color: var(--ink);
+    margin: 0 0 12px;
+    letter-spacing: -0.02em;
+  }
+  .offer-desc {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin: 0 0 22px;
+  }
+  .timer-box {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-soft);
+    border: 1px solid rgba(232,83,14,0.2);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .timer-box svg { width: 14px; height: 14px; color: var(--accent); }
+  .timer-box strong {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    color: var(--accent);
+    font-variant-numeric: tabular-nums;
+  }
+  .offer-price {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 8px 0 22px;
+  }
+  .offer-price-old {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 1.2rem;
+    color: var(--muted-2);
+    text-decoration: line-through;
+    font-weight: 500;
+  }
+  .offer-price-per-day {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--muted-2);
+    margin: -8px 0 14px;
+    font-weight: 400;
+  }
+  .offer-price-now {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 3rem;
+    color: var(--ink);
+    line-height: 1;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-main {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #fff;
+    border: none;
+    padding: 18px 24px;
+    border-radius: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    box-shadow: var(--shadow-cta);
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-main:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 14px 32px rgba(223,3,28,.34), 0 3px 8px rgba(232,83,14,.22);
+    filter: brightness(1.04);
+  }
+  .cta-main .arrow { width: 18px; height: 18px; transition: transform .2s ease; }
+  .cta-main:hover .arrow { transform: translateX(4px); }
+
+  .savings {
+    display: block;
+    margin-top: 10px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  /* ══════ Guarantee ══════ */
+  .guarantee {
+    max-width: 460px;
+    margin: 20px auto 0;
+    background: rgba(42,112,72,0.06);
+    border: 1px solid rgba(42,112,72,0.2);
+    border-radius: 16px;
+    padding: 20px 22px;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .guarantee-icon {
+    flex-shrink: 0;
+    width: 38px; height: 38px;
+    border-radius: 10px;
+    background: rgba(42,112,72,0.12);
+    color: var(--green-700);
+    display: grid;
+    place-items: center;
+  }
+  .guarantee-icon svg { width: 18px; height: 18px; }
+  .guarantee-body { flex: 1; }
+  .guarantee-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--ink);
+    margin: 0 0 4px;
+    letter-spacing: -0.005em;
+  }
+  .guarantee-text {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ══════ Social Proof ══════ */
+  .social-box {
+    background: var(--bg-soft);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 24px 22px;
+    text-align: center;
+    max-width: 460px;
+    margin: 32px auto 0;
+  }
+  .social-head {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    color: var(--ink);
+    margin: 0 0 6px;
+    letter-spacing: -0.01em;
+  }
+  .social-sub {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted-2);
+    margin: 0 0 18px;
+    line-height: 1.5;
+  }
+  .social-avatars {
+    display: inline-flex;
+    margin-bottom: 12px;
+  }
+  .social-avatars span {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--bg-soft);
+    margin-left: -6px;
+    background-size: cover;
+    background-position: center;
+  }
+  .social-avatars span:first-child { margin-left: 0; }
+  .tp-stars { display: inline-flex; gap: 3px; margin-right: 8px; vertical-align: middle; }
+  .tp-tile {
+    width: 20px; height: 20px;
+    background: var(--trust-green);
+    border-radius: 3px;
+    display: grid;
+    place-items: center;
+  }
+  .tp-tile svg { width: 12px; height: 12px; fill: #fff; }
+  .social-rating {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.82rem;
+    color: var(--ink);
+    font-weight: 500;
+  }
+  .social-rating strong { font-weight: 700; }
+
+  /* ══════ Testimonials ══════ */
+  .testimonials {
+    max-width: 560px;
+    margin: 24px auto 0;
+    position: relative;
+  }
+  .testimonials-head { text-align: center; margin-bottom: 20px; }
+  .testimonials-head h3 {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: clamp(1.3rem, 4.5vw, 1.55rem);
+    line-height: 1.25;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    margin: 0 0 6px;
+  }
+  .testimonials-head h3 .italic { font-family: 'Sansita Swashed', cursive; font-weight: 700; color: var(--accent); }
+  .testimonials-head p {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.85rem;
+    color: var(--muted-2);
+    margin: 0;
+  }
+
+  .carousel { position: relative; overflow: hidden; border-radius: 18px; }
+  .carousel-track {
+    display: flex;
+    transition: transform .45s cubic-bezier(.2,.8,.2,1);
+    will-change: transform;
+  }
+  .testimonial-card {
+    flex: 0 0 100%;
+    width: 100%;
+    padding: 28px 26px 24px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    box-shadow: var(--shadow-card);
+  }
+  .testimonial-stars {
+    color: #e8b83e;
+    letter-spacing: 2px;
+    font-size: 0.88rem;
+    margin-bottom: 14px;
+  }
+  .testimonial-quote {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0 0 18px;
+    letter-spacing: -0.005em;
+    position: relative;
+  }
+  .testimonial-quote::before {
+    content: '"';
+    font-size: 3rem;
+    color: var(--accent);
+    opacity: 0.25;
+    position: absolute;
+    top: -18px; left: -8px;
+    line-height: 1;
+    font-style: italic;
+  }
+  .testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+  }
+  .testimonial-avatar {
+    flex-shrink: 0;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #c9a27a, #8a6b48);
+    display: grid;
+    place-items: center;
+    color: #fff;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+  }
+  .testimonial-avatar.v2 { background: linear-gradient(135deg, #b0846a, #7a5540); }
+  .testimonial-avatar.v3 { background: linear-gradient(135deg, #d4a88a, #a0785a); }
+  .testimonial-avatar.v4 { background: linear-gradient(135deg, #9a7258, #6a4a35); }
+  .testimonial-author-info { flex: 1; min-width: 0; }
+  .testimonial-name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: var(--ink);
+    margin: 0;
+  }
+  .testimonial-meta {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--muted-2);
+    margin: 1px 0 0;
+  }
+  .testimonial-verified {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: var(--green-700);
+    background: rgba(42, 112, 72, 0.1);
+    padding: 3px 8px;
+    border-radius: 999px;
+  }
+  .testimonial-verified svg {
+    width: 10px; height: 10px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 3.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 18px;
+  }
+  .carousel-btn {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: #fff;
+    border: 1px solid var(--border);
+    color: var(--ink);
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    transition: background .15s ease, transform .15s ease, border-color .15s ease, color .15s ease;
+    box-shadow: var(--shadow-card);
+  }
+  .carousel-btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .carousel-btn:active { transform: scale(0.95); }
+  .carousel-btn svg {
+    width: 14px; height: 14px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .carousel-dots {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+  }
+  .carousel-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    background: rgba(30,28,26,0.18);
+    cursor: pointer;
+    transition: background .2s ease, transform .2s ease;
+    border: none;
+    padding: 0;
+  }
+  .carousel-dot.active {
+    background: var(--accent);
+    transform: scale(1.2);
+  }
+
+  @media (max-width: 480px) {
+    .testimonial-card { padding: 24px 22px 20px; }
+    .testimonial-quote { font-size: 1rem; }
+    .testimonial-quote::before { font-size: 2.6rem; top: -14px; }
+  }
+
+  /* ══════ 7-Tage ══════ */
+  .days-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 32px auto 24px;
+    max-width: 480px;
+  }
+  .day-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 18px 12px;
+    text-align: center;
+  }
+  .day-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green-700);
+    margin-bottom: 8px;
+  }
+  .day-text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.3;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .days-quote {
+    font-family: 'Instrument Sans', sans-serif;
+    text-align: center;
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    max-width: 440px;
+    margin: 0 auto;
+  }
+  .days-quote strong {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    color: var(--accent);
+    font-size: 1.08rem;
+  }
+
+  /* ══════ FAQ ══════ */
+  .faq-list {
+    max-width: 540px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .faq-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    box-shadow: var(--shadow-card);
+    overflow: hidden;
+    transition: border-color .2s ease;
+  }
+  .faq-item[open] { border-color: rgba(232,83,14,0.25); }
+  .faq-item summary {
+    list-style: none;
+    padding: 18px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    cursor: pointer;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-icon {
+    flex-shrink: 0;
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    transition: transform .25s ease, background .25s ease, color .25s ease;
+  }
+  .faq-item[open] .faq-icon {
+    transform: rotate(45deg);
+    background: var(--accent);
+    color: #fff;
+  }
+  .faq-body {
+    padding: 0 22px 20px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+  }
+
+  .footer-note {
+    text-align: center;
+    font-family: 'Instrument Sans', sans-serif;
+    color: var(--muted-2);
+    font-size: 0.78rem;
+    padding: 24px 20px 40px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 480px) {
+    .hero { padding: 28px 16px 40px; }
+    .section { padding: 44px 20px; }
+    .days-grid { grid-template-columns: 1fr; gap: 10px; }
+    .day-card { text-align: left; padding: 14px 18px; display: flex; align-items: center; gap: 14px; }
+    .day-label { margin-bottom: 0; flex-shrink: 0; width: 72px; }
+  }
+</style>
 </head>
 <body>
 
-<!-- ═══ STICKY BANNER ═══ -->
-<div class="topbar">
-    <span class="topbar-text">70% Rabatt für dich reserviert</span>
-    <span class="topbar-timer" id="tbTimer">15:00</span>
-    <a href="#offer" class="topbar-cta">Meinen Plan sichern</a>
-</div>
+  <!-- Brand Header -->
+  <header class="brand-header">
+    <img src="elliott-aziz-logo.png" alt="Elliott Aziz">
+  </header>
 
-<!-- ═══ HERO ═══ -->
-<section class="hero">
-    <div class="ctn">
-        <h1 class="rv" data-d="0">Du weißt eigentlich, wie Abnehmen funktioniert&hellip;<br>aber du <span class="sw">ziehst es einfach nicht durch.</span></h1>
-        <p class="hero-sub rv" data-d="100">Und das liegt nicht an Disziplin.</p>
-        <div class="hero-split rv" data-d="200">
-            <div class="hs-card hs-now">
-                <p class="hs-label">Jetzt</p>
-                <p class="hs-thought">&bdquo;Warum schaffe ich es nicht?&ldquo;</p>
-                <p class="hs-thought">&bdquo;Ich fang morgen wieder an&hellip;&ldquo;</p>
-                <p class="hs-thought">&bdquo;Ich hab schon alles probiert&ldquo;</p>
-            </div>
-            <div class="hs-card hs-goal">
-                <p class="hs-label">Dein Ziel</p>
-                <p>Ruhig. Klar. Kontrolliert.</p>
-                <p>Kein Kampf mehr gegen dich selbst.</p>
-                <p>Dein Körper arbeitet wieder für dich.</p>
-            </div>
-        </div>
+  <!-- Sticky Top Bar -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <span class="tag-discount">90 % Rabatt</span>
+      <span class="topbar-text">Dein Angebot ist reserviert für:</span>
+      <span class="topbar-timer" id="timer">14:53</span>
     </div>
-</section>
+    <a class="topbar-cta" href="#offer">Jetzt 7-Tage Challenge starten</a>
+  </div>
 
-<!-- ═══ CONTRAST ═══ -->
-<section class="sec">
-    <div class="ctn">
-        <div class="contrast-grid rv" data-d="0">
-            <div class="cc cc-now">
-                <h3>Jetzt</h3>
-                <div class="cc-row"><span class="cc-dot"></span>Heißhunger</div>
-                <div class="cc-row"><span class="cc-dot"></span>Rückfälle</div>
-                <div class="cc-row"><span class="cc-dot"></span>Essensfokus</div>
-                <div class="cc-row"><span class="cc-dot"></span>Selbstzweifel</div>
-                <div class="cc-row"><span class="cc-dot"></span>Bauchfett / überschüssige Kilos</div>
-            </div>
-            <div class="cc cc-want">
-                <h3>Was du eigentlich willst</h3>
-                <div class="cc-row"><span class="cc-dot"></span>Ruhe im Kopf</div>
-                <div class="cc-row"><span class="cc-dot"></span>Natürliche Kontrolle</div>
-                <div class="cc-row"><span class="cc-dot"></span>Dauerhaft abnehmen</div>
-                <div class="cc-row"><span class="cc-dot"></span>Selbstvertrauen</div>
-            </div>
-        </div>
+  <!-- Headline-Section mit schrägem Banner -->
+  <section class="section with-banner">
+    <div class="reco-banner">
+      <div class="reco-banner-pill">Empfohlen auf Basis deiner Abnehm-Analyse</div>
     </div>
-</section>
-
-<!-- ═══ PLAN ═══ -->
-<section class="sec sec--green">
-    <div class="ctn--sm">
-        <div class="plan-card rv" data-d="0">
-            <p class="sec-label">Basierend auf deinen Antworten</p>
-            <h2>Dein persönlicher Abnehm-Reset ist bereit</h2>
-            <p class="sub" style="font-size:.84rem;color:#a0a0a0;margin:8px 0 20px">Dein individueller Plan wartet auf dich.</p>
-            <div class="plan-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Fokus: Nervensystem regulieren</div>
-            <div class="plan-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ziel: nachhaltige Abnahme ohne Rückfälle</div>
-        </div>
+    <div class="section-head">
+      <h2>Starte jetzt deine 7-Tage<br><span class="italic">Reset</span> Challenge</h2>
+      <p class="section-sub">Brich in 7 Tagen deinen Stress- &amp; Heißhunger-Kreislauf und setz einen Plan um, den du wirklich durchziehst.</p>
     </div>
-</section>
+  </section>
 
-<!-- ═══ URGENCY ═══ -->
-<div class="ybanner rv" data-d="0">Dieses Angebot endet in <strong id="midTimer">15:00</strong> Min.</div>
-
-<!-- ═══ OFFER ═══ -->
-<section class="sec" id="offer">
-    <div class="ctn--sm">
-        <div class="offer-card rv" data-d="0">
-            <h2>7 Tage Reset Challenge</h2>
-            <div class="offer-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Nervensystem regulieren</div>
-            <div class="offer-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Abnehmblockade lösen</div>
-            <div class="offer-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Klarer Plan für deinen Alltag</div>
-            <div class="offer-price">
-                <p class="offer-old">Statt 99&euro;</p>
-                <p class="offer-new">29,90&euro; <span>einmalig</span></p>
-            </div>
-            <a href="#" class="cta-main">Jetzt Zugang sichern <span class="cta-lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path class="shackle" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span></a>
-            <div class="cta-trust">
-                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sichere Bezahlung</span>
-                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sofortiger Zugang</span>
-                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Kein Abo</span>
-                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>100% digital</span>
-            </div>
-            <div class="cta-pay"><span>Visa</span><span>Mastercard</span><span>PayPal</span></div>
-            <p class="offer-inc">Videokurs &middot; 2 Online Workshops + Aufzeichnung &middot; Persönlicher Support</p>
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="comparison">
+        <div class="comparison-tabs">
+          <div class="comparison-tab">Heute</div>
+          <div class="comparison-tab goal">Dein Ziel</div>
         </div>
+        <div class="comparison-images">
+          <div class="comparison-img">
+            <img src="generated-images/compare-before.jpg" alt="Vorher" loading="lazy">
+          </div>
+          <div class="comparison-img goal">
+            <img src="generated-images/compare-after.jpg" alt="Nachher" loading="lazy">
+          </div>
+          <div class="comparison-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="13 6 19 12 13 18"/>
+            </svg>
+          </div>
+        </div>
+        <div class="comparison-metrics">
+          <div class="metric-row">
+            <div class="metric">
+              <div class="metric-label">Kontrolle über Essen</div>
+              <div class="metric-bar"><div class="metric-bar-fill low"></div></div>
+              <div class="metric-state low">Niedrig</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Kontrolle über Essen</div>
+              <div class="metric-bar"><div class="metric-bar-fill high"></div></div>
+              <div class="metric-state high">Hoch</div>
+            </div>
+          </div>
+          <div class="metric-row">
+            <div class="metric">
+              <div class="metric-label">Energie im Alltag</div>
+              <div class="metric-bar"><div class="metric-bar-fill low"></div></div>
+              <div class="metric-state low">Niedrig</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Energie im Alltag</div>
+              <div class="metric-bar"><div class="metric-bar-fill high"></div></div>
+              <div class="metric-state high">Hoch</div>
+            </div>
+          </div>
+          <div class="metric-row">
+            <div class="metric">
+              <div class="metric-label">Ruhe im Kopf</div>
+              <div class="metric-bar"><div class="metric-bar-fill low"></div></div>
+              <div class="metric-state low">Niedrig</div>
+            </div>
+            <div class="metric">
+              <div class="metric-label">Ruhe im Kopf</div>
+              <div class="metric-bar"><div class="metric-bar-fill high"></div></div>
+              <div class="metric-state high">Hoch</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero-trust">
+        <span>Bereits über <strong>13.000</strong> Frauen gestartet</span>
+        <span class="sep"></span>
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <span><strong>4,9/5</strong> Zufriedenheit</span>
+      </div>
     </div>
-</section>
+  </section>
 
-<!-- ═══ WHAT YOU GET ═══ -->
-<section class="sec sec--green">
-    <div class="ctn">
-        <h2 class="sec-title rv" data-d="0">Das bekommst du</h2>
-        <div class="stack-grid">
-            <div class="stack-card rv" data-d="100">
-                <div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-                <h3>7 Tage Reset Challenge</h3>
-                <p>Bring dein Nervensystem zurück in Balance und starte echte Fettverbrennung.</p>
-            </div>
-            <div class="stack-card rv" data-d="200">
-                <div class="stack-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-                <h3>7 Video-Einheiten</h3>
-                <p>10&ndash;15 Min. täglich. Verstehe dein Verhalten und verändere Gewohnheiten nachhaltig.</p>
-            </div>
-            <div class="stack-card rv" data-d="300">
-                <div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-                <h3>2 Live Workshops</h3>
-                <p>Inkl. Aufzeichnung. Klarer Plan, ohne dass Essen dein Leben bestimmt.</p>
-            </div>
-            <div class="stack-card rv" data-d="400">
-                <div class="stack-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
-                <h3>Fragen &amp; Klarheit</h3>
-                <p>Kein Rätselraten &ndash; du weißt, was für dich funktioniert.</p>
-            </div>
-        </div>
+  <!-- MODULES -->
+  <section class="section">
+    <div style="text-align:center; margin-bottom: 24px;">
+      <span class="section-eyebrow">Dein Zugang enthält</span>
     </div>
-</section>
 
-<!-- ═══ TESTIMONIALS ═══ -->
-<section class="sec">
-    <div class="ctn">
-        <h2 class="sec-title rv" data-d="0">Das sagen unsere Teilnehmerinnen</h2>
-        <div class="testi-grid">
-            <div class="testi-card rv" data-d="100">
-                <div class="testi-stars"><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span></div>
-                <p>&bdquo;Zum ersten Mal verstehe ich, warum ich immer wieder rückfällig werde.&ldquo;</p>
-                <span class="testi-name">Sarah, 34</span>
-            </div>
-            <div class="testi-card rv" data-d="200">
-                <div class="testi-stars"><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span></div>
-                <p>&bdquo;In 7 Tagen mehr gelernt als in 10 Jahren Diäten. Absolut empfehlenswert.&ldquo;</p>
-                <span class="testi-name">Lisa, 29</span>
-            </div>
-            <div class="testi-card rv" data-d="300">
-                <div class="testi-stars"><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span></div>
-                <p>&bdquo;Endlich kein Heißhunger mehr abends. Ich fühle mich wie ein neuer Mensch.&ldquo;</p>
-                <span class="testi-name">Marina, 41</span>
-            </div>
-            <div class="testi-card rv" data-d="400">
-                <div class="testi-stars"><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span></div>
-                <p>&bdquo;Die Challenge hat mir gezeigt, dass es nicht um Disziplin geht.&ldquo;</p>
-                <span class="testi-name">Julia, 37</span>
-            </div>
+    <div class="modules">
+
+      <div class="module">
+        <div class="module-image">
+          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
+            <rect width="140" height="105" fill="#f6f4f1"/>
+            <rect x="28" y="18" width="84" height="68" rx="6" fill="#ffffff" stroke="#1e1c1a" stroke-width="1.2"/>
+            <rect x="32" y="22" width="76" height="8" rx="2" fill="#e8530e"/>
+            <rect x="32" y="34" width="40" height="3" rx="1.5" fill="#1e1c1a"/>
+            <rect x="32" y="40" width="60" height="2" rx="1" fill="#9b938a"/>
+            <rect x="32" y="46" width="50" height="2" rx="1" fill="#9b938a"/>
+            <rect x="32" y="54" width="76" height="10" rx="2" fill="rgba(232,83,14,0.12)"/>
+            <rect x="32" y="68" width="76" height="10" rx="2" fill="#f6f4f1"/>
+            <circle cx="115" cy="82" r="2" fill="#1e1c1a"/>
+          </svg>
         </div>
-        <div class="testi-proof rv" data-d="200">
-            <p><strong>Über 1.000+ Teilnehmerinnen</strong></p>
-            <div class="testi-badges">
-                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Nachhaltig abgenommen</span>
-                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Essverhalten verändert</span>
-                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ergebnis gehalten</span>
-            </div>
+        <div class="module-content">
+          <h3 class="module-title">Ernährungsplan, den du wirklich durchziehst</h3>
+          <p class="module-outcome">Satt, alltagstauglich, ohne Verbote – und trotzdem Abnahme.</p>
+          <span class="module-tag">Wert: 99 €</span>
         </div>
+      </div>
+
+      <div class="module">
+        <div class="module-image">
+          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
+            <rect width="140" height="105" fill="#f6f4f1"/>
+            <rect x="48" y="12" width="44" height="82" rx="6" fill="#1e1c1a"/>
+            <rect x="51" y="18" width="38" height="70" rx="2" fill="#ffffff"/>
+            <rect x="54" y="22" width="32" height="14" rx="2" fill="#0e2a1b"/>
+            <rect x="57" y="26" width="14" height="2" rx="1" fill="#ffffff"/>
+            <rect x="57" y="30" width="20" height="2" rx="1" fill="#c8e99d"/>
+            <rect x="54" y="40" width="10" height="10" rx="2" fill="rgba(232,83,14,0.12)"/>
+            <rect x="66" y="40" width="10" height="10" rx="2" fill="#e8530e"/>
+            <rect x="78" y="40" width="8" height="10" rx="2" fill="rgba(232,83,14,0.12)"/>
+            <rect x="54" y="54" width="32" height="4" rx="1" fill="#efece4"/>
+            <rect x="54" y="54" width="22" height="4" rx="1" fill="#e8530e"/>
+            <rect x="54" y="62" width="32" height="4" rx="1" fill="#efece4"/>
+            <rect x="54" y="62" width="16" height="4" rx="1" fill="#e8530e"/>
+            <rect x="54" y="70" width="32" height="4" rx="1" fill="#efece4"/>
+            <rect x="54" y="70" width="10" height="4" rx="1" fill="#e8530e"/>
+            <circle cx="70" cy="91" r="1.5" fill="#ffffff"/>
+          </svg>
+        </div>
+        <div class="module-content">
+          <h3 class="module-title">Trainingsplan, der in dein Leben passt</h3>
+          <p class="module-outcome">Kurze, effiziente Einheiten – kein Fitnessstudio nötig.</p>
+          <span class="module-tag">Wert: 79 €</span>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-image">
+          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
+            <rect width="140" height="105" fill="#f6f4f1"/>
+            <rect x="36" y="14" width="68" height="80" rx="3" fill="#0e2a1b"/>
+            <rect x="39" y="17" width="62" height="74" rx="2" fill="#14482c"/>
+            <text x="70" y="40" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-style="italic" font-size="9" font-weight="700" fill="#c8e99d">Mindset</text>
+            <text x="70" y="52" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="700" fill="#f6f4f1">RESET</text>
+            <line x1="50" y1="62" x2="90" y2="62" stroke="#c8e99d" stroke-width="0.5"/>
+            <text x="70" y="76" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="5" letter-spacing="1" fill="#c9c3b3">WORKBOOK</text>
+            <circle cx="70" cy="84" r="2" fill="#e8530e"/>
+          </svg>
+        </div>
+        <div class="module-content">
+          <h3 class="module-title">Mentales Training gegen Rückfälle</h3>
+          <p class="module-outcome">Damit du nach stressigen Tagen nicht mehr eskalierst.</p>
+          <span class="module-tag">Wert: 149 €</span>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-image">
+          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
+            <rect width="140" height="105" fill="#f6f4f1"/>
+            <rect x="20" y="28" width="100" height="48" rx="8" fill="#ffffff" stroke="#1e1c1a" stroke-width="1"/>
+            <circle cx="40" cy="52" r="10" fill="rgba(232,83,14,0.12)" stroke="#e8530e" stroke-width="1.5"/>
+            <polygon points="37,48 37,56 44,52" fill="#e8530e"/>
+            <rect x="56" y="46" width="50" height="3" rx="1" fill="#1e1c1a"/>
+            <rect x="56" y="52" width="40" height="2" rx="1" fill="#9b938a"/>
+            <rect x="56" y="58" width="50" height="3" rx="1.5" fill="#efece4"/>
+            <rect x="56" y="58" width="18" height="3" rx="1.5" fill="#e8530e"/>
+            <text x="70" y="86" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-style="italic" font-size="8" fill="#7a7568">Atemübung · 3 Min</text>
+          </svg>
+        </div>
+        <div class="module-content">
+          <h3 class="module-title">Nervensystem-Regulierung</h3>
+          <p class="module-outcome">Einfache Übungen, die deinen Körper aus dem Stressmodus holen.</p>
+          <span class="module-tag">Wert: 129 €</span>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-image">
+          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
+            <rect width="140" height="105" fill="#f6f4f1"/>
+            <rect x="20" y="20" width="100" height="65" rx="8" fill="#ffffff" stroke="#1e1c1a" stroke-width="1"/>
+            <circle cx="32" cy="34" r="5" fill="#c9a27a"/>
+            <rect x="42" y="30" width="50" height="3" rx="1" fill="#1e1c1a"/>
+            <rect x="42" y="36" width="66" height="2" rx="1" fill="#9b938a"/>
+            <rect x="42" y="40" width="40" height="2" rx="1" fill="#9b938a"/>
+            <circle cx="32" cy="56" r="5" fill="#b0846a"/>
+            <rect x="42" y="52" width="45" height="3" rx="1" fill="#1e1c1a"/>
+            <rect x="42" y="58" width="60" height="2" rx="1" fill="#9b938a"/>
+            <rect x="42" y="62" width="35" height="2" rx="1" fill="#9b938a"/>
+            <circle cx="32" cy="76" r="5" fill="#d4a88a"/>
+            <rect x="42" y="72" width="42" height="3" rx="1" fill="#1e1c1a"/>
+            <rect x="42" y="78" width="55" height="2" rx="1" fill="#9b938a"/>
+          </svg>
+        </div>
+        <div class="module-content">
+          <h3 class="module-title">Community, die dich mitzieht</h3>
+          <p class="module-outcome">Gemeinsam fällt Durchziehen leichter – du bist nicht mehr allein.</p>
+          <span class="module-tag">Wert: 59 €</span>
+        </div>
+      </div>
+
+      <div class="module">
+        <div class="module-image">
+          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
+            <rect width="140" height="105" fill="#f6f4f1"/>
+            <rect x="24" y="20" width="92" height="66" rx="8" fill="#ffffff" stroke="#1e1c1a" stroke-width="1"/>
+            <rect x="30" y="30" width="44" height="14" rx="4" fill="#efece4"/>
+            <rect x="34" y="34" width="30" height="2" rx="1" fill="#1e1c1a"/>
+            <rect x="34" y="38" width="24" height="2" rx="1" fill="#7a7568"/>
+            <rect x="66" y="48" width="44" height="14" rx="4" fill="#0e2a1b"/>
+            <rect x="70" y="52" width="30" height="2" rx="1" fill="#ffffff"/>
+            <rect x="70" y="56" width="20" height="2" rx="1" fill="#c9c3b3"/>
+            <rect x="30" y="66" width="36" height="12" rx="4" fill="#efece4"/>
+            <rect x="34" y="70" width="24" height="2" rx="1" fill="#1e1c1a"/>
+            <circle cx="104" cy="76" r="6" fill="#e8530e"/>
+            <path d="M 101 74 L 107 76 L 101 78 Z" fill="#ffffff"/>
+          </svg>
+        </div>
+        <div class="module-content">
+          <h3 class="module-title">1:1 Support &amp; Live-Gespräche</h3>
+          <p class="module-outcome">Echte Antworten auf deine Fragen – keine leere Forum-Stille.</p>
+          <span class="module-tag">Wert: 199 €</span>
+        </div>
+      </div>
+
     </div>
-</section>
 
-<!-- ═══ TRANSFORM ═══ -->
-<section class="sec sec--green" style="text-align:center">
-    <div class="ctn--sm">
-        <h2 class="sec-title rv" data-d="0">Das verändert sich für dich</h2>
-        <div class="tf-list">
-            <div class="tf-item rv" data-d="100"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Weniger Heißhunger</div>
-            <div class="tf-item rv" data-d="200"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mehr Ruhe im Kopf</div>
-            <div class="tf-item rv" data-d="300"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Kein ständiges Neu-Anfangen</div>
-            <div class="tf-item rv" data-d="400"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dein Körper beginnt wieder abzunehmen</div>
-        </div>
+    <!-- Stack Shot -->
+    <div class="stack-shot">
+      <div class="stack-shot-img">
+        <svg viewBox="0 0 400 240" xmlns="http://www.w3.org/2000/svg">
+          <rect x="80" y="50" width="240" height="140" rx="8" fill="#1e1c1a"/>
+          <rect x="88" y="58" width="224" height="124" rx="2" fill="#ffffff"/>
+          <rect x="96" y="66" width="208" height="20" rx="2" fill="#0e2a1b"/>
+          <text x="200" y="80" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="12" fill="#ffffff">7-Tage Reset-Challenge</text>
+          <rect x="96" y="94" width="100" height="80" rx="3" fill="rgba(232,83,14,0.15)"/>
+          <rect x="200" y="94" width="104" height="38" rx="3" fill="#f6f4f1"/>
+          <rect x="200" y="136" width="104" height="38" rx="3" fill="#efece4"/>
+          <rect x="104" y="102" width="40" height="3" rx="1" fill="#e8530e"/>
+          <rect x="104" y="110" width="80" height="2" rx="1" fill="#1e1c1a" opacity="0.3"/>
+          <rect x="104" y="116" width="60" height="2" rx="1" fill="#1e1c1a" opacity="0.3"/>
+          <rect x="60" y="188" width="280" height="6" rx="1" fill="#1e1c1a"/>
+          <rect x="170" y="188" width="60" height="6" rx="3" fill="#0a0a08"/>
+
+          <rect x="280" y="100" width="60" height="110" rx="10" fill="#1e1c1a"/>
+          <rect x="284" y="106" width="52" height="98" rx="4" fill="#ffffff"/>
+          <rect x="288" y="110" width="44" height="18" rx="2" fill="#e8530e"/>
+          <rect x="291" y="115" width="16" height="2" rx="1" fill="#ffffff"/>
+          <rect x="291" y="120" width="24" height="2" rx="1" fill="#ffffff" opacity="0.7"/>
+          <rect x="288" y="132" width="44" height="12" rx="2" fill="#efece4"/>
+          <rect x="288" y="148" width="44" height="12" rx="2" fill="#efece4"/>
+          <rect x="288" y="164" width="44" height="12" rx="2" fill="#efece4"/>
+          <rect x="288" y="180" width="44" height="12" rx="2" fill="#0e2a1b"/>
+
+          <rect x="50" y="150" width="70" height="60" rx="2" fill="#0e2a1b" transform="rotate(-4 85 180)"/>
+          <rect x="58" y="148" width="54" height="2" fill="#c8e99d" transform="rotate(-4 85 180)"/>
+          <text x="85" y="180" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-style="italic" font-weight="700" font-size="10" fill="#c8e99d" transform="rotate(-4 85 180)">Mindset</text>
+          <text x="85" y="192" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="11" fill="#f6f4f1" transform="rotate(-4 85 180)">RESET</text>
+
+          <rect x="130" y="160" width="65" height="55" rx="2" fill="#e8530e" transform="rotate(3 162 187)"/>
+          <text x="162" y="185" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="9" fill="#ffffff" transform="rotate(3 162 187)">Ernährung</text>
+          <text x="162" y="197" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="9" fill="#ffffff" transform="rotate(3 162 187)">7 Tage</text>
+
+          <circle cx="350" cy="55" r="30" fill="rgba(232,83,14,0.15)" stroke="#e8530e" stroke-width="1.5"/>
+          <text x="350" y="50" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="7" fill="#e8530e">+ COMMUNITY</text>
+          <text x="350" y="62" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-weight="700" font-size="7" fill="#e8530e">&amp; SUPPORT</text>
+        </svg>
+      </div>
+      <p class="stack-shot-caption">Das alles bekommst du heute für nur <span class="price">29,90 €</span></p>
     </div>
-</section>
 
-<!-- ═══ URGENCY ═══ -->
-<div class="ybanner rv" data-d="0">Dieses Angebot verschwindet in <strong id="finalTimer">15:00</strong> Min.</div>
+  </section>
 
-<!-- ═══ FINAL CTA ═══ -->
-<section class="final-sec">
-    <div class="ctn--sm">
-        <a href="#" class="cta-main rv" data-d="0">Jetzt Zugang sichern (29,90&euro;) <span class="cta-lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path class="shackle" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span></a>
-        <p class="save rv" data-d="100">Du sparst heute 69,10&euro; (&asymp;70%)</p>
-        <div class="cta-trust rv" data-d="200">
-            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sichere Bezahlung</span>
-            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sofortiger Zugang</span>
-            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Kein Abo</span>
+  <!-- 7-Tage -->
+  <section class="section" style="background: var(--bg-soft); max-width: none; margin: 0; padding: 56px 24px;">
+    <div style="max-width: 560px; margin: 0 auto;">
+      <div class="section-head">
+        <div style="text-align:center;">
+          <span class="section-eyebrow green">Warum 7 Tage?</span>
         </div>
-    </div>
-</section>
+        <h2>7 Tage reichen, um den <span class="italic-green">Kreislauf</span> zu durchbrechen</h2>
+      </div>
 
-<!-- ═══ FAQ ═══ -->
-<section class="sec">
-    <div class="ctn--sm">
-        <h2 class="sec-title">Häufige Fragen</h2>
-        <div class="faq-list">
-            <div class="faq-item open">
-                <button class="faq-q">Für wen ist die 7-Tage Challenge geeignet?<span class="faq-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-                <div class="faq-a"><p>Für Frauen, die trotz vieler Versuche nicht dauerhaft abnehmen und verstehen wollen, warum Diäten bei ihnen nicht funktionieren.</p></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-q">Brauche ich Vorkenntnisse?<span class="faq-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-                <div class="faq-a"><p>Nein. Alles wird Schritt für Schritt erklärt &ndash; in kurzen, verständlichen Video-Einheiten.</p></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-q">Wie viel Zeit brauche ich täglich?<span class="faq-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-                <div class="faq-a"><p>Etwa 10&ndash;15 Minuten pro Tag. Die Videos sind kompakt und praxisnah.</p></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-q">Was passiert nach dem Kauf?<span class="faq-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-                <div class="faq-a"><p>Du bekommst sofort Zugang. Alles ist digital verfügbar &ndash; starte direkt.</p></div>
-            </div>
-            <div class="faq-item">
-                <button class="faq-q">Ist das ein Abo?<span class="faq-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
-                <div class="faq-a"><p>Nein. Einmalig 29,90&euro; &ndash; kein Abo, keine versteckten Kosten.</p></div>
-            </div>
+      <div class="days-grid">
+        <div class="day-card">
+          <div class="day-label">Tag 1–2</div>
+          <div class="day-text">Ruhe im Kopf &amp; Klarheit</div>
         </div>
-    </div>
-</section>
+        <div class="day-card">
+          <div class="day-label">Tag 3–5</div>
+          <div class="day-text">Weniger Heißhunger &amp; mehr Kontrolle</div>
+        </div>
+        <div class="day-card">
+          <div class="day-label">Tag 6–7</div>
+          <div class="day-text">Du spürst: Abnehmen kann leicht sein</div>
+        </div>
+      </div>
 
-<div style="height:40px"></div>
+      <p class="days-quote">
+        Es geht nicht darum, in 7 Tagen alles zu schaffen.<br>
+        <strong>Es geht darum, endlich richtig zu starten.</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- Transformations -->
+  <section class="section" style="padding: 40px 20px 24px; max-width: 960px;">
+    <div class="transformations">
+      <div class="transformations-head">
+        <h3>Echte <span class="italic">Transformationen</span></h3>
+        <p>Frauen, die den Reset gemacht haben – und nachhaltig abgenommen haben.</p>
+      </div>
+
+      <div class="trafo-grid">
+        <div class="trafo-card">
+          <div class="trafo-images">
+            <div class="trafo-img before"></div>
+            <div class="trafo-img after"></div>
+          </div>
+          <span class="trafo-badge">−3&nbsp;kg in 18&nbsp;Wochen</span>
+          <div class="trafo-caption">Change<span class="script">by you</span></div>
+        </div>
+        <div class="trafo-card">
+          <div class="trafo-images">
+            <div class="trafo-img before"></div>
+            <div class="trafo-img after"></div>
+          </div>
+          <span class="trafo-badge">−16&nbsp;kg in 12&nbsp;Monaten</span>
+          <div class="trafo-caption">Change<span class="script">by you</span></div>
+        </div>
+        <div class="trafo-card">
+          <div class="trafo-images">
+            <div class="trafo-img before"></div>
+            <div class="trafo-img after"></div>
+          </div>
+          <span class="trafo-badge">−5&nbsp;kg in 12&nbsp;Wochen</span>
+          <div class="trafo-caption">Change<span class="script">by you</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Value-Bridge + Preis-Block -->
+  <section class="section" id="offer" style="padding-top: 24px;">
+    <div class="section-head">
+      <h2>Spüre erste Veränderungen<br>in <span class="italic-green">7 Tagen!</span></h2>
+    </div>
+
+    <div class="value-bridge">
+      Normalerweise zahlst du für alles zusammen <span class="old-price">714 €</span>.<br>
+      Weil du die Abnehm-Analyse gemacht hast, bekommst du heute alles für <span class="new-price">29,90 €</span>.
+    </div>
+
+    <div class="offer-card">
+      <div class="offer-reserved">Exklusiv für dich reserviert</div>
+      <h3 class="offer-title">7-Tage Reset-Challenge</h3>
+      <p class="offer-desc">Dein kompletter Abnehm-Plan: Ernährung, Training, Mindset, Community und persönliche Begleitung.</p>
+
+      <div class="timer-box">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <span>Dein Sonderpreis läuft ab in <strong id="priceTimer">14:50</strong></span>
+      </div>
+
+      <div class="offer-price">
+        <span class="offer-price-old">714 €</span>
+        <span class="offer-price-now">29,90 €</span>
+      </div>
+      <p class="offer-price-per-day">Das sind weniger als 5 € pro Tag für deinen Reset.</p>
+
+      <a class="cta-main" href="checkout.html">
+        <span>Jetzt 7-Tage Challenge starten</span>
+        <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/>
+          <polyline points="13 6 19 12 13 18"/>
+        </svg>
+      </a>
+
+      <span class="savings">Du sparst heute 684 €</span>
+    </div>
+
+    <!-- Guarantee -->
+    <div class="guarantee">
+      <div class="guarantee-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6l8-4z"/>
+          <polyline points="9 12 11 14 15 10"/>
+        </svg>
+      </div>
+      <div class="guarantee-body">
+        <p class="guarantee-title">Sicher starten</p>
+        <p class="guarantee-text">Du behältst lebenslangen Zugriff auf alle Inhalte. Kein Abo, keine versteckten Kosten.</p>
+      </div>
+    </div>
+
+    <!-- Social Proof -->
+    <div class="social-box">
+      <div class="social-head">Bereits über 13.000 Frauen erfolgreich gestartet</div>
+      <p class="social-sub">Tausende Frauen haben Kontrolle über Essen gewonnen und nachhaltig abgenommen.</p>
+      <div class="social-avatars" aria-hidden="true">
+        <span style="background-image:url('trafo 1.jpeg')"></span>
+        <span style="background-image:url('trafo 2.jpeg')"></span>
+        <span style="background-image:url('trafo 3.jpeg')"></span>
+        <span style="background-image:url('trafo 4.jpeg')"></span>
+      </div>
+      <div>
+        <span class="tp-stars" aria-label="5 von 5 Sternen">
+          <span class="tp-tile"><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2 2 9.3l6.9-1L12 2z"/></svg></span>
+          <span class="tp-tile"><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2 2 9.3l6.9-1L12 2z"/></svg></span>
+          <span class="tp-tile"><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2 2 9.3l6.9-1L12 2z"/></svg></span>
+          <span class="tp-tile"><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2 2 9.3l6.9-1L12 2z"/></svg></span>
+          <span class="tp-tile"><svg viewBox="0 0 24 24"><path d="M12 2l3.1 6.3 6.9 1-5 4.9 1.2 6.9L12 17.8 5.8 21.1 7 14.2 2 9.3l6.9-1L12 2z"/></svg></span>
+        </span>
+        <span class="social-rating"><strong>4,9/5</strong> Zufriedenheit</span>
+      </div>
+    </div>
+
+    <!-- Testimonials -->
+    <div class="testimonials">
+      <div class="testimonials-head">
+        <h3>Stimmen von Frauen, die es <span class="italic">durchgezogen</span> haben</h3>
+        <p>Ehrliche Rückmeldungen aus der Challenge.</p>
+      </div>
+
+      <div class="carousel">
+        <div class="carousel-track" id="carouselTrack">
+
+          <article class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <p class="testimonial-quote">Nach Tag 3 hat sich etwas verändert, was ich vorher nie geschafft hab: Ich hab abends nicht mehr automatisch zur Schublade gegriffen. Das fühlt sich wie Freiheit an.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">S</div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name">Sarah M.</p>
+                <p class="testimonial-meta">34, Hamburg</p>
+              </div>
+              <span class="testimonial-verified">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Verifiziert
+              </span>
+            </div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <p class="testimonial-quote">Ich hatte schon so viele Programme probiert und jedes Mal wieder aufgegeben. Hier war's anders, weil ich endlich verstanden hab, WARUM ich immer wieder ausraste. Der Kopf war das Problem, nicht die Ernährung.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar v2">J</div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name">Julia K.</p>
+                <p class="testimonial-meta">41, München</p>
+              </div>
+              <span class="testimonial-verified">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Verifiziert
+              </span>
+            </div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <p class="testimonial-quote">In der ersten Woche schon 1,8 kg weniger, und das ohne Hunger. Aber ehrlich – das Beste war die Ruhe im Kopf. Ich denke nicht mehr den ganzen Tag ans Essen.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar v3">N</div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name">Nadine H.</p>
+                <p class="testimonial-meta">38, Köln</p>
+              </div>
+              <span class="testimonial-verified">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Verifiziert
+              </span>
+            </div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <p class="testimonial-quote">Die Übungen fürs Nervensystem haben mich am meisten überrascht. 3 Minuten am Tag, und ich merke einen Unterschied. Abends kein Stressessen mehr – verrückt.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar v4">L</div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name">Laura B.</p>
+                <p class="testimonial-meta">29, Berlin</p>
+              </div>
+              <span class="testimonial-verified">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Verifiziert
+              </span>
+            </div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <p class="testimonial-quote">Ich hab 3 Kinder, kaum Zeit und bin eigentlich immer am Limit. Die 7 Tage waren realistisch – keine Diät, keine stundenlangen Workouts. Genau das, was ich gebraucht hab.</p>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar">M</div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name">Melanie R.</p>
+                <p class="testimonial-meta">44, Stuttgart</p>
+              </div>
+              <span class="testimonial-verified">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Verifiziert
+              </span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="carouselPrev" aria-label="Vorheriges Testimonial">
+          <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <div class="carousel-dots" id="carouselDots"></div>
+        <button class="carousel-btn" id="carouselNext" aria-label="Nächstes Testimonial">
+          <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="section-head">
+      <h2>Hast du noch Fragen?</h2>
+      <p class="section-sub">Hier findest du die wichtigsten Antworten vor deinem Start.</p>
+    </div>
+
+    <div class="faq-list">
+      <details class="faq-item">
+        <summary>
+          <span>Warum sollte es diesmal klappen, wenn ich schon alles probiert habe?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Weil du bisher an den Symptomen gearbeitet hast – Diäten, Pläne, Regeln. In der 7-Tage Reset-Challenge setzen wir eine Ebene tiefer an: bei deinem Nervensystem und deinen Heißhunger-Triggern. Wenn die Basis stimmt, funktioniert alles darauf Aufbauende leichter.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span style="color: var(--accent);">Ist das wieder nur eine neue Diät?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Nein. Du bekommst keinen Kalorien-Zwang, keine Verbotsliste und keine Shake-Pläne. Es ist ein Reset für Körper und Kopf, damit Essen wieder ein normales Thema wird – nicht dein Lebensmittelpunkt.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Ich habe kaum Zeit – funktioniert das trotzdem?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Ja. Die tägliche Umsetzung braucht unter 20 Minuten. Die Übungen und Routinen sind so gebaut, dass du sie im Alltag einfach integrieren kannst – ohne Fitnessstudio, ohne Meal-Prep-Marathons.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Was passiert direkt nach dem Kauf?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Du bekommst sofort Zugang per E-Mail. Du kannst direkt mit Tag 1 starten oder dir einen Starttag aussuchen, der in deine Woche passt.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Wie lange habe ich Zugriff?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Du hast unbegrenzt Zugriff auf alle Inhalte der Challenge – und kannst sie so oft durchlaufen, wie du möchtest.</div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span>Was ist hier anders als bei anderen Programmen?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">Die Kombination: Ernährung + Training + Mindset + Nervensystem-Regulierung + Community + 1:1-Support. Kein anderes 29,90 €-Programm bündelt diese Ebenen – und genau diese Kombination ist nötig, um den Stress- &amp; Heißhunger-Kreislauf wirklich zu unterbrechen.</div>
+      </details>
+    </div>
+  </section>
+
+  <div class="footer-note">
+    © Elliott Aziz · Impressum · Datenschutz · AGB
+  </div>
 
 <script>
-    var ro=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){var d=parseInt(e.target.dataset.d)||0;setTimeout(function(){e.target.classList.add('vis')},d);ro.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -20px 0px'});
-    document.querySelectorAll('.rv').forEach(function(el){ro.observe(el)});
-    var ts=15*60,tb=document.getElementById('tbTimer'),mt=document.getElementById('midTimer'),ft=document.getElementById('finalTimer');
-    function tick(){if(ts<=0)return;ts--;var m=Math.floor(ts/60),s=ts%60,str=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(tb)tb.textContent=str;if(mt)mt.textContent=str;if(ft)ft.textContent=str}
-    setInterval(tick,1000);
-    document.querySelectorAll('.faq-q').forEach(function(b){b.addEventListener('click',function(){var i=b.parentElement,o=i.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(x){x.classList.remove('open')});if(!o)i.classList.add('open')})});
-</script>
+  // Smooth fade-in on arrival
+  requestAnimationFrame(() => requestAnimationFrame(() => document.body.classList.add('is-ready')));
 
+  function startTimer(id, initialMin, initialSec) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    let total = initialMin * 60 + initialSec;
+    const tick = () => {
+      const m = Math.floor(total / 60);
+      const s = total % 60;
+      el.textContent = `${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      if (total > 0) total -= 1;
+    };
+    tick();
+    setInterval(tick, 1000);
+  }
+  startTimer('timer', 14, 53);
+  startTimer('priceTimer', 14, 50);
+
+  // Testimonial Carousel
+  (function(){
+    const track = document.getElementById('carouselTrack');
+    const prevBtn = document.getElementById('carouselPrev');
+    const nextBtn = document.getElementById('carouselNext');
+    const dotsWrap = document.getElementById('carouselDots');
+    if (!track) return;
+
+    const slides = track.querySelectorAll('.testimonial-card');
+    const count = slides.length;
+    let index = 0;
+    let autoplayTimer;
+
+    for (let i = 0; i < count; i++) {
+      const d = document.createElement('button');
+      d.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+      d.setAttribute('aria-label', `Testimonial ${i + 1}`);
+      d.addEventListener('click', () => go(i));
+      dotsWrap.appendChild(d);
+    }
+    const dots = dotsWrap.querySelectorAll('.carousel-dot');
+
+    function go(i) {
+      index = (i + count) % count;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      dots.forEach((d, idx) => d.classList.toggle('active', idx === index));
+      resetAutoplay();
+    }
+
+    prevBtn.addEventListener('click', () => go(index - 1));
+    nextBtn.addEventListener('click', () => go(index + 1));
+
+    function startAutoplay() { autoplayTimer = setInterval(() => go(index + 1), 6000); }
+    function resetAutoplay() { clearInterval(autoplayTimer); startAutoplay(); }
+    startAutoplay();
+
+    const carousel = track.parentElement;
+    carousel.addEventListener('mouseenter', () => clearInterval(autoplayTimer));
+    carousel.addEventListener('mouseleave', () => startAutoplay());
+
+    let startX = 0, deltaX = 0, touching = false;
+    track.addEventListener('touchstart', e => {
+      touching = true;
+      startX = e.touches[0].clientX;
+      deltaX = 0;
+    }, { passive: true });
+    track.addEventListener('touchmove', e => {
+      if (!touching) return;
+      deltaX = e.touches[0].clientX - startX;
+    }, { passive: true });
+    track.addEventListener('touchend', () => {
+      if (!touching) return;
+      touching = false;
+      if (Math.abs(deltaX) > 40) go(deltaX < 0 ? index + 1 : index - 1);
+    });
+  })();
+</script>
 </body>
 </html>

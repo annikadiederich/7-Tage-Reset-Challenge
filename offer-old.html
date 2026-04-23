@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dein Abnehm-Reset | Elliott Aziz</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sansita+Swashed:wght@400;600;700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+        :root{--bg:#F7F6F2;--bg-green:#EEF5F0;--bg-card:#ffffff;--text:#2c2c2c;--text-soft:#6b6b6b;--text-muted:#a0a0a0;--green:#619240;--green-soft:rgba(97,146,64,.08);--cta1:#FF3B1F;--cta2:#FF6A3D;--shadow:0 2px 8px rgba(0,0,0,.03),0 8px 32px rgba(0,0,0,.04);--shadow-hover:0 4px 12px rgba(0,0,0,.04),0 12px 40px rgba(0,0,0,.06)}
+        html{scroll-behavior:smooth}
+        body{font-family:'Instrument Sans',sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+        h1,h2,h3{font-family:'Plus Jakarta Sans',sans-serif}
+        .sw{font-family:'Sansita Swashed',cursive;font-weight:600}
+        .ctn{max-width:720px;margin:0 auto;padding:0 24px}
+        .ctn--sm{max-width:580px;margin:0 auto;padding:0 24px}
+        .rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease,transform .6s cubic-bezier(.23,1,.32,1)}.rv.vis{opacity:1;transform:translateY(0)}
+        .sec{padding:80px 0}
+        .sec--green{background:var(--bg-green)}
+        .sec-label{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:var(--text-muted);text-align:center;margin-bottom:12px}
+        .sec-title{font-size:clamp(1.35rem,4vw,1.75rem);font-weight:800;text-align:center;letter-spacing:-.03em;line-height:1.25;margin-bottom:16px}
+        .sec-sub{font-size:.9rem;color:var(--text-soft);text-align:center;max-width:480px;margin:0 auto 40px;line-height:1.7}
+
+        /* ═══ STICKY BANNER ═══ */
+        .topbar{position:fixed;top:0;left:0;right:0;z-index:100;background:linear-gradient(90deg,#fdf3d0,#f5e6a3);padding:10px 20px;display:flex;align-items:center;justify-content:center;gap:18px;flex-wrap:wrap;border-bottom:1px solid rgba(0,0,0,.04)}
+        .topbar-text{font-family:'Plus Jakarta Sans',sans-serif;font-size:.76rem;font-weight:700;color:#5a4a10}
+        .topbar-timer{font-family:'Plus Jakarta Sans',sans-serif;font-size:.86rem;font-weight:800;color:#3a3010;font-variant-numeric:tabular-nums}
+        .topbar-cta{padding:7px 18px;background:linear-gradient(90deg,var(--cta1),var(--cta2));color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:.7rem;font-weight:700;border:none;border-radius:100px;cursor:pointer;text-decoration:none;transition:transform .2s ease;box-shadow:0 2px 8px rgba(255,59,31,.15)}
+        .topbar-cta:hover{transform:scale(1.04)}
+        @media(max-width:520px){.topbar{gap:8px;padding:8px 14px}.topbar-text{font-size:.64rem}.topbar-timer{font-size:.74rem}}
+
+        /* ═══ HERO ═══ */
+        .hero{padding:100px 24px 60px;text-align:center;background:linear-gradient(180deg,var(--bg) 0%,#f2f1ec 100%)}
+        .hero h1{font-size:clamp(1.6rem,5.5vw,2.3rem);font-weight:800;letter-spacing:-.035em;line-height:1.2;margin-bottom:14px;color:var(--text)}
+        .hero h1 .sw{color:var(--cta1)}
+        .hero-sub{font-size:.95rem;color:var(--text-soft);margin-bottom:48px}
+
+        .hero-split{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:520px;margin:0 auto}
+        .hs-card{background:var(--bg-card);border-radius:20px;padding:28px 22px;box-shadow:var(--shadow);text-align:center;transition:transform .3s ease,box-shadow .3s ease}
+        .hs-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-hover)}
+        .hs-label{font-size:.58rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px}
+        .hs-now .hs-label{color:var(--cta1)}
+        .hs-goal .hs-label{color:var(--green)}
+        .hs-thought{font-size:.76rem;color:var(--text-soft);font-style:italic;padding:8px 12px;background:rgba(255,59,31,.03);border-radius:8px;margin-bottom:8px;line-height:1.45}
+        .hs-goal p{font-size:.78rem;color:var(--text-soft);margin-bottom:6px;line-height:1.5}
+        @media(max-width:520px){.hero-split{grid-template-columns:1fr;gap:12px}}
+
+        /* ═══ CONTRAST ═══ */
+        .contrast-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:560px;margin:0 auto}
+        .cc{border-radius:18px;padding:28px 22px;box-shadow:var(--shadow);transition:transform .3s ease}
+        .cc:hover{transform:translateY(-2px)}
+        .cc-now{background:#fef5f2;border:1px solid rgba(255,59,31,.06)}
+        .cc-want{background:var(--bg-green);border:1px solid rgba(97,146,64,.08)}
+        .cc h3{font-size:.88rem;font-weight:800;margin-bottom:18px}
+        .cc-now h3{color:var(--cta1)}
+        .cc-want h3{color:var(--green)}
+        .cc-row{display:flex;align-items:center;gap:10px;margin-bottom:10px;font-size:.82rem;color:var(--text-soft)}
+        .cc-row:last-child{margin-bottom:0}
+        .cc-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+        .cc-now .cc-dot{background:rgba(255,59,31,.3)}
+        .cc-want .cc-dot{background:rgba(97,146,64,.4)}
+        @media(max-width:520px){.contrast-grid{grid-template-columns:1fr}}
+
+        /* ═══ PLAN ═══ */
+        .plan-card{background:var(--bg-card);border-radius:20px;padding:36px 28px;box-shadow:var(--shadow);max-width:480px;margin:0 auto;text-align:center}
+        .plan-card h2{font-size:1.15rem;font-weight:800;margin-bottom:8px}
+        .plan-card .sub{font-size:.82rem;color:var(--text-muted);margin-bottom:24px}
+        .plan-row{display:flex;align-items:center;gap:10px;padding:10px 0;font-size:.84rem;color:var(--text-soft)}
+        .plan-row svg{width:16px;height:16px;stroke:var(--green);stroke-width:2.5;fill:none;flex-shrink:0}
+
+        /* ═══ OFFER ═══ */
+        .offer-card{background:var(--bg-card);border-radius:24px;padding:44px 32px;box-shadow:0 2px 8px rgba(0,0,0,.02),0 16px 48px rgba(0,0,0,.05);max-width:500px;margin:0 auto;text-align:center;border:1px solid rgba(97,146,64,.06)}
+        .offer-card h2{font-size:clamp(1.3rem,4vw,1.65rem);font-weight:800;margin-bottom:24px}
+        .offer-ck{display:flex;align-items:center;gap:10px;margin-bottom:11px;font-size:.86rem;color:var(--text-soft);text-align:left}
+        .offer-ck:last-of-type{margin-bottom:0}
+        .offer-ck svg{width:16px;height:16px;stroke:var(--green);stroke-width:2.5;fill:none;flex-shrink:0}
+        .offer-price{margin:32px 0 28px}
+        .offer-old{font-size:.86rem;color:var(--text-muted);text-decoration:line-through}
+        .offer-new{font-size:2rem;font-weight:800;color:var(--text);margin-top:4px}
+        .offer-new span{font-size:.85rem;font-weight:500;color:var(--text-soft)}
+        .offer-inc{font-size:.72rem;color:var(--text-muted);margin-top:16px;line-height:1.7}
+
+        /* ═══ CTA ═══ */
+        .cta-main{display:inline-flex;align-items:center;justify-content:center;gap:10px;padding:17px 48px;background:linear-gradient(135deg,var(--cta1),var(--cta2));color:#fff;font-family:'Plus Jakarta Sans',sans-serif;font-size:1rem;font-weight:700;letter-spacing:.02em;border:none;border-radius:30px;cursor:pointer;text-decoration:none;box-shadow:0 4px 16px rgba(255,59,31,.15),0 0 32px rgba(255,59,31,.05);transition:transform .3s ease,box-shadow .3s ease,filter .3s ease}
+        .cta-main:hover{transform:translateY(-2px) scale(1.02);filter:brightness(1.06);box-shadow:0 6px 24px rgba(255,59,31,.2),0 0 44px rgba(255,59,31,.08)}
+        .cta-main:active{transform:translateY(0) scale(.98)}
+        .cta-lock svg{width:16px;height:16px;stroke:#fff;stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round}
+        .cta-lock .shackle{transform-origin:17px 11px;animation:lockAnim 3.5s ease-in-out infinite}
+        @keyframes lockAnim{0%,15%{transform:translateY(0) rotate(0)}25%{transform:translateY(-3px) rotate(-15deg)}45%{transform:translateY(-3px) rotate(-15deg)}60%,100%{transform:translateY(0) rotate(0)}}
+
+        .cta-trust{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:18px}
+        .cta-trust span{display:flex;align-items:center;gap:5px;font-size:.65rem;color:var(--text-muted)}
+        .cta-trust svg{width:11px;height:11px;stroke:var(--green);stroke-width:2.5;fill:none}
+        .cta-pay{display:flex;justify-content:center;gap:10px;margin-top:14px}
+        .cta-pay span{font-size:.58rem;font-weight:600;color:var(--text-muted);padding:3px 10px;border:1px solid rgba(0,0,0,.06);border-radius:4px}
+
+        /* ═══ STACK ═══ */
+        .stack-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:560px;margin:0 auto}
+        .stack-card{background:var(--bg-card);border-radius:18px;padding:26px 22px;box-shadow:var(--shadow);transition:transform .3s ease}
+        .stack-card:hover{transform:translateY(-2px)}
+        .stack-icon{width:36px;height:36px;border-radius:10px;background:var(--green-soft);display:flex;align-items:center;justify-content:center;margin-bottom:14px}
+        .stack-icon svg{width:16px;height:16px;stroke:var(--green);stroke-width:2;fill:none}
+        .stack-card h3{font-size:.88rem;font-weight:700;margin-bottom:6px}
+        .stack-card p{font-size:.78rem;color:var(--text-soft);line-height:1.5}
+        @media(max-width:520px){.stack-grid{grid-template-columns:1fr}}
+
+        /* ═══ TESTIMONIALS ═══ */
+        .testi-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:560px;margin:0 auto}
+        .testi-card{background:var(--bg-card);border-radius:18px;padding:24px 22px;box-shadow:var(--shadow)}
+        .testi-stars{display:flex;gap:2px;margin-bottom:10px}
+        .testi-stars span{width:14px;height:14px;background:#f5d020;border-radius:2px;display:flex;align-items:center;justify-content:center}
+        .testi-stars svg{width:8px;height:8px;fill:#6a5a10}
+        .testi-card p{font-size:.8rem;color:var(--text-soft);line-height:1.55;font-style:italic;margin-bottom:10px}
+        .testi-name{font-size:.68rem;font-weight:700;color:var(--text-muted)}
+        .testi-proof{text-align:center;margin-top:28px;font-size:.78rem;color:var(--text-muted)}
+        .testi-proof strong{color:var(--text-soft)}
+        .testi-badges{display:flex;justify-content:center;gap:14px;margin-top:10px;flex-wrap:wrap}
+        .testi-badges span{display:flex;align-items:center;gap:4px;font-size:.64rem;color:var(--text-muted)}
+        .testi-badges svg{width:11px;height:11px;stroke:var(--green);stroke-width:2.5;fill:none}
+        @media(max-width:520px){.testi-grid{grid-template-columns:1fr}}
+
+        /* ═══ TRANSFORM ═══ */
+        .tf-list{max-width:420px;margin:0 auto}
+        .tf-item{display:flex;align-items:center;gap:12px;padding:14px 0;border-bottom:1px solid rgba(0,0,0,.04);font-size:.86rem;color:var(--text-soft)}
+        .tf-item:last-child{border-bottom:none}
+        .tf-item svg{width:16px;height:16px;stroke:var(--green);stroke-width:2.5;fill:none;flex-shrink:0}
+
+        /* ═══ YELLOW BANNER ═══ */
+        .ybanner{background:linear-gradient(90deg,#fdf3d0,#f5e6a3);padding:16px 24px;text-align:center;font-family:'Plus Jakarta Sans',sans-serif;font-size:.86rem;font-weight:700;color:#5a4a10;border-top:1px solid rgba(0,0,0,.03);border-bottom:1px solid rgba(0,0,0,.03)}
+
+        /* ═══ FINAL CTA ═══ */
+        .final-sec{padding:60px 24px 100px;text-align:center}
+        .final-sec .save{font-size:.82rem;color:var(--cta1);margin-top:14px;font-weight:600}
+
+        /* ═══ FAQ ═══ */
+        .faq-list{max-width:540px;margin:0 auto}
+        .faq-item{border-bottom:1px solid rgba(0,0,0,.05)}
+        .faq-q{width:100%;background:none;border:none;font-family:'Plus Jakarta Sans',sans-serif;font-size:.88rem;font-weight:700;color:var(--text);text-align:left;padding:20px 0;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:14px}
+        .faq-q:hover{color:var(--green)}
+        .faq-ic{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(0,0,0,.03);display:flex;align-items:center;justify-content:center;transition:transform .3s ease,background .3s ease}
+        .faq-ic svg{width:12px;height:12px;stroke:var(--text-soft);stroke-width:2;fill:none;transition:stroke .3s ease}
+        .faq-item.open .faq-ic{transform:rotate(45deg);background:var(--green)}.faq-item.open .faq-ic svg{stroke:#fff}
+        .faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.4,0,.2,1),opacity .3s ease;opacity:0}
+        .faq-item.open .faq-a{max-height:300px;opacity:1}
+        .faq-a p{padding-bottom:20px;font-size:.82rem;color:var(--text-soft);line-height:1.65}
+
+        @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+        @media(max-width:480px){.cta-main{padding:15px 36px;font-size:.94rem;width:auto}}
+    </style>
+</head>
+<body>
+
+<!-- ═══ STICKY BANNER ═══ -->
+<div class="topbar">
+    <span class="topbar-text">70% Rabatt für dich reserviert</span>
+    <span class="topbar-timer" id="tbTimer">15:00</span>
+    <a href="#offer" class="topbar-cta">Meinen Plan sichern</a>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero">
+    <div class="ctn">
+        <h1 class="rv" data-d="0">Du weißt eigentlich, wie Abnehmen funktioniert&hellip;<br>aber du <span class="sw">ziehst es einfach nicht durch.</span></h1>
+        <p class="hero-sub rv" data-d="100">Und das liegt nicht an Disziplin.</p>
+        <div class="hero-split rv" data-d="200">
+            <div class="hs-card hs-now">
+                <p class="hs-label">Jetzt</p>
+                <p class="hs-thought">&bdquo;Warum schaffe ich es nicht?&ldquo;</p>
+                <p class="hs-thought">&bdquo;Ich fang morgen wieder an&hellip;&ldquo;</p>
+                <p class="hs-thought">&bdquo;Ich hab schon alles probiert&ldquo;</p>
+            </div>
+            <div class="hs-card hs-goal">
+                <p class="hs-label">Dein Ziel</p>
+                <p>Ruhig. Klar. Kontrolliert.</p>
+                <p>Kein Kampf mehr gegen dich selbst.</p>
+                <p>Dein Körper arbeitet wieder für dich.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ CONTRAST ═══ -->
+<section class="sec">
+    <div class="ctn">
+        <div class="contrast-grid rv" data-d="0">
+            <div class="cc cc-now">
+                <h3>Jetzt</h3>
+                <div class="cc-row"><span class="cc-dot"></span>Heißhunger</div>
+                <div class="cc-row"><span class="cc-dot"></span>Rückfälle</div>
+                <div class="cc-row"><span class="cc-dot"></span>Essensfokus</div>
+                <div class="cc-row"><span class="cc-dot"></span>Selbstzweifel</div>
+                <div class="cc-row"><span class="cc-dot"></span>Bauchfett / überschüssige Kilos</div>
+            </div>
+            <div class="cc cc-want">
+                <h3>Was du eigentlich willst</h3>
+                <div class="cc-row"><span class="cc-dot"></span>Ruhe im Kopf</div>
+                <div class="cc-row"><span class="cc-dot"></span>Natürliche Kontrolle</div>
+                <div class="cc-row"><span class="cc-dot"></span>Dauerhaft abnehmen</div>
+                <div class="cc-row"><span class="cc-dot"></span>Selbstvertrauen</div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ PLAN ═══ -->
+<section class="sec sec--green">
+    <div class="ctn--sm">
+        <div class="plan-card rv" data-d="0">
+            <p class="sec-label">Basierend auf deinen Antworten</p>
+            <h2>Dein persönlicher Abnehm-Reset ist bereit</h2>
+            <p class="sub" style="font-size:.84rem;color:#a0a0a0;margin:8px 0 20px">Dein individueller Plan wartet auf dich.</p>
+            <div class="plan-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Fokus: Nervensystem regulieren</div>
+            <div class="plan-row"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ziel: nachhaltige Abnahme ohne Rückfälle</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ URGENCY ═══ -->
+<div class="ybanner rv" data-d="0">Dieses Angebot endet in <strong id="midTimer">15:00</strong> Min.</div>
+
+<!-- ═══ OFFER ═══ -->
+<section class="sec" id="offer">
+    <div class="ctn--sm">
+        <div class="offer-card rv" data-d="0">
+            <h2>7 Tage Reset Challenge</h2>
+            <div class="offer-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Nervensystem regulieren</div>
+            <div class="offer-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Abnehmblockade lösen</div>
+            <div class="offer-ck"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Klarer Plan für deinen Alltag</div>
+            <div class="offer-price">
+                <p class="offer-old">Statt 99&euro;</p>
+                <p class="offer-new">29,90&euro; <span>einmalig</span></p>
+            </div>
+            <a href="#" class="cta-main">Jetzt Zugang sichern <span class="cta-lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path class="shackle" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span></a>
+            <div class="cta-trust">
+                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sichere Bezahlung</span>
+                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sofortiger Zugang</span>
+                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Kein Abo</span>
+                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>100% digital</span>
+            </div>
+            <div class="cta-pay"><span>Visa</span><span>Mastercard</span><span>PayPal</span></div>
+            <p class="offer-inc">Videokurs &middot; 2 Online Workshops + Aufzeichnung &middot; Persönlicher Support</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ WHAT YOU GET ═══ -->
+<section class="sec sec--green">
+    <div class="ctn">
+        <h2 class="sec-title rv" data-d="0">Das bekommst du</h2>
+        <div class="stack-grid">
+            <div class="stack-card rv" data-d="100">
+                <div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+                <h3>7 Tage Reset Challenge</h3>
+                <p>Bring dein Nervensystem zurück in Balance und starte echte Fettverbrennung.</p>
+            </div>
+            <div class="stack-card rv" data-d="200">
+                <div class="stack-icon"><svg viewBox="0 0 24 24"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
+                <h3>7 Video-Einheiten</h3>
+                <p>10&ndash;15 Min. täglich. Verstehe dein Verhalten und verändere Gewohnheiten nachhaltig.</p>
+            </div>
+            <div class="stack-card rv" data-d="300">
+                <div class="stack-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+                <h3>2 Live Workshops</h3>
+                <p>Inkl. Aufzeichnung. Klarer Plan, ohne dass Essen dein Leben bestimmt.</p>
+            </div>
+            <div class="stack-card rv" data-d="400">
+                <div class="stack-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                <h3>Fragen &amp; Klarheit</h3>
+                <p>Kein Rätselraten &ndash; du weißt, was für dich funktioniert.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="sec">
+    <div class="ctn">
+        <h2 class="sec-title rv" data-d="0">Das sagen unsere Teilnehmerinnen</h2>
+        <div class="testi-grid">
+            <div class="testi-card rv" data-d="100">
+                <div class="testi-stars"><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span></div>
+                <p>&bdquo;Zum ersten Mal verstehe ich, warum ich immer wieder rückfällig werde.&ldquo;</p>
+                <span class="testi-name">Sarah, 34</span>
+            </div>
+            <div class="testi-card rv" data-d="200">
+                <div class="testi-stars"><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span></div>
+                <p>&bdquo;In 7 Tagen mehr gelernt als in 10 Jahren Diäten. Absolut empfehlenswert.&ldquo;</p>
+                <span class="testi-name">Lisa, 29</span>
+            </div>
+            <div class="testi-card rv" data-d="300">
+                <div class="testi-stars"><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span></div>
+                <p>&bdquo;Endlich kein Heißhunger mehr abends. Ich fühle mich wie ein neuer Mensch.&ldquo;</p>
+                <span class="testi-name">Marina, 41</span>
+            </div>
+            <div class="testi-card rv" data-d="400">
+                <div class="testi-stars"><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span><span><svg viewBox="0 0 20 20"><path d="M10 1l2.4 4.8 5.3.8-3.8 3.7.9 5.3L10 13.3l-4.8 2.5.9-5.3L2.3 6.8l5.3-.8z"/></svg></span></div>
+                <p>&bdquo;Die Challenge hat mir gezeigt, dass es nicht um Disziplin geht.&ldquo;</p>
+                <span class="testi-name">Julia, 37</span>
+            </div>
+        </div>
+        <div class="testi-proof rv" data-d="200">
+            <p><strong>Über 1.000+ Teilnehmerinnen</strong></p>
+            <div class="testi-badges">
+                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Nachhaltig abgenommen</span>
+                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Essverhalten verändert</span>
+                <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Ergebnis gehalten</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ TRANSFORM ═══ -->
+<section class="sec sec--green" style="text-align:center">
+    <div class="ctn--sm">
+        <h2 class="sec-title rv" data-d="0">Das verändert sich für dich</h2>
+        <div class="tf-list">
+            <div class="tf-item rv" data-d="100"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Weniger Heißhunger</div>
+            <div class="tf-item rv" data-d="200"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Mehr Ruhe im Kopf</div>
+            <div class="tf-item rv" data-d="300"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Kein ständiges Neu-Anfangen</div>
+            <div class="tf-item rv" data-d="400"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Dein Körper beginnt wieder abzunehmen</div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ URGENCY ═══ -->
+<div class="ybanner rv" data-d="0">Dieses Angebot verschwindet in <strong id="finalTimer">15:00</strong> Min.</div>
+
+<!-- ═══ FINAL CTA ═══ -->
+<section class="final-sec">
+    <div class="ctn--sm">
+        <a href="#" class="cta-main rv" data-d="0">Jetzt Zugang sichern (29,90&euro;) <span class="cta-lock"><svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path class="shackle" d="M7 11V7a5 5 0 0 1 10 0v4"/></svg></span></a>
+        <p class="save rv" data-d="100">Du sparst heute 69,10&euro; (&asymp;70%)</p>
+        <div class="cta-trust rv" data-d="200">
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sichere Bezahlung</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Sofortiger Zugang</span>
+            <span><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>Kein Abo</span>
+        </div>
+    </div>
+</section>
+
+<!-- ═══ FAQ ═══ -->
+<section class="sec">
+    <div class="ctn--sm">
+        <h2 class="sec-title">Häufige Fragen</h2>
+        <div class="faq-list">
+            <div class="faq-item open">
+                <button class="faq-q">Für wen ist die 7-Tage Challenge geeignet?<span class="faq-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+                <div class="faq-a"><p>Für Frauen, die trotz vieler Versuche nicht dauerhaft abnehmen und verstehen wollen, warum Diäten bei ihnen nicht funktionieren.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Brauche ich Vorkenntnisse?<span class="faq-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+                <div class="faq-a"><p>Nein. Alles wird Schritt für Schritt erklärt &ndash; in kurzen, verständlichen Video-Einheiten.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Wie viel Zeit brauche ich täglich?<span class="faq-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+                <div class="faq-a"><p>Etwa 10&ndash;15 Minuten pro Tag. Die Videos sind kompakt und praxisnah.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Was passiert nach dem Kauf?<span class="faq-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+                <div class="faq-a"><p>Du bekommst sofort Zugang. Alles ist digital verfügbar &ndash; starte direkt.</p></div>
+            </div>
+            <div class="faq-item">
+                <button class="faq-q">Ist das ein Abo?<span class="faq-ic"><svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg></span></button>
+                <div class="faq-a"><p>Nein. Einmalig 29,90&euro; &ndash; kein Abo, keine versteckten Kosten.</p></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div style="height:40px"></div>
+
+<script>
+    var ro=new IntersectionObserver(function(e){e.forEach(function(e){if(e.isIntersecting){var d=parseInt(e.target.dataset.d)||0;setTimeout(function(){e.target.classList.add('vis')},d);ro.unobserve(e.target)}})},{threshold:.1,rootMargin:'0px 0px -20px 0px'});
+    document.querySelectorAll('.rv').forEach(function(el){ro.observe(el)});
+    var ts=15*60,tb=document.getElementById('tbTimer'),mt=document.getElementById('midTimer'),ft=document.getElementById('finalTimer');
+    function tick(){if(ts<=0)return;ts--;var m=Math.floor(ts/60),s=ts%60,str=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');if(tb)tb.textContent=str;if(mt)mt.textContent=str;if(ft)ft.textContent=str}
+    setInterval(tick,1000);
+    document.querySelectorAll('.faq-q').forEach(function(b){b.addEventListener('click',function(){var i=b.parentElement,o=i.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(x){x.classList.remove('open')});if(!o)i.classList.add('open')})});
+</script>
+
+</body>
+</html>
