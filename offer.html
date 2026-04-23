@@ -400,7 +400,7 @@
   h2 {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 700;
-    font-size: clamp(1.7rem, 5.5vw, 2.2rem);
+    font-size: clamp(2rem, 6.5vw, 2.6rem);
     line-height: 1.15;
     letter-spacing: -0.02em;
     margin: 0 0 14px;
@@ -412,9 +412,9 @@
   .section-sub {
     font-family: 'Instrument Sans', sans-serif;
     color: var(--ink-soft);
-    font-size: 1rem;
+    font-size: 1.1rem;
     line-height: 1.55;
-    max-width: 460px;
+    max-width: 480px;
     margin: 0 auto;
   }
 
@@ -426,29 +426,50 @@
   }
   .module {
     display: grid;
-    grid-template-columns: 140px 1fr;
-    gap: 18px;
+    grid-template-columns: 200px 1fr;
+    gap: 22px;
     align-items: center;
     background: var(--card);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 18px;
+    padding: 18px 22px 18px 18px;
     box-shadow: var(--shadow-card);
     transition: transform .2s ease, box-shadow .2s ease;
+    overflow: visible;
   }
   .module:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
   .module-image {
-    width: 140px;
-    aspect-ratio: 4/3;
-    border-radius: 10px;
-    background: var(--bg-soft);
-    overflow: hidden;
+    width: 200px;
+    aspect-ratio: 1/1;
+    background: transparent;
     display: grid;
     place-items: center;
-    border: 1px solid var(--border);
     position: relative;
+    overflow: visible;
   }
   .module-image svg { width: 100%; height: 100%; display: block; }
+  .module-image img {
+    width: 116%;
+    height: 116%;
+    object-fit: contain;
+    display: block;
+    margin: -8%;
+    transform: rotate(-5deg);
+    transform-origin: 50% 55%;
+    filter: drop-shadow(0 14px 22px rgba(20,20,15,0.22)) drop-shadow(0 4px 8px rgba(20,20,15,0.12));
+    transition: transform .35s cubic-bezier(.2,.8,.2,1);
+  }
+  .module:hover .module-image img { transform: rotate(-3deg) translateY(-2px); }
+  .module-image img.module-image--cover {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover;
+    border-radius: 12px;
+    transform: none;
+    filter: none;
+  }
+  .module:hover .module-image img.module-image--cover { transform: none; }
   .module-content { min-width: 0; }
   .module-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
@@ -480,8 +501,8 @@
   }
 
   @media (max-width: 560px) {
-    .module { grid-template-columns: 100px 1fr; gap: 14px; padding: 14px; }
-    .module-image { width: 100px; }
+    .module { grid-template-columns: 130px 1fr; gap: 14px; padding: 14px; }
+    .module-image { width: 130px; }
     .module-title { font-size: 0.98rem; }
     .module-outcome { font-size: 0.85rem; }
   }
@@ -544,105 +565,175 @@
   .trafo-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
+    gap: 20px;
+    align-items: start;
   }
   .trafo-card {
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 10px 10px 18px;
+    border-radius: 18px;
     box-shadow: var(--shadow-card);
     display: flex;
     flex-direction: column;
-    align-items: center;
+    overflow: hidden;
     transition: transform .2s ease, box-shadow .2s ease;
   }
   .trafo-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
-  .trafo-images {
+  .trafo-photo {
     width: 100%;
-    aspect-ratio: 1/1.2;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2px;
-    border-radius: 10px;
-    overflow: hidden;
-    background: var(--border);
-    position: relative;
-  }
-  .trafo-img {
-    background: linear-gradient(135deg, #7a7568 0%, #4a4538 100%);
-    position: relative;
+    background: #eee;
     overflow: hidden;
   }
-  .trafo-img.after { background: linear-gradient(135deg, #8a8578 0%, #5a5548 100%); }
-  .trafo-img::before {
-    content: '';
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);
-    width: 55%;
-    aspect-ratio: 1/1.8;
-    background:
-      radial-gradient(ellipse 40% 15% at 50% 10%, rgba(255,255,255,0.15), transparent 60%),
-      radial-gradient(ellipse 55% 25% at 50% 40%, rgba(255,255,255,0.08), transparent 60%);
-    border-radius: 40% 40% 30% 30%;
-    opacity: 0.6;
+  .trafo-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
-  .trafo-badge {
-    display: inline-block;
-    background: #fff;
-    color: var(--ink);
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.78rem;
-    font-weight: 800;
-    padding: 7px 14px;
-    border-radius: 999px;
-    margin-top: -14px;
-    z-index: 2;
-    position: relative;
-    box-shadow: 0 4px 12px rgba(30,28,26,0.12);
-    border: 1px solid var(--border);
+  /* Desktop/tablet: uniform aspect so all cards align; crop from bottom (trim feet etc.) */
+  @media (min-width: 481px) {
+    .trafo-photo {
+      aspect-ratio: 3 / 4;
+    }
+    .trafo-photo img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+    }
   }
-  .trafo-caption {
-    margin-top: 10px;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.66rem;
+  .trafo-body {
+    padding: 18px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+  .trafo-quote {
+    font-family: 'Playfair Display', Georgia, serif;
     font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
+    font-size: clamp(1rem, 2.4vw, 1.15rem);
+    line-height: 1.3;
+    color: var(--ink);
+    text-align: center;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+  .trafo-sub {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.82rem;
+    line-height: 1.5;
     color: var(--muted-2);
     text-align: center;
-    line-height: 1.3;
+    margin: 0;
   }
-  .trafo-caption .script {
-    display: block;
+  .trafo-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 6px;
+  }
+  .trafo-name {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+  .trafo-flag {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 1px rgba(30,28,26,0.1);
+    background: #fff;
+  }
+  .trafo-flag svg { width: 100%; height: 100%; display: block; }
+  .trafo-result {
+    display: inline-flex;
+    align-items: center;
+    background: rgba(97, 146, 64, 0.14);
+    border: 1px solid rgba(97, 146, 64, 0.3);
+    color: #3a6320;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-style: italic;
-    font-weight: 400;
-    font-size: 0.88rem;
-    letter-spacing: 0;
-    color: var(--muted-2);
-    text-transform: none;
-    margin-top: 2px;
+    font-weight: 700;
+    font-size: 0.78rem;
+    padding: 5px 11px;
+    border-radius: 999px;
+    letter-spacing: -0.005em;
+    white-space: nowrap;
   }
 
-  @media (max-width: 640px) {
-    .trafo-card { padding: 8px 8px 16px; }
-    .trafo-badge { font-size: 0.66rem; padding: 6px 10px; }
-    .trafo-caption { font-size: 0.56rem; letter-spacing: 0.16em; }
-    .trafo-caption .script { font-size: 0.7rem; }
+  @media (max-width: 900px) {
+    .trafo-grid { grid-template-columns: 1fr; gap: 18px; max-width: 520px; margin: 0 auto; }
+    .trafo-quote { font-size: 1.15rem; }
+    .trafo-sub { font-size: 0.88rem; }
+    .trafo-name, .trafo-result { font-size: 0.82rem; }
   }
-  @media (max-width: 420px) {
-    .trafo-grid {
-      grid-template-columns: 1fr;
-      gap: 12px;
-      max-width: 320px;
-      margin: 0 auto;
-    }
-    .trafo-badge { font-size: 0.78rem; padding: 7px 14px; }
-    .trafo-caption { font-size: 0.68rem; letter-spacing: 0.2em; }
-    .trafo-caption .script { font-size: 0.82rem; }
+  @media (max-width: 480px) {
+    .trafo-body { padding: 16px 16px 14px; }
+  }
+  .trafo-footnote {
+    margin: 22px auto 0;
+    text-align: center;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.76rem;
+    color: var(--muted-2);
+    letter-spacing: 0.005em;
+    line-height: 1.5;
+    max-width: 440px;
+  }
+
+  /* ===== Auto-scrolling Trafo Marquee ===== */
+  .trafo-marquee-wrap {
+    margin: 28px auto 4px;
+    max-width: 100%;
+  }
+  .trafo-marquee {
+    overflow: hidden;
+    width: 100%;
+    position: relative;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 7%, black 93%, transparent 100%);
+  }
+  .trafo-marquee-track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    animation: trafoMarquee 42s linear infinite;
+    will-change: transform;
+  }
+  .trafo-marquee:hover .trafo-marquee-track,
+  .trafo-marquee:focus-within .trafo-marquee-track {
+    animation-play-state: paused;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .trafo-marquee-track { animation: none; }
+  }
+  .trafo-marquee-item {
+    flex: 0 0 auto;
+    width: 200px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: transparent;
+    border: 0;
+    box-shadow: none;
+  }
+  .trafo-marquee-item img {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+  @keyframes trafoMarquee {
+    from { transform: translate3d(0, 0, 0); }
+    to   { transform: translate3d(-50%, 0, 0); }
+  }
+  @media (max-width: 480px) {
+    .trafo-marquee-item { width: 165px; border-radius: 12px; }
+    .trafo-marquee-track { gap: 10px; animation-duration: 36s; }
   }
 
   /* ══════ Value bridge ══════ */
@@ -892,6 +983,50 @@
     margin: 0 0 18px;
     line-height: 1.5;
   }
+  .social-video {
+    position: relative;
+    margin: 0 auto 18px;
+    max-width: 400px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    cursor: pointer;
+  }
+  .social-video video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  .social-video-unmute {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 7px 12px;
+    background: rgba(0,0,0,0.62);
+    color: #fff;
+    border: none;
+    border-radius: 999px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    transition: opacity .3s ease, transform .2s ease, background .2s ease;
+    z-index: 2;
+  }
+  .social-video-unmute svg { width: 13px; height: 13px; fill: currentColor; }
+  .social-video-unmute:hover { transform: scale(1.04); background: rgba(0,0,0,0.78); }
+  .social-video.is-unmuted { cursor: default; }
+  .social-video.is-unmuted .social-video-unmute { opacity: 0; pointer-events: none; }
   .social-avatars {
     display: inline-flex;
     margin-bottom: 12px;
@@ -987,6 +1122,20 @@
     top: -18px; left: -8px;
     line-height: 1;
     font-style: italic;
+  }
+  .testimonial-screenshot {
+    margin: 0 auto 18px;
+    max-width: 380px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: #eceae4;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 10px rgba(30, 28, 26, 0.06);
+  }
+  .testimonial-screenshot img {
+    display: block;
+    width: 100%;
+    height: auto;
   }
   .testimonial-author {
     display: flex;
@@ -1216,12 +1365,117 @@
     margin: 0 auto;
   }
 
+  /* ===== Hero Video (Wistia-style) ===== */
+  .hero-video-section {
+    padding: 8px 16px 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .hero-video {
+    position: relative;
+    width: 100%;
+    max-width: 260px;
+    aspect-ratio: 9 / 16;
+    border-radius: 20px;
+    overflow: hidden;
+    background: #0e2a1b;
+    box-shadow:
+      0 30px 60px -22px rgba(14, 42, 27, 0.55),
+      0 10px 22px -12px rgba(0, 0, 0, 0.28);
+    cursor: pointer;
+    isolation: isolate;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .hero-video__el {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    background: #0e2a1b;
+  }
+  .hero-video__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 0 26px;
+    gap: 10px;
+    border: 0;
+    background:
+      linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(0,0,0,0.45) 100%);
+    color: #fff;
+    cursor: pointer;
+    transition: opacity 0.4s ease;
+    z-index: 2;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  .hero-video__speaker {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.94);
+    color: #0e2a1b;
+    display: grid;
+    place-items: center;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+    animation: heroVidPulse 2.2s ease-in-out infinite;
+  }
+  .hero-video__speaker svg { width: 22px; height: 22px; }
+  .hero-video__label {
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+  }
+  @keyframes heroVidPulse {
+    0%, 100% {
+      transform: scale(1);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28), 0 0 0 0 rgba(255,255,255,0.55);
+    }
+    50% {
+      transform: scale(1.06);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28), 0 0 0 14px rgba(255,255,255,0);
+    }
+  }
+  .hero-video.is-unmuted .hero-video__overlay {
+    opacity: 0;
+    pointer-events: none;
+  }
+  .hero-video__mute-toggle {
+    position: absolute;
+    bottom: 14px; right: 14px;
+    width: 38px; height: 38px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.55);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    color: #fff;
+    display: none;
+    place-items: center;
+    cursor: pointer;
+    z-index: 3;
+    transition: background 0.2s ease, transform 0.2s ease;
+  }
+  .hero-video__mute-toggle svg { width: 18px; height: 18px; }
+  .hero-video__mute-toggle:hover { background: rgba(0, 0, 0, 0.75); transform: scale(1.06); }
+  .hero-video.is-unmuted .hero-video__mute-toggle { display: grid; }
+
   @media (max-width: 480px) {
     .hero { padding: 28px 16px 40px; }
     .section { padding: 44px 20px; }
     .days-grid { grid-template-columns: 1fr; gap: 10px; }
     .day-card { text-align: left; padding: 14px 18px; display: flex; align-items: center; gap: 14px; }
     .day-label { margin-bottom: 0; flex-shrink: 0; width: 72px; }
+    .hero-video { max-width: 230px; border-radius: 18px; }
+    .hero-video__speaker { width: 44px; height: 44px; }
+    .hero-video__speaker svg { width: 20px; height: 20px; }
+    .hero-video__label { font-size: 0.8rem; }
   }
 </style>
 </head>
@@ -1239,7 +1493,7 @@
       <span class="topbar-text">Dein Angebot ist reserviert für:</span>
       <span class="topbar-timer" id="timer">14:53</span>
     </div>
-    <a class="topbar-cta" href="#offer">Jetzt 7-Tage Challenge starten</a>
+    <a class="topbar-cta" href="https://myablefy.com/s/elliottaziz/reset-challenge/payment" target="_blank" rel="noopener noreferrer">Jetzt 7-Tage Challenge starten</a>
   </div>
 
   <!-- Headline-Section mit schrägem Banner -->
@@ -1334,17 +1588,7 @@
 
       <div class="module">
         <div class="module-image">
-          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
-            <rect width="140" height="105" fill="#f6f4f1"/>
-            <rect x="28" y="18" width="84" height="68" rx="6" fill="#ffffff" stroke="#1e1c1a" stroke-width="1.2"/>
-            <rect x="32" y="22" width="76" height="8" rx="2" fill="#e8530e"/>
-            <rect x="32" y="34" width="40" height="3" rx="1.5" fill="#1e1c1a"/>
-            <rect x="32" y="40" width="60" height="2" rx="1" fill="#9b938a"/>
-            <rect x="32" y="46" width="50" height="2" rx="1" fill="#9b938a"/>
-            <rect x="32" y="54" width="76" height="10" rx="2" fill="rgba(232,83,14,0.12)"/>
-            <rect x="32" y="68" width="76" height="10" rx="2" fill="#f6f4f1"/>
-            <circle cx="115" cy="82" r="2" fill="#1e1c1a"/>
-          </svg>
+          <img src="module-images/ernaehrung.png" alt="Ernährungsplan App-Ansicht" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
           <h3 class="module-title">Ernährungsplan, den du wirklich durchziehst</h3>
@@ -1355,24 +1599,7 @@
 
       <div class="module">
         <div class="module-image">
-          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
-            <rect width="140" height="105" fill="#f6f4f1"/>
-            <rect x="48" y="12" width="44" height="82" rx="6" fill="#1e1c1a"/>
-            <rect x="51" y="18" width="38" height="70" rx="2" fill="#ffffff"/>
-            <rect x="54" y="22" width="32" height="14" rx="2" fill="#0e2a1b"/>
-            <rect x="57" y="26" width="14" height="2" rx="1" fill="#ffffff"/>
-            <rect x="57" y="30" width="20" height="2" rx="1" fill="#c8e99d"/>
-            <rect x="54" y="40" width="10" height="10" rx="2" fill="rgba(232,83,14,0.12)"/>
-            <rect x="66" y="40" width="10" height="10" rx="2" fill="#e8530e"/>
-            <rect x="78" y="40" width="8" height="10" rx="2" fill="rgba(232,83,14,0.12)"/>
-            <rect x="54" y="54" width="32" height="4" rx="1" fill="#efece4"/>
-            <rect x="54" y="54" width="22" height="4" rx="1" fill="#e8530e"/>
-            <rect x="54" y="62" width="32" height="4" rx="1" fill="#efece4"/>
-            <rect x="54" y="62" width="16" height="4" rx="1" fill="#e8530e"/>
-            <rect x="54" y="70" width="32" height="4" rx="1" fill="#efece4"/>
-            <rect x="54" y="70" width="10" height="4" rx="1" fill="#e8530e"/>
-            <circle cx="70" cy="91" r="1.5" fill="#ffffff"/>
-          </svg>
+          <img src="module-images/training.png" alt="Trainingsplan App-Ansicht" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
           <h3 class="module-title">Trainingsplan, der in dein Leben passt</h3>
@@ -1383,19 +1610,10 @@
 
       <div class="module">
         <div class="module-image">
-          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
-            <rect width="140" height="105" fill="#f6f4f1"/>
-            <rect x="36" y="14" width="68" height="80" rx="3" fill="#0e2a1b"/>
-            <rect x="39" y="17" width="62" height="74" rx="2" fill="#14482c"/>
-            <text x="70" y="40" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-style="italic" font-size="9" font-weight="700" fill="#c8e99d">Mindset</text>
-            <text x="70" y="52" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="11" font-weight="700" fill="#f6f4f1">RESET</text>
-            <line x1="50" y1="62" x2="90" y2="62" stroke="#c8e99d" stroke-width="0.5"/>
-            <text x="70" y="76" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-size="5" letter-spacing="1" fill="#c9c3b3">WORKBOOK</text>
-            <circle cx="70" cy="84" r="2" fill="#e8530e"/>
-          </svg>
+          <img src="module-images/mindset.png" alt="Mentales Training – Videomodul" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Mentales Training gegen Rückfälle</h3>
+          <h3 class="module-title">7 konkrete Mindset-Lektionen gegen Rückfälle</h3>
           <p class="module-outcome">Damit du nach stressigen Tagen nicht mehr eskalierst.</p>
           <span class="module-tag">Wert: 149 €</span>
         </div>
@@ -1403,20 +1621,10 @@
 
       <div class="module">
         <div class="module-image">
-          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
-            <rect width="140" height="105" fill="#f6f4f1"/>
-            <rect x="20" y="28" width="100" height="48" rx="8" fill="#ffffff" stroke="#1e1c1a" stroke-width="1"/>
-            <circle cx="40" cy="52" r="10" fill="rgba(232,83,14,0.12)" stroke="#e8530e" stroke-width="1.5"/>
-            <polygon points="37,48 37,56 44,52" fill="#e8530e"/>
-            <rect x="56" y="46" width="50" height="3" rx="1" fill="#1e1c1a"/>
-            <rect x="56" y="52" width="40" height="2" rx="1" fill="#9b938a"/>
-            <rect x="56" y="58" width="50" height="3" rx="1.5" fill="#efece4"/>
-            <rect x="56" y="58" width="18" height="3" rx="1.5" fill="#e8530e"/>
-            <text x="70" y="86" text-anchor="middle" font-family="Plus Jakarta Sans, sans-serif" font-style="italic" font-size="8" fill="#7a7568">Atemübung · 3 Min</text>
-          </svg>
+          <img src="module-images/nervensystem.png" alt="Gehirnwellen-Diagramm: Beta, Alpha, Theta, Delta" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Nervensystem-Regulierung</h3>
+          <h3 class="module-title">3 klare Nervensystem-Regulierungs-Übungen</h3>
           <p class="module-outcome">Einfache Übungen, die deinen Körper aus dem Stressmodus holen.</p>
           <span class="module-tag">Wert: 129 €</span>
         </div>
@@ -1424,24 +1632,10 @@
 
       <div class="module">
         <div class="module-image">
-          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
-            <rect width="140" height="105" fill="#f6f4f1"/>
-            <rect x="20" y="20" width="100" height="65" rx="8" fill="#ffffff" stroke="#1e1c1a" stroke-width="1"/>
-            <circle cx="32" cy="34" r="5" fill="#c9a27a"/>
-            <rect x="42" y="30" width="50" height="3" rx="1" fill="#1e1c1a"/>
-            <rect x="42" y="36" width="66" height="2" rx="1" fill="#9b938a"/>
-            <rect x="42" y="40" width="40" height="2" rx="1" fill="#9b938a"/>
-            <circle cx="32" cy="56" r="5" fill="#b0846a"/>
-            <rect x="42" y="52" width="45" height="3" rx="1" fill="#1e1c1a"/>
-            <rect x="42" y="58" width="60" height="2" rx="1" fill="#9b938a"/>
-            <rect x="42" y="62" width="35" height="2" rx="1" fill="#9b938a"/>
-            <circle cx="32" cy="76" r="5" fill="#d4a88a"/>
-            <rect x="42" y="72" width="42" height="3" rx="1" fill="#1e1c1a"/>
-            <rect x="42" y="78" width="55" height="2" rx="1" fill="#9b938a"/>
-          </svg>
+          <img src="module-images/community.png" alt="Community-Zoom-Call auf Laptop" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Community, die dich mitzieht</h3>
+          <h3 class="module-title">Zugang zur Community-Gruppe</h3>
           <p class="module-outcome">Gemeinsam fällt Durchziehen leichter – du bist nicht mehr allein.</p>
           <span class="module-tag">Wert: 59 €</span>
         </div>
@@ -1449,23 +1643,10 @@
 
       <div class="module">
         <div class="module-image">
-          <svg viewBox="0 0 140 105" xmlns="http://www.w3.org/2000/svg">
-            <rect width="140" height="105" fill="#f6f4f1"/>
-            <rect x="24" y="20" width="92" height="66" rx="8" fill="#ffffff" stroke="#1e1c1a" stroke-width="1"/>
-            <rect x="30" y="30" width="44" height="14" rx="4" fill="#efece4"/>
-            <rect x="34" y="34" width="30" height="2" rx="1" fill="#1e1c1a"/>
-            <rect x="34" y="38" width="24" height="2" rx="1" fill="#7a7568"/>
-            <rect x="66" y="48" width="44" height="14" rx="4" fill="#0e2a1b"/>
-            <rect x="70" y="52" width="30" height="2" rx="1" fill="#ffffff"/>
-            <rect x="70" y="56" width="20" height="2" rx="1" fill="#c9c3b3"/>
-            <rect x="30" y="66" width="36" height="12" rx="4" fill="#efece4"/>
-            <rect x="34" y="70" width="24" height="2" rx="1" fill="#1e1c1a"/>
-            <circle cx="104" cy="76" r="6" fill="#e8530e"/>
-            <path d="M 101 74 L 107 76 L 101 78 Z" fill="#ffffff"/>
-          </svg>
+          <img src="module-images/workshop.png" alt="Live-Abnehm-Workshop mit Coaching-Team" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">1:1 Support &amp; Live-Gespräche</h3>
+          <h3 class="module-title">1:1 Chat-Support &amp; 2 Live-Abnehm-Workshops</h3>
           <p class="module-outcome">Echte Antworten auf deine Fragen – keine leere Forum-Stille.</p>
           <span class="module-tag">Wert: 199 €</span>
         </div>
@@ -1529,6 +1710,42 @@
         <h2>7 Tage reichen, um den <span class="italic-green">Kreislauf</span> zu durchbrechen</h2>
       </div>
 
+      <div class="hero-video-section">
+        <div class="hero-video" id="heroVideo">
+          <video
+            class="hero-video__el"
+            autoplay
+            muted
+            loop
+            playsinline
+            webkit-playsinline
+            preload="metadata">
+            <source src="event-video.mp4" type="video/mp4">
+          </video>
+          <button class="hero-video__overlay" type="button" aria-label="Ton einschalten und Video von Anfang abspielen">
+            <span class="hero-video__speaker" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor" stroke="none"/>
+                <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+                <path d="M18.5 5.5a9 9 0 0 1 0 13"/>
+              </svg>
+            </span>
+            <span class="hero-video__label">Klick für Ton</span>
+          </button>
+          <button class="hero-video__mute-toggle" type="button" aria-label="Ton stumm schalten">
+            <svg class="hero-video__icon-on" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor" stroke="none"/>
+              <path d="M15.5 8.5a5 5 0 0 1 0 7"/>
+            </svg>
+            <svg class="hero-video__icon-off" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" hidden>
+              <path d="M11 5L6 9H2v6h4l5 4V5z" fill="currentColor" stroke="none"/>
+              <line x1="22" y1="9" x2="16" y2="15"/>
+              <line x1="16" y1="9" x2="22" y2="15"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
       <div class="days-grid">
         <div class="day-card">
           <div class="day-label">Tag 1–2</div>
@@ -1561,30 +1778,63 @@
 
       <div class="trafo-grid">
         <div class="trafo-card">
-          <div class="trafo-images">
-            <div class="trafo-img before"></div>
-            <div class="trafo-img after"></div>
+          <div class="trafo-photo">
+            <img src="generated-images/trafo-laura.jpg" alt="Laura – Abnehmen ohne Kampf, −10 kg in 8 Wochen" loading="lazy">
           </div>
-          <span class="trafo-badge">−3&nbsp;kg in 18&nbsp;Wochen</span>
-          <div class="trafo-caption">Change<span class="script">by you</span></div>
+          <div class="trafo-body">
+            <p class="trafo-quote">„Abnehmen ohne Kampf."</p>
+            <p class="trafo-sub">Abnehmen fühlt sich nicht mehr wie ein Kampf an, sondern wie etwas, das einfach passiert.</p>
+            <div class="trafo-foot">
+              <span class="trafo-name">
+                – Laura aus
+                <span class="trafo-flag" aria-hidden="true">
+                  <svg viewBox="0 0 32 32"><rect width="32" height="16" fill="#000"/><rect y="16" width="32" height="16" fill="#FFCC00"/></svg>
+                </span>
+              </span>
+              <span class="trafo-result">–10&nbsp;kg in 8&nbsp;Wochen</span>
+            </div>
+          </div>
         </div>
+
         <div class="trafo-card">
-          <div class="trafo-images">
-            <div class="trafo-img before"></div>
-            <div class="trafo-img after"></div>
+          <div class="trafo-photo">
+            <img src="generated-images/trafo-frau-24kg.png" alt="Sarah – Endlich angekommen, −24 kg in 12 Monaten" loading="lazy">
           </div>
-          <span class="trafo-badge">−16&nbsp;kg in 12&nbsp;Monaten</span>
-          <div class="trafo-caption">Change<span class="script">by you</span></div>
+          <div class="trafo-body">
+            <p class="trafo-quote">„Endlich angekommen."</p>
+            <p class="trafo-sub">Nach Jahren des Probierens habe ich meine Routine gefunden – ohne Verzicht, ohne Jojo.</p>
+            <div class="trafo-foot">
+              <span class="trafo-name">
+                – Sarah aus
+                <span class="trafo-flag" aria-hidden="true">
+                  <svg viewBox="0 0 32 32"><rect width="32" height="16" fill="#046A38"/><rect y="16" width="32" height="16" fill="#fff"/></svg>
+                </span>
+              </span>
+              <span class="trafo-result">–24&nbsp;kg in 12&nbsp;Monaten</span>
+            </div>
+          </div>
         </div>
+
         <div class="trafo-card">
-          <div class="trafo-images">
-            <div class="trafo-img before"></div>
-            <div class="trafo-img after"></div>
+          <div class="trafo-photo">
+            <img src="generated-images/trafo-frau-7kg.jpg" alt="Jana – Wieder Kontrolle, −7,3 kg in 12 Wochen" loading="lazy">
           </div>
-          <span class="trafo-badge">−5&nbsp;kg in 12&nbsp;Wochen</span>
-          <div class="trafo-caption">Change<span class="script">by you</span></div>
+          <div class="trafo-body">
+            <p class="trafo-quote">„Wieder Kontrolle."</p>
+            <p class="trafo-sub">Keine Heißhunger-Attacken mehr am Abend. Ich weiß endlich, was mein Körper wirklich braucht.</p>
+            <div class="trafo-foot">
+              <span class="trafo-name">
+                – Jana aus
+                <span class="trafo-flag" aria-hidden="true">
+                  <svg viewBox="0 0 32 32"><rect width="32" height="16" fill="#fff"/><rect y="16" width="32" height="16" fill="#0066B3"/></svg>
+                </span>
+              </span>
+              <span class="trafo-result">–7,3&nbsp;kg in 12&nbsp;Wochen</span>
+            </div>
+          </div>
         </div>
       </div>
+      <p class="trafo-footnote">Echte Teilnehmerinnen · Ergebnisse mit Einverständnis veröffentlicht.</p>
     </div>
   </section>
 
@@ -1618,7 +1868,7 @@
       </div>
       <p class="offer-price-per-day">Das sind weniger als 5 € pro Tag für deinen Reset.</p>
 
-      <a class="cta-main" href="checkout.html">
+      <a class="cta-main" href="https://myablefy.com/s/elliottaziz/reset-challenge/payment" target="_blank" rel="noopener noreferrer">
         <span>Jetzt 7-Tage Challenge starten</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"/>
@@ -1627,6 +1877,23 @@
       </a>
 
       <span class="savings">Du sparst heute 684 €</span>
+    </div>
+
+    <!-- Auto-scrolling Trafo Marquee -->
+    <div class="trafo-marquee-wrap">
+      <div class="trafo-marquee" aria-label="Weitere Transformationen">
+        <div class="trafo-marquee-track">
+          <div class="trafo-marquee-item"><img src="generated-images/trafo-c-5kg.jpg" alt="−5 kg in 12 Wochen" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="trafo-marquee-item"><img src="generated-images/trafo-c-7kg.jpg" alt="−7 kg in 12 Wochen" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="trafo-marquee-item"><img src="generated-images/trafo-c-8kg.jpg" alt="−8 kg in 9 Monaten" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="trafo-marquee-item"><img src="generated-images/trafo-c-sixpack.jpg" alt="Six Pack in 9 Monaten" loading="lazy" decoding="async" width="200" height="200"></div>
+          <!-- Duplicate for seamless loop -->
+          <div class="trafo-marquee-item" aria-hidden="true"><img src="generated-images/trafo-c-5kg.jpg" alt="" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="trafo-marquee-item" aria-hidden="true"><img src="generated-images/trafo-c-7kg.jpg" alt="" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="trafo-marquee-item" aria-hidden="true"><img src="generated-images/trafo-c-8kg.jpg" alt="" loading="lazy" decoding="async" width="200" height="200"></div>
+          <div class="trafo-marquee-item" aria-hidden="true"><img src="generated-images/trafo-c-sixpack.jpg" alt="" loading="lazy" decoding="async" width="200" height="200"></div>
+        </div>
+      </div>
     </div>
 
     <!-- Guarantee -->
@@ -1647,6 +1914,15 @@
     <div class="social-box">
       <div class="social-head">Bereits über 13.000 Frauen erfolgreich gestartet</div>
       <p class="social-sub">Tausende Frauen haben Kontrolle über Essen gewonnen und nachhaltig abgenommen.</p>
+      <div class="social-video" id="proofVideo">
+        <video id="proofVideoEl" autoplay muted loop playsinline preload="metadata" disablepictureinpicture>
+          <source src="feedback-video.mp4" type="video/mp4">
+        </video>
+        <button type="button" class="social-video-unmute" id="proofVideoUnmute" aria-label="Mit Ton abspielen">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg>
+          <span>Ton an</span>
+        </button>
+      </div>
       <div class="social-avatars" aria-hidden="true">
         <span style="background-image:url('trafo 1.jpeg')"></span>
         <span style="background-image:url('trafo 2.jpeg')"></span>
@@ -1677,7 +1953,9 @@
 
           <article class="testimonial-card">
             <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
-            <p class="testimonial-quote">Nach Tag 3 hat sich etwas verändert, was ich vorher nie geschafft hab: Ich hab abends nicht mehr automatisch zur Schublade gegriffen. Das fühlt sich wie Freiheit an.</p>
+            <div class="testimonial-screenshot">
+              <img src="feedback-screenshots/fb-4.jpg" alt="WhatsApp-Feedback von Sarah M." loading="lazy" decoding="async">
+            </div>
             <div class="testimonial-author">
               <div class="testimonial-avatar">S</div>
               <div class="testimonial-author-info">
@@ -1693,7 +1971,9 @@
 
           <article class="testimonial-card">
             <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
-            <p class="testimonial-quote">Ich hatte schon so viele Programme probiert und jedes Mal wieder aufgegeben. Hier war's anders, weil ich endlich verstanden hab, WARUM ich immer wieder ausraste. Der Kopf war das Problem, nicht die Ernährung.</p>
+            <div class="testimonial-screenshot">
+              <img src="feedback-screenshots/fb-2.jpg" alt="WhatsApp-Feedback von Julia K." loading="lazy" decoding="async">
+            </div>
             <div class="testimonial-author">
               <div class="testimonial-avatar v2">J</div>
               <div class="testimonial-author-info">
@@ -1709,7 +1989,9 @@
 
           <article class="testimonial-card">
             <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
-            <p class="testimonial-quote">In der ersten Woche schon 1,8 kg weniger, und das ohne Hunger. Aber ehrlich – das Beste war die Ruhe im Kopf. Ich denke nicht mehr den ganzen Tag ans Essen.</p>
+            <div class="testimonial-screenshot">
+              <img src="feedback-screenshots/fb-3.jpg" alt="WhatsApp-Feedback von Nadine H." loading="lazy" decoding="async">
+            </div>
             <div class="testimonial-author">
               <div class="testimonial-avatar v3">N</div>
               <div class="testimonial-author-info">
@@ -1725,7 +2007,9 @@
 
           <article class="testimonial-card">
             <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
-            <p class="testimonial-quote">Die Übungen fürs Nervensystem haben mich am meisten überrascht. 3 Minuten am Tag, und ich merke einen Unterschied. Abends kein Stressessen mehr – verrückt.</p>
+            <div class="testimonial-screenshot">
+              <img src="feedback-screenshots/fb-6.jpg" alt="WhatsApp-Feedback von Laura B." loading="lazy" decoding="async">
+            </div>
             <div class="testimonial-author">
               <div class="testimonial-avatar v4">L</div>
               <div class="testimonial-author-info">
@@ -1741,12 +2025,32 @@
 
           <article class="testimonial-card">
             <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
-            <p class="testimonial-quote">Ich hab 3 Kinder, kaum Zeit und bin eigentlich immer am Limit. Die 7 Tage waren realistisch – keine Diät, keine stundenlangen Workouts. Genau das, was ich gebraucht hab.</p>
+            <div class="testimonial-screenshot">
+              <img src="feedback-screenshots/fb-5.jpg" alt="WhatsApp-Feedback von Melanie R." loading="lazy" decoding="async">
+            </div>
             <div class="testimonial-author">
               <div class="testimonial-avatar">M</div>
               <div class="testimonial-author-info">
                 <p class="testimonial-name">Melanie R.</p>
                 <p class="testimonial-meta">44, Stuttgart</p>
+              </div>
+              <span class="testimonial-verified">
+                <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                Verifiziert
+              </span>
+            </div>
+          </article>
+
+          <article class="testimonial-card">
+            <div class="testimonial-stars" aria-label="5 von 5 Sternen">★★★★★</div>
+            <div class="testimonial-screenshot">
+              <img src="feedback-screenshots/fb-1.jpg" alt="WhatsApp-Feedback von Anna W." loading="lazy" decoding="async">
+            </div>
+            <div class="testimonial-author">
+              <div class="testimonial-avatar v2">A</div>
+              <div class="testimonial-author-info">
+                <p class="testimonial-name">Anna W.</p>
+                <p class="testimonial-meta">36, Frankfurt</p>
               </div>
               <span class="testimonial-verified">
                 <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
@@ -1906,6 +2210,111 @@
       if (!touching) return;
       touching = false;
       if (Math.abs(deltaX) > 40) go(deltaX < 0 ? index + 1 : index - 1);
+    });
+  })();
+
+  // ===== Hero Video (Wistia-style) =====
+  (() => {
+    const wrap = document.getElementById('heroVideo');
+    if (!wrap) return;
+    const video = wrap.querySelector('.hero-video__el');
+    const overlay = wrap.querySelector('.hero-video__overlay');
+    const muteBtn = wrap.querySelector('.hero-video__mute-toggle');
+    const onIcon = muteBtn.querySelector('.hero-video__icon-on');
+    const offIcon = muteBtn.querySelector('.hero-video__icon-off');
+
+    const tryPlay = () => video.play().catch(() => {});
+
+    // Pause when scrolled out of view → saves CPU/battery, keeps page snappy
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+          if (e.isIntersecting) tryPlay();
+          else video.pause();
+        });
+      }, { threshold: 0.25 });
+      io.observe(wrap);
+    } else {
+      tryPlay();
+    }
+
+    // Click overlay → unmute, restart from beginning, no loop
+    overlay.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      video.muted = false;
+      video.loop = false;
+      video.currentTime = 0;
+      video.volume = 1;
+      tryPlay();
+      wrap.classList.add('is-unmuted');
+    });
+
+    // Mute toggle (small button, after unmute)
+    muteBtn.addEventListener('click', (ev) => {
+      ev.stopPropagation();
+      video.muted = !video.muted;
+      onIcon.hidden = video.muted;
+      offIcon.hidden = !video.muted;
+    });
+
+    // Click video itself (after unmute) → pause/play
+    video.addEventListener('click', () => {
+      if (!wrap.classList.contains('is-unmuted')) return;
+      if (video.paused) tryPlay(); else video.pause();
+    });
+
+    // When unmuted video ends → reset to muted loop preview
+    video.addEventListener('ended', () => {
+      wrap.classList.remove('is-unmuted');
+      video.muted = true;
+      video.loop = true;
+      video.currentTime = 0;
+      tryPlay();
+      onIcon.hidden = false;
+      offIcon.hidden = true;
+    });
+  })();
+
+  // ===== Proof Video (social-box, Wistia-style) =====
+  (function(){
+    var wrap = document.getElementById('proofVideo');
+    var v    = document.getElementById('proofVideoEl');
+    var btn  = document.getElementById('proofVideoUnmute');
+    if (!wrap || !v) return;
+    var unmuted = false;
+    function tryPlay(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+    function go(e){
+      if (unmuted) return;
+      if (e) e.preventDefault();
+      unmuted = true;
+      wrap.classList.add('is-unmuted');
+      v.loop = false;
+      v.controls = true;
+      v.muted = false;
+      v.volume = 1;
+      try { v.currentTime = 0; } catch(_) {}
+      tryPlay();
+    }
+    v.addEventListener('click', go);
+    if (btn) btn.addEventListener('click', function(e){ e.stopPropagation(); go(e); });
+
+    // Pause when scrolled out of view → saves CPU/battery
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) { if (!unmuted || !v.paused) tryPlay(); }
+          else v.pause();
+        });
+      }, { threshold: 0.25 });
+      io.observe(wrap);
+    } else {
+      tryPlay();
+    }
+
+    // Fallback: if autoplay blocked, start on first pointerdown
+    v.play().catch(function(){
+      var once = function(){ v.play().catch(function(){}); document.removeEventListener('pointerdown', once); };
+      document.addEventListener('pointerdown', once, { once: true });
     });
   })();
 </script>

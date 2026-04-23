@@ -127,6 +127,15 @@
         .co-proof-inner{padding:18px 24px;border-radius:18px;background:var(--green-soft);border:1px solid rgba(97,146,64,.08)}
         .co-proof-inner h3{font-size:.82rem;font-weight:800;margin-bottom:5px;letter-spacing:-.01em}
         .co-proof-inner>p{font-size:.7rem;color:var(--soft);line-height:1.55;max-width:320px;margin:0 auto 14px}
+        .co-proof-video{position:relative;margin:0 auto 16px;max-width:440px;width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000;box-shadow:0 2px 12px rgba(0,0,0,.08);cursor:pointer}
+        .co-proof-video video{display:block;width:100%;height:100%;object-fit:cover}
+        .co-proof-video-unmute{position:absolute;top:12px;right:12px;display:inline-flex;align-items:center;gap:7px;padding:10px 16px;background:rgba(255,255,255,.96);color:#0e2a1b;border:none;border-radius:999px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.82rem;font-weight:700;letter-spacing:.01em;cursor:pointer;box-shadow:0 6px 20px rgba(0,0,0,.28),0 0 0 0 rgba(255,255,255,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:opacity .3s ease,transform .2s ease,background .2s ease;z-index:2;animation:coProofUnmutePulse 2.2s ease-in-out infinite}
+        .co-proof-video-unmute svg{width:16px;height:16px;fill:currentColor;stroke:currentColor}
+        .co-proof-video-unmute:hover{transform:scale(1.05);background:#fff}
+        @keyframes coProofUnmutePulse{0%,100%{box-shadow:0 6px 20px rgba(0,0,0,.28),0 0 0 0 rgba(255,255,255,.5)}50%{box-shadow:0 6px 20px rgba(0,0,0,.28),0 0 0 12px rgba(255,255,255,0)}}
+        @media(prefers-reduced-motion:reduce){.co-proof-video-unmute{animation:none}}
+        .co-proof-video.is-unmuted{cursor:default}
+        .co-proof-video.is-unmuted .co-proof-video-unmute{opacity:0;pointer-events:none}
         .co-proof-thumbs{display:flex;justify-content:center;gap:8px;margin-bottom:12px}
         .co-proof-thumbs img{width:44px;height:44px;border-radius:11px;object-fit:cover;box-shadow:0 1px 4px rgba(0,0,0,.05);border:1.5px solid var(--card)}
         .co-proof-rating{display:flex;align-items:center;justify-content:center;gap:5px;font-family:'Plus Jakarta Sans',sans-serif;font-size:.62rem;font-weight:600;color:var(--soft)}
@@ -585,6 +594,35 @@
             if(!wasOpen) item.classList.add('open');
         });
     });
+
+    // Proof video — autoplay muted, click to unmute + restart + show controls
+    (function(){
+        var wrap=document.getElementById('proofVideo');
+        var v=document.getElementById('proofVideoEl');
+        var btn=document.getElementById('proofVideoUnmute');
+        if(!v||!wrap) return;
+        var unmuted=false;
+        function go(e){
+            if(unmuted) return;
+            if(e) e.preventDefault();
+            unmuted=true;
+            wrap.classList.add('is-unmuted');
+            v.loop=false;
+            v.controls=true;
+            v.muted=false;
+            try{ v.currentTime=0; }catch(_){}
+            var p=v.play();
+            if(p&&typeof p.catch==='function') p.catch(function(){});
+        }
+        v.addEventListener('click',go);
+        if(btn) btn.addEventListener('click',function(e){ e.stopPropagation(); go(e); });
+        // Fallback: if autoplay was blocked (rare, muted+playsinline usually passes),
+        // start playback on first user interaction anywhere on the page.
+        v.play().catch(function(){
+            var once=function(){ v.play().catch(function(){}); document.removeEventListener('pointerdown',once); };
+            document.addEventListener('pointerdown',once,{once:true});
+        });
+    })();
 </script>
 
 </body>
