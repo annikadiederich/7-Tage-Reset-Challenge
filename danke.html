@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Willkommen in der 7-Tage-Reset-Challenge · Elliott Aziz</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="favicon.png">
 <meta name="robots" content="noindex, nofollow">
 <!-- PixelFlow Script -->
 <script>!(function(p,i,x,f,l,o,w){p["PixelFlowObject"]=f;p[f]=p[f]||function(){(p[f].q=p[f].q||[]).push(arguments);};p[f].l=1*new Date();o=i.createElement(x);w=i.getElementsByTagName(x)[0];o.src=l;o.async=1;p[f].apiKey="71d5e752e544e0a8a258acbaa0ee56a6eff6241099605b8179dc109664f66a4b";p[f].siteId="1777100841152mwpfb7aium";p[f].apiEndpoint="https://api.pixelflow.so/event";w.parentNode.insertBefore(o,w);})(window,document,"script","pixelFlow","https://slrgkgulru.pixelflow.so/pfm.js");</script>
@@ -1095,6 +1097,49 @@ fbq('track','PageView');
     } else {
       window.addEventListener('load', () => setTimeout(firePurchase, 600));
     }
+  })();
+
+  // Mark buyer in Brevo: move from Leads list to Käufer list to stop the drip sequence.
+  // Email comes from Ablefy Thank-You URL params first, falls back to localStorage from /plan-email.
+  (function() {
+    function getParam(name) {
+      try {
+        var v = new URLSearchParams(window.location.search).get(name);
+        return v ? String(v).trim() : '';
+      } catch (_) { return ''; }
+    }
+    function getStoredEmail() {
+      try { return localStorage.getItem('userEmail') || ''; } catch (_) {}
+      try { return sessionStorage.getItem('userEmail') || ''; } catch (_) {}
+      return '';
+    }
+
+    var email = (
+      getParam('email') ||
+      getParam('buyer_email') ||
+      getParam('customer_email') ||
+      getStoredEmail()
+    ).toLowerCase();
+
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+
+    var payload = {
+      email: email,
+      order_id: getParam('order_id') || getParam('transaction_id') || getParam('txn_id') || '',
+      product_id: getParam('product_id') || '',
+      amount: getParam('amount') || getParam('price') || '',
+      first_name: getParam('first_name') || getParam('firstname') || '',
+      last_name: getParam('last_name') || getParam('lastname') || ''
+    };
+
+    try {
+      fetch('/api/purchase', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+        keepalive: true,
+      }).catch(function(){});
+    } catch (_) {}
   })();
 </script>
 

@@ -462,6 +462,7 @@ fbq('track','PageView');
       return;
     }
     try { sessionStorage.setItem('userEmail', email); } catch(_) {}
+    try { localStorage.setItem('userEmail', email); } catch(_) {}
 
     try {
       fetch('/api/subscribe', {
