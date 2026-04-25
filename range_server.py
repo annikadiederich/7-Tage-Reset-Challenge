@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Tiny HTTP server with byte-range support for local video testing."""
+"""Tiny HTTP server with byte-range support + .htaccess-style URL rewrites."""
 import http.server
 import os
 import re
@@ -8,8 +8,29 @@ import sys
 
 PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 8080
 
+# Mirror of .htaccess RewriteRules — keep in sync
+REWRITES = {
+    '/ergebnis':      '/result.html',
+    '/ergebnis-2':    '/result2.html',
+    '/ergebnis-3':    '/result3.html',
+    '/challenge':     '/offer.html',
+    '/plan-email':    '/plan-email.html',
+    '/plan-loading':  '/plan-loading.html',
+    '/loading-quiz':  '/loading-quiz.html',
+    '/danke':         '/danke.html',
+}
+
+def rewrite(path):
+    """Strip query, look up rewrite, re-attach query. Trailing slash tolerated."""
+    base, _, query = path.partition('?')
+    base = base.rstrip('/') or '/'
+    if base in REWRITES:
+        base = REWRITES[base]
+    return base + ('?' + query if query else '')
+
 class RangeHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
+        self.path = rewrite(self.path)
         path = self.translate_path(self.path.split('?', 1)[0])
         if not os.path.isfile(path):
             return super().do_GET()
@@ -58,6 +79,10 @@ class RangeHandler(http.server.SimpleHTTPRequestHandler):
                 remaining -= len(buf)
         finally:
             f.close()
+
+    def do_HEAD(self):
+        self.path = rewrite(self.path)
+        super().do_HEAD()
 
     def end_headers(self):
         self.send_header('Accept-Ranges', 'bytes')

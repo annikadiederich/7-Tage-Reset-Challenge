@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kostenfreie Abnehm-Analyse | Heißhunger & Rückfälle verstehen</title>
+    <!-- PixelFlow Script -->
+    <script>!(function(p,i,x,f,l,o,w){p["PixelFlowObject"]=f;p[f]=p[f]||function(){(p[f].q=p[f].q||[]).push(arguments);};p[f].l=1*new Date();o=i.createElement(x);w=i.getElementsByTagName(x)[0];o.src=l;o.async=1;p[f].apiKey="71d5e752e544e0a8a258acbaa0ee56a6eff6241099605b8179dc109664f66a4b";p[f].siteId="1777100841152mwpfb7aium";p[f].apiEndpoint="https://api.pixelflow.so/event";w.parentNode.insertBefore(o,w);})(window,document,"script","pixelFlow","https://slrgkgulru.pixelflow.so/pfm.js");</script>
+    <!-- End PixelFlow Script -->
+    <!-- Meta Pixel Code -->
+    <script>
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init','1796302617856127');
+    fbq('track','PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1796302617856127&ev=PageView&noscript=1"/></noscript>
+    <!-- End Meta Pixel Code -->
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-KXXR0DW0N0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-KXXR0DW0N0');
+    </script>
+    <!-- End Google tag -->
+    <script src="tracker.js"></script>
+    <script>window.addEventListener('load', function(){ if (typeof window.track === 'function') window.track('view_quiz'); });</script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Sansita+Swashed:wght@400;600;700&family=Instrument+Sans:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -2356,9 +2378,9 @@
 
         .cycle-center span {
             font-family: 'Sansita Swashed', cursive;
-            font-size: 0.85rem;
-            color: rgba(30,28,26,0.18);
-            font-weight: 600;
+            font-size: 0.95rem;
+            color: rgba(30,28,26,0.55);
+            font-weight: 700;
             letter-spacing: 0.02em;
         }
 
@@ -3370,8 +3392,6 @@
         .steps-badge { display: none; }
 
         @media (max-width: 680px) {
-            .steps { min-height: 280vh; position: relative; }
-            .steps .container { position: sticky; top: 60px; padding-bottom: 40px; }
             .steps h2 { margin-bottom: 32px; }
             .steps-label { display: none; }
             .steps-badge {
@@ -3388,22 +3408,10 @@
                 text-transform: uppercase; letter-spacing: .1em;
                 color: #619240;
             }
-            .steps-row { grid-template-columns: 1fr; gap: 0; }
+            .steps-row { grid-template-columns: 1fr; gap: 14px; }
             .step {
                 padding: 24px 22px;
-                position: relative;
-                margin-bottom: -12px;
                 box-shadow: 0 -2px 16px rgba(0,0,0,.05), 0 2px 8px rgba(31,61,43,.04);
-                transform: translateY(80px);
-                opacity: 0;
-                transition: opacity 0.55s ease, transform 0.55s cubic-bezier(.23,1,.32,1);
-            }
-            .step:nth-child(1) { z-index: 1; }
-            .step:nth-child(2) { z-index: 2; }
-            .step:nth-child(3) { z-index: 3; margin-bottom: 0; }
-            .step.step-show {
-                opacity: 1;
-                transform: translateY(0);
             }
         }
 
@@ -4380,11 +4388,16 @@
     });
 
     // ── Quiz option selection → launch full quiz ──
+    let quizStartFired = false;
     document.querySelectorAll('.quiz-opt').forEach(btn => {
         btn.addEventListener('click', () => {
             document.querySelectorAll('.quiz-opt').forEach(b => b.classList.remove('selected'));
             btn.classList.add('selected');
             const answer = btn.dataset.v || btn.textContent.trim();
+            if (!quizStartFired) {
+                quizStartFired = true;
+                if (typeof window.track === 'function') window.track('quiz_start');
+            }
             setTimeout(() => {
                 if (typeof startQuiz === 'function') {
                     startQuiz(answer);
@@ -4409,8 +4422,7 @@
                         var scrolled = -rect.top;
                         var runway = sectionH - window.innerHeight;
                         var progress = Math.max(0, Math.min(1, scrolled / runway));
-                        // Card 1 at 15%, Card 2 at 40%, Card 3 at 65%
-                        var thresholds = [0.15, 0.4, 0.65];
+                        var thresholds = [0.1, 0.35, 0.6];
                         stepCards.forEach(function(card, i) {
                             if (progress >= thresholds[i]) {
                                 card.classList.add('step-show');

@@ -1100,7 +1100,7 @@
             requestAnimationFrame(tick);
 
             setTimeout(function() {
-                window.location.href = 'result.html';
+                window.location.href = '/ergebnis';
             }, 5800);
         }, 350);
     }

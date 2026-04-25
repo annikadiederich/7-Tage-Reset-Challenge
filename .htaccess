@@ -1,0 +1,26 @@
+# Apache rewrite rules — clean URLs for funnel pages
+# Hosted on IONOS (mod_rewrite enabled by default)
+
+RewriteEngine On
+
+# Custom-renamed clean URLs
+RewriteRule ^ergebnis/?$ result.html [L]
+RewriteRule ^ergebnis-2/?$ result2.html [L]
+RewriteRule ^ergebnis-3/?$ result3.html [L]
+RewriteRule ^challenge/?$ offer.html [L]
+
+# Strip .html from URL — file keeps its name, URL is clean
+RewriteRule ^plan-email/?$ plan-email.html [L]
+RewriteRule ^plan-loading/?$ plan-loading.html [L]
+RewriteRule ^loading-quiz/?$ loading-quiz.html [L]
+RewriteRule ^danke/?$ danke.html [L]
+
+# Optional: redirect old .html URLs to clean versions (keeps existing links/ads working)
+RewriteRule ^result\.html$ /ergebnis [R=301,L]
+RewriteRule ^result2\.html$ /ergebnis-2 [R=301,L]
+RewriteRule ^result3\.html$ /ergebnis-3 [R=301,L]
+RewriteRule ^offer\.html$ /challenge [R=301,L]
+RewriteRule ^plan-email\.html$ /plan-email [R=301,L]
+RewriteRule ^plan-loading\.html$ /plan-loading [R=301,L]
+RewriteRule ^loading-quiz\.html$ /loading-quiz [R=301,L]
+RewriteRule ^danke\.html$ /danke [R=301,L]

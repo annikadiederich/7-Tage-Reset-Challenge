@@ -4,6 +4,27 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Deine Analyse per E-Mail · Elliott Aziz</title>
+<!-- PixelFlow Script -->
+<script>!(function(p,i,x,f,l,o,w){p["PixelFlowObject"]=f;p[f]=p[f]||function(){(p[f].q=p[f].q||[]).push(arguments);};p[f].l=1*new Date();o=i.createElement(x);w=i.getElementsByTagName(x)[0];o.src=l;o.async=1;p[f].apiKey="71d5e752e544e0a8a258acbaa0ee56a6eff6241099605b8179dc109664f66a4b";p[f].siteId="1777100841152mwpfb7aium";p[f].apiEndpoint="https://api.pixelflow.so/event";w.parentNode.insertBefore(o,w);})(window,document,"script","pixelFlow","https://slrgkgulru.pixelflow.so/pfm.js");</script>
+<!-- End PixelFlow Script -->
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1796302617856127');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1796302617856127&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KXXR0DW0N0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KXXR0DW0N0');
+</script>
+<!-- End Google tag -->
+<script src="tracker.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Sansita+Swashed:wght@400;600;700&display=swap" rel="stylesheet">
@@ -439,10 +460,11 @@
       return;
     }
     try { sessionStorage.setItem('userEmail', email); } catch(_) {}
+    if (typeof window.track === 'function') window.track('email_submit', { email: email });
     // Smooth fade-out before redirect
     document.body.style.transition = 'opacity .45s ease';
     document.body.style.opacity = '0';
-    setTimeout(() => { window.location.href = 'offer.html'; }, 450);
+    setTimeout(() => { window.location.href = '/challenge'; }, 450);
   });
 </script>
 
