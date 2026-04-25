@@ -1115,6 +1115,7 @@ fbq('track','PageView');
     }
 
     var email = (
+      getParam('payer_email') ||
       getParam('email') ||
       getParam('buyer_email') ||
       getParam('customer_email') ||
@@ -1123,13 +1124,17 @@ fbq('track','PageView');
 
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
 
+    // Don't mark as buyer if Ablefy state indicates a non-success.
+    var state = (getParam('state') || '').toLowerCase();
+    if (state && /reject|fail|cancel|error|refund/.test(state)) return;
+
     var payload = {
       email: email,
       order_id: getParam('order_id') || getParam('transaction_id') || getParam('txn_id') || '',
       product_id: getParam('product_id') || '',
-      amount: getParam('amount') || getParam('price') || '',
-      first_name: getParam('first_name') || getParam('firstname') || '',
-      last_name: getParam('last_name') || getParam('lastname') || ''
+      amount: getParam('price') || getParam('amount') || '',
+      first_name: getParam('payer_first_name') || getParam('first_name') || getParam('firstname') || '',
+      last_name: getParam('payer_last_name') || getParam('last_name') || getParam('lastname') || ''
     };
 
     try {
