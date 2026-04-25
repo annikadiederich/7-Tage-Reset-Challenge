@@ -36,7 +36,7 @@ module.exports = async function handler(req, res) {
     email,
     attributes: {
       FUNNEL: '7-tage-reset-challenge',
-      OPT_IN_DATE: new Date().toISOString(),
+      OPT_IN_DATE: new Date().toISOString().slice(0, 10),
     },
     updateEnabled: true,
   };

@@ -38,14 +38,14 @@ module.exports = async function handler(req, res) {
   const leadsListId = parseInt(process.env.BREVO_LIST_ID || '', 10);
 
   const attributes = {
-    PURCHASED: 'yes',
-    PURCHASE_DATE: new Date().toISOString(),
+    PURCHASED: true,
+    PURCHASE_DATE: new Date().toISOString().slice(0, 10),
     FUNNEL: '7-tage-reset-challenge',
   };
   if (body.order_id) attributes.ORDER_ID = String(body.order_id);
   if (body.product_id) attributes.PRODUCT_ID = String(body.product_id);
-  if (body.first_name) attributes.FIRSTNAME = String(body.first_name);
-  if (body.last_name) attributes.LASTNAME = String(body.last_name);
+  if (body.first_name) attributes.VORNAME = String(body.first_name);
+  if (body.last_name) attributes.NACHNAME = String(body.last_name);
   if (body.amount) {
     const amt = parseFloat(String(body.amount).replace(',', '.'));
     if (!Number.isNaN(amt)) attributes.AMOUNT = amt;
