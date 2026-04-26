@@ -30,8 +30,7 @@ fbq('track','PageView');
 <script src="tracker.js"></script>
 <script>window.addEventListener('load', function(){
   if (typeof window.track !== 'function') return;
-  var leadParams = { content_name: '7-Tage Reset-Challenge', value: 29.9, currency: 'EUR' };
-  window.track('Lead', leadParams);
+  window.track('Lead', { content_name: '7-Tage Reset-Challenge' });
   window.track('salespage_view');
 });</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
