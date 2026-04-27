@@ -1080,18 +1080,23 @@ fbq('init','1796302617856127');
     });
   })();
 
-  // Fire Purchase events on page load — Ablefy redirect to /danke means purchase completed.
-  // Standard Meta Purchase + custom purchase_challenge, deduped via shared eventID.
+  // Fire Purchase events on /danke (Ablefy redirect = purchase completed).
+  // Purchase (Meta standard event) is fired by PixelFlow URL Trigger
+  // configured in the PixelFlow dashboard — handles browser fbq + CAPI dedup.
+  // We fire GA4 + the custom purchase_challenge event directly.
   (function() {
     function firePurchase() {
-      if (typeof window.track !== 'function') return;
       var purchaseParams = {
         value: 29.9,
         currency: 'EUR',
         content_name: '7-Tage Reset-Challenge'
       };
-      window.track('Purchase', purchaseParams);
-      window.track('purchase_challenge', purchaseParams);
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'purchase', purchaseParams);
+      }
+      if (typeof window.track === 'function') {
+        window.track('purchase_challenge', purchaseParams);
+      }
     }
     if (document.readyState === 'complete') {
       setTimeout(firePurchase, 600);

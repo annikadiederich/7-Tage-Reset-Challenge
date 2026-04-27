@@ -29,9 +29,15 @@ fbq('init','1796302617856127');
 <!-- End Google tag -->
 <script src="tracker.js"></script>
 <script>window.addEventListener('load', function(){
-  if (typeof window.track !== 'function') return;
-  window.track('Lead', { content_name: '7-Tage Reset-Challenge' });
-  window.track('salespage_view');
+  // Lead (Meta standard event) is fired by PixelFlow URL Trigger configured
+  // in the PixelFlow dashboard — handles browser fbq + CAPI with dedup.
+  // We just fire GA4 directly here for parity.
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'Lead', { content_name: '7-Tage Reset-Challenge' });
+  }
+  if (typeof window.track === 'function') {
+    window.track('salespage_view');
+  }
 });</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
