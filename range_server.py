@@ -18,6 +18,7 @@ REWRITES = {
     '/plan-loading':  '/plan-loading.html',
     '/loading-quiz':  '/loading-quiz.html',
     '/danke':         '/danke.html',
+    '/analyse-report': '/report.html',
 }
 
 def rewrite(path):

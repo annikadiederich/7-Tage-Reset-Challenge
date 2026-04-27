@@ -14,6 +14,7 @@ RewriteRule ^plan-email/?$ plan-email.html [L]
 RewriteRule ^plan-loading/?$ plan-loading.html [L]
 RewriteRule ^loading-quiz/?$ loading-quiz.html [L]
 RewriteRule ^danke/?$ danke.html [L]
+RewriteRule ^analyse-report/?$ report.html [L]
 
 # Optional: redirect old .html URLs to clean versions (keeps existing links/ads working)
 RewriteRule ^result\.html$ /ergebnis [R=301,L]
@@ -24,3 +25,4 @@ RewriteRule ^plan-email\.html$ /plan-email [R=301,L]
 RewriteRule ^plan-loading\.html$ /plan-loading [R=301,L]
 RewriteRule ^loading-quiz\.html$ /loading-quiz [R=301,L]
 RewriteRule ^danke\.html$ /danke [R=301,L]
+RewriteRule ^report\.html$ /analyse-report [R=301,L]

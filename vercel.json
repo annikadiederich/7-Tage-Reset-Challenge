@@ -9,7 +9,8 @@
     { "source": "/plan-email",   "destination": "/plan-email.html" },
     { "source": "/plan-loading", "destination": "/plan-loading.html" },
     { "source": "/loading-quiz", "destination": "/loading-quiz.html" },
-    { "source": "/danke",        "destination": "/danke.html" }
+    { "source": "/danke",        "destination": "/danke.html" },
+    { "source": "/analyse-report", "destination": "/report.html" }
   ],
   "redirects": [
     { "source": "/result.html",       "destination": "/ergebnis",     "permanent": true },
@@ -19,6 +20,7 @@
     { "source": "/plan-email.html",   "destination": "/plan-email",   "permanent": true },
     { "source": "/plan-loading.html", "destination": "/plan-loading", "permanent": true },
     { "source": "/loading-quiz.html", "destination": "/loading-quiz", "permanent": true },
-    { "source": "/danke.html",        "destination": "/danke",        "permanent": true }
+    { "source": "/danke.html",        "destination": "/danke",        "permanent": true },
+    { "source": "/report.html",       "destination": "/analyse-report", "permanent": true }
   ]
 }
