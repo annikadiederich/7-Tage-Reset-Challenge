@@ -13,7 +13,7 @@
 
 const BREVO_CONTACTS_URL = 'https://api.brevo.com/v3/contacts';
 const BREVO_EMAIL_URL = 'https://api.brevo.com/v3/smtp/email';
-const DEFAULT_PDF_URL = 'https://analyse.elliottaziz.de/abnehm-analyse.pdf';
+const DEFAULT_PDF_URL = 'https://analyse.elliottaziz.de/pdf';
 const DEFAULT_CHALLENGE_URL = 'https://analyse.elliottaziz.de/challenge';
 
 module.exports = async function handler(req, res) {
@@ -97,9 +97,6 @@ module.exports = async function handler(req, res) {
     to: [{ email }],
     subject: 'Deine Abnehm-Analyse ist da (Stress & Heißhunger)',
     htmlContent: buildEmailHtml({ challengeUrl, pdfUrl }),
-    attachment: [
-      { url: pdfUrl, name: 'Deine-Abnehm-Analyse.pdf' },
-    ],
     tags: ['abnehm-analyse', 'lead-magnet'],
   };
 
@@ -164,37 +161,9 @@ function buildEmailHtml({ challengeUrl, pdfUrl }) {
 
               <p style="margin:0 0 20px;font-size:16px;line-height:1.6;color:#3a332e;">Hi,</p>
 
-              <p style="margin:0 0 16px;font-size:16px;line-height:1.6;color:#3a332e;">
-                hier ist deine Abnehm-Analyse als PDF:
+              <p style="margin:0 0 22px;font-size:16px;line-height:1.6;color:#3a332e;">
+                hier ist deine Abnehm-Analyse.
               </p>
-
-              <!-- PDF Attachment Card -->
-              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 28px;">
-                <tr>
-                  <td style="background:#faf8f5;border:1px solid rgba(30,28,26,0.10);border-radius:12px;padding:16px 18px;">
-                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
-                      <tr>
-                        <td width="52" valign="middle" style="padding-right:14px;">
-                          <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
-                            <td align="center" valign="middle" width="44" height="52" style="background:#DF031C;border-radius:6px;color:#ffffff;font-family:'Plus Jakarta Sans',Helvetica,Arial,sans-serif;font-size:11px;font-weight:800;letter-spacing:0.06em;line-height:52px;">
-                              PDF
-                            </td>
-                          </tr></table>
-                        </td>
-                        <td valign="middle">
-                          <p style="margin:0 0 3px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700;color:#1e1c1a;line-height:1.3;">Deine-Abnehm-Analyse.pdf</p>
-                          <p style="margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12.5px;color:#7a7568;line-height:1.3;">6 Seiten · 3,2 MB</p>
-                        </td>
-                        <td valign="middle" align="right" style="padding-left:12px;">
-                          <a href="${pdf}" target="_blank" style="display:inline-block;background:#1e1c1a;color:#ffffff;text-decoration:none;font-family:'Plus Jakarta Sans',Helvetica,Arial,sans-serif;font-size:13px;font-weight:700;padding:10px 16px;border-radius:8px;letter-spacing:0.02em;white-space:nowrap;">
-                            Öffnen →
-                          </a>
-                        </td>
-                      </tr>
-                    </table>
-                  </td>
-                </tr>
-              </table>
 
               <p style="margin:0 0 8px;font-size:16px;line-height:1.6;color:#3a332e;">
                 Darin siehst du schwarz auf weiß:
@@ -241,6 +210,37 @@ function buildEmailHtml({ challengeUrl, pdfUrl }) {
               <p style="margin:0 0 32px;font-size:12.5px;line-height:1.5;color:#9b938a;text-align:center;">
                 Empfohlen auf Basis deiner Analyse — Schritt 4 von 4
               </p>
+
+              <!-- Online-Report Card (after CTA, soft secondary action) -->
+              <p style="margin:0 0 10px;font-size:14px;line-height:1.5;color:#5c5650;">
+                Oder lies dir deine vollständige Analyse jetzt durch:
+              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 32px;">
+                <tr>
+                  <td style="background:#faf8f5;border:1px solid rgba(30,28,26,0.10);border-radius:12px;padding:16px 18px;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
+                      <tr>
+                        <td width="52" valign="middle" style="padding-right:14px;">
+                          <table role="presentation" cellpadding="0" cellspacing="0" border="0"><tr>
+                            <td align="center" valign="middle" width="44" height="52" style="background:#1e1c1a;border-radius:6px;color:#ffffff;font-family:'Plus Jakarta Sans',Helvetica,Arial,sans-serif;font-size:18px;font-weight:800;line-height:52px;">
+                              📄
+                            </td>
+                          </tr></table>
+                        </td>
+                        <td valign="middle">
+                          <p style="margin:0 0 3px;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:14.5px;font-weight:700;color:#1e1c1a;line-height:1.3;">Deine vollständige Abnehm-Analyse</p>
+                          <p style="margin:0;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;font-size:12.5px;color:#7a7568;line-height:1.3;">6 Seiten · online ansehen</p>
+                        </td>
+                        <td valign="middle" align="right" style="padding-left:12px;">
+                          <a href="${pdf}" target="_blank" style="display:inline-block;background:#1e1c1a;color:#ffffff;text-decoration:none;font-family:'Plus Jakarta Sans',Helvetica,Arial,sans-serif;font-size:13px;font-weight:700;padding:10px 16px;border-radius:8px;letter-spacing:0.02em;white-space:nowrap;">
+                            Öffnen →
+                          </a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
 
               <p style="margin:0 0 4px;font-size:16px;line-height:1.6;color:#3a332e;">
                 Liebe Grüße<br>

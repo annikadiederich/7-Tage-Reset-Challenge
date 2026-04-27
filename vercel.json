@@ -10,7 +10,8 @@
     { "source": "/plan-loading", "destination": "/plan-loading.html" },
     { "source": "/loading-quiz", "destination": "/loading-quiz.html" },
     { "source": "/danke",        "destination": "/danke.html" },
-    { "source": "/analyse-report", "destination": "/report.html" }
+    { "source": "/analyse-report", "destination": "/report.html" },
+    { "source": "/pdf",            "destination": "/report.html" }
   ],
   "redirects": [
     { "source": "/result.html",       "destination": "/ergebnis",     "permanent": true },
