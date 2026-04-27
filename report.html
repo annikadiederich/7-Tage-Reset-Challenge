@@ -1438,8 +1438,11 @@ fbq('track','PageView');
     box-shadow: 0 6px 18px rgba(223,3,28,0.08);
   }
 
-  /* Mobile / smaller screens — scale the A4 paper down */
-  @media (max-width: 900px) {
+  /* Mobile / smaller screens — scale the A4 paper down.
+     IMPORTANT: must be `screen and ...` so this NEVER applies to print.
+     Otherwise Chrome Headless (which prints at ~794px A4 width) would
+     trigger this rule and shift the whole layout. */
+  @media screen and (max-width: 900px) {
     .page {
       width: 100%;
       min-height: 0;
