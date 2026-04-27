@@ -426,6 +426,172 @@ fbq('init','1796302617856127');
     color: var(--muted-2);
   }
 
+  /* ══════ Bridge breathing pulse ══════ */
+  .bridge {
+    animation: bridgeBreath 4.5s ease-in-out infinite;
+  }
+  @keyframes bridgeBreath {
+    0%, 100% {
+      box-shadow: 0 10px 28px rgba(232,83,14,0.08);
+      border-color: var(--accent-border);
+    }
+    50% {
+      box-shadow: 0 16px 40px rgba(232,83,14,0.20), 0 0 0 1px rgba(232,83,14,0.18);
+      border-color: rgba(232,83,14,0.50);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bridge { animation: none; }
+  }
+
+  /* ══════ 7-Day Timeline Graphic ══════ */
+  .seven-day-viz {
+    margin: 22px auto 4px;
+    max-width: 380px;
+    position: relative;
+  }
+  .seven-day-track {
+    position: relative;
+    height: 3px;
+    background: rgba(232,83,14,0.18);
+    border-radius: 999px;
+    margin: 28px 16px 36px;
+  }
+  .seven-day-fill {
+    position: absolute;
+    top: 0; left: 0;
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg,
+      rgba(232,83,14,0.55) 0%,
+      var(--accent) 60%,
+      var(--accent-deep) 100%);
+    border-radius: 999px;
+    box-shadow: 0 0 14px rgba(232,83,14,0.45);
+    transition: width 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .seven-day-viz.is-active .seven-day-fill {
+    width: 100%;
+  }
+  .seven-day-points {
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    transform: translateY(-50%);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 16px;
+    pointer-events: none;
+  }
+  .day-point {
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 2px solid var(--accent);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 800;
+    color: #fff;
+    display: grid;
+    place-items: center;
+    position: relative;
+    z-index: 2;
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  .seven-day-viz.is-active .day-point {
+    animation: dayPointIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+  .seven-day-viz.is-active .day-point:nth-child(1) { animation-delay: 0.10s; }
+  .seven-day-viz.is-active .day-point:nth-child(2) { animation-delay: 0.25s; }
+  .seven-day-viz.is-active .day-point:nth-child(3) { animation-delay: 0.40s; }
+  .seven-day-viz.is-active .day-point:nth-child(4) { animation-delay: 0.55s; }
+  .seven-day-viz.is-active .day-point:nth-child(5) { animation-delay: 0.70s; }
+  .seven-day-viz.is-active .day-point:nth-child(6) { animation-delay: 0.85s; }
+  .seven-day-viz.is-active .day-point:nth-child(7) { animation-delay: 1.05s; }
+  @keyframes dayPointIn {
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  .day-point.day-final {
+    width: 36px; height: 36px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    border-color: rgba(255,255,255,0.85);
+    box-shadow:
+      0 0 0 4px rgba(232,83,14,0.18),
+      0 8px 22px rgba(223,3,28,0.40);
+  }
+  .seven-day-viz.is-active .day-point.day-final {
+    animation:
+      dayPointIn 0.55s cubic-bezier(0.34, 1.56, 0.64, 1) forwards 1.05s,
+      finalPulse 2.2s ease-in-out infinite 1.6s;
+  }
+  @keyframes finalPulse {
+    0%, 100% {
+      box-shadow:
+        0 0 0 4px rgba(232,83,14,0.18),
+        0 8px 22px rgba(223,3,28,0.40);
+    }
+    50% {
+      box-shadow:
+        0 0 0 8px rgba(232,83,14,0.10),
+        0 12px 30px rgba(223,3,28,0.55);
+    }
+  }
+  .day-point.day-final svg {
+    width: 18px; height: 18px;
+    stroke: #fff;
+    stroke-width: 3;
+    fill: none;
+  }
+  .seven-day-labels {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.62rem;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin-top: -16px;
+    padding: 0 6px;
+    position: relative;
+  }
+  .seven-day-labels .end {
+    color: var(--accent);
+    text-align: right;
+  }
+  .seven-day-labels .end strong {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink);
+    margin-top: 2px;
+    font-family: 'Sansita Swashed', cursive;
+    color: var(--accent);
+  }
+  .seven-day-labels .start strong {
+    display: block;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: none;
+    color: var(--ink-soft);
+    margin-top: 2px;
+    font-family: 'Instrument Sans', sans-serif;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .seven-day-fill { transition: none; width: 100% !important; }
+    .day-point { animation: none !important; opacity: 1 !important; transform: scale(1) !important; }
+  }
+
   @media (max-width: 480px) {
     .step-indicator { padding: 20px 18px 0; }
     .page { padding: 32px 18px 170px; }
@@ -433,6 +599,15 @@ fbq('init','1796302617856127');
     .bridge { padding: 26px 20px; }
     .step-num { font-size: 2.7rem; }
     .cta { padding: 16px 24px; font-size: 0.92rem; }
+    .seven-day-viz { max-width: 320px; }
+    .seven-day-track { margin: 26px 12px 32px; }
+    .seven-day-points { margin: 0 12px; }
+    .day-point { width: 18px; height: 18px; font-size: 0.56rem; }
+    .day-point.day-final { width: 30px; height: 30px; }
+    .day-point.day-final svg { width: 14px; height: 14px; }
+    .seven-day-labels { font-size: 0.58rem; }
+    .seven-day-labels .start strong,
+    .seven-day-labels .end strong { font-size: 0.72rem; }
   }
 </style>
 </head>
@@ -468,7 +643,7 @@ fbq('init','1796302617856127');
           <span class="step-num">1</span>
           <div class="step-body">
             <p class="step-title">Nervensystem täglich runterfahren</p>
-            <p class="step-sub">Du schaufelst dir jeden Tag bewusst 5 Minuten frei und machst einfache Atem- und Nervensystem-Übungen, damit dein Körper aus dem Dauer-Spannungsmodus rauskommt.</p>
+            <p class="step-sub">Täglich 5 Minuten Atem-/Beruhigungsübungen, damit dein Körper aus dem Dauer-Stress rauskommt.</p>
           </div>
         </li>
 
@@ -476,7 +651,7 @@ fbq('init','1796302617856127');
           <span class="step-num">2</span>
           <div class="step-body">
             <p class="step-title">Ernährung entschärfen &amp; Essen aus dem Kopf holen</p>
-            <p class="step-sub">Du nimmst kleine, durchhaltbare Veränderungen vor: z.&nbsp;B. Süßigkeiten halbieren, mehr Eiweiß einbauen, feste Mahlzeiten statt Dauersnacken — ohne Kalorien zu tracken, damit Essen nicht mehr den ganzen Tag im Kopf kreist.</p>
+            <p class="step-sub">Kleine, haltbare Anpassungen (z.&nbsp;B. Süßes halbieren, mehr Eiweiß, feste Mahlzeiten) — ohne strikte Diät und ohne Kalorienzählen. Mehr brauchst du nicht, weil du durch Schritt 1 deinen eingeschlafenen Stoffwechsel wieder in Gang bringst.</p>
           </div>
         </li>
 
@@ -484,7 +659,7 @@ fbq('init','1796302617856127');
           <span class="step-num">3</span>
           <div class="step-body">
             <p class="step-title">7 Tage konsequent durchziehen</p>
-            <p class="step-sub">Du ziehst deine neuen Nervensystem- und Ernährungsroutinen 7 Tage am Stück durch — auch am Wochenende. Eine Woche konsequent reicht, um einen neuen Standard zu setzen und den alten Kreislauf zu durchbrechen.</p>
+            <p class="step-sub">Deine neuen Nervensystem- und Ernährungsroutinen 7 Tage am Stück — auch am Wochenende — leben, damit sie zu deinem neuen Standard werden.</p>
           </div>
         </li>
       </ol>
@@ -500,8 +675,53 @@ fbq('init','1796302617856127');
       <span class="bridge-sub-eyebrow">Nächster sinnvoller Schritt</span>
       <h3 class="bridge-title">Die <span class="italic">7-Tage Reset-Challenge</span><br>ist genau dafür gebaut.</h3>
       <p class="bridge-text">Alles, was deine Analyse empfiehlt – als klarer, begleiteter 7-Tage-Plan. Damit du diesmal wirklich dranbleibst.</p>
+
+      <!-- 7-Day Timeline visualization -->
+      <div class="seven-day-viz" id="sevenDayViz" aria-label="7-Tage Transformation: von festgefahren zu neuem Standard">
+        <div class="seven-day-track">
+          <div class="seven-day-fill"></div>
+          <div class="seven-day-points">
+            <div class="day-point">1</div>
+            <div class="day-point">2</div>
+            <div class="day-point">3</div>
+            <div class="day-point">4</div>
+            <div class="day-point">5</div>
+            <div class="day-point">6</div>
+            <div class="day-point day-final" aria-label="Tag 7 — neuer Standard">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <polyline points="4 12 10 18 20 6"/>
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div class="seven-day-labels">
+          <span class="start">Heute<strong>Festgefahren</strong></span>
+          <span class="end">Tag 7<strong>Neuer Standard</strong></span>
+        </div>
+      </div>
+
       <p class="bridge-note">Im nächsten Schritt sicherst du dir deine komplette Auswertung und deinen Zugang per E-Mail.</p>
     </div>
+
+    <script>
+      (function () {
+        var viz = document.getElementById('sevenDayViz');
+        if (!viz) return;
+        if (typeof IntersectionObserver !== 'function') {
+          viz.classList.add('is-active');
+          return;
+        }
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (e.isIntersecting) {
+              viz.classList.add('is-active');
+              io.unobserve(viz);
+            }
+          });
+        }, { threshold: 0.35 });
+        io.observe(viz);
+      })();
+    </script>
 
   </div>
 
