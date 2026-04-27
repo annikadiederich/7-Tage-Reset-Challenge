@@ -9,10 +9,10 @@
     const questions = [
         { id: 2, q: 'Wie alt bist du?', type: 'single', layout: 'stack', opts: ['Unter 25', '25 – 34', '35 – 44', '45 – 54', '55+'] },
         { id: 3, q: 'Wähle deinen Körpertyp', type: 'bodytype', opts: [
-            { label: 'Normal', img: 'bodytype-female-1.png' },
-            { label: 'Kurvig', img: 'bodytype-female-3.png' },
-            { label: 'Deutlich kurvig', img: 'bodytype-female-4.png' },
-            { label: 'Kräftig', img: 'bodytype-female-5.png' },
+            { label: 'Normal', img: 'bodytype-female-1.webp' },
+            { label: 'Kurvig', img: 'bodytype-female-3.webp' },
+            { label: 'Deutlich kurvig', img: 'bodytype-female-4.webp' },
+            { label: 'Kräftig', img: 'bodytype-female-5.webp' },
         ]},
         { id: 4, q: 'Wie viel möchtest du abnehmen?', type: 'stepcards', opts: [
             { label: 'Unter 5 kg', level: 1 },
