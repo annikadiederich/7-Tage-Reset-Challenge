@@ -1,0 +1,1800 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Deine Abnehm-Analyse · Vollständiger Report</title>
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+<link rel="shortcut icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/favicon-180.png">
+<!-- PixelFlow Script -->
+<script>!(function(p,i,x,f,l,o,w){p["PixelFlowObject"]=f;p[f]=p[f]||function(){(p[f].q=p[f].q||[]).push(arguments);};p[f].l=1*new Date();o=i.createElement(x);w=i.getElementsByTagName(x)[0];o.src=l;o.async=1;p[f].apiKey="71d5e752e544e0a8a258acbaa0ee56a6eff6241099605b8179dc109664f66a4b";p[f].siteId="1777100841152mwpfb7aium";p[f].apiEndpoint="https://api.pixelflow.so/event";w.parentNode.insertBefore(o,w);})(window,document,"script","pixelFlow","https://slrgkgulru.pixelflow.so/pfm.js");</script>
+<!-- End PixelFlow Script -->
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','1796302617856127');
+fbq('track','PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1796302617856127&ev=PageView&noscript=1"/></noscript>
+<!-- End Meta Pixel Code -->
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-KXXR0DW0N0"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-KXXR0DW0N0');
+</script>
+<!-- End Google tag -->
+<script src="tracker.js"></script>
+<script>window.addEventListener('load', function(){ if (typeof window.track === 'function') window.track('analysis_report_view'); });</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Instrument+Sans:wght@400;500;600;700&family=Sansita+Swashed:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f6f4f1;
+    --paper: #ffffff;
+    --card-border: rgba(30,28,26,0.08);
+    --ink: #1e1c1a;
+    --ink-soft: #3a332e;
+    --muted: #5c5650;
+    --muted-2: #7a7568;
+    --muted-3: #9b938a;
+
+    --green-dark: #0e2a1b;
+    --green-mid: #14482c;
+    --green-light: #c8e99d;
+    --green-soft-bg: rgba(42,90,58,0.08);
+    --green-border: rgba(20,72,44,0.25);
+    --green-line: rgba(20,72,44,0.18);
+    --green-tp: #00b67a;
+
+    --accent: #e8530e;
+    --accent-deep: #DF031C;
+    --accent-soft: rgba(232,83,14,0.08);
+    --accent-border: rgba(232,83,14,0.25);
+    --accent-glow: rgba(232,83,14,0.25);
+  }
+
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Instrument Sans', 'Plus Jakarta Sans', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ══════ Toolbar (screen only) ══════ */
+  .toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(246,244,241,0.92);
+    backdrop-filter: saturate(180%) blur(10px);
+    -webkit-backdrop-filter: saturate(180%) blur(10px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 12px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+  }
+  .toolbar-brand {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .toolbar-brand img { height: 24px; width: auto; }
+  .toolbar-brand .sub {
+    color: var(--muted-2);
+    font-weight: 500;
+    font-size: 0.78rem;
+    letter-spacing: 0;
+  }
+  .toolbar-actions { display: flex; gap: 8px; }
+  .btn-pdf, .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+    cursor: pointer;
+    padding: 10px 18px;
+    border-radius: 999px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+  }
+  .btn-pdf {
+    background: #fff;
+    color: var(--ink);
+    border: 1px solid var(--card-border);
+  }
+  .btn-pdf:hover { transform: translateY(-1px); box-shadow: 0 4px 14px rgba(30,28,26,0.08); }
+  .btn-cta {
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #fff;
+    box-shadow: 0 6px 18px rgba(223,3,28,0.22);
+  }
+  .btn-cta:hover { transform: translateY(-1px); filter: brightness(1.05); box-shadow: 0 8px 22px rgba(223,3,28,0.28); }
+
+  /* ══════ Stage (paper layout on screen) ══════ */
+  .stage {
+    max-width: 940px;
+    margin: 0 auto;
+    padding: 28px 20px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+  }
+
+  /* ══════ A4 Page ══════ */
+  .page {
+    width: 210mm;
+    min-height: 297mm;
+    background: var(--paper);
+    margin: 0 auto;
+    padding: 18mm 16mm;
+    box-shadow: 0 12px 40px rgba(30,28,26,0.10), 0 2px 6px rgba(30,28,26,0.05);
+    position: relative;
+    overflow: hidden;
+    color: var(--ink);
+    font-family: 'Instrument Sans', system-ui, sans-serif;
+    line-height: 1.5;
+  }
+
+  /* Subtle "page #" footer */
+  .page::after {
+    content: counter(page-num) " / 6";
+    counter-increment: page-num;
+    position: absolute;
+    bottom: 8mm;
+    right: 16mm;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    color: var(--muted-3);
+  }
+  body { counter-reset: page-num; }
+
+  .page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4mm;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent-deep) 70%, var(--green-mid) 100%);
+  }
+
+  /* ══════ Header on each page ══════ */
+  .ph {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 6mm;
+    border-bottom: 1px solid var(--card-border);
+    margin-bottom: 8mm;
+  }
+  .ph-brand { display: flex; align-items: center; gap: 10px; }
+  .ph-brand img { height: 24px; width: auto; }
+  .ph-brand .name {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 10pt;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+  .ph-meta {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 8.5pt;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+  }
+  .ph-meta strong { color: var(--accent); }
+
+  /* ══════ Typography ══════ */
+  .kicker {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin: 0 0 8mm;
+    text-align: center;
+  }
+  .kicker .diamond {
+    display: inline-block;
+    width: 5px; height: 5px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    margin: 0 8px;
+    vertical-align: 1px;
+  }
+
+  h1.title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 34pt;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    text-align: center;
+    margin: 0 0 6mm;
+    color: var(--ink);
+  }
+  h1.title .italic, h2.title .italic, .accent-italic {
+    font-family: 'Sansita Swashed', cursive;
+    font-weight: 700;
+    color: var(--accent);
+  }
+  /* Cursive Sansita-Swashed has trailing swashes that visually swallow the
+     following space. Add small right-padding to all cursive spans. */
+  .accent-italic,
+  .italic,
+  .verdict .accent,
+  .bridge-title .italic,
+  h1.title .italic,
+  h2.section .italic,
+  .verdict-eyebrow + p .accent,
+  span.accent {
+    padding-right: 0.12em;
+  }
+  h1.title.green .italic { color: var(--green-mid); }
+
+  h2.section {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 26pt;
+    line-height: 1.08;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin: 0 0 6mm;
+    position: relative;
+  }
+  h2.section::after {
+    content: '';
+    display: block;
+    width: 16mm;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent-deep));
+    border-radius: 2px;
+    margin: 4mm 0 0;
+  }
+  h2.section.center { text-align: center; }
+  h2.section.center::after { margin-left: auto; margin-right: auto; }
+  h2.section .italic {
+    font-family: 'Sansita Swashed', cursive;
+    color: var(--accent);
+  }
+
+  /* Sub-section heading (within a page) */
+  h3.section-sub-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 17pt;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 0 0 5mm;
+  }
+  h3.section-sub-title .accent-italic {
+    font-family: 'Sansita Swashed', cursive;
+    color: var(--accent);
+  }
+
+  .lead {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    color: var(--muted);
+    text-align: center;
+    max-width: 145mm;
+    margin: 0 auto 8mm;
+  }
+  .lead strong { color: var(--ink); font-weight: 700; }
+
+  /* ══════ Cover (Page 1) ══════ */
+  .cover-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-top: 6mm;
+  }
+  .cover-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    padding: 7px 14px;
+    border-radius: 999px;
+    margin-bottom: 10mm;
+  }
+  .cover-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 36pt;
+    line-height: 1.03;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin: 0 0 6mm;
+  }
+  .cover-title .italic {
+    font-family: 'Sansita Swashed', cursive;
+    color: var(--accent);
+  }
+  .cover-sub {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    color: var(--muted);
+    max-width: 140mm;
+    margin: 0 auto 10mm;
+  }
+  .cover-sub strong { color: var(--ink); }
+  .cover-date {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9pt;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin-bottom: 8mm;
+  }
+  .cover-date strong { color: var(--ink); }
+
+  /* Gauge */
+  .gauge-card {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 16px;
+    padding: 12mm 12mm 8mm;
+    margin: 6mm auto 10mm;
+    width: 100%;
+    max-width: 165mm;
+    box-shadow: 0 2px 8px rgba(30,28,26,0.04);
+  }
+  .gauge-eyebrow {
+    text-align: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin-bottom: 6mm;
+  }
+  .gauge-track {
+    position: relative;
+    height: 12px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+      #2a7048 0%, #c8e99d 22%, #e8b83e 48%,
+      #e8a13e 68%, var(--accent) 86%, var(--accent-deep) 100%);
+    box-shadow: inset 0 1px 2px rgba(30,28,26,0.1);
+  }
+  .gauge-pointer {
+    position: absolute;
+    top: 50%; left: 82%;
+    transform: translate(-50%, -50%);
+    width: 5px; height: 38px;
+    background: var(--ink);
+    border-radius: 2px;
+    box-shadow:
+      0 0 0 5px #fff,
+      0 0 0 6px rgba(30,28,26,0.1),
+      0 4px 14px rgba(232,83,14,0.3);
+  }
+  .gauge-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 7mm;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+  }
+  .gauge-labels .active { color: var(--accent); }
+
+  .cover-diagnose {
+    background: linear-gradient(180deg,
+      rgba(232,83,14,0.08) 0%,
+      rgba(232,83,14,0.02) 100%);
+    border: 1px solid var(--accent-border);
+    border-radius: 14px;
+    padding: 8mm 10mm;
+    text-align: center;
+    margin-bottom: 9mm;
+  }
+  .cover-diagnose-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 14pt;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 3mm;
+  }
+  .cover-diagnose-sub {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-style: italic;
+    color: var(--accent);
+    font-size: 10.5pt;
+    font-weight: 500;
+    margin: 0;
+  }
+
+  /* CTA inside report */
+  .cta-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 6mm;
+  }
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #fff !important;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 999px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11pt;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    box-shadow:
+      0 8px 24px rgba(223,3,28,0.25),
+      0 2px 6px rgba(232,83,14,0.18),
+      inset 0 1px 0 rgba(255,255,255,0.25);
+    transition: transform .15s ease, filter .15s ease, box-shadow .15s ease;
+  }
+  .cta:hover { transform: translateY(-2px); filter: brightness(1.05); box-shadow: 0 12px 30px rgba(223,3,28,0.32); }
+  .cta-arrow { width: 16px; height: 16px; flex-shrink: 0; }
+  .cta-note {
+    text-align: center;
+    margin-top: 4mm;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 9pt;
+    color: var(--muted-2);
+  }
+
+  /* ══════ Quote / Profile (Page 2) ══════ */
+  .quote-block {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-left: 4px solid var(--accent);
+    border-radius: 12px;
+    padding: 7mm 8mm;
+    margin: 0 0 7mm;
+    color: var(--ink-soft);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 11pt;
+    line-height: 1.6;
+    box-shadow: 0 2px 8px rgba(30,28,26,0.03);
+  }
+  .quote-eyebrow {
+    display: block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 4mm;
+    padding-bottom: 3mm;
+    border-bottom: 1px solid rgba(232,83,14,0.18);
+  }
+
+  .bullets {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3mm;
+  }
+  .bullet {
+    display: flex;
+    align-items: flex-start;
+    gap: 4mm;
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 5mm 6mm;
+  }
+  .bullet-dot {
+    flex-shrink: 0;
+    width: 9mm; height: 9mm;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 11pt;
+    border: 1px solid var(--accent-border);
+  }
+  .bullet-text {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.45;
+    color: var(--ink);
+    font-weight: 500;
+    padding-top: 1.5mm;
+    flex: 1;
+  }
+  .bullet-text strong { font-weight: 700; }
+
+  .footer-note {
+    text-align: center;
+    margin-top: 8mm;
+    font-family: 'Instrument Sans', sans-serif;
+    font-style: italic;
+    font-size: 10pt;
+    color: var(--muted);
+  }
+  .footer-note .accent { color: var(--accent); font-weight: 700; font-style: normal; }
+
+  /* ══════ Mechanism (Page 3) ══════ */
+  .mech-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4mm;
+    margin: 0 0 7mm;
+  }
+  .mech-card {
+    display: flex;
+    align-items: flex-start;
+    gap: 5mm;
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 6mm 7mm;
+  }
+  .mech-icon {
+    flex-shrink: 0;
+    width: 14mm; height: 14mm;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    color: var(--accent);
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--accent-border);
+  }
+  .mech-icon svg { width: 7mm; height: 7mm; }
+  .mech-num {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9pt;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 2mm;
+  }
+  .mech-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 12.5pt;
+    line-height: 1.25;
+    color: var(--ink);
+    margin: 0 0 2mm;
+    letter-spacing: -0.005em;
+  }
+  .mech-text {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: var(--muted);
+    margin: 0;
+  }
+
+  .verdict {
+    background: linear-gradient(180deg,
+      rgba(232,83,14,0.10) 0%,
+      rgba(232,83,14,0.03) 100%);
+    border: 1px solid var(--accent-border);
+    border-radius: 14px;
+    padding: 7mm 9mm;
+    text-align: center;
+  }
+  .verdict-eyebrow {
+    display: inline-block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 3mm;
+  }
+  .verdict p {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 13pt;
+    line-height: 1.4;
+    color: var(--ink);
+    margin: 0;
+    letter-spacing: -0.005em;
+  }
+  .verdict .accent {
+    font-family: 'Sansita Swashed', cursive;
+    color: var(--accent);
+  }
+
+  /* ══════ Cost (Page 4) ══════ */
+  .cost-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5mm;
+    margin: 0 0 7mm;
+  }
+  .cost-card {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-top: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 7mm 7mm;
+  }
+  .cost-card.deep { border-top-color: var(--accent-deep); }
+  .cost-card-eyebrow {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 2mm;
+  }
+  .cost-card.deep .cost-card-eyebrow { color: var(--accent-deep); }
+  .cost-card-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 13pt;
+    line-height: 1.2;
+    color: var(--ink);
+    margin: 0 0 4mm;
+    letter-spacing: -0.005em;
+  }
+  .cost-list {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3mm;
+  }
+  .cost-list li {
+    display: flex;
+    gap: 3mm;
+    align-items: flex-start;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 10pt;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+  .cost-list li::before {
+    content: '';
+    flex-shrink: 0;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 6px;
+  }
+
+  .timeline {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 7mm 4mm;
+    margin: 6mm 0;
+    position: relative;
+  }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 16%; right: 16%;
+    top: 50%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--green-light), var(--accent), var(--accent-deep));
+    border-radius: 2px;
+    z-index: 0;
+  }
+  .timeline-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3mm;
+    position: relative;
+    z-index: 1;
+  }
+  .timeline-dot {
+    width: 16mm; height: 16mm;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--accent);
+    display: grid;
+    place-items: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 8pt;
+    letter-spacing: 0.02em;
+    color: var(--accent);
+    box-shadow: 0 4px 14px rgba(232,83,14,0.12);
+    white-space: nowrap;
+    text-align: center;
+  }
+  .timeline-step.now .timeline-dot { border-color: var(--green-mid); color: var(--green-mid); }
+  .timeline-step.late .timeline-dot { border-color: var(--accent-deep); color: var(--accent-deep); }
+  .timeline-label {
+    text-align: center;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 9pt;
+    line-height: 1.35;
+    color: var(--muted);
+    max-width: 50mm;
+  }
+  .timeline-label strong { display: block; color: var(--ink); font-weight: 700; margin-bottom: 1mm; }
+
+  /* ══════ Plan (Page 5) ══════ */
+  .solution-panel {
+    background: #fff;
+    border: 1.5px solid var(--green-border);
+    border-radius: 16px;
+    padding: 9mm 9mm 7mm;
+    margin: 0 0 8mm;
+    position: relative;
+  }
+  .solution-panel::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    border-radius: 16px 16px 0 0;
+    background: linear-gradient(90deg, rgba(20,72,44,0.3), var(--green-mid), rgba(20,72,44,0.3));
+  }
+  .solution-eyebrow {
+    display: inline-block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    background: var(--green-soft-bg);
+    padding: 6px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--green-border);
+    margin-bottom: 6mm;
+  }
+  .solution-eyebrow-wrap { text-align: center; }
+
+  .steps {
+    list-style: none;
+    padding: 0; margin: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0;
+  }
+  .step-item {
+    padding: 0 4mm;
+    border-left: 1px dashed var(--green-line);
+  }
+  .step-item:first-child { border-left: none; padding-left: 0; }
+  .step-item:last-child { padding-right: 0; }
+  .step-num {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 32pt;
+    line-height: 0.9;
+    color: var(--green-mid);
+    letter-spacing: -0.04em;
+    margin-bottom: 3mm;
+  }
+  .step-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 11pt;
+    line-height: 1.3;
+    color: var(--ink);
+    font-weight: 700;
+    margin: 0 0 2mm;
+    letter-spacing: -0.005em;
+  }
+  .step-sub {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+
+  .bridge-box {
+    background: linear-gradient(180deg,
+      rgba(232,83,14,0.08) 0%,
+      rgba(232,83,14,0.03) 100%);
+    border: 1.5px solid var(--accent-border);
+    border-radius: 14px;
+    padding: 8mm 9mm;
+    text-align: center;
+  }
+  .bridge-text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 12pt;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0 0 5mm;
+  }
+  .bridge-text .or {
+    display: block;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 9pt;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin: 3mm 0;
+  }
+
+  /* ══════ Offer (Page 6) ══════ */
+  .offer-intro {
+    text-align: center;
+    margin-bottom: 6mm;
+  }
+  .offer-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-border);
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 4mm;
+  }
+
+  .offer-bullets {
+    list-style: none;
+    padding: 0;
+    margin: 0 auto 6mm;
+    max-width: 145mm;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5mm;
+  }
+  .offer-bullets li {
+    display: flex;
+    align-items: flex-start;
+    gap: 3mm;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 10.5pt;
+    line-height: 1.45;
+    color: var(--ink-soft);
+  }
+  .check-icon {
+    flex-shrink: 0;
+    width: 5mm; height: 5mm;
+    border-radius: 50%;
+    background: var(--green-tp);
+    display: grid;
+    place-items: center;
+    margin-top: 1mm;
+  }
+  .check-icon svg { width: 3mm; height: 3mm; fill: #fff; }
+
+  .stack {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 6mm 7mm;
+    margin: 0 0 5mm;
+  }
+  .stack-title {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 9pt;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin: 0 0 3mm;
+    text-align: center;
+  }
+  .stack-list {
+    list-style: none;
+    padding: 0; margin: 0;
+  }
+  .stack-list li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 2.5mm 0;
+    border-bottom: 1px dashed var(--card-border);
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 10pt;
+    color: var(--ink);
+  }
+  .stack-list li:last-child { border-bottom: none; }
+  .stack-list .item { font-weight: 600; }
+  .stack-list .val { font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; color: var(--muted); font-size: 9.5pt; }
+
+  .stack-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 4mm;
+    padding-top: 4mm;
+    border-top: 2px solid var(--ink);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+  }
+  .stack-total .label {
+    font-size: 10pt;
+    font-weight: 700;
+    color: var(--ink);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .stack-total .strike {
+    text-decoration: line-through;
+    color: var(--muted-3);
+    font-size: 11pt;
+    font-weight: 600;
+    margin-right: 4mm;
+  }
+  .stack-total .price {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 18pt;
+    color: var(--accent-deep);
+    letter-spacing: -0.01em;
+  }
+
+  .urgency {
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+    background: linear-gradient(180deg, rgba(223,3,28,0.06) 0%, rgba(223,3,28,0.02) 100%);
+    border: 1px solid rgba(223,3,28,0.25);
+    border-radius: 12px;
+    padding: 5mm 6mm;
+    margin: 0 0 6mm;
+  }
+  .urgency-icon {
+    flex-shrink: 0;
+    width: 10mm; height: 10mm;
+    border-radius: 50%;
+    background: var(--accent-deep);
+    color: #fff;
+    display: grid;
+    place-items: center;
+  }
+  .urgency-icon svg { width: 5mm; height: 5mm; }
+  .urgency p {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    margin: 0;
+  }
+  .urgency p strong { color: var(--ink); font-weight: 700; }
+
+  .trust-strip {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6mm;
+    margin: 4mm 0 0;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 9pt;
+    color: var(--muted);
+    text-align: center;
+  }
+  .trust-strip span { display: inline-flex; align-items: center; gap: 2mm; }
+  .trust-strip strong { color: var(--ink); font-weight: 700; }
+  .trust-strip .dot {
+    width: 4px; height: 4px;
+    background: var(--muted-3);
+    border-radius: 50%;
+  }
+
+  /* Big final CTA */
+  .cta-final {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    color: #fff !important;
+    text-decoration: none;
+    width: 100%;
+    padding: 16px 28px;
+    border-radius: 999px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 12pt;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    box-shadow:
+      0 10px 28px rgba(223,3,28,0.28),
+      0 2px 8px rgba(232,83,14,0.2),
+      inset 0 1px 0 rgba(255,255,255,0.25);
+    transition: transform .15s ease, filter .15s ease;
+  }
+  .cta-final:hover { transform: translateY(-2px); filter: brightness(1.05); }
+
+  /* ══════ Print styles → clean PDF export ══════ */
+  @page {
+    size: A4;
+    margin: 0;
+  }
+
+  @media print {
+    .toolbar { display: none !important; }
+    body { background: #fff; }
+    .stage { padding: 0; gap: 0; max-width: none; }
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0;
+      box-shadow: none;
+      page-break-after: always;
+      break-after: page;
+    }
+    .page:last-of-type {
+      page-break-after: auto;
+      break-after: auto;
+    }
+    .cta, .cta-final { box-shadow: none !important; }
+    a { color: inherit; }
+    a[href]::after { content: ""; }
+    .no-print { display: none !important; }
+  }
+
+  /* ══════ Reflexion-Box (Page 2) ══════ */
+  .reflect {
+    background: linear-gradient(180deg, rgba(20,72,44,0.04), rgba(20,72,44,0.01));
+    border: 1.5px dashed var(--green-border);
+    border-radius: 12px;
+    padding: 6mm 7mm;
+    margin: 6mm 0 4mm;
+  }
+  .reflect-eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--green-mid);
+    margin: 0 0 1mm;
+  }
+  .reflect-eyebrow svg { width: 11px; height: 11px; }
+  .reflect-hint {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 9pt;
+    color: var(--muted-2);
+    margin: 0 0 4mm;
+    font-style: italic;
+  }
+  .reflect-q {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 10pt;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0 0 5mm;
+    font-weight: 500;
+  }
+  .reflect-q + .reflect-line { margin-top: 0; }
+  .reflect-line {
+    height: 1px;
+    background: rgba(30,28,26,0.18);
+    margin: 0 0 9mm;
+  }
+  .reflect-line + .reflect-q { margin-top: 2mm; }
+  .reflect-line.inline {
+    display: inline-block;
+    width: 30mm;
+    height: 0;
+    border-bottom: 1px solid rgba(30,28,26,0.35);
+    vertical-align: 1px;
+    margin: 0 0 0 2mm;
+  }
+
+  /* ══════ Tag-im-Leben Timeline (Page 3) ══════ */
+  .day-timeline {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 12px;
+    padding: 6mm 5mm 5mm;
+    margin: 6mm 0 0;
+    position: relative;
+  }
+  .day-timeline-eyebrow {
+    text-align: center;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin: 0 0 5mm;
+  }
+  .day-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3mm;
+    position: relative;
+  }
+  .day-grid::before {
+    content: '';
+    position: absolute;
+    left: 12%; right: 12%; top: 7mm;
+    height: 2px;
+    background: linear-gradient(90deg, #c8e99d 0%, #e8b83e 50%, var(--accent-deep) 100%);
+    border-radius: 2px;
+    z-index: 0;
+  }
+  .day-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 2mm;
+    position: relative;
+    z-index: 1;
+  }
+  .day-icon {
+    width: 14mm; height: 14mm;
+    border-radius: 50%;
+    background: #fff;
+    border: 2px solid var(--card-border);
+    display: grid;
+    place-items: center;
+    color: var(--ink);
+    box-shadow: 0 2px 6px rgba(30,28,26,0.06);
+  }
+  .day-icon svg { width: 6mm; height: 6mm; }
+  .day-step.warning .day-icon { border-color: var(--accent); color: var(--accent); }
+  .day-step.danger  .day-icon { border-color: var(--accent-deep); color: var(--accent-deep); }
+  .day-time {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+  }
+  .day-text {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 8.5pt;
+    line-height: 1.35;
+    color: var(--ink-soft);
+    max-width: 38mm;
+    margin: 0 auto;
+  }
+
+  /* ══════ Mona Case Study (Page 5) ══════ */
+  .case {
+    background: #fff;
+    border: 1px solid var(--card-border);
+    border-radius: 14px;
+    padding: 5mm 6mm 6mm;
+    margin: 6mm 0;
+    display: grid;
+    grid-template-columns: 60mm 1fr;
+    gap: 5mm;
+    align-items: stretch;
+  }
+  .case-eyebrow-row {
+    grid-column: 1 / -1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 3mm;
+    border-bottom: 1px dashed var(--card-border);
+    margin-bottom: 1mm;
+  }
+  .case-eyebrow {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8pt;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .case-result-pill {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 8.5pt;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    color: #fff;
+    background: var(--green-mid);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .case-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2mm;
+  }
+  .case-img {
+    position: relative;
+    aspect-ratio: 1 / 1.15;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f0ede8;
+  }
+  .case-img img {
+    width: 100%; height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .case-img-tag {
+    position: absolute;
+    top: 2mm; left: 2mm;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 7pt;
+    font-weight: 800;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(30,28,26,0.78);
+    padding: 3px 7px;
+    border-radius: 4px;
+  }
+  .case-img.after .case-img-tag { background: var(--green-mid); }
+  .case-body {
+    display: flex;
+    flex-direction: column;
+    gap: 2mm;
+    justify-content: center;
+  }
+  .case-block-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 7.5pt;
+    font-weight: 800;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin: 0 0 0.5mm;
+  }
+  .case-block-text {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 9.5pt;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin: 0 0 2mm;
+  }
+  .case-note {
+    grid-column: 1 / -1;
+    margin: 1mm 0 0;
+    padding-top: 3mm;
+    border-top: 1px dashed var(--card-border);
+    font-family: 'Instrument Sans', sans-serif;
+    font-style: italic;
+    font-size: 9pt;
+    color: var(--muted);
+    text-align: center;
+  }
+  .case-note strong { color: var(--accent); font-style: normal; font-weight: 700; }
+
+  /* ══════ Stack Shot (Page 6) ══════ */
+  .stack-shot {
+    text-align: center;
+    margin: 0 0 5mm;
+  }
+  .stack-shot img {
+    max-width: 100%;
+    width: 110mm;
+    height: auto;
+    display: block;
+    margin: 0 auto 2mm;
+  }
+  .stack-shot-caption {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 9.5pt;
+    color: var(--muted);
+    margin: 0;
+    font-style: italic;
+  }
+
+  /* Stronger urgency on Page 6 */
+  .urgency.strong {
+    background: linear-gradient(180deg, rgba(223,3,28,0.10) 0%, rgba(223,3,28,0.04) 100%);
+    border: 1.5px solid rgba(223,3,28,0.4);
+    box-shadow: 0 6px 18px rgba(223,3,28,0.08);
+  }
+
+  /* Mobile / smaller screens — scale the A4 paper down */
+  @media (max-width: 900px) {
+    .page {
+      width: 100%;
+      min-height: 0;
+      padding: 24px 22px;
+      border-radius: 12px;
+    }
+    .page::before { height: 4px; }
+    .page::after { display: none; }
+    h1.title { font-size: 22pt; }
+    .cover-title { font-size: 28pt; }
+    .cost-grid { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: repeat(3, 1fr); padding: 6mm 2mm; }
+    .timeline-label { font-size: 8pt; }
+    .steps { grid-template-columns: 1fr; gap: 5mm; }
+    .step-item { border-left: none; padding: 0; padding-top: 5mm; border-top: 1px dashed var(--green-line); }
+    .step-item:first-child { border-top: none; padding-top: 0; }
+    .case { grid-template-columns: 1fr; gap: 4mm; }
+    .day-grid { grid-template-columns: repeat(2, 1fr); gap: 4mm; }
+    .day-grid::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Toolbar (screen only) -->
+<div class="toolbar no-print">
+  <div class="toolbar-brand">
+    <img src="elliott-aziz-logo.png" alt="Elliott Aziz">
+    <span>Abnehm-Analyse <span class="sub">· Vollständiger Report</span></span>
+  </div>
+  <div class="toolbar-actions">
+    <button type="button" class="btn-pdf" onclick="window.print()" aria-label="Als PDF speichern">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>
+      Als PDF speichern
+    </button>
+    <a class="btn-cta" href="/challenge" data-cta="toolbar">
+      Zur 7-Tage Reset-Challenge
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+    </a>
+  </div>
+</div>
+
+<div class="stage">
+
+  <!-- ══════════════════ PAGE 1 — COVER ══════════════════ -->
+  <section class="page" aria-label="Seite 1 — Cover">
+    <div class="ph">
+      <div class="ph-brand">
+        <img src="elliott-aziz-logo.png" alt="Elliott Aziz">
+      </div>
+      <div class="ph-meta"><strong>Persönliche</strong> · Abnehm-Analyse</div>
+    </div>
+
+    <div class="cover-hero">
+      <span class="cover-eyebrow">Dein persönlicher Report</span>
+
+      <h1 class="cover-title">Deine Abnehm-Analyse:<br><span class="italic">Stress &amp; Heißhunger</span></h1>
+
+      <p class="cover-sub">Eine ehrliche Auswertung dessen, was deine Antworten über deinen Körper, dein Nervensystem und dein Essverhalten zeigen — und was dein nächster sinnvoller Schritt ist.</p>
+
+      <div class="gauge-card">
+        <div class="gauge-eyebrow">Dein aktueller Stress-Pegel</div>
+        <div class="gauge-track">
+          <div class="gauge-pointer"></div>
+        </div>
+        <div class="gauge-labels">
+          <span>Ausgeglichen</span>
+          <span>Angespannt</span>
+          <span class="active">Häufig angespannt</span>
+        </div>
+      </div>
+
+      <div class="cover-diagnose">
+        <h2 class="cover-diagnose-title">Dein System ist aktuell überlastet</h2>
+        <p class="cover-diagnose-sub">und macht dir das Abnehmen extrem schwer.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════ PAGE 2 — PROFILE ══════════════════ -->
+  <section class="page" aria-label="Seite 2 — Profil">
+    <div class="ph">
+      <div class="ph-brand">
+        <img src="elliott-aziz-logo.png" alt="Elliott Aziz">
+      </div>
+      <div class="ph-meta">Was deine <strong>Antworten</strong> zeigen</div>
+    </div>
+
+    <p class="kicker">Teil 1 <span class="diamond"></span> Dein Profil</p>
+
+    <h2 class="section center">Dein Abnehm-Profil:<br><span class="italic">Stress &amp; Heißhunger</span></h2>
+
+    <div class="quote-block">
+      <span class="quote-eyebrow">Was deine Antworten zeigen</span>
+      Dein Körper und dein Kopf kommen selten wirklich zur Ruhe. Du <strong>funktionierst</strong> — aber innerlich bist du ständig unter Spannung. Tagsüber hältst du durch, abends kippt es. Deshalb greifst du zu Essen, obwohl du weißt, dass es dich vom Ziel wegbringt.
+    </div>
+
+    <h3 style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:13pt;color:var(--ink);margin:0 0 4mm;letter-spacing:-0.005em;">Das bedeutet für dich <span class="accent-italic">im Alltag</span>:</h3>
+
+    <ul class="bullets">
+      <li class="bullet">
+        <span class="bullet-dot">1</span>
+        <span class="bullet-text">Du bist oft müde und funktionierst nur noch.</span>
+      </li>
+      <li class="bullet">
+        <span class="bullet-dot">2</span>
+        <span class="bullet-text">Ernährung &amp; Training fühlen sich anstrengend und schwer durchzuhalten an.</span>
+      </li>
+      <li class="bullet">
+        <span class="bullet-dot">3</span>
+        <span class="bullet-text">Essen bleibt ständig ein Thema in deinem Kopf.</span>
+      </li>
+      <li class="bullet">
+        <span class="bullet-dot">4</span>
+        <span class="bullet-text">Du fühlst dich fremdbestimmt durch Heißhunger und spontane Rückfälle.</span>
+      </li>
+      <li class="bullet">
+        <span class="bullet-dot">5</span>
+        <span class="bullet-text">Du nimmst nicht richtig ab — selbst wenn du dich an „die Regeln" hältst.</span>
+      </li>
+    </ul>
+
+    <div class="reflect">
+      <p class="reflect-eyebrow">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4z"/></svg>
+        Reflexion <span style="font-weight:500;letter-spacing:0.04em;text-transform:none;color:var(--muted-2);"> · optional ausfüllen</span>
+      </p>
+      <p class="reflect-hint">Nimm dir 2 Minuten. Antworte ehrlich — nur für dich.</p>
+
+      <p class="reflect-q">In welchen Situationen erkennst du dich am stärksten wieder?</p>
+      <div class="reflect-line"></div>
+      <div class="reflect-line"></div>
+
+      <p class="reflect-q">Wann war dein letzter Abend genau so? <span class="reflect-line inline"></span></p>
+
+      <p class="reflect-q">Wie viel Energie kostet dich das gerade auf einer Skala von 1–10? <span class="reflect-line inline" style="width:14mm;"></span></p>
+    </div>
+
+    <p class="footer-note">Du kannst dieses Muster ändern. <span class="accent">→ Mehr dazu ab Seite 5.</span></p>
+  </section>
+
+  <!-- ══════════════════ PAGE 3 — MECHANISMUS ══════════════════ -->
+  <section class="page" aria-label="Seite 3 — Mechanismus">
+    <div class="ph">
+      <div class="ph-brand">
+        <img src="elliott-aziz-logo.png" alt="Elliott Aziz">
+      </div>
+      <div class="ph-meta">Warum du <strong>feststeckst</strong></div>
+    </div>
+
+    <p class="kicker">Teil 2 <span class="diamond"></span> Der Mechanismus</p>
+
+    <h2 class="section center">Warum dich dieses<br><span class="italic">Muster ausbremst</span></h2>
+
+    <p class="lead">Wenn dein System zu oft <strong>auf Alarm</strong> steht, passiert Folgendes in deinem Körper und Kopf:</p>
+
+    <div class="mech-grid">
+      <div class="mech-card">
+        <div class="mech-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="18" height="12" rx="2"/><line x1="22" y1="11" x2="22" y2="13"/><line x1="6" y1="10" x2="6" y2="14"/></svg>
+        </div>
+        <div>
+          <p class="mech-num">Grund 1</p>
+          <p class="mech-title">Dein Körper will Energie sparen</p>
+          <p class="mech-text">Er hält lieber fest, statt loszulassen — dadurch wird Fettabbau extrem schwer, egal wie wenig du isst.</p>
+        </div>
+      </div>
+
+      <div class="mech-card">
+        <div class="mech-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div>
+          <p class="mech-num">Grund 2</p>
+          <p class="mech-title">Heißhunger wird automatisch ausgelöst</p>
+          <p class="mech-text">Es ist dann keine Willensfrage mehr, sondern die schnellste Beruhigung, die dein System kennt.</p>
+        </div>
+      </div>
+
+      <div class="mech-card">
+        <div class="mech-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a4 4 0 0 0-4 4v1.2A4 4 0 0 0 4 11v3a4 4 0 0 0 4 4v0a4 4 0 0 0 4 4 4 4 0 0 0 4-4v0a4 4 0 0 0 4-4v-3a4 4 0 0 0-4-3.8V6a4 4 0 0 0-4-4z"/><path d="M9 11h6"/></svg>
+        </div>
+        <div>
+          <p class="mech-num">Grund 3</p>
+          <p class="mech-title">Dein Kopf sucht ständig nach Essen, um runterzufahren</p>
+          <p class="mech-text">Essen wird zum einzigen verlässlichen Ventil — der schnellste Weg, damit dein System überhaupt noch abschalten kann.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="day-timeline">
+      <p class="day-timeline-eyebrow">Ein typischer Tag in deinem Profil</p>
+      <div class="day-grid">
+        <div class="day-step">
+          <div class="day-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+          </div>
+          <p class="day-time">Morgens</p>
+          <p class="day-text">„Heute ziehe ich es durch." — guter Vorsatz, klarer Plan.</p>
+        </div>
+        <div class="day-step warning">
+          <div class="day-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+          </div>
+          <p class="day-time">Tagsüber</p>
+          <p class="day-text">Du funktionierst, sammelst Stress. Anspannung baut sich auf.</p>
+        </div>
+        <div class="day-step danger">
+          <div class="day-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </div>
+          <p class="day-time">Abends</p>
+          <p class="day-text">Kopf voll, müde. Snack, Kühlschrank — du kannst kaum widerstehen.</p>
+        </div>
+        <div class="day-step danger">
+          <div class="day-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+          </div>
+          <p class="day-time">Danach</p>
+          <p class="day-text">Schlechtes Gewissen. „Montag starte ich neu" — und der Kreislauf beginnt.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="verdict" style="margin-top:6mm;">
+      <div class="verdict-eyebrow">Kurz gesagt</div>
+      <p>Solange dieser <span class="accent">Stress- &amp; Heißhunger-Kreislauf</span> läuft, wird sich Abnehmen wie Kampf anfühlen — egal welchen Plan du versuchst.</p>
+    </div>
+  </section>
+
+  <!-- ══════════════════ PAGE 4 — KOSTEN ══════════════════ -->
+  <section class="page" aria-label="Seite 4 — Kosten der Untätigkeit">
+    <div class="ph">
+      <div class="ph-brand">
+        <img src="elliott-aziz-logo.png" alt="Elliott Aziz">
+      </div>
+      <div class="ph-meta">Wenn sich <strong>nichts ändert</strong></div>
+    </div>
+
+    <p class="kicker">Teil 3 <span class="diamond"></span> Die ehrliche Prognose</p>
+
+    <h2 class="section center">Was passiert,<br>wenn sich <span class="italic">nichts ändert</span>?</h2>
+
+    <p class="lead">Diese Analyse zeigt dir klar, wo du stehst. Aber sie ändert nichts, wenn du <strong>nichts änderst</strong>. So sieht der wahrscheinliche Verlauf aus:</p>
+
+    <div class="cost-grid">
+      <div class="cost-card">
+        <p class="cost-card-eyebrow">In den nächsten Wochen</p>
+        <h3 class="cost-card-title">Der gleiche Kreislauf, nur intensiver</h3>
+        <ul class="cost-list">
+          <li>Wieder „Neustart Montag" — und Donnerstag schon vorbei</li>
+          <li>Frustration, weil du es eigentlich „besser weißt"</li>
+          <li>Wachsendes Misstrauen in deinen eigenen Körper</li>
+          <li>Heißhunger-Attacken werden lauter, nicht leiser</li>
+        </ul>
+      </div>
+
+      <div class="cost-card deep">
+        <p class="cost-card-eyebrow">In den nächsten 6–12 Monaten</p>
+        <h3 class="cost-card-title">Die langfristigen Kosten</h3>
+        <ul class="cost-list">
+          <li>Gewicht eher hoch als runter, trotz aller Versuche</li>
+          <li>Mehr Verstecken in weiten Klamotten</li>
+          <li>Soziale Termine vermeiden („wenn ich erst abgenommen habe…")</li>
+          <li>Abnehmen fühlt sich irgendwann „unmöglich" an</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-step now">
+        <div class="timeline-dot">HEUTE</div>
+        <div class="timeline-label"><strong>Stress &amp; Heißhunger</strong> dominieren deinen Alltag</div>
+      </div>
+      <div class="timeline-step">
+        <div class="timeline-dot">+6 MON.</div>
+        <div class="timeline-label"><strong>Frustrations-Spirale</strong> festigt sich</div>
+      </div>
+      <div class="timeline-step late">
+        <div class="timeline-dot">+12 MON.</div>
+        <div class="timeline-label"><strong>Resignation</strong> — du gibst es innerlich auf</div>
+      </div>
+    </div>
+
+    <p class="footer-note"><em>„Die Analyse zeigt dir, wo du stehst — aber sie ändert nichts, wenn du nichts änderst."</em></p>
+  </section>
+
+  <!-- ══════════════════ PAGE 5 — 3-SCHRITT-PLAN ══════════════════ -->
+  <section class="page" aria-label="Seite 5 — 3-Schritt-Plan">
+    <div class="ph">
+      <div class="ph-brand">
+        <img src="elliott-aziz-logo.png" alt="Elliott Aziz">
+      </div>
+      <div class="ph-meta">Deine <strong>Empfehlung</strong></div>
+    </div>
+
+    <p class="kicker">Teil 4 <span class="diamond"></span> Was dir die Analyse empfiehlt</p>
+
+    <h1 class="title green">Dein <span class="italic">3-Schritt-Plan</span><br>aus der Analyse</h1>
+
+    <p class="lead">Um aus diesem Profil auszusteigen, brauchst du keinen härteren Plan, sondern zuerst einen <strong>gezielten Reset</strong>:</p>
+
+    <div class="solution-panel">
+      <div class="solution-eyebrow-wrap">
+        <span class="solution-eyebrow">Dein 3-Schritt-Plan</span>
+      </div>
+
+      <ol class="steps">
+        <li class="step-item">
+          <div class="step-num">1</div>
+          <p class="step-title">Dein System beruhigen, bevor du abnimmst</p>
+          <p class="step-sub">Nicht noch mehr Disziplin — zuerst dein Nervensystem runterfahren. Wenn der Körper aus dem Dauer-Spannungsmodus rauskommt, wird alles andere leichter.</p>
+        </li>
+
+        <li class="step-item">
+          <div class="step-num">2</div>
+          <p class="step-title">Essen aus deinem Kopf rausholen</p>
+          <p class="step-sub">Kleine, alltagstaugliche Routinen, die deine Heißhunger-Schleifen unterbrechen — ohne Kalorien zählen, ohne Verbote.</p>
+        </li>
+
+        <li class="step-item">
+          <div class="step-num">3</div>
+          <p class="step-title">7 Tage konsequent mit klarer Anleitung testen</p>
+          <p class="step-sub">Eine Woche reicht, um zu spüren, wie sich dein Muster verändern kann — wenn du jeden Tag genau weißt, was zu tun ist.</p>
+        </li>
+      </ol>
+    </div>
+
+    <div class="case">
+      <div class="case-eyebrow-row">
+        <span class="case-eyebrow">Wie Mona ihre Analyse genutzt hat</span>
+        <span class="case-result-pill">−10 kg in 12 Wochen</span>
+      </div>
+      <div class="case-images">
+        <div class="case-img"><span class="case-img-tag">Vorher</span><img src="generated-images/compare-before.jpg" alt="Mona vorher"></div>
+        <div class="case-img after"><span class="case-img-tag">Nachher</span><img src="generated-images/compare-after.jpg" alt="Mona nachher"></div>
+      </div>
+      <div class="case-body">
+        <p class="case-block-label">Vorher</p>
+        <p class="case-block-text">Mona hatte das gleiche Profil wie du: tagsüber diszipliniert, abends Heißhunger, ständiges Jo-Jo.</p>
+        <p class="case-block-label">Wendepunkt</p>
+        <p class="case-block-text">Sie hat zuerst diese 3 Schritte aus der Analyse umgesetzt — statt noch eine Diät zu starten.</p>
+        <p class="case-block-label">Ergebnis</p>
+        <p class="case-block-text">12 Wochen später: −10 kg, weniger Heißhunger, ruhiger im Kopf — und sie hält ihr Gewicht bis heute.</p>
+      </div>
+      <p class="case-note">Mona ist über die <strong>7-Tage Reset-Challenge</strong> gestartet — genau die, die wir dir empfehlen.</p>
+    </div>
+
+    <div class="bridge-box">
+      <p class="bridge-text">
+        Du kannst versuchen, diese 3 Schritte alleine umzusetzen.
+        <span class="or">— oder —</span>
+        Du nutzt die <span class="accent-italic">7-Tage Reset-Challenge</span>, die genau dafür gebaut wurde.
+      </p>
+
+      <a class="cta" href="/challenge" data-cta="page5">
+        Jetzt 7-Tage Reset-Challenge starten
+        <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+      </a>
+    </div>
+  </section>
+
+  <!-- ══════════════════ PAGE 6 — CHALLENGE PITCH ══════════════════ -->
+  <section class="page" aria-label="Seite 6 — Challenge">
+    <div class="ph">
+      <div class="ph-brand">
+        <img src="elliott-aziz-logo.png" alt="Elliott Aziz">
+      </div>
+      <div class="ph-meta">Dein <strong>nächster Schritt</strong></div>
+    </div>
+
+    <div class="offer-intro">
+      <span class="offer-eyebrow">Empfohlen auf Basis deiner Analyse</span>
+      <h2 class="section center" style="text-align:center;">Die <span class="italic">7-Tage Reset-Challenge</span><br>— dein nächster Schritt</h2>
+    </div>
+
+    <ul class="offer-bullets">
+      <li><span class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19l11-11-1.4-1.4z"/></svg></span>setzt genau deinen 3-Schritt-Plan aus der Analyse um</li>
+      <li><span class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19l11-11-1.4-1.4z"/></svg></span>unter 20 Minuten pro Tag, voll alltagstauglich</li>
+      <li><span class="check-icon"><svg viewBox="0 0 24 24"><path d="M9 16.2l-3.5-3.5-1.4 1.4L9 19l11-11-1.4-1.4z"/></svg></span>Ernährung, Training, Mindset &amp; Nervensystem in einem Programm</li>
+    </ul>
+
+    <div class="stack-shot">
+      <img src="generated-images/stack-shot.png" alt="Alle Module der 7-Tage Reset-Challenge: Ernährungsplan, Trainingsplan, Mindset, Nervensystem, Community">
+      <p class="stack-shot-caption">Alles, was du brauchst, um deinen 3-Schritt-Plan wirklich umzusetzen.</p>
+    </div>
+
+    <div class="stack">
+      <p class="stack-title">Was du heute bekommst</p>
+      <ul class="stack-list">
+        <li><span class="item">Ernährungsplan-Erstellung</span><span class="val">Wert 99 €</span></li>
+        <li><span class="item">Trainingsplan-Erstellung</span><span class="val">Wert 79 €</span></li>
+        <li><span class="item">Mentales Training (Videomodul)</span><span class="val">Wert 149 €</span></li>
+        <li><span class="item">Nervensystem-Regulierungs-Übungen</span><span class="val">Wert 129 €</span></li>
+        <li><span class="item">Community &amp; 1:1 Support</span><span class="val">Wert 59 €</span></li>
+        <li><span class="item">Lebenslanger Zugang zur Community-Gruppe</span><span class="val">Wert 199 €</span></li>
+      </ul>
+      <div class="stack-total">
+        <span class="label">Dein Preis heute</span>
+        <span><span class="strike">714 €</span><span class="price">29,90 €</span></span>
+      </div>
+    </div>
+
+    <div class="urgency strong">
+      <div class="urgency-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      </div>
+      <p><strong>Dieses Angebot gilt nur für kurze Zeit</strong> und nur für Frauen, die die Abnehm-Analyse gemacht haben.<br>Wenn du wartest, ist dein Profil dasselbe — nur deine <strong>Frustration größer</strong>.</p>
+    </div>
+
+    <a class="cta-final" href="/challenge" data-cta="page6">
+      Jetzt 7-Tage Reset-Challenge starten
+      <svg class="cta-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+    </a>
+
+    <div class="trust-strip">
+      <span><strong>13.000+</strong> Frauen gestartet</span>
+      <span class="dot"></span>
+      <span><strong>4,9/5</strong> Zufriedenheit</span>
+      <span class="dot"></span>
+      <span>Einmalig <strong>29,90 €</strong> — kein Abo</span>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // Auto-print if URL contains ?print=1
+  if (/[?&]print=1/.test(window.location.search)) {
+    window.addEventListener('load', function () { setTimeout(window.print, 400); });
+  }
+
+  // CTA tracking — fire InitiateCheckout (Meta) + begin_checkout (GA4) on every CTA click
+  document.addEventListener('click', function (e) {
+    var el = e.target.closest('[data-cta]');
+    if (!el) return;
+    var location = el.getAttribute('data-cta');
+
+    if (typeof fbq !== 'undefined') {
+      fbq('track', 'InitiateCheckout', {
+        content_name: '7-Tage Reset-Challenge',
+        content_category: 'Challenge',
+        content_ids: ['7tage-challenge'],
+        value: 29.90,
+        currency: 'EUR',
+        source: 'analysis_report:' + location
+      });
+    }
+    if (typeof gtag !== 'undefined') {
+      gtag('event', 'begin_checkout', {
+        value: 29.90,
+        currency: 'EUR',
+        source: 'analysis_report:' + location,
+        items: [{ item_id: '7tage-challenge', item_name: '7-Tage Reset-Challenge', price: 29.90, quantity: 1 }]
+      });
+    }
+    if (typeof window.track === 'function') window.track('analysis_report_cta_click', { location: location });
+  });
+</script>
+
+</body>
+</html>
