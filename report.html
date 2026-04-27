@@ -1073,23 +1073,62 @@ fbq('track','PageView');
   }
 
   @media print {
+    /* Force ALL backgrounds, gradients, shadows and colors to render.
+       Without this, Chrome strips backgrounds → no orange bar, no gradients,
+       no accent boxes. Single most important rule for print fidelity. */
+    *,
+    *::before,
+    *::after {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+      color-adjust: exact !important;
+    }
+
+    html, body {
+      background: #fff !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
     .toolbar { display: none !important; }
-    body { background: #fff; }
-    .stage { padding: 0; gap: 0; max-width: none; }
+
+    .stage {
+      padding: 0 !important;
+      gap: 0 !important;
+      max-width: none !important;
+      margin: 0 !important;
+    }
+
     .page {
-      width: 210mm;
-      min-height: 297mm;
-      margin: 0;
-      box-shadow: none;
-      page-break-after: always;
-      break-after: page;
+      width: 210mm !important;
+      height: 297mm !important;
+      min-height: 297mm !important;
+      max-height: 297mm !important;
+      margin: 0 !important;
+      box-shadow: none !important;
+      border-radius: 0 !important;
+      page-break-after: always !important;
+      break-after: page !important;
+      overflow: hidden;
     }
     .page:last-of-type {
-      page-break-after: auto;
-      break-after: auto;
+      page-break-after: auto !important;
+      break-after: auto !important;
     }
-    .cta, .cta-final { box-shadow: none !important; }
-    a { color: inherit; }
+
+    /* Preserve gradients on the colored bar at top of each page */
+    .page::before {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    .cta, .cta-final, .btn-cta, .case-result-pill, .gauge-pointer,
+    .urgency-icon, .timeline-dot, .accent-italic, .italic {
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+
+    a { color: inherit; text-decoration: none; }
     a[href]::after { content: ""; }
     .no-print { display: none !important; }
   }
