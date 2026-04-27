@@ -95,7 +95,7 @@ module.exports = async function handler(req, res) {
   const emailPayload = {
     sender: { email: senderEmail, name: senderName },
     to: [{ email }],
-    subject: 'Deine Abnehm-Analyse — vollständiger Report im Anhang',
+    subject: 'Deine Abnehm-Analyse ist da (Stress & Heißhunger-Profil)',
     htmlContent: buildEmailHtml({ challengeUrl }),
     attachment: [
       { url: pdfUrl, name: 'Deine-Abnehm-Analyse.pdf' },
@@ -129,6 +129,7 @@ module.exports = async function handler(req, res) {
 
 // ────────────────────── Email HTML template ──────────────────────
 function buildEmailHtml({ challengeUrl }) {
+  const cta = escapeHtml(challengeUrl);
   return `<!DOCTYPE html>
 <html lang="de">
 <head>
@@ -137,6 +138,12 @@ function buildEmailHtml({ challengeUrl }) {
 <title>Deine Abnehm-Analyse</title>
 </head>
 <body style="margin:0;padding:0;background-color:#f6f4f1;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif;color:#1e1c1a;-webkit-font-smoothing:antialiased;">
+
+  <!-- Preheader (shows in inbox preview, hidden in body) -->
+  <div style="display:none;font-size:1px;color:#f6f4f1;line-height:1px;max-height:0;max-width:0;opacity:0;overflow:hidden;mso-hide:all;">
+    Dein Report zeigt dir schwarz auf weiß, warum du feststeckst — und wie du in 7 Tagen den Kreislauf brichst.
+  </div>
+
   <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="background-color:#f6f4f1;padding:32px 16px;">
     <tr>
       <td align="center">
@@ -150,25 +157,57 @@ function buildEmailHtml({ challengeUrl }) {
             <td style="padding:36px 36px 28px;">
               <p style="margin:0 0 18px;font-size:11px;font-weight:800;letter-spacing:0.18em;text-transform:uppercase;color:#7a7568;">Dein persönlicher Report</p>
 
-              <h1 style="margin:0 0 16px;font-family:'Plus Jakarta Sans',Helvetica,Arial,sans-serif;font-weight:800;font-size:28px;line-height:1.15;letter-spacing:-0.015em;color:#1e1c1a;">
-                Hier ist deine <span style="color:#e8530e;">Abnehm-Analyse</span>.
+              <h1 style="margin:0 0 24px;font-family:'Plus Jakarta Sans',Helvetica,Arial,sans-serif;font-weight:800;font-size:30px;line-height:1.15;letter-spacing:-0.015em;color:#1e1c1a;">
+                Hier ist deine Abnehm-Analyse.
               </h1>
 
-              <p style="margin:0 0 16px;font-size:16px;line-height:1.55;color:#3a332e;">
-                Hi, danke fürs Vertrauen.
+              <p style="margin:0 0 8px;font-size:16px;line-height:1.55;color:#3a332e;">Hi,</p>
+              <p style="margin:0 0 18px;font-size:16px;line-height:1.55;color:#3a332e;">
+                danke fürs Vertrauen.
               </p>
-              <p style="margin:0 0 16px;font-size:16px;line-height:1.55;color:#3a332e;">
-                Im Anhang findest du deinen vollständigen Report als PDF — mit deinem persönlichen Profil, den Mechanismen, die dich aktuell ausbremsen, und dem 3-Schritt-Plan, den ich dir auf Basis deiner Antworten empfehle.
+
+              <p style="margin:0 0 10px;font-size:16px;line-height:1.55;color:#3a332e;">
+                Im Anhang findest du deinen vollständigen Report als PDF — mit:
               </p>
-              <p style="margin:0 0 26px;font-size:16px;line-height:1.55;color:#3a332e;">
-                Lies ihn in Ruhe. Nimm dir die 5 Minuten — vor allem für die Reflexions-Fragen auf Seite 2. Genau dort liegt der Hebel.
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 22px;">
+                <tr><td style="padding:3px 0;font-size:15.5px;line-height:1.55;color:#3a332e;">— deinem Stress- &amp; Heißhunger-Profil,</td></tr>
+                <tr><td style="padding:3px 0;font-size:15.5px;line-height:1.55;color:#3a332e;">— den Mustern, die dich gerade ausbremsen,</td></tr>
+                <tr><td style="padding:3px 0;font-size:15.5px;line-height:1.55;color:#3a332e;">— der ehrlichen Prognose, wenn du nichts änderst,</td></tr>
+                <tr><td style="padding:3px 0;font-size:15.5px;line-height:1.55;color:#3a332e;">— und einem klaren 3-Schritt-Plan, den ich dir auf Basis deiner Antworten empfehle.</td></tr>
+              </table>
+
+              <p style="margin:0 0 10px;font-size:16px;line-height:1.55;color:#3a332e;">
+                Lies ihn in Ruhe. Die wichtigsten Stellen sind:
+              </p>
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="margin:0 0 26px;">
+                <tr><td style="padding:3px 0;font-size:15.5px;line-height:1.55;color:#3a332e;">— <strong style="color:#1e1c1a;">Seite 2–3:</strong> wo du dich im Alltag wiedererkennen wirst</td></tr>
+                <tr><td style="padding:3px 0;font-size:15.5px;line-height:1.55;color:#3a332e;">— <strong style="color:#1e1c1a;">Seite 4:</strong> was passiert, wenn du nichts änderst</td></tr>
+                <tr><td style="padding:3px 0;font-size:15.5px;line-height:1.55;color:#3a332e;">— <strong style="color:#1e1c1a;">Seite 5–6:</strong> dein 3-Schritt-Plan + Mona-Story (−10 kg in 12 Wochen)</td></tr>
+              </table>
+
+              <!-- Hard pivot -->
+              <p style="margin:0 0 8px;font-family:'Plus Jakarta Sans',Helvetica,Arial,sans-serif;font-weight:800;font-size:16px;line-height:1.45;color:#1e1c1a;letter-spacing:-0.005em;">
+                Und jetzt kommt der Teil, der weh tut:
+              </p>
+              <p style="margin:0 0 22px;font-size:16px;line-height:1.55;color:#3a332e;">
+                Die Analyse allein ändert <strong style="color:#1e1c1a;">nichts</strong>, wenn du danach weitermachst wie bisher.
+              </p>
+
+              <p style="margin:0 0 22px;font-size:16px;line-height:1.55;color:#3a332e;">
+                Genau deshalb gibt es die <strong style="color:#1e1c1a;">7-Tage Reset-Challenge</strong>:<br>
+                Sie setzt deinen 3-Schritt-Plan aus der Analyse in 7 Tagen um — unter 20 Minuten pro Tag, alltagstauglich und speziell für dein Stress- &amp; Heißhunger-Profil.
+              </p>
+
+              <!-- Bridge -->
+              <p style="margin:0 0 18px;font-size:16px;line-height:1.55;color:#1e1c1a;font-weight:600;">
+                👉 Wenn du nicht willst, dass dieser Report in deinem Download-Ordner verstaubt:
               </p>
 
               <!-- CTA button -->
-              <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 24px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0" align="center" style="margin:0 auto 12px;">
                 <tr>
                   <td align="center" style="border-radius:999px;background:linear-gradient(135deg,#e8530e,#DF031C);box-shadow:0 8px 24px rgba(223,3,28,0.22);">
-                    <a href="${escapeHtml(challengeUrl)}" target="_blank"
+                    <a href="${cta}" target="_blank"
                        style="display:inline-block;padding:16px 32px;font-family:'Plus Jakarta Sans',Helvetica,Arial,sans-serif;font-size:16px;font-weight:800;letter-spacing:0.04em;color:#ffffff;text-decoration:none;border-radius:999px;">
                       Jetzt 7-Tage Reset-Challenge starten →
                     </a>
@@ -185,16 +224,16 @@ function buildEmailHtml({ challengeUrl }) {
           <!-- Divider -->
           <tr><td style="padding:0 36px;"><div style="height:1px;background:rgba(30,28,26,0.08);"></div></td></tr>
 
-          <!-- Sub-section -->
+          <!-- "Was im PDF drinsteht" -->
           <tr>
             <td style="padding:24px 36px 32px;">
-              <p style="margin:0 0 8px;font-size:11px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#7a7568;">Was im PDF drinsteht</p>
+              <p style="margin:0 0 10px;font-size:11px;font-weight:800;letter-spacing:0.16em;text-transform:uppercase;color:#7a7568;">Was im PDF drinsteht</p>
               <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%">
                 <tr><td style="padding:6px 0;font-size:14px;color:#3a332e;">→ Dein Stress- &amp; Heißhunger-Profil</td></tr>
                 <tr><td style="padding:6px 0;font-size:14px;color:#3a332e;">→ Reflexions-Fragen zum Ausfüllen</td></tr>
                 <tr><td style="padding:6px 0;font-size:14px;color:#3a332e;">→ Warum dich dein aktuelles Muster ausbremst</td></tr>
                 <tr><td style="padding:6px 0;font-size:14px;color:#3a332e;">→ Die ehrliche Prognose, wenn nichts passiert</td></tr>
-                <tr><td style="padding:6px 0;font-size:14px;color:#3a332e;">→ Dein 3-Schritt-Plan + nächste Schritte</td></tr>
+                <tr><td style="padding:6px 0;font-size:14px;color:#3a332e;">→ Dein 3-Schritt-Plan + nächste Schritte (inkl. Mona-Beispiel)</td></tr>
               </table>
             </td>
           </tr>
@@ -203,7 +242,7 @@ function buildEmailHtml({ challengeUrl }) {
           <tr>
             <td style="padding:24px 36px 36px;background:#faf8f5;border-top:1px solid rgba(30,28,26,0.06);">
               <p style="margin:0 0 6px;font-size:13px;color:#5c5650;line-height:1.5;">
-                Bei Fragen einfach auf diese E-Mail antworten.
+                Wenn du Fragen hast, antworte einfach auf diese E-Mail.
               </p>
               <p style="margin:0;font-size:13px;color:#5c5650;line-height:1.5;">
                 — Elliott
