@@ -1100,7 +1100,7 @@
             requestAnimationFrame(tick);
 
             setTimeout(function() {
-                window.location.href = '/ergebnis';
+                window.location.href = '/plan-email';
             }, 5800);
         }, 350);
     }

@@ -39,6 +39,10 @@ module.exports = async function handler(req, res) {
     return res.status(400).json({ ok: false, error: 'Valid email required' });
   }
 
+  // Optional first name (from new email gate); sanitized to a sensible length.
+  let firstName = String(body.name || '').trim().replace(/\s+/g, ' ');
+  if (firstName.length > 60) firstName = firstName.slice(0, 60);
+
   const apiKey = process.env.BREVO_API_KEY;
   if (!apiKey) {
     console.error('BREVO_API_KEY environment variable is not set');
@@ -54,6 +58,7 @@ module.exports = async function handler(req, res) {
     },
     updateEnabled: true,
   };
+  if (firstName) contactPayload.attributes.FIRSTNAME = firstName;
 
   const listId = process.env.BREVO_LIST_ID;
   if (listId) {
@@ -94,9 +99,9 @@ module.exports = async function handler(req, res) {
 
   const emailPayload = {
     sender: { email: senderEmail, name: senderName },
-    to: [{ email }],
+    to: [{ email, ...(firstName ? { name: firstName } : {}) }],
     subject: 'Deine Abnehm-Analyse ist da (Stress & Heißhunger)',
-    htmlContent: buildEmailHtml({ challengeUrl, pdfUrl }),
+    htmlContent: buildEmailHtml({ challengeUrl, pdfUrl, firstName }),
     tags: ['abnehm-analyse', 'lead-magnet'],
   };
 
@@ -125,9 +130,10 @@ module.exports = async function handler(req, res) {
 };
 
 // ────────────────────── Email HTML template ──────────────────────
-function buildEmailHtml({ challengeUrl, pdfUrl }) {
+function buildEmailHtml({ challengeUrl, pdfUrl, firstName }) {
   const cta = escapeHtml(challengeUrl);
   const pdf = escapeHtml(pdfUrl);
+  const greeting = firstName ? `Hi ${escapeHtml(firstName)},` : 'Hi,';
   return `<!DOCTYPE html>
 <html lang="de">
 <head>
@@ -159,7 +165,7 @@ function buildEmailHtml({ challengeUrl, pdfUrl }) {
                 Hier ist deine Abnehm-Analyse.
               </h1>
 
-              <p style="margin:0 0 20px;font-size:16px;line-height:1.6;color:#3a332e;">Hi,</p>
+              <p style="margin:0 0 20px;font-size:16px;line-height:1.6;color:#3a332e;">${greeting}</p>
 
               <p style="margin:0 0 22px;font-size:16px;line-height:1.6;color:#3a332e;">
                 hier ist deine Abnehm-Analyse.

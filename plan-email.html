@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Deine Analyse per E-Mail · Elliott Aziz</title>
+<title>Deine Analyse ist bereit · Elliott Aziz</title>
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
 <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
 <link rel="shortcut icon" type="image/png" href="/favicon.png">
@@ -35,6 +35,7 @@ fbq('track','PageView');
 <style>
   :root {
     --bg: #f6f4f1;
+    --bg-warm: #f3ede4;
     --card: #ffffff;
     --ink: #1e1c1a;
     --ink-soft: #3a332e;
@@ -44,12 +45,14 @@ fbq('track','PageView');
 
     --green-dark: #0e2a1b;
     --green-mid: #14482c;
-    --green-accent: #c8e99d;
+    --green-soft: #c8e99d;
 
     --accent: #e8530e;
     --accent-deep: #DF031C;
 
-    --field-border: rgba(30,28,26,0.12);
+    --field-border: rgba(30,28,26,0.10);
+    --shadow-soft: 0 4px 16px rgba(30,28,26,0.06);
+    --shadow-card: 0 6px 24px rgba(30,28,26,0.07);
   }
 
   * { box-sizing: border-box; }
@@ -70,189 +73,411 @@ fbq('track','PageView');
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 32px 22px 24px;
+    justify-content: flex-start;
+    padding: 0 0 28px;
     position: relative;
   }
 
-  /* Brand top (gleiches Logo wie im Quiz) */
+  /* Brand top — identical to quiz .qz-logo */
   .brand {
     text-align: center;
-    margin-top: 4px;
-    padding: 4px 0 0;
     flex-shrink: 0;
+    padding: 18px 0 0;
+    width: 100%;
+    margin-bottom: 24px;
   }
   .brand img {
-    height: 30px;
-    width: auto;
+    height: 28px !important;
+    width: auto !important;
     mix-blend-mode: multiply;
-    object-fit: contain;
   }
 
-  /* ══════ LOADER (initial state) ══════ */
-  .loader {
-    flex: 1;
+  /* Content area — horizontal padding lives here, NOT on .page (so brand spans full width like quiz) */
+  .content {
     width: 100%;
-    max-width: 440px;
+    padding: 0 18px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    gap: 26px;
-    padding: 24px 0 40px;
-    transition: opacity .55s ease;
-  }
-  .loader-caption {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-style: italic;
-    font-size: 0.95rem;
-    color: var(--muted-2);
-    margin: 0;
-    letter-spacing: 0.02em;
-    text-align: center;
   }
 
-  .ring {
-    position: relative;
-    width: min(240px, 64vw);
-    aspect-ratio: 1;
-  }
-  .ring-svg { width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
-  .ring-track { fill: none; stroke: rgba(14,42,27,0.08); stroke-width: 6; }
-  .ring-progress {
-    fill: none;
-    stroke: url(#emailRingGradient);
-    stroke-width: 10;
-    stroke-linecap: round;
-    transition: stroke-dashoffset .35s ease-out;
-    filter: drop-shadow(0 2px 6px rgba(14,42,27,0.25));
-  }
-  .ring-dot { fill: #fff; stroke: var(--green-mid); stroke-width: 2.5; filter: drop-shadow(0 2px 8px rgba(14,42,27,0.35)); }
-  .ring-decor {
-    position: absolute;
-    inset: 12px;
-    border-radius: 50%;
-    border: 1px dashed rgba(14,42,27,0.12);
-    animation: ringRotate 24s linear infinite;
-  }
-  .ring-decor::before,
-  .ring-decor::after {
-    content: '';
-    position: absolute;
-    width: 5px; height: 5px;
-    background: var(--accent);
-    border-radius: 50%;
-    top: -2.5px; left: 50%;
-    transform: translateX(-50%);
-  }
-  .ring-decor::after { top: auto; bottom: -2.5px; background: var(--green-mid); }
-  @keyframes ringRotate { to { transform: rotate(360deg); } }
-  .ring-center {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-  }
-  .ring-percent {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: clamp(44px, 12vw, 60px);
-    line-height: 1;
-    color: var(--green-mid);
-    letter-spacing: -0.04em;
-    display: flex;
-    align-items: flex-start;
-  }
-  .ring-sign {
-    font-size: 0.42em;
-    margin-top: 0.6em;
-    margin-left: 3px;
-    color: var(--accent);
-    font-weight: 700;
-  }
-  .ring-label {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.62rem;
-    font-weight: 800;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-    color: var(--muted-2);
-    margin-top: 4px;
-  }
-  .loader-phase {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: clamp(1.2rem, 4vw, 1.4rem);
-    color: var(--ink);
-    letter-spacing: -0.015em;
-    line-height: 1.2;
-    text-align: center;
-    max-width: 380px;
-    margin: 0;
-    transition: opacity .4s ease, transform .4s ease;
-  }
-  .loader-phase.swap { opacity: 0; transform: translateY(6px); }
-
-  .loader.hidden { opacity: 0; pointer-events: none; position: absolute; }
-
-  /* ══════ FORM (after loader) ══════ */
+  /* ══════ FORM WRAP ══════ */
   .form-wrap {
-    flex: 1;
     width: 100%;
     max-width: 440px;
-    display: none;
+    display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 24px 0 40px;
+    align-items: stretch;
     opacity: 0;
     transform: translateY(8px);
-    transition: opacity .6s ease, transform .6s ease;
+    animation: fadeUp .55s ease-out .08s forwards;
   }
-  .form-wrap.visible {
-    display: flex;
-    opacity: 1;
-    transform: translateY(0);
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
   }
 
+  /* ══════ CURIOSITY TEASER (mini-preview of /ergebnis) ══════ */
+  /* Wrapper so the badge can float above the teaser */
+  .teaser-wrap {
+    position: relative;
+    width: 100%;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  .teaser {
+    position: relative;
+    width: 100%;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #fff;
+    box-shadow: var(--shadow-card);
+    border: 1px solid rgba(30,28,26,0.06);
+  }
+
+  /* Free-standing badge above the teaser — equal gap to logo above and to box below */
+  .teaser-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    margin: 0 auto 24px; /* 24px gap below badge → to box */
+    padding: 7px 14px 7px 12px;
+    background: linear-gradient(135deg, #14482c, #0e2a1b);
+    border-radius: 999px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #fff;
+    box-shadow:
+      0 8px 22px rgba(14,42,27,0.28),
+      0 2px 6px rgba(14,42,27,0.16);
+    white-space: nowrap;
+  }
+  .teaser-label-arrow {
+    width: 11px;
+    height: 11px;
+    stroke: var(--green-soft);
+    fill: none;
+    stroke-width: 2.6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    margin-left: 1px;
+    animation: arrowBob 1.6s ease-in-out infinite;
+  }
+  @keyframes arrowBob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(2px); }
+  }
+  .teaser-label-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--green-soft);
+    box-shadow: 0 0 0 3px rgba(200,233,157,0.30);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  /* Preview header — fully visible structure; only sensitive bits are blurred selectively */
+  .teaser-preview {
+    padding: 22px 20px 0;
+    text-align: center;
+    user-select: none;
+    pointer-events: none;
+  }
+
+  .teaser-kicker {
+    display: block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.6rem;
+    font-weight: 800;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted-2);
+    margin-bottom: 12px;
+  }
+  .teaser-kicker .diamond {
+    display: inline-block;
+    width: 4px; height: 4px;
+    background: var(--accent);
+    transform: rotate(45deg);
+    margin: 0 7px;
+    vertical-align: 2px;
+  }
+
+  .teaser-headline {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1.14;
+    letter-spacing: -0.018em;
+    color: var(--ink);
+    margin: 0 0 12px;
+  }
+  .teaser-headline em {
+    font-family: 'Sansita Swashed', cursive;
+    font-style: italic;
+    font-weight: 600;
+    color: var(--accent);
+    display: inline-block;
+    /* Selective blur — soft enough that user can almost read it */
+    filter: blur(4.5px);
+    -webkit-filter: blur(4.5px);
+    opacity: 0.9;
+  }
+
+  /* Mini gauge — same gradient as /ergebnis */
+  .teaser-gauge-card {
+    background: var(--bg);
+    border-radius: 12px;
+    padding: 11px 14px 8px;
+    border: 1px solid rgba(30,28,26,0.05);
+  }
+  .teaser-gauge-track {
+    position: relative;
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(90deg,
+      #2a7048 0%, #c8e99d 22%, #e8b83e 48%,
+      #e8a13e 68%, var(--accent) 86%, var(--accent-deep) 100%);
+    box-shadow: inset 0 1px 2px rgba(30,28,26,0.1);
+  }
+  .teaser-gauge-pointer {
+    position: absolute;
+    top: 50%;
+    left: 82%;
+    transform: translate(-50%, -50%);
+    width: 3.5px;
+    height: 24px;
+    background: var(--ink);
+    border-radius: 2px;
+    box-shadow:
+      0 0 0 3.5px #fff,
+      0 0 0 4.5px rgba(30,28,26,0.10);
+    /* Pointer position itself is hidden — track gradient stays visible */
+    filter: blur(3.5px);
+    -webkit-filter: blur(3.5px);
+    opacity: 0.75;
+  }
+  .teaser-gauge-labels {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 9px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.52rem;
+    font-weight: 800;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+    /* Labels blurred — gauge structure visible, but the verdict (active label) hidden */
+    filter: blur(2.6px);
+    -webkit-filter: blur(2.6px);
+    opacity: 0.9;
+  }
+  .teaser-gauge-labels span { color: var(--muted-3); }
+  .teaser-gauge-labels span.active { color: var(--accent); }
+
+  /* Visible "next steps" section — creates anticipation for the locked bullets below */
+  .teaser-next {
+    margin-top: 14px;
+    padding: 12px 4px 2px;
+    border-top: 1px dashed rgba(30,28,26,0.10);
+    text-align: center;
+    /* Soft blur — readable but visibly locked */
+    filter: blur(1.6px);
+    -webkit-filter: blur(1.6px);
+    opacity: 0.9;
+  }
+  .teaser-next-kicker {
+    display: block;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.86rem;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    letter-spacing: -0.005em;
+    margin-bottom: 3px;
+  }
+  .teaser-next-text {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.74rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.35;
+  }
+
+  /* Blurred bullet placeholder area */
+  .teaser-blurred {
+    position: relative;
+    padding: 14px 20px 22px;
+    filter: blur(3.5px);
+    -webkit-filter: blur(3.5px);
+    opacity: 0.55;
+    pointer-events: none;
+    user-select: none;
+  }
+  .teaser-fake-bullet {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 0 0 8px;
+  }
+  .teaser-fake-bullet:last-child { margin-bottom: 0; }
+  .teaser-fake-bullet-dot {
+    flex: 0 0 auto;
+    width: 22px; height: 22px;
+    border-radius: 50%;
+    background: var(--green-soft);
+    border: 1.5px solid rgba(20,72,44,0.22);
+  }
+  .teaser-fake-bullet-line {
+    flex: 1;
+    height: 9px;
+    background: var(--muted-3);
+    border-radius: 4px;
+    opacity: 0.55;
+  }
+  .teaser-fake-bullet-line.short { max-width: 62%; }
+
+  /* Glass overlay at bottom — only over the bullet area */
+  .teaser-lock {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 11px 16px 12px;
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    background: rgba(14,42,27,0.88);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    color: #fff;
+    text-align: left;
+  }
+  .teaser-lock-icon {
+    flex: 0 0 auto;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.13);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .teaser-lock-icon svg {
+    width: 14px; height: 14px;
+    stroke: var(--green-soft);
+    fill: none;
+    stroke-width: 2.2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+  .teaser-lock-text {
+    margin: 0;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 12.5px;
+    line-height: 1.4;
+    color: #fff;
+    letter-spacing: 0.005em;
+  }
+  .teaser-lock-text strong {
+    color: var(--green-soft);
+    font-weight: 700;
+  }
+
+  /* ══════ HEADLINE + SUBLINE ══════ */
   h1 {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 700;
-    font-size: clamp(1.7rem, 6vw, 2rem);
+    font-size: clamp(1.45rem, 5.4vw, 1.7rem);
     line-height: 1.18;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.018em;
     text-align: center;
-    margin: 0 0 14px;
+    margin: 0 0 12px;
     color: var(--ink);
+    padding: 0 4px;
   }
 
   .subhead {
     text-align: center;
     color: var(--muted);
     font-family: 'Instrument Sans', sans-serif;
-    font-size: 0.95rem;
+    font-size: 0.92rem;
     line-height: 1.55;
-    margin: 0 0 28px;
+    margin: 0 0 22px;
     font-weight: 400;
+    padding: 0 6px;
+  }
+
+  /* ══════ FORM CARD — same dark green treatment as the lock overlay above */
+  .form-card {
+    background: #2b4436;
+    border-radius: 18px;
+    padding: 26px 20px 22px;
+    box-shadow:
+      0 1px 3px rgba(14,42,27,0.10),
+      0 14px 40px rgba(14,42,27,0.22),
+      inset 0 1px 0 rgba(200,233,157,0.10);
+    border: 1px solid rgba(200,233,157,0.14);
+    text-align: center;
+    position: relative;
   }
 
   .form {
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    text-align: center;
   }
 
-  .input-wrap { position: relative; }
+  .field {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+  }
+  .field + .field {
+    margin-top: 14px;
+  }
+
+  .field-label {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 10px;
+    letter-spacing: -0.012em;
+    line-height: 1.3;
+    text-align: center;
+  }
+  .field-sub {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.82rem;
+    color: rgba(255,255,255,0.78);
+    margin: -4px 0 14px;
+    text-align: center;
+    line-height: 1.45;
+  }
+  .field-sub strong {
+    color: #c8e99d;
+    font-weight: 700;
+  }
+
+  .input-wrap {
+    position: relative;
+  }
   .input-icon {
     position: absolute;
-    left: 18px;
+    left: 14px;
     top: 50%;
     transform: translateY(-50%);
     width: 16px; height: 16px;
-    color: var(--muted-3);
+    color: var(--muted-2);
     pointer-events: none;
-    transition: color .2s ease;
+    transition: color .18s ease;
+    z-index: 2;
   }
   .input-icon svg {
     width: 100%; height: 100%;
@@ -262,74 +487,235 @@ fbq('track','PageView');
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-  .email-input {
+  .field input {
     width: 100%;
-    background: var(--card);
-    border: 1px solid var(--field-border);
+    background: #fff;
+    border: 1.5px solid rgba(255,255,255,0.18);
     border-radius: 12px;
-    padding: 16px 18px 16px 44px;
+    padding: 14px 14px 14px 40px;
     font-family: 'Instrument Sans', sans-serif;
-    font-size: 1rem;
+    font-size: 0.97rem;
     color: var(--ink);
     outline: none;
-    transition: border-color .2s ease, box-shadow .2s ease;
-    box-shadow: 0 1px 2px rgba(30,28,26,0.03);
+    transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
   }
-  .email-input::placeholder { color: var(--muted-3); }
-  .email-input:focus {
-    border-color: var(--accent);
-    box-shadow: 0 0 0 3px rgba(232,83,14,0.14);
+  .field input::placeholder { color: var(--muted-3); }
+  .field input:focus {
+    border-color: #c8e99d;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(200,233,157,0.30);
   }
-  .input-wrap:focus-within .input-icon { color: var(--accent); }
+  .input-wrap:focus-within .input-icon { color: var(--green-mid); }
 
+  /* Error state for invalid input */
+  .field input.error,
+  .field input.error:focus {
+    border-color: #ff8c4a;
+    box-shadow: 0 0 0 3px rgba(255,140,74,0.22);
+  }
+  .input-wrap.error .input-icon { color: #ff8c4a; }
+
+  /* Error message below input */
+  .field-error {
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: #ff8c4a;
+    text-align: center;
+    line-height: 1.4;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    margin: 0;
+    transition:
+      max-height .25s ease,
+      opacity .2s ease,
+      margin-top .25s ease;
+  }
+  .field-error.show {
+    max-height: 40px;
+    opacity: 1;
+    margin-top: 8px;
+  }
+
+  /* Email field reveal animation */
+  .field-email {
+    overflow: hidden;
+    max-height: 0;
+    opacity: 0;
+    margin-top: 0 !important;
+    transform: translateY(-4px);
+    transition:
+      max-height .35s cubic-bezier(0.4, 0, 0.2, 1),
+      opacity .25s ease .08s,
+      transform .3s ease,
+      margin-top .35s ease;
+  }
+  .field-email.visible {
+    max-height: 180px;
+    opacity: 1;
+    transform: translateY(0);
+    margin-top: 18px !important;
+  }
+
+  /* Name-confirm button — vivid orange→red, never desaturates */
+  .name-next {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 16px;
+    background: linear-gradient(135deg, #f06a3a 0%, #e8530e 50%, #DF031C 100%);
+    color: #fff;
+    border: none;
+    padding: 15px 22px;
+    border-radius: 14px;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 800;
+    letter-spacing: 0.025em;
+    cursor: pointer;
+    position: relative;
+    box-shadow:
+      0 8px 24px rgba(232,83,14,0.30),
+      0 2px 6px rgba(223,3,28,0.18),
+      inset 0 1px 0 rgba(255,255,255,0.20);
+    overflow: hidden;
+  }
+  .name-next:hover {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+  }
+  .name-next:active { transform: translateY(0) scale(0.99); }
+  .name-next:not(:disabled):active { transform: translateY(0) scale(0.99); }
+  .name-next.hidden {
+    margin-top: 0;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    padding-top: 0;
+    padding-bottom: 0;
+    overflow: hidden;
+  }
+  .name-next-arrow {
+    width: 16px; height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  /* Submit button — same hero CTA treatment */
   .cta {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, var(--accent), var(--accent-deep));
+    gap: 8px;
+    background: linear-gradient(160deg, #ec6020 0%, var(--accent) 30%, var(--accent-deep) 100%);
     color: #fff;
     border: none;
-    padding: 16px 24px;
-    border-radius: 12px;
+    padding: 15px 22px;
+    border-radius: 14px;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.95rem;
+    font-size: 0.98rem;
     font-weight: 800;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.025em;
     cursor: pointer;
-    box-shadow:
-      0 8px 24px rgba(223,3,28,0.26),
-      0 2px 6px rgba(232,83,14,0.18),
-      inset 0 1px 0 rgba(255,255,255,0.2);
-    transition: transform .15s ease, box-shadow .15s ease, filter .15s ease;
+    transition:
+      transform .15s ease,
+      opacity .22s ease,
+      filter .15s ease,
+      max-height .35s cubic-bezier(0.4, 0, 0.2, 1),
+      margin-top .35s ease;
+    margin-top: 0;
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+    overflow: hidden;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .cta.visible {
+    margin-top: 16px;
+    max-height: 64px;
+    opacity: 1;
+    pointer-events: auto;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    animation: heroGlow 3.2s ease-in-out infinite;
   }
   .cta:hover {
     transform: translateY(-1px);
-    box-shadow:
-      0 10px 28px rgba(223,3,28,0.32),
-      0 3px 8px rgba(232,83,14,0.22),
-      inset 0 1px 0 rgba(255,255,255,0.25);
-    filter: brightness(1.04);
+    filter: brightness(1.06);
   }
   .cta:active { transform: translateY(0) scale(0.99); }
+  .cta-arrow {
+    width: 16px; height: 16px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
 
   .privacy {
     text-align: center;
     font-family: 'Instrument Sans', sans-serif;
-    font-size: 0.76rem;
+    font-size: 0.74rem;
     color: var(--muted-3);
-    letter-spacing: 0.02em;
-    margin: 14px 0 0;
-    padding-top: 12px;
+    line-height: 1.5;
+    margin: 14px 6px 0;
+    letter-spacing: 0.01em;
   }
 
-  @media (max-width: 480px) {
-    .page { padding: 24px 18px 20px; }
-    .brand img { height: 27px; }
-    h1 { font-size: 1.5rem; }
-    .subhead { font-size: 0.92rem; }
-    .email-input { padding: 15px 16px 15px 42px; font-size: 0.95rem; }
-    .cta { padding: 15px 22px; font-size: 0.9rem; }
+  /* ══════ Submit-state mini-loader (after form submit) ══════ */
+  .submit-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(246,244,241,0.92);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 16px;
+    z-index: 100;
+    opacity: 0;
+    transition: opacity .25s ease;
+  }
+  .submit-overlay.show {
+    display: flex;
+    opacity: 1;
+  }
+  .submit-spinner {
+    width: 38px; height: 38px;
+    border: 3px solid rgba(14,42,27,0.10);
+    border-top-color: var(--green-mid);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .submit-text {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+  }
+
+  /* ══════ Responsive ══════ */
+  @media (max-width: 380px) {
+    .page { padding: 20px 14px 22px; }
+    .brand img { height: 26px; }
+    .teaser-headline { font-size: 1.18rem; }
+    .field-label { font-size: 1.08rem; }
+    .field-sub { font-size: 0.78rem; }
+    .field input { padding: 12px 14px 12px 38px; font-size: 0.94rem; }
+    .name-next { padding: 13px 20px; font-size: 0.9rem; }
+    .cta.visible { padding: 13px 20px; font-size: 0.92rem; }
   }
 </style>
 </head>
@@ -339,146 +725,261 @@ fbq('track','PageView');
 
     <div class="brand"><img src="elliott-aziz-logo.png" alt="Elliott Aziz"></div>
 
-    <!-- LOADER -->
-    <div class="loader" id="loader">
-      <p class="loader-caption">Wir bereiten deine vollständige Auswertung vor</p>
+    <div class="content">
+    <div class="form-wrap" id="formWrap">
 
-      <div class="ring">
-        <svg class="ring-svg" viewBox="0 0 200 200" aria-hidden="true">
-          <defs>
-            <linearGradient id="emailRingGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#1f5d3a"/>
-              <stop offset="55%" stop-color="#14482c"/>
-              <stop offset="100%" stop-color="#e8530e"/>
-            </linearGradient>
-          </defs>
-          <circle class="ring-track" cx="100" cy="100" r="86"/>
-          <circle class="ring-progress" cx="100" cy="100" r="86" id="ringProgress"/>
-          <circle class="ring-dot" cx="100" cy="14" r="6" id="ringDot"/>
-        </svg>
-        <div class="ring-decor" aria-hidden="true"></div>
-        <div class="ring-center">
-          <div class="ring-percent"><span id="ringPercent">0</span><span class="ring-sign">%</span></div>
-          <div class="ring-label">Wird vorbereitet</div>
+      <!-- Curiosity Teaser: blurred preview of /ergebnis with locked detail area -->
+      <div class="teaser-wrap">
+        <span class="teaser-label" aria-hidden="true">
+          <span class="teaser-label-dot"></span>
+          Deine Analyse ist erstellt
+          <svg class="teaser-label-arrow" viewBox="0 0 24 24">
+            <polyline points="6 9 12 15 18 9"/>
+          </svg>
+        </span>
+        <div class="teaser" aria-hidden="true">
+
+        <!-- Preview header (lightly blurred — recognizable but not readable) -->
+        <div class="teaser-preview">
+          <span class="teaser-kicker">
+            Dein persönliches Ergebnis
+            <span class="diamond"></span>
+            ist da
+          </span>
+          <p class="teaser-headline">Dein Abnehm-Profil:<br><em>Stress &amp; Heißhunger</em></p>
+          <div class="teaser-gauge-card">
+            <div class="teaser-gauge-track">
+              <div class="teaser-gauge-pointer"></div>
+            </div>
+            <div class="teaser-gauge-labels">
+              <span>Ausgeglichen</span>
+              <span>Angespannt</span>
+              <span class="active">Häufig angespannt</span>
+            </div>
+          </div>
+
+          <div class="teaser-next">
+            <span class="teaser-next-kicker">Deine konkreten nächsten Schritte</span>
+            <p class="teaser-next-text">Was du jetzt tun solltest, um auszubrechen.</p>
+          </div>
+        </div>
+
+        <!-- Blurred bullets (faux content for visual depth) -->
+        <div class="teaser-blurred">
+          <div class="teaser-fake-bullet">
+            <div class="teaser-fake-bullet-dot"></div>
+            <div class="teaser-fake-bullet-line"></div>
+          </div>
+          <div class="teaser-fake-bullet">
+            <div class="teaser-fake-bullet-dot"></div>
+            <div class="teaser-fake-bullet-line"></div>
+          </div>
+          <div class="teaser-fake-bullet">
+            <div class="teaser-fake-bullet-dot"></div>
+            <div class="teaser-fake-bullet-line short"></div>
+          </div>
+        </div>
+
+        <!-- Glass overlay only over the bullet area, not the header -->
+        <div class="teaser-lock">
+          <div class="teaser-lock-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="4" y="11" width="16" height="9" rx="2"/>
+              <path d="M8 11V7a4 4 0 0 1 8 0v4"/>
+            </svg>
+          </div>
+          <p class="teaser-lock-text">
+            Deine persönliche Auswertung steht bereit, <strong>sag uns noch kurz, wie wir dich nennen dürfen,</strong> um sie freizuschalten.
+          </p>
+        </div>
         </div>
       </div>
 
-      <p class="loader-phase" id="loaderPhase">Deine Antworten werden gebündelt …</p>
-    </div>
+      <div class="form-card">
+        <form class="form" id="emailForm" onsubmit="return false;" novalidate>
 
-    <!-- FORM (hidden until loader done) -->
-    <div class="form-wrap" id="formWrap">
-      <h1>Wohin sollen wir dir deine Analyse schicken?</h1>
+          <div class="field">
+            <label class="field-label" for="nameInput">Wie dürfen wir dich nennen?</label>
+            <p class="field-sub">Damit wir dich persönlich ansprechen können.</p>
+            <div class="input-wrap">
+              <span class="input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <circle cx="12" cy="8" r="4"/>
+                  <path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>
+                </svg>
+              </span>
+              <input type="text" id="nameInput" placeholder="Dein Vorname" autocomplete="given-name" required>
+            </div>
+          </div>
 
-      <p class="subhead">Wir senden dir deine vollständige Abnehm-Analyse &amp; Empfehlung per E-Mail – inkl. Stress- &amp; Heißhunger-Profil und den nächsten Schritten.</p>
-
-      <form class="form" id="emailForm" onsubmit="return false;">
-        <div class="input-wrap">
-          <span class="input-icon" aria-hidden="true">
-            <svg viewBox="0 0 24 24">
-              <rect x="3" y="5" width="18" height="14" rx="2"/>
-              <path d="M3 7l9 6 9-6"/>
+          <button type="button" class="name-next" id="nameNextBtn">
+            <span>Weiter</span>
+            <svg class="name-next-arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="13 6 19 12 13 18"/>
             </svg>
-          </span>
-          <input type="email" class="email-input" id="emailInput" placeholder="Deine E-Mail-Adresse" required autocomplete="email">
-        </div>
+          </button>
 
-        <button type="submit" class="cta">Analyse per E-Mail erhalten</button>
-      </form>
+          <div class="field field-email" id="fieldEmail">
+            <label class="field-label" for="emailInput">Wie lautet deine E-Mail?</label>
+            <p class="field-sub">Wir schicken dir deine Analyse im Nachgang auch per E‑Mail, damit du sie jederzeit wiederfindest – kein Spam, kein Abo.</p>
+            <div class="input-wrap" id="emailWrap">
+              <span class="input-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <rect x="3" y="5" width="18" height="14" rx="2"/>
+                  <path d="M3 7l9 6 9-6"/>
+                </svg>
+              </span>
+              <input type="email" id="emailInput" placeholder="z. B. maria@mail.de" autocomplete="email" required>
+            </div>
+            <p class="field-error" id="emailError">Bitte gib eine gültige E-Mail-Adresse ein.</p>
+          </div>
 
-      <p class="privacy">Sofort per E-Mail · Kein Spam · Deine Daten sind sicher</p>
+          <button type="submit" class="cta" id="submitBtn">
+            <span>Analyse anzeigen</span>
+            <svg class="cta-arrow" viewBox="0 0 24 24" aria-hidden="true">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="13 6 19 12 13 18"/>
+            </svg>
+          </button>
+        </form>
+      </div>
+
+      <p class="privacy">Du siehst deine Analyse sofort hier auf der Seite und erhältst sie zusätzlich per E-Mail als PDF. Kein Spam.</p>
+
+    </div>
     </div>
 
   </div>
 
+  <!-- Submit loader overlay -->
+  <div class="submit-overlay" id="submitOverlay" aria-hidden="true">
+    <div class="submit-spinner" aria-hidden="true"></div>
+    <p class="submit-text">Deine Analyse wird geladen …</p>
+  </div>
+
 <script>
-  // ══════ Loader animation ══════
-  const R = 86;
-  const CIRC = 2 * Math.PI * R;
-  const ring = document.getElementById('ringProgress');
-  const dot = document.getElementById('ringDot');
-  const pctEl = document.getElementById('ringPercent');
-  const phaseEl = document.getElementById('loaderPhase');
-  const loader = document.getElementById('loader');
-  const formWrap = document.getElementById('formWrap');
-  const emailForm = document.getElementById('emailForm');
-  const emailInput = document.getElementById('emailInput');
+  const nameInput   = document.getElementById('nameInput');
+  const emailInput  = document.getElementById('emailInput');
+  const emailWrap   = document.getElementById('emailWrap');
+  const emailError  = document.getElementById('emailError');
+  const fieldEmail  = document.getElementById('fieldEmail');
+  const submitBtn   = document.getElementById('submitBtn');
+  const nameNextBtn = document.getElementById('nameNextBtn');
+  const emailForm   = document.getElementById('emailForm');
+  const submitOverlay = document.getElementById('submitOverlay');
 
-  ring.setAttribute('stroke-dasharray', CIRC.toFixed(2));
-  ring.setAttribute('stroke-dashoffset', CIRC.toFixed(2));
+  const EMAIL_RX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-  const phases = [
-    { until: 30, text: 'Deine Antworten werden gebündelt …' },
-    { until: 65, text: 'Dein Profil wird abgeglichen …' },
-    { until: 92, text: 'Deine Empfehlungen werden erstellt …' },
-    { until: 100, text: 'Fertig – wohin schicken wir sie?' },
-  ];
-  let currentPhase = -1;
-
-  function setRing(p) {
-    p = Math.max(0, Math.min(100, p));
-    ring.setAttribute('stroke-dashoffset', (CIRC * (1 - p/100)).toFixed(2));
-    const a = (p/100) * 2 * Math.PI - Math.PI/2;
-    dot.setAttribute('cx', (100 + R*Math.cos(a)).toFixed(2));
-    dot.setAttribute('cy', (100 + R*Math.sin(a)).toFixed(2));
-    pctEl.textContent = Math.round(p);
-  }
-  function setPhase(p) {
-    let idx = phases.findIndex(ph => p <= ph.until);
-    if (idx === -1) idx = phases.length - 1;
-    if (idx === currentPhase) return;
-    currentPhase = idx;
-    phaseEl.classList.add('swap');
-    setTimeout(() => {
-      phaseEl.textContent = phases[idx].text;
-      phaseEl.classList.remove('swap');
-    }, 240);
+  function isValidEmail(s) {
+    return EMAIL_RX.test(s);
   }
 
-  const DURATION = 3600;
-  const start = performance.now();
-  function tick(now) {
-    const t = Math.min(1, (now - start) / DURATION);
-    const eased = 1 - Math.pow(1 - t, 2.2);
-    const p = eased * 100;
-    setRing(p);
-    setPhase(p);
-    if (t < 1) requestAnimationFrame(tick);
-    else {
-      setRing(100);
-      setTimeout(() => {
-        loader.classList.add('hidden');
-        formWrap.classList.add('visible');
-        setTimeout(() => { try { emailInput.focus({ preventScroll: true }); } catch(_) {} }, 300);
-      }, 400);
-    }
+  function nameOk() {
+    return nameInput.value.trim().length >= 2;
   }
-  requestAnimationFrame(tick);
 
-  // ══════ Form submit ══════
-  emailForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const email = (emailInput.value || '').trim();
-    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      emailInput.focus();
+  function emailOk() {
+    return isValidEmail(emailInput.value.trim());
+  }
+
+  let emailRevealed = false;
+  function revealEmail() {
+    if (emailRevealed) return;
+    if (!nameOk()) {
+      // gentle nudge — focus the name input if user clicks Weiter too early
+      try { nameInput.focus({ preventScroll: true }); } catch(_) {}
       return;
     }
+    emailRevealed = true;
+    nameNextBtn.classList.add('hidden');
+    fieldEmail.classList.add('visible');
+    submitBtn.classList.add('visible');
+    setTimeout(() => { try { emailInput.focus({ preventScroll: true }); } catch(_) {} }, 260);
+  }
+
+  // Enter on name = same as clicking Weiter
+  nameInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      if (!emailRevealed) revealEmail();
+    }
+  });
+
+  // Confirm name → reveal email (validation happens inside revealEmail)
+  nameNextBtn.addEventListener('click', revealEmail);
+
+  // Email error feedback
+  function showEmailError() {
+    emailError.classList.add('show');
+    emailInput.classList.add('error');
+    emailWrap.classList.add('error');
+  }
+  function clearEmailError() {
+    emailError.classList.remove('show');
+    emailInput.classList.remove('error');
+    emailWrap.classList.remove('error');
+  }
+  emailInput.addEventListener('input', () => {
+    if (emailOk()) clearEmailError();
+  });
+  emailInput.addEventListener('blur', () => {
+    if (emailInput.value.trim() && !emailOk()) showEmailError();
+  });
+
+  // Auto-focus name on mobile-friendly trigger
+  setTimeout(() => {
+    try { nameInput.focus({ preventScroll: true }); } catch(_) {}
+  }, 380);
+
+  emailForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (!nameOk()) {
+      try { nameInput.focus({ preventScroll: true }); } catch(_) {}
+      return;
+    }
+    if (!emailOk()) {
+      showEmailError();
+      try { emailInput.focus({ preventScroll: true }); } catch(_) {}
+      return;
+    }
+    clearEmailError();
+
+    const name  = nameInput.value.trim();
+    const email = emailInput.value.trim().toLowerCase();
+
+    // Persist locally for downstream pages
     try { sessionStorage.setItem('userEmail', email); } catch(_) {}
     try { localStorage.setItem('userEmail', email); } catch(_) {}
+    try { sessionStorage.setItem('userName', name); } catch(_) {}
+    try { localStorage.setItem('userName', name); } catch(_) {}
 
+    // Send to backend
     try {
       fetch('/api/subscribe', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email: email }),
+        body: JSON.stringify({ email: email, name: name }),
         keepalive: true,
       }).catch(() => {});
     } catch(_) {}
 
-    if (typeof window.track === 'function') window.track('email_submit', { email: email });
-    document.body.style.transition = 'opacity .45s ease';
-    document.body.style.opacity = '0';
-    setTimeout(() => { window.location.href = '/challenge'; }, 450);
+    // GA4 (custom) + Meta (Lead standard)
+    if (typeof window.track === 'function') {
+      window.track('email_submit', { email: email, name: name });
+    }
+    if (typeof fbq === 'function') {
+      try { fbq('track', 'Lead', { content_name: 'Abnehm-Analyse' }); } catch(_) {}
+    }
+
+    // Show loader, redirect to /ergebnis
+    submitOverlay.classList.add('show');
+    submitOverlay.setAttribute('aria-hidden', 'false');
+    submitBtn.disabled = true;
+
+    setTimeout(() => {
+      window.location.href = '/ergebnis';
+    }, 450);
   });
 </script>
 
