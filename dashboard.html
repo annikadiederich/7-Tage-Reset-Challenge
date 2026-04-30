@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Funnel Analytics</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0a0a0f;
+    --surface: #111118;
+    --surface2: #1a1a24;
+    --border: #ffffff0f;
+    --accent: #c8ff00;
+    --accent2: #ff6b35;
+    --accent3: #7c3aff;
+    --text: #e8e8f0;
+    --muted: #6b6b80;
+    --green: #22c55e;
+    --red: #ef4444;
+    --mono: 'DM Mono', monospace;
+    --sans: 'Syne', sans-serif;
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Login Screen */
+  #login-screen {
+    position: fixed; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    background: var(--bg);
+    z-index: 100;
+  }
+  .login-box {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 48px;
+    width: 360px;
+    text-align: center;
+  }
+  .login-box h1 { font-size: 1.5rem; font-weight: 800; margin-bottom: 8px; }
+  .login-box p { color: var(--muted); font-size: 0.85rem; margin-bottom: 32px; font-family: var(--mono); }
+  .login-box input {
+    width: 100%; padding: 14px 16px;
+    background: var(--surface2); border: 1px solid var(--border);
+    border-radius: 8px; color: var(--text); font-family: var(--mono);
+    font-size: 1rem; margin-bottom: 12px; outline: none;
+    transition: border-color 0.2s;
+  }
+  .login-box input:focus { border-color: var(--accent); }
+  .login-box button {
+    width: 100%; padding: 14px;
+    background: var(--accent); color: #000;
+    border: none; border-radius: 8px;
+    font-family: var(--sans); font-weight: 700; font-size: 1rem;
+    cursor: pointer; transition: opacity 0.2s;
+  }
+  .login-box button:hover { opacity: 0.85; }
+
+  /* Header */
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 24px 40px;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; background: var(--bg);
+    z-index: 10; backdrop-filter: blur(10px);
+  }
+  .logo { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.5px; }
+  .logo span { color: var(--accent); }
+  .header-right { display: flex; align-items: center; gap: 16px; }
+  .last-updated { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); }
+  .refresh-btn {
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--text); padding: 8px 16px; border-radius: 8px;
+    font-family: var(--mono); font-size: 0.8rem; cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .refresh-btn:hover { border-color: var(--accent); }
+
+  /* Main Layout */
+  main { padding: 40px; max-width: 1400px; margin: 0 auto; }
+
+  /* KPI Row */
+  .kpi-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 16px; margin-bottom: 40px;
+  }
+  .kpi-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 12px; padding: 24px;
+    position: relative; overflow: hidden;
+  }
+  .kpi-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+    background: var(--accent);
+  }
+  .kpi-card.red::before { background: var(--red); }
+  .kpi-card.purple::before { background: var(--accent3); }
+  .kpi-card.orange::before { background: var(--accent2); }
+  .kpi-label { font-family: var(--mono); font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+  .kpi-value { font-size: 2.5rem; font-weight: 800; line-height: 1; }
+  .kpi-sub { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); margin-top: 8px; }
+
+  /* Section Headers */
+  .section-header {
+    display: flex; align-items: center; gap: 12px;
+    margin-bottom: 20px;
+  }
+  .section-title { font-size: 1rem; font-weight: 700; }
+  .section-badge {
+    background: var(--surface2); border: 1px solid var(--border);
+    padding: 2px 10px; border-radius: 100px;
+    font-family: var(--mono); font-size: 0.7rem; color: var(--muted);
+  }
+
+  /* Funnel */
+  .funnel-section { margin-bottom: 40px; }
+  .funnel-list { display: flex; flex-direction: column; gap: 8px; }
+  .funnel-step {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 16px 20px;
+    display: grid; grid-template-columns: 200px 1fr 80px 80px 100px;
+    align-items: center; gap: 16px;
+    transition: border-color 0.2s;
+  }
+  .funnel-step:hover { border-color: var(--accent)33; }
+  .step-name { font-size: 0.85rem; font-weight: 600; }
+  .step-bar-wrap { height: 8px; background: var(--surface2); border-radius: 4px; overflow: hidden; }
+  .step-bar { height: 100%; background: var(--accent); border-radius: 4px; transition: width 0.6s ease; }
+  .step-views { font-family: var(--mono); font-size: 0.85rem; text-align: right; }
+  .step-exits { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); text-align: right; }
+  .step-dropoff {
+    font-family: var(--mono); font-size: 0.8rem; font-weight: 500;
+    text-align: right; padding: 4px 10px; border-radius: 6px;
+  }
+  .dropoff-low { color: var(--green); background: #22c55e15; }
+  .dropoff-mid { color: var(--accent2); background: #ff6b3515; }
+  .dropoff-high { color: var(--red); background: #ef444415; }
+
+  /* Two column layout */
+  .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 40px; }
+
+  /* Quiz section */
+  .quiz-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .quiz-question { margin-bottom: 24px; padding-bottom: 24px; border-bottom: 1px solid var(--border); }
+  .quiz-question:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+  .quiz-q-label { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); margin-bottom: 4px; }
+  .quiz-q-text { font-size: 0.9rem; font-weight: 600; margin-bottom: 12px; }
+  .quiz-answers { display: flex; flex-direction: column; gap: 6px; }
+  .quiz-answer { display: flex; align-items: center; gap: 10px; }
+  .answer-bar-wrap { flex: 1; height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
+  .answer-bar { height: 100%; background: var(--accent3); border-radius: 3px; transition: width 0.5s ease; }
+  .answer-label { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); min-width: 100px; }
+  .answer-count { font-family: var(--mono); font-size: 0.75rem; min-width: 40px; text-align: right; }
+
+  /* Recent Events */
+  .events-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+  .event-list { display: flex; flex-direction: column; gap: 8px; }
+  .event-item {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; background: var(--surface2); border-radius: 8px;
+    font-family: var(--mono); font-size: 0.75rem;
+  }
+  .event-type {
+    padding: 2px 8px; border-radius: 4px; font-size: 0.65rem; font-weight: 500; min-width: 90px; text-align: center;
+  }
+  .et-page_view { background: #7c3aff22; color: var(--accent3); }
+  .et-quiz_answer { background: #c8ff0022; color: var(--accent); }
+  .et-exit { background: #ef444422; color: var(--red); }
+  .et-conversion { background: #22c55e22; color: var(--green); }
+  .et-scroll { background: #ff6b3522; color: var(--accent2); }
+  .event-page { color: var(--text); }
+  .event-detail { color: var(--muted); flex: 1; }
+  .event-time { color: var(--muted); margin-left: auto; }
+
+  /* Daily chart */
+  .chart-section { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 40px; }
+  .chart-bars { display: flex; align-items: flex-end; gap: 8px; height: 120px; margin-top: 16px; }
+  .chart-bar-wrap { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; height: 100%; }
+  .chart-bar-inner { width: 100%; background: var(--surface2); border-radius: 4px 4px 0 0; position: relative; display: flex; flex-direction: column; justify-content: flex-end; height: 100%; }
+  .chart-bar-fill { width: 100%; background: var(--accent)66; border-radius: 4px 4px 0 0; transition: height 0.6s ease; min-height: 2px; }
+  .chart-bar-fill:hover { background: var(--accent); }
+  .chart-date { font-family: var(--mono); font-size: 0.65rem; color: var(--muted); }
+  .chart-val { font-family: var(--mono); font-size: 0.7rem; color: var(--accent); }
+
+  /* Error / Loading */
+  .state-msg {
+    text-align: center; padding: 60px; color: var(--muted);
+    font-family: var(--mono); font-size: 0.9rem;
+  }
+
+  @media (max-width: 900px) {
+    main { padding: 20px; }
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .two-col { grid-template-columns: 1fr; }
+    .funnel-step { grid-template-columns: 1fr 1fr; }
+    header { padding: 16px 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Login -->
+<div id="login-screen">
+  <div class="login-box">
+    <h1>Funnel<span>Analytics</span></h1>
+    <p>Passwort eingeben um fortzufahren</p>
+    <input type="password" id="token-input" placeholder="Analytics Token" autofocus>
+    <button onclick="doLogin()">Einloggen →</button>
+  </div>
+</div>
+
+<!-- Header -->
+<header>
+  <div class="logo">Funnel<span>Analytics</span></div>
+  <div class="header-right">
+    <span class="last-updated" id="last-updated">—</span>
+    <button class="refresh-btn" onclick="loadData()">↻ Aktualisieren</button>
+  </div>
+</header>
+
+<main id="main-content" style="display:none">
+  <!-- KPIs -->
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Besucher gesamt</div>
+      <div class="kpi-value" id="kpi-visitors">—</div>
+      <div class="kpi-sub">Landing Page Views</div>
+    </div>
+    <div class="kpi-card orange">
+      <div class="kpi-label">Offer Page</div>
+      <div class="kpi-value" id="kpi-offer">—</div>
+      <div class="kpi-sub">Erreichen das Angebot</div>
+    </div>
+    <div class="kpi-card purple">
+      <div class="kpi-label">Conversions</div>
+      <div class="kpi-value" id="kpi-conversions">—</div>
+      <div class="kpi-sub">Käufer</div>
+    </div>
+    <div class="kpi-card red">
+      <div class="kpi-label">Conv. Rate</div>
+      <div class="kpi-value" id="kpi-rate">—</div>
+      <div class="kpi-sub">Besucher → Käufer</div>
+    </div>
+  </div>
+
+  <!-- Tages-Chart -->
+  <div class="chart-section">
+    <div class="section-header">
+      <span class="section-title">Tägliche Besucher</span>
+      <span class="section-badge">7 Tage</span>
+    </div>
+    <div class="chart-bars" id="chart-bars">
+      <div class="state-msg">Lade Chart…</div>
+    </div>
+  </div>
+
+  <!-- Funnel -->
+  <div class="funnel-section">
+    <div class="section-header">
+      <span class="section-title">Funnel Analyse</span>
+      <span class="section-badge">Alle Schritte</span>
+    </div>
+    <div class="funnel-list" id="funnel-list">
+      <div class="state-msg">Lade Funnel…</div>
+    </div>
+  </div>
+
+  <!-- Quiz + Events -->
+  <div class="two-col">
+    <div>
+      <div class="section-header">
+        <span class="section-title">Quiz Antworten</span>
+        <span class="section-badge">pro Frage</span>
+      </div>
+      <div class="quiz-section" id="quiz-section">
+        <div class="state-msg">Lade Quiz-Daten…</div>
+      </div>
+    </div>
+    <div>
+      <div class="section-header">
+        <span class="section-title">Live Events</span>
+        <span class="section-badge">letzte 20</span>
+      </div>
+      <div class="events-section" id="events-section">
+        <div class="state-msg">Lade Events…</div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script>
+  let authToken = '';
+
+  function doLogin() {
+    const val = document.getElementById('token-input').value.trim();
+    if (!val) return;
+    authToken = val;
+    document.getElementById('login-screen').style.display = 'none';
+    document.getElementById('main-content').style.display = 'block';
+    loadData();
+    // Auto-refresh alle 60 Sekunden
+    setInterval(loadData, 60000);
+  }
+
+  document.getElementById('token-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') doLogin();
+  });
+
+  async function loadData() {
+    try {
+      const res = await fetch(`/api/analytics?token=${encodeURIComponent(authToken)}`);
+      if (res.status === 401) {
+        alert('Falsches Passwort!');
+        document.getElementById('login-screen').style.display = 'flex';
+        document.getElementById('main-content').style.display = 'none';
+        return;
+      }
+      const data = await res.json();
+      renderAll(data);
+      document.getElementById('last-updated').textContent =
+        'Aktualisiert: ' + new Date().toLocaleTimeString('de-DE');
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
+  function renderAll(data) {
+    renderKPIs(data);
+    renderChart(data.dailyStats || []);
+    renderFunnel(data.funnel || []);
+    renderQuiz(data.quizData || {});
+    renderEvents(data.recentEvents || []);
+  }
+
+  function renderKPIs(data) {
+    const funnel = data.funnel || [];
+    const landing = funnel.find(f => f.key === 'index');
+    const offer = funnel.find(f => f.key === 'offer');
+    const visitors = landing ? landing.views : 0;
+    const offerViews = offer ? offer.views : 0;
+    const conversions = data.conversions || 0;
+    const rate = visitors > 0 ? ((conversions / visitors) * 100).toFixed(1) : '0.0';
+
+    document.getElementById('kpi-visitors').textContent = fmt(visitors);
+    document.getElementById('kpi-offer').textContent = fmt(offerViews);
+    document.getElementById('kpi-conversions').textContent = fmt(conversions);
+    document.getElementById('kpi-rate').textContent = rate + '%';
+  }
+
+  function renderChart(days) {
+    const el = document.getElementById('chart-bars');
+    if (!days.length) { el.innerHTML = '<div class="state-msg">Keine Daten</div>'; return; }
+    const maxViews = Math.max(...days.map(d => parseInt(d.stats['page:index'] || 0) || 1), 1);
+    el.innerHTML = days.map(d => {
+      const views = parseInt(d.stats['page:index'] || 0);
+      const pct = Math.round((views / maxViews) * 100);
+      const label = d.date.slice(5); // MM-DD
+      return `
+        <div class="chart-bar-wrap">
+          <span class="chart-val">${views || ''}</span>
+          <div class="chart-bar-inner">
+            <div class="chart-bar-fill" style="height:${pct}%"></div>
+          </div>
+          <span class="chart-date">${label}</span>
+        </div>`;
+    }).join('');
+  }
+
+  function renderFunnel(funnel) {
+    const el = document.getElementById('funnel-list');
+    if (!funnel.length) { el.innerHTML = '<div class="state-msg">Keine Daten</div>'; return; }
+    const maxViews = Math.max(...funnel.map(f => f.views), 1);
+    el.innerHTML = funnel.map(step => {
+      const barPct = Math.round((step.views / maxViews) * 100);
+      const dropClass = step.dropoff < 20 ? 'dropoff-low' : step.dropoff < 50 ? 'dropoff-mid' : 'dropoff-high';
+      const dropLabel = step.dropoff > 0 ? `-${step.dropoff}%` : '—';
+      return `
+        <div class="funnel-step">
+          <span class="step-name">${step.label}</span>
+          <div class="step-bar-wrap">
+            <div class="step-bar" style="width:${barPct}%"></div>
+          </div>
+          <span class="step-views">${fmt(step.views)}</span>
+          <span class="step-exits">↑${fmt(step.exits)} Exit</span>
+          <span class="step-dropoff ${dropClass}">${dropLabel}</span>
+        </div>`;
+    }).join('');
+  }
+
+  function renderQuiz(quizData) {
+    const el = document.getElementById('quiz-section');
+    const questions = Object.values(quizData);
+    if (!questions.length) { el.innerHTML = '<div class="state-msg">Keine Quiz-Daten</div>'; return; }
+    el.innerHTML = questions.map((q, i) => {
+      const answers = q.answers || {};
+      const total = Object.values(answers).reduce((a, b) => a + b, 0);
+      const answerRows = Object.entries(answers)
+        .sort((a, b) => b[1] - a[1])
+        .map(([label, count]) => {
+          const pct = total > 0 ? Math.round((count / total) * 100) : 0;
+          return `
+            <div class="quiz-answer">
+              <span class="answer-label">${label.slice(0, 14)}</span>
+              <div class="answer-bar-wrap">
+                <div class="answer-bar" style="width:${pct}%"></div>
+              </div>
+              <span class="answer-count">${count}</span>
+            </div>`;
+        }).join('');
+      return `
+        <div class="quiz-question">
+          <div class="quiz-q-label">Frage ${i + 1}</div>
+          <div class="quiz-q-text">${q.question}</div>
+          <div class="quiz-answers">${answerRows || '<span style="color:var(--muted);font-size:0.75rem;font-family:var(--mono)">Keine Antworten</span>'}</div>
+        </div>`;
+    }).join('');
+  }
+
+  function renderEvents(events) {
+    const el = document.getElementById('events-section');
+    if (!events.length) { el.innerHTML = '<div class="state-msg">Keine Events</div>'; return; }
+    el.innerHTML = '<div class="event-list">' + events.map(e => {
+      const time = new Date(e.timestamp).toLocaleTimeString('de-DE', { hour: '2-digit', minute: '2-digit' });
+      let detail = '';
+      if (e.type === 'quiz_answer') detail = `${e.questionText || 'Q' + e.questionId}: ${e.answer}`;
+      else if (e.type === 'exit') detail = `${e.timeOnPage}s · Scroll ${e.scrollDepth}%`;
+      else if (e.type === 'scroll') detail = `${e.percent}% gescrollt`;
+      return `
+        <div class="event-item">
+          <span class="event-type et-${e.type}">${e.type}</span>
+          <span class="event-page">${e.page}</span>
+          <span class="event-detail">${detail}</span>
+          <span class="event-time">${time}</span>
+        </div>`;
+    }).join('') + '</div>';
+  }
+
+  function fmt(n) {
+    if (!n) return '0';
+    return n.toLocaleString('de-DE');
+  }
+</script>
+</body>
+</html>
