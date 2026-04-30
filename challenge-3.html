@@ -556,6 +556,14 @@ fbq('init','1796302617856127');
   }
   h2 .italic { font-family: 'Sansita Swashed', cursive; font-weight: 700; color: var(--accent); }
   h2 .italic-green { font-family: 'Sansita Swashed', cursive; font-weight: 700; color: var(--green-700); }
+
+  .hero-h2 { line-height: 1.2; }
+  .hero-h2-line1, .hero-h2-line2 { display: block; }
+  .hero-h2-line2 { margin-top: 22px; }
+  @media (max-width: 480px) {
+    .hero-h2 { line-height: 1.22; }
+    .hero-h2-line2 { margin-top: 18px; }
+  }
   .price-bubble {
     display: inline-block;
     background: linear-gradient(135deg, var(--accent-bright, #ff7a3c), var(--accent), var(--accent-deep));
@@ -2220,7 +2228,10 @@ fbq('init','1796302617856127');
       <div class="reco-banner-pill">Empfohlen auf Basis deiner Abnehm-Analyse</div>
     </div>
     <div class="section-head">
-      <h2>Dein Profil: <span class="italic">Stress &amp; Heißhunger.</span><br>Dein <span class="price-bubble">1 €</span> 7-Tage Reset-Plan.</h2>
+      <h2 class="hero-h2">
+        <span class="hero-h2-line1">Dein Profil: <span class="italic">Stress &amp; Heißhunger.</span></span>
+        <span class="hero-h2-line2">Dein <span class="price-bubble">1&nbsp;€</span> 7-Tage Reset-Plan.</span>
+      </h2>
       <p class="section-sub">Speziell für dein Profil: beruhigt dein Nervensystem, entschärft deine Ernährung – 7 Tage am Stück durchziehbar.</p>
       <div class="risk-free-pill">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
