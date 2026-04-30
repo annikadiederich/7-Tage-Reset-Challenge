@@ -722,8 +722,26 @@ fbq('init','1796302617856127');
   .stack-shot-img img { width: 100%; height: auto; display: block; }
   .stack-shot-img svg { width: 100%; height: auto; display: block; }
   .stack-shot-pricing {
-    margin: 0;
+    position: relative;
+    margin: 28px auto 0;
+    max-width: 540px;
+    padding: 32px 28px 26px;
+    background: linear-gradient(180deg, #ffffff 0%, rgba(232,83,14,0.04) 100%);
+    border: 1.5px solid rgba(232,83,14,0.20);
+    border-radius: 22px;
+    box-shadow: 0 14px 40px rgba(30,28,26,0.08), 0 3px 10px rgba(30,28,26,0.04);
     text-align: center;
+    overflow: hidden;
+  }
+  .stack-shot-pricing::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-bright, #ff7a3c), var(--accent), var(--accent-deep));
+  }
+  @media (max-width: 480px) {
+    .stack-shot-pricing { padding: 26px 20px 22px; border-radius: 18px; }
   }
   .stack-shot-line-old {
     font-family: 'Instrument Sans', sans-serif;
@@ -2366,7 +2384,7 @@ fbq('init','1796302617856127');
       </div>
       <div class="stack-shot-pricing">
         <p class="stack-shot-line-old">Einzeln gebucht zusammen: <span class="strike">414&nbsp;€</span></p>
-        <p class="stack-shot-line-now">Heute als Analyse-Teilnehmerin: <span class="price">1&nbsp;€</span></p>
+        <p class="stack-shot-line-now">Heute als Analyse-Teilnehmerin: <span class="price-bubble">1&nbsp;€</span></p>
         <p class="stack-shot-line-deal">Nach 7 Tagen automatisch <strong>28,90&nbsp;€</strong>. Insgesamt <strong>29,90&nbsp;€</strong>.</p>
         <p class="stack-shot-line-fineprint">Davor jederzeit kündbar. Kein Abo.</p>
       </div>
@@ -2771,6 +2789,29 @@ fbq('init','1796302617856127');
     </div>
 
     <div class="faq-list">
+      <details class="faq-item">
+        <summary>
+          <span style="color: var(--accent);">Kostet das wirklich nur 1 €?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">
+          Ja, heute zahlst du wirklich nur <strong>1 €</strong> – kein Trick, keine versteckten Kosten. Du bekommst sofort vollen Zugang zu allen Inhalten der 7-Tage Reset-Challenge.<br><br>
+          Nach 7 Tagen wird <strong>einmalig 28,90 €</strong> abgebucht (insgesamt also 29,90 €). Wenn dir die Challenge in diesen 7 Tagen nicht gefällt, kannst du mit einem Klick kündigen und zahlst kein zweites Mal. <strong>Kein Abo, keine Bedingungen.</strong><br><br>
+          Diesen Einstiegspreis bekommst du nur, weil du die Abnehm-Analyse gemacht hast – wir wollen, dass du es ohne Risiko ausprobieren kannst.
+        </div>
+      </details>
+
+      <details class="faq-item">
+        <summary>
+          <span style="color: var(--accent);">Was, wenn es bei mir nicht funktioniert?</span>
+          <span class="faq-icon">+</span>
+        </summary>
+        <div class="faq-body">
+          Wenn dir die Challenge nicht gefällt, kannst du sie <strong>mit einem Klick kündigen</strong>. Du zahlst kein zweites Mal und behältst den 1 € Einstieg.<br><br>
+          Eine kurze Mail genügt – wir bestätigen die Kündigung innerhalb von 24 Stunden. <strong>Kein Abo, keine Bedingungen.</strong>
+        </div>
+      </details>
+
       <details class="faq-item">
         <summary>
           <span>Warum sollte es diesmal klappen, wenn ich schon alles probiert habe?</span>
