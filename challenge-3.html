@@ -617,24 +617,25 @@ fbq('init','1796302617856127');
   .modules {
     display: flex;
     flex-direction: column;
-    gap: 22px;
+    gap: 10px;
   }
   .module {
     display: grid;
-    grid-template-columns: 180px 1fr;
-    gap: 32px;
+    grid-template-columns: 1fr 88px;
+    gap: 14px;
     align-items: center;
     background: var(--card);
     border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 20px 24px 20px 20px;
+    border-radius: 14px;
+    padding: 14px 16px 14px 18px;
     box-shadow: var(--shadow-card);
-    transition: transform .2s ease, box-shadow .2s ease;
+    transition: transform .15s ease, box-shadow .15s ease;
     overflow: visible;
   }
-  .module:hover { transform: translateY(-2px); box-shadow: var(--shadow-card-hover); }
+  .module:hover { transform: translateY(-1px); box-shadow: var(--shadow-card-hover); }
   .module-image {
-    width: 180px;
+    order: 2;
+    width: 88px;
     aspect-ratio: 1/1;
     background: transparent;
     display: grid;
@@ -668,49 +669,30 @@ fbq('init','1796302617856127');
     filter: none;
   }
   .module:hover .module-image img.module-image--cover { transform: none; }
-  .module-content { min-width: 0; }
+  .module-content { order: 1; min-width: 0; }
   .module-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 700;
-    font-size: 1.08rem;
+    font-size: 1rem;
     line-height: 1.25;
     color: var(--ink);
-    margin: 0 0 6px;
+    margin: 0 0 4px;
     letter-spacing: -0.01em;
   }
   .module-outcome {
     font-family: 'Instrument Sans', sans-serif;
-    font-size: 0.9rem;
-    line-height: 1.45;
+    font-size: 0.84rem;
+    line-height: 1.4;
     color: var(--ink-soft);
-    margin: 0 0 10px;
+    margin: 0;
   }
-  .module-tag {
-    display: inline-block;
-    background: transparent;
-    color: var(--muted-2);
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 500;
-    letter-spacing: 0;
-    padding: 0;
-    border: none;
-    border-radius: 0;
-  }
-  .module-tag .price {
-    color: var(--accent-deep);
-    font-weight: 700;
-    text-decoration: line-through;
-    text-decoration-thickness: 1.5px;
-    text-decoration-color: rgba(232,83,14,0.7);
-    margin-left: 2px;
-  }
+  .module-tag { display: none; }
 
   @media (max-width: 560px) {
-    .module { grid-template-columns: 120px 1fr; gap: 20px; padding: 14px 16px 14px 14px; }
-    .module-image { width: 120px; }
-    .module-title { font-size: 0.98rem; }
-    .module-outcome { font-size: 0.85rem; }
+    .module { grid-template-columns: 1fr 70px; gap: 12px; padding: 12px 14px 12px 16px; }
+    .module-image { width: 70px; }
+    .module-title { font-size: 0.94rem; }
+    .module-outcome { font-size: 0.8rem; }
     .module-image img[src*="workshop"] { transform: rotate(5deg) scale(0.63); }
     .module:hover .module-image img[src*="workshop"] { transform: rotate(3deg) scale(0.63) translateY(-2px); }
   }
@@ -2332,7 +2314,7 @@ fbq('init','1796302617856127');
           <img src="module-images/nervensystem.webp" alt="Gehirnwellen-Diagramm: Beta, Alpha, Theta, Delta" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Nervensystem-Übungen</h3>
+          <h3 class="module-title">Nervensystem-Übungen:</h3>
           <p class="module-outcome">Beruhigen dein überlastetes System, damit Heißhunger ab Tag 2 leiser wird.</p>
           <span class="module-tag">Einzeln: <span class="price">79 €</span></span>
         </div>
@@ -2343,7 +2325,7 @@ fbq('init','1796302617856127');
           <img src="module-images/ernaehrung.webp" alt="Ernährungsplan App-Ansicht" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Spezieller Ernährungsplan</h3>
+          <h3 class="module-title">Spezieller Ernährungsplan:</h3>
           <p class="module-outcome">Entschärft Essen, damit du satt wirst – ohne Trigger und ohne Verbotsdenken.</p>
           <span class="module-tag">Einzeln: <span class="price">49 €</span></span>
         </div>
@@ -2354,7 +2336,7 @@ fbq('init','1796302617856127');
           <img src="module-images/training.webp" alt="Trainingsplan App-Ansicht" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Kurze Alltags-Workouts</h3>
+          <h3 class="module-title">Kurze Alltags-Workouts:</h3>
           <p class="module-outcome">Bringen deinen Stoffwechsel in Fahrt, ohne dich zusätzlich zu stressen.</p>
           <span class="module-tag">Einzeln: <span class="price">49 €</span></span>
         </div>
@@ -2365,7 +2347,7 @@ fbq('init','1796302617856127');
           <img src="module-images/mindset.webp" alt="Mentales Training – Videomodul" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Mindset-Lektionen gegen Sabotage</h3>
+          <h3 class="module-title">Mindset gegen Sabotage:</h3>
           <p class="module-outcome">Damit du nicht nach jedem Rückfall komplett aussteigst.</p>
           <span class="module-tag">Einzeln: <span class="price">99 €</span></span>
         </div>
@@ -2376,7 +2358,7 @@ fbq('init','1796302617856127');
           <img src="module-images/community.webp" alt="Community-Zoom-Call auf Laptop" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Community &amp; Live-Calls</h3>
+          <h3 class="module-title">Community &amp; Live-Calls:</h3>
           <p class="module-outcome">Damit du nicht wieder alleine kämpfst – täglicher Austausch und 2 Live-Workshops in der Challenge.</p>
           <span class="module-tag">Einzeln: <span class="price">99 €</span></span>
         </div>
@@ -2387,7 +2369,7 @@ fbq('init','1796302617856127');
           <img src="module-images/workshop.webp" alt="Group of Commitment – Community-App auf dem Handy" loading="lazy" decoding="async">
         </div>
         <div class="module-content">
-          <h3 class="module-title">Lebenslanger Zugang</h3>
+          <h3 class="module-title">Lebenslanger Zugang:</h3>
           <p class="module-outcome">Damit du jederzeit wieder einsteigen kannst, wenn das Leben dazwischenkommt.</p>
           <span class="module-tag">Einzeln: <span class="price">39 €</span></span>
         </div>
