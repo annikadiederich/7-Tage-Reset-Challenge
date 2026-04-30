@@ -225,6 +225,8 @@ fbq('init','1796302617856127');
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    text-align: center;
+    line-height: 1.25;
   }
   .topbar-cta:hover { transform: translateY(-1px); filter: brightness(1.06); }
 
@@ -701,6 +703,8 @@ fbq('init','1796302617856127');
     .module-image { width: 120px; }
     .module-title { font-size: 0.98rem; }
     .module-outcome { font-size: 0.85rem; }
+    .module-image img[src*="workshop"] { transform: rotate(5deg) scale(0.63); }
+    .module:hover .module-image img[src*="workshop"] { transform: rotate(3deg) scale(0.63) translateY(-2px); }
   }
 
   /* ══════ Stack Shot ══════ */
@@ -1405,7 +1409,10 @@ fbq('init','1796302617856127');
     text-decoration: none;
     position: relative;
     overflow: hidden;
+    text-align: center;
+    line-height: 1.25;
   }
+  .cta-main span { text-align: center; }
   .cta-main:hover {
     transform: translateY(-2px);
     box-shadow: 0 14px 32px rgba(223,3,28,.34), 0 3px 8px rgba(232,83,14,.22);
