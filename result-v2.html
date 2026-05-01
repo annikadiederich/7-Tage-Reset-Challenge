@@ -44,6 +44,7 @@ fbq('init','1796302617856127');
 <style>
   :root {
     --bg: #f6f4f1;
+    --bg-soft: #faf7ef;
     --card: #ffffff;
     --card-border: rgba(30,28,26,0.08);
     --ink: #1e1c1a;
@@ -557,6 +558,15 @@ fbq('init','1796302617856127');
     letter-spacing: -0.003em;
   }
   .diag-spacer { height: 38px; }
+  .diag-box {
+    background: var(--bg-soft);
+    border: 1px solid var(--card-border);
+    border-radius: 18px;
+    padding: 32px 26px 28px;
+    margin: 0 auto;
+    max-width: 560px;
+    box-shadow: 0 8px 24px rgba(30,28,26,0.04);
+  }
   .diag-subhead {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 700;
@@ -666,6 +676,18 @@ fbq('init','1796302617856127');
     color: var(--accent);
     white-space: nowrap;
   }
+  .warning-eyebrow--rec {
+    margin-top: 32px;
+  }
+  .warning-eyebrow--rec::before,
+  .warning-eyebrow--rec::after {
+    background: rgba(20,72,44,0.22);
+  }
+  .warning-eyebrow--rec .warning-eyebrow-text {
+    color: var(--green-mid);
+    white-space: normal;
+    text-align: center;
+  }
   .warning-headline {
     font-family: 'Plus Jakarta Sans', sans-serif;
     font-weight: 700;
@@ -676,7 +698,9 @@ fbq('init','1796302617856127');
     margin: 0 0 22px;
     letter-spacing: -0.01em;
   }
-  .warning-headline .italic {
+  .warning-headline .italic,
+  .diag-subhead .italic,
+  .diagnose-title .italic {
     font-family: 'Sansita Swashed', cursive;
     font-weight: 700;
     color: var(--accent);
@@ -1026,6 +1050,7 @@ fbq('init','1796302617856127');
     .diag-card-eyebrow { font-size: 0.66rem; letter-spacing: 0.16em; margin-bottom: 12px; }
     .diag-card-body { font-size: 0.98rem; line-height: 1.55; }
     .diag-spacer { height: 28px; }
+    .diag-box { padding: 26px 20px 22px; border-radius: 16px; }
     .diag-subhead { font-size: clamp(1.25rem, 5.6vw, 1.55rem); }
     .diag-sub { font-size: 0.95rem; }
     .warning-block { padding: 36px 22px 32px; border-radius: 18px; margin: 30px 0 26px; }
@@ -1109,7 +1134,7 @@ fbq('init','1796302617856127');
 
     <!-- Diagnose -->
     <div class="diagnose">
-      <h2 class="diagnose-title">Dein System ist aktuell überlastet</h2>
+      <h2 class="diagnose-title">Dein System ist aktuell <span class="italic">überlastet</span></h2>
       <p class="diagnose-sub">und macht dir das Abnehmen extrem schwer.</p>
     </div>
 
@@ -1124,7 +1149,8 @@ fbq('init','1796302617856127');
 
       <div class="diag-spacer" aria-hidden="true"></div>
 
-      <h2 class="diag-subhead">Stoffwechsel und Hormone aus dem Gleichgewicht</h2>
+      <div class="diag-box">
+      <h2 class="diag-subhead">Stoffwechsel und Hormone aus dem <span class="italic">Gleichgewicht</span></h2>
       <p class="diag-sub">Wenn dein Nervensystem dauerhaft auf Alarm steht, laufen drei Dinge automatisch ab — und die machen Abnehmen fast unmöglich:</p>
 
       <ul class="bullets">
@@ -1157,6 +1183,7 @@ fbq('init','1796302617856127');
           Solange dieser <span class="accent">Stress- &amp; Heißhunger-Kreislauf</span> läuft, fühlt sich Abnehmen wie Kampf an — egal welche Diät, egal wie viel Disziplin du aufbringst.
         </p>
       </div>
+      </div>
     </section>
 
     <!-- ═════════ Aber Achtung-Block ═════════ -->
@@ -1180,33 +1207,23 @@ fbq('init','1796302617856127');
           Sorg dafür, dass es bei dir nicht so weit kommt — und handle, solange es noch einfach ist.
         </p>
 
-        <p class="warning-cta">
-          Deine perfekte Hilfe: <a href="/challenge" data-track="cta_click" data-track-params='{"cta_id":"warning_block_to_challenge","page":"ergebnis_v2"}'>Starte jetzt meine kostenfreie Abnehm-Challenge →</a>
-        </p>
-      </div>
-    </section>
+        <div class="warning-eyebrow warning-eyebrow--rec">
+          <span class="warning-eyebrow-text">Empfohlen auf Basis deiner Abnehm-Analyse</span>
+        </div>
 
-    <!-- ═════════ Section-Divider ═════════ -->
-    <div class="divider">
-      <span>Dein nächster Schritt</span>
-    </div>
+        <div class="bridge-preview" aria-hidden="true">
+          <img src="generated-images/stack-shot.jpg" alt="" loading="lazy" decoding="async">
+        </div>
 
-    <!-- ═════════ Final Pitch / Bridge zur Challenge ═════════ -->
-    <section class="bridge reveal">
-      <div class="bridge-eyebrow">Empfohlen auf Basis deiner Abnehm-Analyse</div>
-
-      <div class="bridge-preview" aria-hidden="true">
-        <img src="generated-images/stack-shot.jpg" alt="" loading="lazy" decoding="async">
-      </div>
-
-      <div class="bridge-cta-wrap">
-        <a class="bridge-cta" href="/challenge" data-track="cta_click" data-track-params='{"cta_id":"result_v2_pitch_cta","page":"ergebnis_v2"}'>
-          <span>So startest du deinen Reset</span>
-          <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="5" y1="12" x2="19" y2="12"/>
-            <polyline points="13 6 19 12 13 18"/>
-          </svg>
-        </a>
+        <div class="bridge-cta-wrap">
+          <a class="bridge-cta" href="/challenge" data-track="cta_click" data-track-params='{"cta_id":"result_v2_warning_to_challenge","page":"ergebnis_v2"}'>
+            <span>So startest du deinen Reset</span>
+            <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="13 6 19 12 13 18"/>
+            </svg>
+          </a>
+        </div>
       </div>
     </section>
 
