@@ -2551,8 +2551,8 @@ fbq('init','1796302617856127');
       <div class="social-head">Bereits über 13.000 Frauen <span class="italic">erfolgreich</span> gestartet</div>
       <p class="social-sub">Tausende Frauen haben Kontrolle über Essen gewonnen und nachhaltig abgenommen.</p>
       <div class="social-video" id="proofVideo">
-        <video id="proofVideoEl" autoplay muted loop playsinline preload="none" disablepictureinpicture data-src="feedback-video.mp4">
-          <!-- Source wird erst nach window.load via JS gesetzt, damit Critical-Path-Assets (Bilder, Fonts, CSS) nicht um Bandbreite konkurrieren -->
+        <video id="proofVideoEl" muted loop playsinline preload="none" disablepictureinpicture poster="feedback-poster.webp" data-src="feedback-video.mp4">
+          <!-- Source wird erst angefügt, wenn das Element 300px vor dem Viewport ist (echtes Lazy-Load). Wer nie hinscrollt, lädt 0 MB Video. -->
         </video>
         <button type="button" class="social-video-unmute" id="proofVideoUnmute" aria-label="Mit Ton abspielen">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg>
@@ -2892,17 +2892,21 @@ fbq('init','1796302617856127');
   })();
 
   // ===== Proof Video (social-box, Wistia-style) =====
+  // Video lädt 0 MB beim initial Page-Load. Ein IntersectionObserver hängt die
+  // <source> erst an und triggert .load(), wenn das Element 400px vor dem
+  // Viewport ist — gibt genug Vorlauf zum Buffern, ohne Critical-Path-Bytes
+  // zu blockieren. Wer nie hinscrollt, lädt das Video nie.
   (function(){
     var wrap = document.getElementById('proofVideo');
     var v    = document.getElementById('proofVideoEl');
     var btn  = document.getElementById('proofVideoUnmute');
     if (!wrap || !v) return;
 
-    // Lazy-Source: erst nach window.load anhängen, damit Critical-Path nicht
-    // mit dem 11 MB-Video um Bandbreite konkurriert. Video läuft dann im
-    // Hintergrund weiter und ist fertig, bevor die Person hinunterscrollt.
+    var sourceAttached = false;
+    var unmuted = false;
+    function tryPlay(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
     function attachSource(){
-      if (v.querySelector('source')) return;
+      if (sourceAttached) return;
       var src = v.getAttribute('data-src');
       if (!src) return;
       var s = document.createElement('source');
@@ -2911,12 +2915,9 @@ fbq('init','1796302617856127');
       v.appendChild(s);
       v.preload = 'auto';
       v.load();
+      sourceAttached = true;
     }
-    if (document.readyState === 'complete') attachSource();
-    else window.addEventListener('load', attachSource);
 
-    var unmuted = false;
-    function tryPlay(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
     function go(e){
       if (unmuted) return;
       if (e) e.preventDefault();
@@ -2927,29 +2928,35 @@ fbq('init','1796302617856127');
       v.muted = false;
       v.volume = 1;
       try { v.currentTime = 0; } catch(_) {}
+      attachSource();
       tryPlay();
     }
     v.addEventListener('click', go);
     if (btn) btn.addEventListener('click', function(e){ e.stopPropagation(); go(e); });
 
-    // Pause when scrolled out of view → saves CPU/battery
     if ('IntersectionObserver' in window) {
-      var io = new IntersectionObserver(function(entries){
+      // Vor-Lade-Observer: 400px vor Viewport → Source anhängen, Browser
+      // beginnt im Hintergrund zu buffern.
+      var preloadIO = new IntersectionObserver(function(entries){
         entries.forEach(function(e){
-          if (e.isIntersecting) { if (!unmuted || !v.paused) tryPlay(); }
-          else v.pause();
+          if (e.isIntersecting) { attachSource(); preloadIO.disconnect(); }
+        });
+      }, { rootMargin: '400px 0px', threshold: 0 });
+      preloadIO.observe(wrap);
+
+      // Play/Pause-Observer: spielt im Viewport, pausiert außerhalb
+      var playIO = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) { attachSource(); tryPlay(); }
+          else { v.pause(); }
         });
       }, { threshold: 0.25 });
-      io.observe(wrap);
+      playIO.observe(wrap);
     } else {
+      // Älterer Browser ohne IntersectionObserver → direkt laden
+      attachSource();
       tryPlay();
     }
-
-    // Fallback: if autoplay blocked, start on first pointerdown
-    v.play().catch(function(){
-      var once = function(){ v.play().catch(function(){}); document.removeEventListener('pointerdown', once); };
-      document.addEventListener('pointerdown', once, { once: true });
-    });
   })();
 
   // Trafo carousel: dot indicators synced with horizontal scroll (mobile only)
