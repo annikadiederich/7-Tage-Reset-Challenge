@@ -32,5 +32,19 @@
     { "source": "/danke.html",        "destination": "/danke",        "permanent": true },
     { "source": "/report.html",       "destination": "/analyse-report", "permanent": true },
     { "source": "/brandkit.html",     "destination": "/brandkit",     "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)\\.(mp4|mov|webm|jpg|jpeg|png|webp|gif|svg|ico|woff|woff2|ttf|otf)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.(css|js)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }
+      ]
+    }
   ]
 }
