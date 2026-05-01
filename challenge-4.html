@@ -220,22 +220,32 @@ fbq('init','1796302617856127');
     background: linear-gradient(135deg, var(--accent), var(--accent-deep));
     color: #fff;
     border: none;
-    padding: 12px 24px;
+    padding: 9px 22px;
     border-radius: 999px;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.86rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
     cursor: pointer;
     box-shadow: 0 4px 14px rgba(232,83,14,0.4), 0 0 0 6px rgba(232,83,14,0.06);
     transition: transform .15s ease, filter .15s ease;
     flex-shrink: 0;
     text-decoration: none;
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    line-height: 1.25;
+    line-height: 1.15;
+  }
+  .topbar-cta-main {
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .topbar-cta-sub {
+    font-size: 0.66rem;
+    font-weight: 600;
+    opacity: 0.92;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
   }
   .topbar-cta:hover { transform: translateY(-1px); filter: brightness(1.06); }
 
@@ -2236,7 +2246,10 @@ fbq('init','1796302617856127');
       <span class="topbar-text">Dein Platz ist reserviert für:</span>
       <span class="topbar-timer" id="timer">15:00</span>
     </div>
-    <a class="topbar-cta" href="https://myablefy.com/s/elliottaziz/reset-challenge/payment" target="_blank" rel="noopener noreferrer" data-track="cta_click" data-track-params='{"cta_id":"topbar_checkout","page":"challenge_4"}'>Jetzt für 7,99 € sichern</a>
+    <a class="topbar-cta" href="https://myablefy.com/s/elliottaziz/reset-challenge/payment" target="_blank" rel="noopener noreferrer" data-track="cta_click" data-track-params='{"cta_id":"topbar_checkout","page":"challenge_4"}'>
+      <span class="topbar-cta-main">Jetzt kostenlos sichern</span>
+      <span class="topbar-cta-sub">Bearbeitungsgebühr 7,99 €</span>
+    </a>
   </div>
 
   <!-- Headline-Section mit schrägem Banner -->
@@ -2315,9 +2328,9 @@ fbq('init','1796302617856127');
           <img src="generated-images/stack-shot.jpg" alt="Alle Module der 7-Tage Reset-Challenge: Ernährungsplan, Trainingsplan, Mindset-Lektionen, Nervensystem-Regulierung, Community &amp; 1:1 Coaching" loading="lazy" decoding="async">
         </div>
         <a class="stack-card-cta" href="https://myablefy.com/s/elliottaziz/reset-challenge/payment" target="_blank" rel="noopener noreferrer" data-track="cta_click" data-track-params='{"cta_id":"stack_card_cta","page":"challenge_4"}'>
-          Jetzt deinen Platz sichern — für 7,99 €
+          Jetzt kostenlos sichern
         </a>
-        <p class="stack-card-eyebrow">Inhalte im Wert von <strong>297 €</strong> bekommst du als Analyse-Teilnehmerin geschenkt. Du zahlst nur die <strong>Bearbeitungsgebühr von 7,99 €</strong> für Plattform &amp; Hosting.</p>
+        <p class="stack-card-eyebrow">Bearbeitungsgebühr 7,99 €</p>
       </div>
     </div>
 
