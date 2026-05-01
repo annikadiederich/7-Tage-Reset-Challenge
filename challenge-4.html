@@ -2551,8 +2551,8 @@ fbq('init','1796302617856127');
       <div class="social-head">Bereits über 13.000 Frauen <span class="italic">erfolgreich</span> gestartet</div>
       <p class="social-sub">Tausende Frauen haben Kontrolle über Essen gewonnen und nachhaltig abgenommen.</p>
       <div class="social-video" id="proofVideo">
-        <video id="proofVideoEl" muted loop playsinline preload="none" disablepictureinpicture poster="feedback-poster.webp" data-src="feedback-video.mp4">
-          <!-- Source wird erst angefügt, wenn das Element 300px vor dem Viewport ist (echtes Lazy-Load). Wer nie hinscrollt, lädt 0 MB Video. -->
+        <video id="proofVideoEl" muted loop playsinline preload="none" disablepictureinpicture poster="feedback-poster.webp" data-hls="hls/master.m3u8" data-fallback="feedback-video.mp4">
+          <!-- Source wird erst angefügt, wenn das Element 400px vor dem Viewport ist. HLS adaptive (360p/540p/720p) — Safari nativ, Chrome/FF via hls.js (lazy geladen). -->
         </video>
         <button type="button" class="social-video-unmute" id="proofVideoUnmute" aria-label="Mit Ton abspielen">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10v4h4l5 4V6L7 10H3zm13.5 2c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77 0-4.28-2.99-7.86-7-8.77z"/></svg>
@@ -2905,17 +2905,40 @@ fbq('init','1796302617856127');
     var sourceAttached = false;
     var unmuted = false;
     function tryPlay(){ var p = v.play(); if (p && p.catch) p.catch(function(){}); }
-    function attachSource(){
-      if (sourceAttached) return;
-      var src = v.getAttribute('data-src');
-      if (!src) return;
-      var s = document.createElement('source');
-      s.src = src;
-      s.type = 'video/mp4';
-      v.appendChild(s);
+    function attachMp4Fallback(){
+      var mp4 = v.getAttribute('data-fallback');
+      if (!mp4) return;
+      v.src = mp4;
       v.preload = 'auto';
       v.load();
+    }
+    function attachSource(){
+      if (sourceAttached) return;
       sourceAttached = true;
+      var hlsUrl = v.getAttribute('data-hls');
+      if (!hlsUrl) { attachMp4Fallback(); return; }
+      // Safari (+ iOS) spricht HLS nativ
+      if (v.canPlayType && v.canPlayType('application/vnd.apple.mpegurl')) {
+        v.src = hlsUrl;
+        v.preload = 'auto';
+        v.load();
+        return;
+      }
+      // Chrome / Firefox / Edge: hls.js erst hier nachladen (CDN, ~30 KB)
+      var sc = document.createElement('script');
+      sc.src = 'https://cdn.jsdelivr.net/npm/hls.js@1.5.13/dist/hls.min.js';
+      sc.onload = function(){
+        if (window.Hls && window.Hls.isSupported()) {
+          var hls = new window.Hls({ maxBufferLength: 10, maxMaxBufferLength: 30, startLevel: -1 });
+          hls.loadSource(hlsUrl);
+          hls.attachMedia(v);
+          v._hls = hls;
+        } else {
+          attachMp4Fallback();
+        }
+      };
+      sc.onerror = attachMp4Fallback;
+      document.head.appendChild(sc);
     }
 
     function go(e){
