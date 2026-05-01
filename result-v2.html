@@ -375,8 +375,8 @@ fbq('init','1796302617856127');
     display: flex;
     align-items: flex-start;
     gap: 14px;
-    background: #fff;
-    border: 1px solid var(--card-border);
+    background: var(--accent-soft);
+    border: 1px solid rgba(232,83,14,0.18);
     border-radius: 14px;
     padding: 16px 18px;
     transition: border-color .2s ease, transform .2s ease, box-shadow .2s ease;
@@ -389,17 +389,15 @@ fbq('init','1796302617856127');
   }
   .bullet-dot {
     flex-shrink: 0;
-    width: 30px; height: 30px;
+    width: 36px; height: 36px;
     border-radius: 50%;
-    background: var(--accent-soft);
+    background: #fff;
     color: var(--accent);
     display: grid;
     place-items: center;
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    border: 1px solid rgba(232,83,14,0.22);
+    border: 1px solid rgba(232,83,14,0.28);
   }
+  .bullet-dot svg { width: 20px; height: 20px; display: block; }
   /* ══════ CTA-Button ══════ */
   .cta {
     pointer-events: auto;
@@ -1155,21 +1153,27 @@ fbq('init','1796302617856127');
 
       <ul class="bullets">
         <li class="bullet">
-          <span class="bullet-dot">1</span>
+          <span class="bullet-dot" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17l-8.5-8.5-4 4L2 5"/><path d="M16 17h6v-6"/></svg>
+          </span>
           <div class="bullet-body">
             <p class="bullet-title">Dein Stoffwechsel fährt runter</p>
             <p class="bullet-sub">Dein Körper schaltet in den Sparmodus. Statt Fett abzubauen, hält er fest, was er hat. Du isst weniger – und nimmst trotzdem nicht ab.</p>
           </div>
         </li>
         <li class="bullet">
-          <span class="bullet-dot">2</span>
+          <span class="bullet-dot" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+          </span>
           <div class="bullet-body">
             <p class="bullet-title">Deine Fettverbrennung wird blockiert</p>
             <p class="bullet-sub">Stresshormone wie Cortisol verhindern, dass dein Körper an die Fettreserven rangeht. Selbst Sport bringt kaum was, solange dieses Signal aktiv ist.</p>
           </div>
         </li>
         <li class="bullet">
-          <span class="bullet-dot">3</span>
+          <span class="bullet-dot" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 L4 14 L11 14 L11 22 L20 10 L13 10 Z"/></svg>
+          </span>
           <div class="bullet-body">
             <p class="bullet-title">Heißhunger wird automatisch ausgelöst</p>
             <p class="bullet-sub">Dein Kopf sucht ständig nach der schnellsten Beruhigung. Und das ist fast immer Essen. Es ist keine Willensfrage mehr – es ist Biologie.</p>
@@ -1198,7 +1202,7 @@ fbq('init','1796302617856127');
         </h2>
 
         <p class="warning-body">
-          Je länger der Kreislauf läuft, desto tiefer fährt dein Stoffwechsel runter — und desto schwerer kommt dein System wieder aus dem Stressmodus raus.
+          Je länger der Kreislauf läuft, desto tiefer fährt dein Stoffwechsel runter.
         </p>
         <p class="warning-body">
           Ich erlebe viel zu oft, dass Kundinnen ihr System so verschossen haben, dass sie selbst bei <strong>1.200 kcal nicht mehr abnehmen</strong>.
