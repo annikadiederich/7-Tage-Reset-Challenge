@@ -159,6 +159,9 @@ fbq('init','1796302617856127');
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
   }
   .tag-discount {
     background: transparent;
@@ -2258,10 +2261,10 @@ fbq('init','1796302617856127');
   <!-- Sticky Top Bar (erscheint erst, sobald die Person den Stack-Shot mit 7,99 € Bearbeitungsgebühr sieht) -->
   <div class="topbar is-active" id="stickyBar" aria-hidden="false">
     <div class="topbar-left">
-      <div class="topbar-tags">
+      <a class="topbar-tags" href="https://myablefy.com/s/elliottaziz/reset-challenge/payment" target="_blank" rel="noopener noreferrer" data-track="cta_click" data-track-params='{"cta_id":"topbar_tags","page":"challenge_4"}'>
         <span class="tag-discount">Einmaliges Angebot</span>
         <span class="tag-chance"><span class="tag-chance-dot" aria-hidden="true"></span>7,99 € statt 297 €</span>
-      </div>
+      </a>
       <span class="topbar-text">Dein Platz ist reserviert für:</span>
       <span class="topbar-timer" id="timer">15:00</span>
     </div>
@@ -2286,6 +2289,26 @@ fbq('init','1796302617856127');
 
   <!-- MODULES -->
   <section class="section" style="padding: 28px 24px;">
+
+    <!-- Stack Card (moved above modules for above-fold offer visibility) -->
+    <div class="stack-shot">
+      <div class="stack-card">
+        <div class="stack-card-banner">
+          <span aria-hidden="true">★</span>
+          Kostenlos für Analyse-Teilnehmerinnen
+          <span aria-hidden="true">★</span>
+        </div>
+        <div class="stack-card-image">
+          <img src="generated-images/stack-shot.jpg" alt="Alle Module der 7-Tage Reset-Challenge: Ernährungsplan, Trainingsplan, Mindset-Lektionen, Nervensystem-Regulierung, Community &amp; 1:1 Coaching" loading="lazy" decoding="async">
+        </div>
+        <a class="stack-card-cta" href="https://myablefy.com/s/elliottaziz/reset-challenge/payment" target="_blank" rel="noopener noreferrer" data-track="cta_click" data-track-params='{"cta_id":"stack_card_cta","page":"challenge_4"}'>
+          <span class="stack-card-cta-main">Jetzt kostenfrei sichern</span>
+          <span class="stack-card-cta-sub">Bearbeitungsgebühr 7,99 €</span>
+        </a>
+        <p class="stack-card-eyebrow">Inhalte im Wert von <strong>297 €</strong> — geschenkt. Du zahlst nur <strong>7,99 € Bearbeitungsgebühr</strong> um Kosten zu decken.</p>
+      </div>
+    </div>
+
     <div class="modules">
 
       <div class="module">
@@ -2333,25 +2356,6 @@ fbq('init','1796302617856127');
         </div>
       </div>
 
-    </div>
-
-    <!-- Stack Card -->
-    <div class="stack-shot">
-      <div class="stack-card">
-        <div class="stack-card-banner">
-          <span aria-hidden="true">★</span>
-          Kostenlos für Analyse-Teilnehmerinnen
-          <span aria-hidden="true">★</span>
-        </div>
-        <div class="stack-card-image">
-          <img src="generated-images/stack-shot.jpg" alt="Alle Module der 7-Tage Reset-Challenge: Ernährungsplan, Trainingsplan, Mindset-Lektionen, Nervensystem-Regulierung, Community &amp; 1:1 Coaching" loading="lazy" decoding="async">
-        </div>
-        <a class="stack-card-cta" href="https://myablefy.com/s/elliottaziz/reset-challenge/payment" target="_blank" rel="noopener noreferrer" data-track="cta_click" data-track-params='{"cta_id":"stack_card_cta","page":"challenge_4"}'>
-          <span class="stack-card-cta-main">Jetzt kostenfrei sichern</span>
-          <span class="stack-card-cta-sub">Bearbeitungsgebühr 7,99 €</span>
-        </a>
-        <p class="stack-card-eyebrow">Inhalte im Wert von <strong>297 €</strong> — geschenkt. Du zahlst nur <strong>7,99 € Bearbeitungsgebühr</strong> um Kosten zu decken.</p>
-      </div>
     </div>
 
   </section>
