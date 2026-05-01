@@ -8,11 +8,10 @@
  * For GA4 on standard events, call gtag('event', name, params) directly
  * in the page where the event happens.
  *
- * Manual usage:    window.track('purchase_challenge', { value: 29.9, currency: 'EUR' });
- * Click tracking:  <a data-track="cta_click" data-track-params='{"cta_id":"topbar_checkout"}'>...</a>
- *                  Optional userData (for CAPI matching): pass _userData on the params object.
+ * Usage: window.track('purchase_challenge', { value: 29.9, currency: 'EUR' });
+ * Optional userData (for CAPI matching): pass _userData on the params object.
  */
-(function (w, d) {
+(function (w) {
   function track(name, params) {
     params = params || {};
 
@@ -43,38 +42,5 @@
     } catch (_) {}
   }
 
-  // Auto-bind clicks on [data-track] elements (delegated for dynamic content).
-  function onClick(e) {
-    var el = e.target && e.target.closest && e.target.closest('[data-track]');
-    if (!el) return;
-
-    var name = el.getAttribute('data-track');
-    if (!name) return;
-
-    var params = {};
-    var raw = el.getAttribute('data-track-params');
-    if (raw) {
-      try { params = JSON.parse(raw); } catch (_) {}
-    }
-
-    if (el.tagName === 'A' && el.href && !params.click_url) {
-      params.click_url = el.href;
-    }
-    if (!params.click_text) {
-      var text = (el.innerText || el.textContent || '').replace(/\s+/g, ' ').trim();
-      if (text) params.click_text = text.slice(0, 80);
-    }
-    if (!params.page) {
-      var path = (w.location && w.location.pathname) || '';
-      params.page = path.replace(/\.html$/, '').replace(/^\/+/, '') || 'index';
-    }
-
-    track(name, params);
-  }
-
-  if (d && d.addEventListener) {
-    d.addEventListener('click', onClick, true);
-  }
-
   w.track = track;
-})(window, document);
+})(window);
