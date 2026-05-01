@@ -220,22 +220,32 @@ fbq('init','1796302617856127');
     background: linear-gradient(135deg, var(--accent), var(--accent-deep));
     color: #fff;
     border: none;
-    padding: 12px 24px;
+    padding: 9px 22px;
     border-radius: 999px;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.86rem;
-    font-weight: 800;
-    letter-spacing: 0.04em;
     cursor: pointer;
     box-shadow: 0 4px 14px rgba(232,83,14,0.4), 0 0 0 6px rgba(232,83,14,0.06);
     transition: transform .15s ease, filter .15s ease;
     flex-shrink: 0;
     text-decoration: none;
     display: inline-flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    line-height: 1.25;
+    line-height: 1.15;
+  }
+  .topbar-cta-main {
+    font-size: 0.92rem;
+    font-weight: 800;
+    letter-spacing: 0.02em;
+  }
+  .topbar-cta-sub {
+    font-size: 0.66rem;
+    font-weight: 600;
+    opacity: 0.92;
+    margin-top: 2px;
+    letter-spacing: 0.04em;
   }
   .topbar-cta:hover { transform: translateY(-1px); filter: brightness(1.06); }
 
@@ -931,21 +941,34 @@ fbq('init','1796302617856127');
     color: var(--accent);
   }
   .stack-card-cta {
-    display: block;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     width: 100%;
     background: linear-gradient(135deg, var(--accent-bright, #ff7a3c), var(--accent), var(--accent-deep));
     color: #fff;
     text-align: center;
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-weight: 800;
-    font-size: 1.05rem;
-    letter-spacing: -0.005em;
-    padding: 17px 22px;
+    padding: 14px 22px;
     border-radius: 14px;
     text-decoration: none;
     box-shadow: 0 12px 28px rgba(232,83,14,0.32);
     transition: transform .15s ease, box-shadow .15s ease;
     box-sizing: border-box;
+    line-height: 1.2;
+  }
+  .stack-card-cta-main {
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: -0.005em;
+  }
+  .stack-card-cta-sub {
+    font-size: 0.78rem;
+    font-weight: 600;
+    opacity: 0.92;
+    margin-top: 4px;
+    letter-spacing: 0.02em;
   }
   .stack-card-cta:hover {
     transform: translateY(-1px);
@@ -969,7 +992,9 @@ fbq('init','1796302617856127');
     .stack-card-price { padding: 14px 12px; gap: 10px; }
     .stack-card-strike { font-size: 1.1rem; }
     .stack-card-free { font-size: 1.4rem; }
-    .stack-card-cta { font-size: 1rem; padding: 15px 18px; }
+    .stack-card-cta { padding: 12px 18px; }
+    .stack-card-cta-main { font-size: 1rem; }
+    .stack-card-cta-sub { font-size: 0.74rem; }
   }
 
   /* ══════ Transformations ══════ */
@@ -2236,7 +2261,10 @@ fbq('init','1796302617856127');
       <span class="topbar-text">Dein Platz ist reserviert für:</span>
       <span class="topbar-timer" id="timer">15:00</span>
     </div>
-    <a class="topbar-cta" href="https://myablefy.com/s/elliottaziz/reset-challenge/payment" target="_blank" rel="noopener noreferrer" data-track="cta_click" data-track-params='{"cta_id":"topbar_checkout","page":"challenge_4"}'>Jetzt für 7,99 € sichern</a>
+    <a class="topbar-cta" href="https://myablefy.com/s/elliottaziz/reset-challenge/payment" target="_blank" rel="noopener noreferrer" data-track="cta_click" data-track-params='{"cta_id":"topbar_checkout","page":"challenge_4"}'>
+      <span class="topbar-cta-main">Jetzt kostenfrei sichern</span>
+      <span class="topbar-cta-sub">Bearbeitungsgebühr 7,99 €</span>
+    </a>
   </div>
 
   <!-- Headline-Section mit schrägem Banner -->
@@ -2315,9 +2343,9 @@ fbq('init','1796302617856127');
           <img src="generated-images/stack-shot.jpg" alt="Alle Module der 7-Tage Reset-Challenge: Ernährungsplan, Trainingsplan, Mindset-Lektionen, Nervensystem-Regulierung, Community &amp; 1:1 Coaching" loading="lazy" decoding="async">
         </div>
         <a class="stack-card-cta" href="https://myablefy.com/s/elliottaziz/reset-challenge/payment" target="_blank" rel="noopener noreferrer" data-track="cta_click" data-track-params='{"cta_id":"stack_card_cta","page":"challenge_4"}'>
-          Jetzt deinen Platz sichern — für 7,99 €
+          <span class="stack-card-cta-main">Jetzt kostenfrei sichern</span>
+          <span class="stack-card-cta-sub">Bearbeitungsgebühr 7,99 €</span>
         </a>
-        <p class="stack-card-eyebrow">Inhalte im Wert von <strong>297 €</strong> bekommst du als Analyse-Teilnehmerin geschenkt. Du zahlst nur die <strong>Bearbeitungsgebühr von 7,99 €</strong> für Plattform &amp; Hosting.</p>
       </div>
     </div>
 
